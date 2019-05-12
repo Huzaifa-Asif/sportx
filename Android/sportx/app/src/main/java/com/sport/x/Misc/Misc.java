@@ -18,7 +18,7 @@ public class Misc {
     private boolean connected;
     private double lat, lon;
 
-    public static final String ROOT_PATH = "http://176.223.134.61:3000/api/";
+    public static final String ROOT_PATH = "http://176.223.134.61:3300/";
 
     public Misc(Context context) {
         this.context = context;
