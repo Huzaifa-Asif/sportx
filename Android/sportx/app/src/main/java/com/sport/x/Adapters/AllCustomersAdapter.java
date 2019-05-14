@@ -78,7 +78,6 @@ public class AllCustomersAdapter extends RecyclerView.Adapter<AllCustomersAdapte
             intent.putExtra("name", customersListModel.get(getAdapterPosition()).getCustomerName());
             intent.putExtra("email", customersListModel.get(getAdapterPosition()).getCustomerEmail());
             intent.putExtra("phone", customersListModel.get(getAdapterPosition()).getCustomerPhone());
-            intent.putExtra("cnic", customersListModel.get(getAdapterPosition()).getCustomerCNIC());
             intent.putExtra("image", customersListModel.get(getAdapterPosition()).getCustomerImage());
             intent.putExtra("status", customersListModel.get(getAdapterPosition()).getCustomerStatus());
             intent.putExtra("id", customersListModel.get(getAdapterPosition()).getCustomerId());

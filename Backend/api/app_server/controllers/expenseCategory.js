@@ -1,7 +1,4 @@
-require('../models/expenseCategory.js');
-var mongoose = require('mongoose');
-var expenseCategory = mongoose.model('ExpenseCategory');
-
+var expenseCategory =require('../models/expenseCategory.js');
 
 // Get expenseCategory
 module.exports.getExpenseCategory = (callback, limit) => {

@@ -20,7 +20,7 @@ module.exports.login = (email,password,res) => {
             return res.json(result);
             else
             return res.status(500).json({Message:"Wrong Email or Password"});
-
+        
         }
         else
         return res.status(500).json({Message:"Wrong Email or Password"});
@@ -32,7 +32,7 @@ module.exports.getAdminById = (id ,callback) =>  {
 	admin.findById(id, callback);
 }
 
-// Add Admin
+// Add Admin 
 module.exports.addAdmin = (adminform ,callback) =>  {
     record=new admin();
     record.email=adminform.email;
@@ -40,21 +40,21 @@ module.exports.addAdmin = (adminform ,callback) =>  {
     record.save(callback);
 }
 
-// Update Admin
+// Update Admin 
 module.exports.updateAdmin = (id, adminform, options, callback) => {
     var query = {admin_id: id};
     var update = {
 
         email: adminform.email,
         password:adminform.password
-
+        
 
     }
 
     admin.findOneAndUpdate(query, update, options, callback);
 }
 
-// Delete Admin
+// Delete Admin   
 module.exports.removeAdmin = (id, callback) => {
     var query = {admin_id: id};
     admin.remove(query, callback);

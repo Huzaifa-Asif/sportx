@@ -66,17 +66,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void checkLogin(){
-        String id = sharedPref.getUserId();
-        String userRole = sharedPref.getUserRole();
+        String _id = sharedPref.getUserId();
+        Integer role = sharedPref.getUserRole();
 
-        if(id != null && userRole != null) {
-            if(userRole.equalsIgnoreCase("customer")) {
+        if(_id != null && role != null) {
+            if(role==2) {
                 Intent intent = new Intent(LoginActivity.this, AllServiceActivity.class);
                 startActivity(intent);
                 finish();
             }
-            if(userRole.equalsIgnoreCase("vendor")) {
+            if(role==1) {
                 Intent intent = new Intent(LoginActivity.this, ServiceHomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            if(role==0) {
+                Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -122,11 +127,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         pd.show();
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("user_email", email);
-        jsonObject.addProperty("user_password", password);
+        jsonObject.addProperty("email", email);
+        jsonObject.addProperty("password", password);
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"login_user")
+                .load(misc.ROOT_PATH+"login")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -138,34 +143,59 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             misc.showToast("Please check internet connection");
                             return;
                         }
+
                         else{
                             try {
 
-                                if(result.getResult().isEmpty()){
+
+                                JSONObject jsonObject1 = new JSONObject(result.getResult());
+
+                                Boolean status = jsonObject1.getBoolean("status");
+
+
+                                if(!status)
+                                {
                                     pd.dismiss();
                                     misc.showToast("Invalid Email or Password!");
                                     return;
                                 }
 
-                                JSONObject jsonObject1 = new JSONObject(result.getResult());
 
-                                String id = jsonObject1.getString("user_id");
-                                String role = jsonObject1.getString("user_role");
+                                if(status)
+                                {
 
-                                if(role.equalsIgnoreCase("customer")){
+                                    String id = jsonObject1.getString("_id");
+                                    Integer role = jsonObject1.getInt("role");
+
+                                    if(role == 2)
+                                    {
                                     sharedPref.createLoginSession(id, role);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AllServiceActivity.class);
                                     startActivity(intent);
                                     finish();
-                                }
-                                else if(role.equalsIgnoreCase("vendor") ){
+                                    }
+                                    else if(role == 1 )
+                                    {
                                     sharedPref.createLoginSession(id, role);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, ServiceHomeActivity.class);
                                     startActivity(intent);
                                     finish();
+                                    }
+                                    else if(role == 0 )
+                                    {
+                                    sharedPref.createLoginSession(id, role);
+                                    pd.dismiss();
+                                    Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    }
                                 }
+
+
+
+
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }

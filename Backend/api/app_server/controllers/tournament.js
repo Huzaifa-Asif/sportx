@@ -1,7 +1,4 @@
-require('../models/tournament.js');
-var mongoose = require('mongoose');
-var tournament = mongoose.model('Tournament');
-
+var tournament =require('../models/tournament.js');
 
 // Get tournament
 module.exports.getTournament = (callback, limit) => {

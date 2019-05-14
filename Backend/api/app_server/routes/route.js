@@ -12,17 +12,17 @@ var expenseCategory = require('../controllers/expenseCategory.js');
 var ratingAndFeedback = require('../controllers/ratingAndFeedback.js');
 var revenue = require('../controllers/revenue.js');
 var revenueCategory = require('../controllers/revenueCategory.js');
+var serviceCategory = require('../controllers/serviceCategory.js');
 var serviceProvider = require('../controllers/serviceProvider.js');
 var team = require('../controllers/team.js');
 var tournament = require('../controllers/tournament.js');
 
 
-// Get Service Provider by category
-router.get('/', function (req, res) {
-
-  return res.json("Welcome Sport-X API's");
-
+router.get('/',function(req,res)
+{
+    res.json({message:"Hello Bitches"})
 });
+
 
 //Add Admin
 router.post('/signup_Admin', function (req, res) {
@@ -34,7 +34,7 @@ router.post('/signup_Admin', function (req, res) {
                 }
         return res.json(admin);
         });
-
+            
 });
 
 
@@ -59,20 +59,20 @@ router.post('/signup_customer', function (req, res) {
                     return res.json({Message:"Email Already Exists"});
                     else
                     {
-                        customer.addCustomer(customerform,function (err, customer)
+                        customer.addCustomer(customerform,function (err, customer) 
                         {
-                            if (err)
+                            if (err) 
                             {
                             return res.status(500).json({Message:"Error in Connecting to DB"});
                             }
                             return res.json(customer);
-
+            
                         });
                     }
                 });
             }
          }
-
+  
      });
 });
 
@@ -91,7 +91,7 @@ router.post('/signup_serviceProvider', function (req, res) {
             else
             {
                 customer.getCustomerByEmail(serviceProviderform.email,function(err,result)
-                {
+                {   
                     if(err)
                     return res.status(500).json({Message:"Error in Connecting to DB"});
                     else
@@ -105,16 +105,16 @@ router.post('/signup_serviceProvider', function (req, res) {
                                     return res.status(500).json({Message:"Error in Connecting to DB"});
                                 }
                                 return res.json(serviceProvider);
-
+                        
                             });
                         }
 
                     }
                 });
-
+                
             }
          }
-
+  
      });
 });
 
@@ -124,7 +124,7 @@ router.post('/login', function (req, res) {
     let password=req.body.password;
     customer.login(email,password,res);
     serviceProvider.login(email,password,res);
-
+    
 });
 
 //Login for Admin
@@ -132,8 +132,8 @@ router.post('/loginAdmin', function (req, res) {
     let email=req.body.email;
     let password=req.body.password;
     admin.login(email,password,res);
-
-
+    
+    
 });
 
 // Get Service Provider by category
@@ -229,6 +229,60 @@ router.patch('/update_serviceProvider/:email', function (req, res) {
 
 });
 
+//Add Service Category
+router.post('/add_serviceCategory', function (req, res) {
+    var serviceCategoryform=req.body;
+    serviceCategory.getServiceCategoryByName(serviceCategoryform.name,function (err, result) {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB"});
+                }
+        else if(result)
+        return res.json({Message:"Service Category Already Exists"});
+        else
+        {
+            serviceCategory.addServiceCategory(serviceCategoryform,function (err, serviceCategory) {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({Message:"Error in Connecting to DB"});
+                        }
+                return res.json(serviceCategory);
+                });
+        }
+        });
+            
+});
+
+
+//Update Service Category
+router.patch('/update_serviceCategory/:name', function (req, res) {
+    var serviceCategoryform=req.body;
+    var name=req.params.name;
+    serviceCategory.updateServiceCategory(name,serviceCategoryform,{new:true},function (err, serviceCategory) {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB"});
+                }
+        return res.json(serviceCategory);
+        });
+            
+});
+
+
+//Delete Service Category
+router.delete('/delete_serviceCategory/:name', function (req, res) {
+    var name=req.params.name;
+    serviceCategory.removeServiceCategory(name,function (err, serviceCategory) {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB"});
+                }
+        return res.json(serviceCategory);
+        });
+            
+});
+
+
 
 
 // /* GET home page. */
@@ -240,14 +294,14 @@ router.patch('/update_serviceProvider/:email', function (req, res) {
 //     <br>
 //     <p>  Please use /api/stocks/    or   /api/demands/ </p>
 
-//     <a href="http://localhost:3000/api/stocks/" target='blank'> Stock API </a>
+//     <a href="http://localhost:3000/api/stocks/" target='blank'> Stock API </a> 
 //     &ensp;  &ensp;
 //      <a href="http://localhost:3000/api/demands/" target='blank'> Demand API </a>
 //    </h2>
 //    </div>
 //     </html>
-
-
+    
+    
 //     `);
 // });
 

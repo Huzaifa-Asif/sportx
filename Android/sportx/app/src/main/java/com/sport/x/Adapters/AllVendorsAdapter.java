@@ -81,7 +81,7 @@ public class AllVendorsAdapter extends RecyclerView.Adapter<AllVendorsAdapter.Ve
             intent.putExtra("name", vendorsListModel.get(getAdapterPosition()).getCustomerName());
             intent.putExtra("email", vendorsListModel.get(getAdapterPosition()).getCustomerEmail());
             intent.putExtra("phone", vendorsListModel.get(getAdapterPosition()).getCustomerPhone());
-            intent.putExtra("cnic", vendorsListModel.get(getAdapterPosition()).getCustomerCNIC());
+
             intent.putExtra("image", vendorsListModel.get(getAdapterPosition()).getCustomerImage());
             intent.putExtra("status", vendorsListModel.get(getAdapterPosition()).getCustomerStatus());
             intent.putExtra("id", vendorsListModel.get(getAdapterPosition()).getCustomerId());

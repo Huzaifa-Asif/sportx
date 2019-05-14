@@ -1,7 +1,4 @@
-require('../models/ratingAndFeedback.js');
-var mongoose = require('mongoose');
-var ratingAndFeedback = mongoose.model('RatingAndFeedback');
-
+var ratingAndFeedback =require('../models/ratingAndFeedback.js');
 
 // Get ratingAndFeedback
 module.exports.getRatingAndFeedback = (callback, limit) => {
@@ -27,15 +24,15 @@ module.exports.updateRatingAndFeedback = (id, ratingAndFeedbackform, options, ca
         date: ratingAndFeedbackform.date,
         serviceProviderId: ratingAndFeedbackform.serviceProviderId,
         customerId: ratingAndFeedbackform.customerId,
-
-
-
+        
+        
+        
     }
 
     ratingAndFeedback.findOneAndUpdate(query, update, options, callback);
 }
 
-// Delete ratingAndFeedback
+// Delete ratingAndFeedback   
 module.exports.removeRatingAndFeedback = (id, callback) => {
     var query = {_id: id};
     ratingAndFeedback.remove(query, callback);

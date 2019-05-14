@@ -8,7 +8,7 @@ public class SharedPref {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     Context context;
-    private static final String PREF_NAME = "WIVAALog";
+    private static final String PREF_NAME = "SportxLog";
     private static final String IS_LOGIN = "IsLoggedIn";
     int PRIVATE_MODE = 0;
 
@@ -18,27 +18,27 @@ public class SharedPref {
         editor = sharedPreferences.edit();
     }
 
-    public void createLoginSession(String userId, String userRole) {
+    public void createLoginSession(String _id, Integer role) {
         editor.putBoolean("login", true);
-        editor.putString("userId", userId);
-        editor.putString("userRole", userRole);
+        editor.putString("_id", _id);
+        editor.putInt("role", role);
 
         editor.commit();
     }
 
     public String getUserId() {
-        String userId = sharedPreferences.getString("userId", null);
-        return userId;
+        String _id = sharedPreferences.getString("_id", null);
+        return _id;
     }
 
-    public String getUserRole() {
-        String userRole = sharedPreferences.getString("userRole", null);
-        return userRole;
+    public Integer getUserRole() {
+        Integer role = sharedPreferences.getInt("role", 0);
+        return role;
     }
 
     public void clearSession() {
-        editor.remove("userId");
-        editor.remove("userRole");
+        editor.remove("_id");
+        editor.remove("role");
         editor.putBoolean("login", false);
         editor.clear();
         editor.commit();

@@ -1,49 +1,46 @@
 package com.sport.x.Models;
 
 public class Customer {
-    private String customerId;
-    private String customerName;
-    private String customerPhone;
-    private String customerEmail;
-    private String customerCNIC;
-    private String customerImage;
-    private String customerStatus;
 
-    public Customer(String customerId, String customerName, String customerPhone, String customerEmail, String customerCNIC, String customerImage, String customerStatus) {
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.customerPhone = customerPhone;
-        this.customerEmail = customerEmail;
-        this.customerCNIC = customerCNIC;
-        this.customerImage = customerImage;
-        this.customerStatus = customerStatus;
+    private String name;
+    private String email;
+    private String picture;
+    private String contact;
+    private String password;
+    private Integer role;
+
+    public Customer( String name, String email, String picture, String contact,  String password, Integer role) {
+
+        this.name = name;
+        this.email = email;
+        this.picture = picture;
+        this.contact = contact;
+        this.password = password;
+        this.role = role;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
 
     public String getCustomerName() {
-        return customerName;
-    }
-
-    public String getCustomerPhone() {
-        return customerPhone;
+        return name;
     }
 
     public String getCustomerEmail() {
-        return customerEmail;
+        return email;
     }
 
-    public String getCustomerCNIC() {
-        return customerCNIC;
+    public String getCustomerContact() {
+        return contact;
     }
 
-    public String getCustomerImage() {
-        return customerImage;
+    public String getCustomerPicture() {
+        return picture;
     }
 
-    public String getCustomerStatus() {
-        return customerStatus;
+    public String getCustomerPassword() {
+        return password;
+    }
+
+    public Integer getCustomerRole() {
+        return role;
     }
 }

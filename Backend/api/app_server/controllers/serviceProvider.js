@@ -91,7 +91,7 @@ module.exports.addServiceProvider = (serviceProviderform, callback) => {
     record.category=serviceProviderform.category;
     record.contact=serviceProviderform.contact;
     record.email=serviceProviderform.email;
-    record.status=serviceProviderform.status;
+    
     record.password=record.hashPassword(serviceProviderform.password);
 
     if(serviceProviderform.picture_profile)

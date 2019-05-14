@@ -1,8 +1,4 @@
-
-require('../models/booking.js');
-var mongoose = require('mongoose');
-var booking = mongoose.model('Booking');
-
+var booking =require('../models/booking.js');
 
 // Get booking
 module.exports.getBooking = (callback, limit) => {
@@ -36,7 +32,7 @@ module.exports.updateBooking = (id, bookingform, options, callback) => {
     booking.findOneAndUpdate(query, update, options, callback);
 }
 
-// Delete booking
+// Delete booking   
 module.exports.removeBooking = (id, callback) => {
     var query = {_id: id};
     booking.remove(query, callback);

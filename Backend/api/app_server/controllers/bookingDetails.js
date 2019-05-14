@@ -1,8 +1,4 @@
-
-require('../models/bookingDetails.js');
-var mongoose = require('mongoose');
-var bookingDetails = mongoose.model('BookingDetails');
-
+var bookingDetails =require('../models/bookingDetails.js');
 
 // Get bookingDetails
 module.exports.getBookingDetails = (callback, limit) => {
@@ -27,13 +23,13 @@ module.exports.updateBookingDetails = (id, bookingDetailsform, options, callback
         bookingType: bookingDetailsform.bookingType,
         price: bookingDetailsform.price,
         serviceProviderId: bookingDetailsform.serviceProviderId,
-
+        
     }
 
     bookingDetails.findOneAndUpdate(query, update, options, callback);
 }
 
-// Delete bookingDetails
+// Delete bookingDetails   
 module.exports.removeBookingDetails = (id, callback) => {
     var query = {_id: id};
     bookingDetails.remove(query, callback);

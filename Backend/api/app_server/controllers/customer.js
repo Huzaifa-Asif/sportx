@@ -40,10 +40,10 @@ module.exports.addCustomer = (customerform, callback) => {
     record.contact=customerform.contact;
     record.email=customerform.email;
     record.password=record.hashPassword(customerform.password);
-
+    
     if(customerform.picture)
     record.picture=functions.uploadPicture(record.email,customerform.picture)
-
+    
     record.save(callback);
 }
 
@@ -55,7 +55,7 @@ module.exports.updateCustomer = (email, customerform, options, callback) => {
     customer.findOneAndUpdate(query, customerform, options, callback);
 }
 
-// Delete Customer
+// Delete Customer   
 module.exports.removeCustomer = (id, callback) => {
     var query = {_id: id};
     customer.remove(query, callback);

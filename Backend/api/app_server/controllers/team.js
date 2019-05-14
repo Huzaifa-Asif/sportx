@@ -1,7 +1,4 @@
-require('../models/team.js');
-var mongoose = require('mongoose');
-var team = mongoose.model('Team');
-
+var team =require('../models/team.js');
 
 // Get team
 module.exports.getTeam = (callback, limit) => {

@@ -1,7 +1,4 @@
-require('../models/chatbox.js');
-var mongoose = require('mongoose');
-var chatbox = mongoose.model('Chatbox');
-
+var chatbox =require('../models/chatbox.js');
 
 // Get Chatbox Message
 module.exports.getChatbox = (callback, limit) => {
@@ -28,13 +25,13 @@ module.exports.updateChatbox = (id, chatboxform, options, callback) => {
         recieverId: chatboxform.recieverId,
         date: chatboxform.date,
         time: chatboxform.time,
-
+        
     }
 
     chatbox.findOneAndUpdate(query, update, options, callback);
 }
 
-// Delete chatbox Message
+// Delete chatbox Message   
 module.exports.removeChatbox = (id, callback) => {
     var query = {_id: id};
     chatbox.remove(query, callback);

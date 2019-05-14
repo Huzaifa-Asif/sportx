@@ -1,7 +1,4 @@
-require('../models/revenue.js');
-var mongoose = require('mongoose');
-var revenue = mongoose.model('Revenue');
-
+var revenue =require('../models/revenue.js');
 
 // Get revenue
 module.exports.getRevenue = (callback, limit) => {
@@ -28,8 +25,8 @@ module.exports.updateRevenue = (id, revenueform, options, callback) => {
         serviceProviderId: revenueform.serviceProviderId,
         customerId:revenueform.customerId,
         date: revenueform.date
-
-
+        
+        
     }
 
     revenue.findOneAndUpdate(query, update, options, callback);

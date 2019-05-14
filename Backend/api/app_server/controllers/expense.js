@@ -1,7 +1,4 @@
-require('../models/expense.js');
-var mongoose = require('mongoose');
-var expense = mongoose.model('Expense');
-
+var expense =require('../models/expense.js');
 
 // Get Expense
 module.exports.getExpense = (callback, limit) => {
@@ -27,8 +24,8 @@ module.exports.updateExpense = (id, expenseform, options, callback) => {
         amount: expenseform.amount,
         serviceProviderId: expenseform.serviceProviderId,
         date: expenseform.date
-
-
+        
+        
     }
 
     expense.findOneAndUpdate(query, update, options, callback);
