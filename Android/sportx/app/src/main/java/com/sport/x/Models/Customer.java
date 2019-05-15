@@ -7,16 +7,16 @@ public class Customer {
     private String picture;
     private String contact;
     private String password;
-    private Integer role;
 
-    public Customer( String name, String email, String picture, String contact,  String password, Integer role) {
+
+    public Customer( String name, String email, String picture, String contact,  String password) {
 
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.contact = contact;
         this.password = password;
-        this.role = role;
+
     }
 
 
@@ -40,7 +40,4 @@ public class Customer {
         return password;
     }
 
-    public Integer getCustomerRole() {
-        return role;
-    }
 }

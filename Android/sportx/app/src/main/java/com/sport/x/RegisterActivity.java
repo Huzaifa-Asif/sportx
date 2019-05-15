@@ -28,25 +28,29 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText name, email, phone, password, re_password, cnic;
+    private EditText name, email, phone, password, re_password;
     private RadioButton male, female;
     private Button register;
     private CircleImageView image;
     private String bitmapTo64, selectedGender = null;
     private static String resultPath = null;
     private final int REQUEST_CODE = 1;
-    private String user_role = "customer";
     private File uploadFile = null;
     Misc misc;
-
+    String imagebase64;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,36 +72,35 @@ public class RegisterActivity extends AppCompatActivity {
         name = findViewById(R.id.full_name);
         phone = findViewById(R.id.reg_phone);
         email = findViewById(R.id.register_email);
-    //    cnic = findViewById(R.id.cus_reg_cnic);
         password = findViewById(R.id.reg_password);
         re_password = findViewById(R.id.confirm_password);
 
-        male = findViewById(R.id.cus_male);
-        female = findViewById(R.id.cus_female);
-
-        male.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(male.isChecked()){
-                    selectedGender = male.getText().toString();
-                }
-            }
-        });
-        female.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(female.isChecked()) {
-                    selectedGender = female.getText().toString();
-                }
-            }
-        });
-
-        if(male.isChecked()){
-            selectedGender = male.getText().toString();
-        }
-        if(female.isChecked()) {
-            selectedGender = female.getText().toString();
-        }
+//        male = findViewById(R.id.cus_male);
+//        female = findViewById(R.id.cus_female);
+//
+//        male.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(male.isChecked()){
+//                    selectedGender = male.getText().toString();
+//                }
+//            }
+//        });
+//        female.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(female.isChecked()) {
+//                    selectedGender = female.getText().toString();
+//                }
+//            }
+//        });
+//
+//        if(male.isChecked()){
+//            selectedGender = male.getText().toString();
+//        }
+//        if(female.isChecked()) {
+//            selectedGender = female.getText().toString();
+//        }
 
         register = findViewById(R.id.register_button);
         register.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +119,6 @@ public class RegisterActivity extends AppCompatActivity {
         String user_email = email.getText().toString().trim();
         String user_phone = phone.getText().toString().trim();
         String user_password = password.getText().toString();
-        String user_cnic = cnic.getText().toString();
         String user_re_password = re_password.getText().toString();
 
         String regex = "[A-Za-z A-Za-z]+";
@@ -148,11 +150,6 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
 
-//        if(user_cnic.length() < 13) {
-//            misc.showToast("Invalid CNIC");
-//            cnic.setError("Invalid CNIC");
-//            return false;
-//        }
 
         return true;
     }
@@ -191,6 +188,7 @@ public class RegisterActivity extends AppCompatActivity {
             bitmapTo64 = bitmapToBase64(bitmap);
             Log.d("Converted Image", bitmapTo64);
             image.setImageBitmap(bitmap);
+            imagebase64 = bitmapTo64.toString();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -218,7 +216,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream .toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
@@ -226,7 +224,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerCustomer(){
 
         if(validate()) {
-
 
             if(resultPath != null) {
                 uploadFile = new File(resultPath);
@@ -245,61 +242,21 @@ public class RegisterActivity extends AppCompatActivity {
         pd.setCancelable(false);
         pd.show();
 
-        Ion.with(this)
-                .load(misc.ROOT_PATH + "create_user")
-                .setMultipartFile("user_image", uploadFile)
-                .setMultipartParameter("user_name", name.getText().toString().trim())
-                .setMultipartParameter("user_email", email.getText().toString().trim())
-                .setMultipartParameter("user_phone", phone.getText().toString().trim())
-                .setMultipartParameter("user_cnic", cnic.getText().toString().trim())
-                .setMultipartParameter("user_password", password.getText().toString())
-                .setMultipartParameter("user_role", "customer")
-                .setMultipartParameter("user_gender", selectedGender)
-                .asString()
-                .withResponse()
-                .setCallback(new FutureCallback<Response<String>>() {
-                    @Override
-                    public void onCompleted(Exception e, Response<String> result) {
-                        if (e != null) {
-                            pd.dismiss();
-                            misc.showToast("Please check your connection");
-                            pd.dismiss();
-                            return;
-                        }
-                        String response = result.getResult();
-                        if (response.isEmpty()) {
-                            pd.dismiss();
-                            misc.showToast("Email, Phone, or CNIC already exists");
-                            return;
-                        } else {
-                            pd.dismiss();
-                            misc.showToast(result.getResult());
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-                });
-    }
-
-    private void registerWithoutImage(){
-
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Registration in process...");
-        pd.setCancelable(false);
-        pd.show();
+//        Log.d("Converted Image", "gggggg");
+//        Log.d("Converted Image", bitmapTo64);
+//        String temp ="";
+//        temp+=bitmapTo64;
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("user_name", name.getText().toString().trim());
-        jsonObject.addProperty("user_email", email.getText().toString().trim());
-        jsonObject.addProperty("user_phone", phone.getText().toString().trim());
-        jsonObject.addProperty("user_cnic", cnic.getText().toString().trim());
-        jsonObject.addProperty("user_password", password.getText().toString());
-        jsonObject.addProperty("user_role", "customer");
-        jsonObject.addProperty("user_gender", selectedGender);
+        jsonObject.addProperty("name", name.getText().toString().trim());
+        jsonObject.addProperty("picture", bitmapTo64);
+        jsonObject.addProperty("email", email.getText().toString().trim());
+        jsonObject.addProperty("contact", phone.getText().toString().trim());
+        jsonObject.addProperty("password", password.getText().toString());
+//        jsonObject.addProperty("user_gender", selectedGender);
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"new_user")
+                .load(misc.ROOT_PATH+"signup_customer")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -312,18 +269,94 @@ public class RegisterActivity extends AppCompatActivity {
                             pd.dismiss();
                             return;
                         }
-                        String response = result.getResult();
-                        if (response.isEmpty()) {
-                            pd.dismiss();
-                            misc.showToast("Email, Phone, or CNIC already exists");
-                            return;
-                        } else {
-                            pd.dismiss();
-                            misc.showToast(result.getResult());
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish();
+
+
+                        try{
+                            JSONObject jsonObject2 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject2.getBoolean("status");
+
+
+                            if (!status) {
+                                String Message = jsonObject2.getString("Message");
+                                pd.dismiss();
+                                misc.showToast(Message);
+                                return;
+                            }
+                            else if (status) {
+                                pd.dismiss();
+                                misc.showToast("Signup Successful");
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
                         }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                });
+    }
+
+    private void registerWithoutImage(){
+
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Registration in process...");
+        pd.setCancelable(false);
+        pd.show();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("name", name.getText().toString().trim());
+        jsonObject.addProperty("email", email.getText().toString().trim());
+        jsonObject.addProperty("contact", phone.getText().toString().trim());
+        jsonObject.addProperty("password", password.getText().toString());
+//        jsonObject.addProperty("user_gender", selectedGender);
+
+        Ion.with(this)
+                .load(misc.ROOT_PATH+"signup_customer")
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            pd.dismiss();
+                            misc.showToast("Please check your connection");
+                            pd.dismiss();
+                            return;
+                        }
+
+
+                        try{
+                            JSONObject jsonObject1 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject1.getBoolean("status");
+
+
+                            if (!status) {
+                                String Message = jsonObject1.getString("Message");
+                                pd.dismiss();
+                                misc.showToast(Message);
+                                return;
+                            }
+                           else if (status) {
+                                    pd.dismiss();
+                                    misc.showToast("Signup Successful");
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                            }
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+
                     }
                 });
     }

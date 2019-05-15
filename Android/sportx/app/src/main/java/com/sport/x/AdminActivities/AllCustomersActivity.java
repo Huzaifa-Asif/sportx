@@ -99,15 +99,14 @@ public class AllCustomersActivity extends AppCompatActivity {
                                     customersListModel.clear();
                                     for(int i = 0; i < jsonArray.length(); i++){
                                         JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                                        String user_name = jsonObject.getString("user_name");
-                                        String user_id = jsonObject.getString("user_id");
-                                        String user_email = jsonObject.getString("user_email");
-                                        String user_phone = jsonObject.getString("user_phone");
-                                        String user_cnic = jsonObject.getString("user_cnic");
-                                        String user_status = jsonObject.getString("user_status");
-                                        String user_image = jsonObject.getString("user_image").replace("\"","");
+                                        String name = jsonObject.getString("name");
+//                                        String user_id = jsonObject.getString("user_id");
+                                        String email = jsonObject.getString("email");
+                                        String contact = jsonObject.getString("contact");
+//                                        String user_status = jsonObject.getString("user_status");
+                                        String picture = jsonObject.getString("picture").replace("\"","");
 
-                                        customersListModel.add(new Customer(user_id, user_name, user_phone, user_email, user_cnic, user_image, user_status));
+                                       // customersListModel.add(new Customer(name, email, contact, picture));
 
                                     }
                                     allCustomersAdapter = new AllCustomersAdapter(context, customersListModel);
@@ -160,7 +159,7 @@ public class AllCustomersActivity extends AppCompatActivity {
                                         String user_status = jsonObject.getString("user_status");
                                         String user_image = jsonObject.getString("user_image").replace("\"","");
 
-                                        customersListModel.add(new Customer(user_id, user_name, user_phone, user_email, user_cnic, user_image, user_status));
+                                    //    customersListModel.add(new Customer(user_id, user_name, user_phone, user_email, user_cnic, user_image, user_status));
 
                                     }
                                     allVendorsAdapter = new AllVendorsAdapter(context, customersListModel);

@@ -62,12 +62,12 @@ public class AllCustomersAdapter extends RecyclerView.Adapter<AllCustomersAdapte
 
         public void setData(Customer customer){
             customer_nam.setText(customer.getCustomerName());
-            if(customer.getCustomerImage().isEmpty()){
+            if(customer.getCustomerPicture().isEmpty()){
                 customer_img.setImageResource(R.drawable.usersicon);
             }
             else{
                 Picasso.get()
-                        .load(customer.getCustomerImage())
+                        .load(customer.getCustomerPicture())
                         .into(customer_img);
             }
         }
@@ -77,10 +77,10 @@ public class AllCustomersAdapter extends RecyclerView.Adapter<AllCustomersAdapte
             Intent intent = new Intent(context, CustomerDetailsActivity.class);
             intent.putExtra("name", customersListModel.get(getAdapterPosition()).getCustomerName());
             intent.putExtra("email", customersListModel.get(getAdapterPosition()).getCustomerEmail());
-            intent.putExtra("phone", customersListModel.get(getAdapterPosition()).getCustomerPhone());
-            intent.putExtra("image", customersListModel.get(getAdapterPosition()).getCustomerImage());
-            intent.putExtra("status", customersListModel.get(getAdapterPosition()).getCustomerStatus());
-            intent.putExtra("id", customersListModel.get(getAdapterPosition()).getCustomerId());
+            intent.putExtra("phone", customersListModel.get(getAdapterPosition()).getCustomerContact());
+            intent.putExtra("image", customersListModel.get(getAdapterPosition()).getCustomerPicture());
+//            intent.putExtra("status", customersListModel.get(getAdapterPosition()).getCustomerStatus());
+//            intent.putExtra("id", customersListModel.get(getAdapterPosition()).getCustomerId());
 
             context.startActivity(intent);
             ((Activity) context).finish();
