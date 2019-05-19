@@ -8,10 +8,13 @@ const bookingDetailsSchema = new schema({
     bookingType:{
         type:String
     },
+    duration:{
+        type:String
+    },
     price:{
         type:Number
     },
-    serviceProviderId:{
+    serviceProviderEmail:{
         type:String
     }
 })

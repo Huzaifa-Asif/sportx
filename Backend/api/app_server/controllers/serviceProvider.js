@@ -20,7 +20,7 @@ module.exports.getServiceProviderById = (id ,callback) =>  {
 module.exports.getServiceProviderByCategory = (category ,callback) =>  {
     serviceProvider.
     find({ category: category }).
-    where('status').equals('approved').
+    where('state').equals('approved').
     exec(callback);
 }
 
@@ -28,7 +28,7 @@ module.exports.getServiceProviderByCategory = (category ,callback) =>  {
 module.exports.getServiceProviderByName = (name ,callback) =>  {
     serviceProvider.
     find({name: {$regex: '.*' + name + '.*', $options: 'i'}}).
-    where('status').equals('approved').
+    where('state').equals('approved').
     exec(callback);
 }
 
@@ -36,21 +36,25 @@ module.exports.getServiceProviderByName = (name ,callback) =>  {
 module.exports.login = (email,password,res) => {
     let record=new serviceProvider();
     serviceProvider.findOne({email:email}).
-    where('status').equals('approved').
+    where('state').equals('approved').
     exec(function(err,result)
         {
             if (err)
-            return res.status(500).json({Message:"Error in Connecting to DB"});
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
             else if(result)
             {
             console.log(result.password);
             if(record.comparePassword(password,result.password))
-            return res.json(result);
-            else
-            return res.status(500).json({Message:"Wrong Email or Password"});
+            {
+                var result1 = result.toObject();
+                result1.status = true;
+                return res.json(result1);
             }
             else
-            return res.status(500).json({Message:"Wrong Email or Password"});
+            return res.status(500).json({Message:"Wrong Email or Password",status:false});
+            }
+            else
+            return res.status(500).json({Message:"Wrong Email or Password",status:false});
         });
 }
 
@@ -58,7 +62,7 @@ module.exports.login = (email,password,res) => {
 module.exports.getServiceProviderByAddress = (keyword ,callback) =>  {
     serviceProvider.
     find({address: {$regex: '.*' + keyword + '.*', $options: 'i'}}).
-    where('status').equals('approved').
+    where('state').equals('approved').
     exec(callback);
 }
 
@@ -76,7 +80,7 @@ module.exports.getServiceProviderByLocation = (lat,long,maxDistance ,callback) =
            }
         }
       }).
-    //where('status').equals('approved').
+    where('state').equals('approved').
     exec(callback);
 }
 
@@ -91,9 +95,8 @@ module.exports.addServiceProvider = (serviceProviderform, callback) => {
     record.category=serviceProviderform.category;
     record.contact=serviceProviderform.contact;
     record.email=serviceProviderform.email;
-    
     record.password=record.hashPassword(serviceProviderform.password);
-
+    
     if(serviceProviderform.picture_profile)
     record.picture_profile=functions.uploadPicture(record.email+'_picture_profile',serviceProviderform.picture_profile);
     if(serviceProviderform.picture_cover)
@@ -129,10 +132,10 @@ module.exports.updateServiceProvider = (email, serviceProviderform, options, cal
     if(serviceProviderform.picture_5)
     serviceProviderform.picture_5=functions.uploadPicture(email+'_picture_5',serviceProviderform.picture_5);
     serviceProvider.findOneAndUpdate(query, { $set: serviceProviderform},options,callback);
-
+    
 }
 
-// Delete serviceProvider
+// Delete serviceProvider   
 module.exports.removeServiceProvider = (id, callback) => {
     var query = {_id: id};
     serviceProvider.remove(query, callback);

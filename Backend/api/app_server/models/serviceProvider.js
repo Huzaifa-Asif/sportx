@@ -53,17 +53,17 @@ const serviceProviderSchema = mongoose.Schema({
 	password:{
 		type: String
 	},
-	status:{
+	state:{
 		type: String,
 		default:"pending"
 	},
 	role:
     {
-        type:String,
-        default:"service_provider"
+        type:Number,
+        default:1
     }
-
-
+	
+    
 });
 serviceProviderSchema.methods.hashPassword = function(password){
 	return bcrypt.hashSync(password,bcrypt.genSaltSync(10))
@@ -72,6 +72,6 @@ serviceProviderSchema.methods.comparePassword = function(password,hash){
 	return bcrypt.compareSync(password,hash)
 }
 serviceProviderSchema.index( { location : "2dsphere" } );
-
+ 
 
 const serviceProvider = module.exports = mongoose.model('ServiceProvider', serviceProviderSchema);

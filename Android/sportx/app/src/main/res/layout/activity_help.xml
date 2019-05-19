@@ -24,8 +24,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:text="03435394466"
+        android:text="0314-5632169"
         android:id="@+id/number"
+        android:textSize="@dimen/_20sdp"
+        android:textColor="#000"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="sportx8580@gmail.com"
+        android:id="@+id/sportx"
         android:textSize="@dimen/_20sdp"
         android:textColor="#000"
         android:layout_marginTop="@dimen/_10sdp"

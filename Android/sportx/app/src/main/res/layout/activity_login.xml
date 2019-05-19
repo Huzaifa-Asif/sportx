@@ -38,33 +38,77 @@
                 android:layout_below="@+id/logo_img"
                 android:textCursorDrawable="@color/grey"
                 />
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_below="@id/login_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_18sdp"
-                android:hint="Enter Password"
-                android:layout_marginLeft="@dimen/_12sdp"
-                android:layout_marginRight="@dimen/_12sdp"
-                android:textSize="@dimen/_12sdp"
-                android:padding="@dimen/_12sdp"
-                android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
-                android:drawablePadding="@dimen/_8sdp"
-                android:background="@drawable/edittext"
-                android:textColor="@color/grey"
-                android:textColorHint="@color/grey"
-                android:paddingLeft="@dimen/_8sdp"
-                android:paddingRight="@dimen/_8sdp"
-                android:inputType="textPassword"
-                android:textCursorDrawable="@color/grey"
-                />
+            <!--<EditText-->
+                <!--android:id="@+id/login_password"-->
+                <!--android:layout_below="@id/login_email"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/_18sdp"-->
+                <!--android:hint="Enter Password"-->
+                <!--android:layout_marginLeft="@dimen/_12sdp"-->
+                <!--android:layout_marginRight="@dimen/_12sdp"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:padding="@dimen/_12sdp"-->
+                <!--android:drawableLeft="@drawable/ic_vpn_key_black_24dp"-->
+                <!--android:drawablePadding="@dimen/_8sdp"-->
+                <!--android:background="@drawable/edittext"-->
+                <!--android:textColor="@color/grey"-->
+                <!--android:textColorHint="@color/grey"-->
+                <!--android:paddingLeft="@dimen/_8sdp"-->
+                <!--android:paddingRight="@dimen/_8sdp"-->
+                <!--android:inputType="textPassword"-->
+                <!--android:textCursorDrawable="@color/grey"-->
+                <!--/>-->
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
+        android:layout_below="@+id/login_email"
+        android:textColorHint="@color/grey"
+        android:textColor="@color/grey"
+        app:passwordToggleTint="@color/grey"
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginRight="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:hintEnabled="false"
+        android:id="@+id/log"
+        app:hintAnimationEnabled="false"
+        >
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:hint="Enter Password"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_12sdp"
+            android:drawableStart="@drawable/ic_vpn_key_black_24dp"
+            android:drawablePadding="@dimen/_8sdp"
+            android:background="@drawable/edittext"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
+            android:paddingLeft="@dimen/_8sdp"
+            android:paddingRight="@dimen/_8sdp"
+            android:inputType="textPassword"
+            android:id="@+id/login_password"
+            android:textCursorDrawable="@drawable/cursor_color"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+
+
+
+
 
     <TextView
         android:id="@+id/forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login_password"
+        android:layout_below="@id/log"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginBottom="@dimen/_2sdp"

@@ -11,6 +11,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +21,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 
 import com.sport.x.Adapters.CustomerServiceAdapter;
 import com.sport.x.Misc.Misc;
@@ -55,13 +58,15 @@ public class AllServiceActivity extends AppCompatActivity
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_service);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Hire Service Providers");
+        setTitle("Book Services");
 
         context = this;
 
@@ -132,8 +137,9 @@ public class AllServiceActivity extends AppCompatActivity
     }
 
     public void getServices(){
+
         Ion.with(this)
-                .load(misc.ROOT_PATH+"get_services")
+                .load(misc.ROOT_PATH+"get_serviceCategory")
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -144,16 +150,24 @@ public class AllServiceActivity extends AppCompatActivity
                             return;
                         }
                         else{
+
+
                             try {
+
+
+
                                 JSONArray jsonArray = new JSONArray(result.getResult());
+
                                 serviceListModel.clear();
                                 for(int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                                    String service_id = jsonObject.getString("service_id");
-                                    String service_name = jsonObject.getString("service_name");
-                                    String service_image = jsonObject.getString("service_image").replace("\"", "");
+                                    String service_name = jsonObject.getString("name");
+                                    String service_id = jsonObject.getString("_id");
+                                    String service_image = jsonObject.getString("picture");
+
 
                                     serviceListModel.add(new Service(service_id, service_name, service_image));
+
                                 }
                                 customerServiceAdapter = new CustomerServiceAdapter(context, serviceListModel);
                                 customerServiceAdapter.setTemp(serviceListModel);

@@ -11,7 +11,7 @@
         />
     <item
         android:id="@+id/job_history"
-        android:title="Job History"
+        android:title="Booking Management"
         android:icon="@drawable/job_history"
         app:showAsAction="ifRoom"
         />

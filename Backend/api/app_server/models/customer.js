@@ -21,8 +21,8 @@ const customerSchema = mongoose.Schema({
 	},
 	role:
     {
-        type:String,
-        default:"customer"
+        type:Number,
+        default:2
     }
 });
 customerSchema.methods.hashPassword = function(password){
@@ -31,6 +31,6 @@ customerSchema.methods.hashPassword = function(password){
 customerSchema.methods.comparePassword = function(password,hash){
 	return bcrypt.compareSync(password,hash)
 }
-
+ 
 
 const customer = module.exports = mongoose.model('Customer', customerSchema);

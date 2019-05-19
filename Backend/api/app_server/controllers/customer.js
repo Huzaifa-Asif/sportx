@@ -17,13 +17,18 @@ module.exports.login = (email,password,res) => {
     customer.findOne({email:email},function(err,result)
     {
         if (err)
-        return res.status(500).json({Message:"Error in Connecting to DB"});
+        return res.status(500).json({Message:"Error in Connecting to DB",status:false});
         else if(result)
         {
             if(record.comparePassword(password,result.password))
-                return res.json(result);
+                {
+                    var result1 = result.toObject();
+                    result1.status = true;
+                    return res.json(result1);
+                    
+                }
             else
-                return res.status(500).json({Message:"Wrong Email or Password"});
+                return res.status(500).json({Message:"Wrong Email or Password",status:false});
         }
     });
 }

@@ -6,7 +6,7 @@ const schema = mongoose.Schema;
 // Admin Schema
 
 const adminSchema = new schema({
-
+   
     email:{
         type:String
     },
@@ -15,10 +15,10 @@ const adminSchema = new schema({
     },
     role:
     {
-        type:String,
-        default:"admin"
+        type:Number,
+        default:0
     }
-
+    
 
 })
 adminSchema.methods.hashPassword = function(password){

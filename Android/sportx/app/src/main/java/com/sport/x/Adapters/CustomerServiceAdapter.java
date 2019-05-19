@@ -27,6 +27,9 @@ public class CustomerServiceAdapter extends RecyclerView.Adapter<CustomerService
     private Context context;
     private ArrayList<Service> serviceListModel = new ArrayList<>();
     private ArrayList<Service> tempServiceListModel = new ArrayList<>();
+
+
+
     public CustomerServiceAdapter(Context context, ArrayList<Service> serviceListModel ){
         this.context = context;
         this.serviceListModel = serviceListModel;

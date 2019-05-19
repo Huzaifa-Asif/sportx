@@ -57,12 +57,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RegisterServiceActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button register;
-    private EditText name, email, phone, password, re_password, address, city, charges, cnic;
+    private EditText name, email, phone, password, re_password, address, city;
     private CircleImageView image;
     private String bitmapTo64, selectedGender = null;
     private static String resultPath = null;
     private final int REQUEST_CODE = 1;
-    private String user_role = "vendor";
     Misc misc;
     private ArrayList<String> selectedServices = new ArrayList<>();
     private ArrayList<Service> allServices = new ArrayList<>();
@@ -70,7 +69,7 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
     private RadioButton male, female;
     private File uploadFile = null;
 
-    private double lat, lon;
+    private double lat1, lon1;
 
     private GridLayout checkBoxLayout;
 
@@ -88,24 +87,23 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         email = findViewById(R.id.provider_register_email);
         phone = findViewById(R.id.provider_phone);
         address = findViewById(R.id.provider_address);
-        city = findViewById(R.id.provider_city);
         re_password = findViewById(R.id.provider_confirm_password);
         password = findViewById(R.id.provider_password);
 //        charges = findViewById(R.id.provider_charges);
 //        cnic = findViewById(R.id.reg_cnic);
 
-        male = findViewById(R.id.male);
-        female = findViewById(R.id.female);
-
-        male.setOnClickListener(this);
-        female.setOnClickListener(this);
-
-        if(male.isChecked()) {
-            selectedGender = male.getText().toString();
-        }
-        if(female.isChecked()) {
-            female.getText().toString();
-        }
+//        male = findViewById(R.id.male);
+//        female = findViewById(R.id.female);
+//
+//        male.setOnClickListener(this);
+//        female.setOnClickListener(this);
+//
+//        if(male.isChecked()) {
+//            selectedGender = male.getText().toString();
+//        }
+//        if(female.isChecked()) {
+//            female.getText().toString();
+//        }
 
         image = findViewById(R.id.profile_pic_service);
         image.setOnClickListener(this);
@@ -124,16 +122,16 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
 
-        if(v.getId() == male.getId()){
-            if(male.isChecked()){
-                selectedGender = male.getText().toString();
-            }
-        }
-        if(v.getId() == female.getId()){
-            if(female.isChecked()) {
-                selectedGender = female.getText().toString();
-            }
-        }
+//        if(v.getId() == male.getId()){
+//            if(male.isChecked()){
+//                selectedGender = male.getText().toString();
+//            }
+//        }
+//        if(v.getId() == female.getId()){
+//            if(female.isChecked()) {
+//                selectedGender = female.getText().toString();
+//            }
+//        }
 
         if(v.getId() == image.getId()) {
             ActivityCompat.requestPermissions
@@ -220,7 +218,7 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         pd.show();
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"get_services")
+                .load(misc.ROOT_PATH+"get_serviceCategory")
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -234,19 +232,23 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
                         }
 
                         try {
+
+//                            JSONObject jsonObject1 = new JSONObject(result.getResult());
+
                             JSONArray serviceArray = new JSONArray(result.getResult());
                             if(serviceArray.length() < 1) {
-                                misc.showToast("No Service Found");
+                                misc.showToast("No Services Found");
                                 pd.dismiss();
                             }
                             else{
                                 allServices.clear();
                                 for (int i = 0; i < serviceArray.length(); i++) {
                                     JSONObject serviceObject = (JSONObject) serviceArray.get(i);
-                                    String serviceName = serviceObject.getString("service_name");
-                                    String serviceId = serviceObject.getString("service_id");
-                                    String serviceImage = serviceObject.getString("service_image");
+                                    String serviceName = serviceObject.getString("name");
+                                    String serviceId = serviceObject.getString("_id");
+                                    String serviceImage = serviceObject.getString("picture");
                                     allServices.add(new Service(serviceId, serviceName, serviceImage));
+
 
                                     final CheckBox cb = new CheckBox(getApplicationContext());
                                     cb.setText(serviceName.toUpperCase());
@@ -254,12 +256,12 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                         cb.setButtonTintList(ColorStateList.valueOf(R.color.colorPrimary));
                                     }
-                                    cb.setId(Integer.parseInt(serviceId));
+                                    cb.setId(i);
                                     cb.setTextSize(10);
                                     cb.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            String selectedItem = String.valueOf(cb.getId());
+                                            String selectedItem = String.valueOf(cb.getText());
                                             if(selectedServices.contains(selectedItem)){
                                                 selectedServices.remove(selectedItem);
                                             }
@@ -288,10 +290,10 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         String user_password = password.getText().toString();
         String user_re_password = re_password.getText().toString();
         String user_address = address.getText().toString();
-        String user_city = city.getText().toString();
-        String user_charges = charges.getText().toString();
-        String user_cnic = cnic.getText().toString();
-        LatLng latLng = misc.getCoordinates(user_address);
+//        String user_city = city.getText().toString();
+//        String user_charges = charges.getText().toString();
+//        String user_cnic = cnic.getText().toString();
+        LatLng lat1Lng1 = misc.getCoordinates(user_address);
 
         getCoordinates(user_address);
 
@@ -323,34 +325,35 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
             re_password.setError("Password Mismatch");
             return false;
         }
-        if(user_city.length() < 3) {
-            misc.showToast("Invalid City");
-            city.setError("Invalid City");
-            return false;
-        }
+//        if(user_city.length() < 3) {
+//            misc.showToast("Invalid City");
+//            city.setError("Invalid City");
+//            return false;
+//        }
         if(user_address.length() < 5) {
             misc.showToast("Please Enter Full Address");
             address.setError("Please Enter Full Address");
             return false;
         }
-        if(user_charges.isEmpty() || user_charges.length() < 3) {
-            misc.showToast("Charges must be Min Rs 100");
-            address.setError("Charges must be Min Rs 100");
-            return false;
-        }
-        if(user_cnic.length() < 13) {
-            misc.showToast("Invalid CNIC");
-            cnic.setError("Invalid CNIC");
-            return false;
-        }
-        if(latLng == null) {
+//        if(user_charges.isEmpty() || user_charges.length() < 3) {
+//            misc.showToast("Charges must be Min Rs 100");
+//            address.setError("Charges must be Min Rs 100");
+//            return false;
+//        }
+//        if(user_cnic.length() < 13) {
+//            misc.showToast("Invalid CNIC");
+//            cnic.setError("Invalid CNIC");
+//            return false;
+//        }
+        if(lat1Lng1 == null) {
             misc.showToast("Service Location Not Found");
             return false;
         }
-        if(selectedServices.size() < 1) {
-            misc.showToast("Please select atleast one service");
+        if(selectedServices.size() > 1) {
+            misc.showToast("Please select only one Service");
             return false;
         }
+
 
         return true;
     }
@@ -373,28 +376,26 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         pd.setCancelable(false);
         pd.show();
 
-
         String items = "";
         for(String item : selectedServices){
-            items += item+",";
+            items += item;
         }
 
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("name", name.getText().toString().trim());
+        jsonObject.addProperty("email", email.getText().toString().trim());
+        jsonObject.addProperty("contact", phone.getText().toString().trim());
+        jsonObject.addProperty("address", address.getText().toString().trim());
+        jsonObject.addProperty("password", password.getText().toString());
+        jsonObject.addProperty("category", items);
+        jsonObject.addProperty("picture", bitmapTo64);
+        jsonObject.addProperty("long", lon1);
+        jsonObject.addProperty("lat", lat1);
+
+
         Ion.with(this)
-                .load(misc.ROOT_PATH+"create_user")
-                .setMultipartFile("user_image", uploadFile)
-                .setMultipartParameter("user_name", name.getText().toString().trim())
-                .setMultipartParameter("user_email", email.getText().toString().trim())
-                .setMultipartParameter("user_phone", phone.getText().toString().trim())
-                .setMultipartParameter("user_cnic", cnic.getText().toString().trim())
-                .setMultipartParameter("user_password", password.getText().toString())
-                .setMultipartParameter("user_address", address.getText().toString().trim())
-                .setMultipartParameter("user_city", city.getText().toString().trim())
-                .setMultipartParameter("user_role", "vendor")
-                .setMultipartParameter("user_gender", selectedGender)
-                .setMultipartParameter("user_lat", String.valueOf(lat))
-                .setMultipartParameter("user_lon", String.valueOf(lon))
-                .setMultipartParameter("services", items)
-                .setMultipartParameter("charges", charges.getText().toString().trim())
+                .load(misc.ROOT_PATH+"signup_serviceProvider")
+                .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -409,12 +410,13 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
                         String response = result.getResult();
                         if(response.isEmpty()){
                             pd.dismiss();
-                            misc.showToast("Email, Phone, or CNIC already exists");
+                            misc.showToast("Email or Phone already exists");
                             return;
                         }
                         else{
                             pd.dismiss();
-                            misc.showToast(result.getResult());
+//                            misc.showToast(result.getResult());
+                            misc.showToast("Signup Successful");
                             Intent intent = new Intent(RegisterServiceActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
@@ -431,26 +433,29 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
 
         String items = "";
         for(String item : selectedServices){
-            items += item+",";
+            items += item;
         }
+//
+//        JsonObject abc = new JsonObject();
+//        abc.addProperty("long", lon1);
+//        abc.addProperty("lat", lat1);
+
+
+
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("user_name", name.getText().toString().trim());
-        jsonObject.addProperty("user_email", email.getText().toString().trim());
-        jsonObject.addProperty("user_phone", phone.getText().toString().trim());
-        jsonObject.addProperty("user_address", address.getText().toString().trim());
-        jsonObject.addProperty("user_city", city.getText().toString().trim());
-        jsonObject.addProperty("user_cnic", cnic.getText().toString().trim());
-        jsonObject.addProperty("user_password", password.getText().toString());
-        jsonObject.addProperty("user_role", "vendor");
-        jsonObject.addProperty("user_lat", lat);
-        jsonObject.addProperty("user_lon", lon);
-        jsonObject.addProperty("user_gender", selectedGender);
-        jsonObject.addProperty("services", items);
-        jsonObject.addProperty("charges", charges.getText().toString().trim());
+        jsonObject.addProperty("name", name.getText().toString().trim());
+        jsonObject.addProperty("email", email.getText().toString().trim());
+        jsonObject.addProperty("contact", phone.getText().toString().trim());
+        jsonObject.addProperty("address", address.getText().toString().trim());
+        jsonObject.addProperty("password", password.getText().toString());
+        jsonObject.addProperty("category", items);
+        jsonObject.addProperty("long", lon1);
+        jsonObject.addProperty("lat", lat1);
+
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"new_user")
+                .load(misc.ROOT_PATH+"signup_serviceProvider")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -466,12 +471,13 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
                         String response = result.getResult();
                         if(response.isEmpty()){
                             pd.dismiss();
-                            misc.showToast("Email, Phone, or CNIC already exists");
+                            misc.showToast("Email or Phone already exists");
                             return;
                         }
                         else{
                             pd.dismiss();
-                            misc.showToast(result.getResult());
+//                            misc.showToast(result.getResult());
+                            misc.showToast("Signup Successful");
                             Intent intent = new Intent(RegisterServiceActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
@@ -489,13 +495,13 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
 
     public void getCoordinates(String location) {
         Geocoder gc = new Geocoder(this);
-        LatLng latLng = null;
+        LatLng lat1Lng1 = null;
         try {
             List<Address> address = gc.getFromLocationName(location, 1);
             Address add = address.get(0);
-            lat = add.getLatitude();
-            lon = add.getLongitude();
-            misc.showToast("Lat : " + lat + " Lon : " + lon);
+            lat1 = add.getLatitude();
+            lon1 = add.getLongitude();
+            misc.showToast("Lat : " + lat1 + " Lon : " + lon1);
         } catch (IOException e) {
             misc.showToast("Service Location not found");
             e.printStackTrace();
