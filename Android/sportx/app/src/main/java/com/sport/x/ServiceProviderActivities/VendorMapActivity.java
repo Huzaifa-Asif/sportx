@@ -134,13 +134,13 @@ public class VendorMapActivity extends FragmentActivity implements
             TextView agree = dialog.findViewById(R.id.sure);
             agree.setText("Are you Sure you want to hire " + vendorList.get(0).getUserName());
 
-            TextView rating = dialog.findViewById(R.id.provider_rating);
-            if(u_rating != null){
-                rating.setText("Rating: " + user_rating+"/"+5);
-            }
-            else {
-                rating.setText("Rating: " + user_rating);
-            }
+//            TextView rating = dialog.findViewById(R.id.provider_rating);
+//            if(u_rating != null){
+//                rating.setText("Rating: " + user_rating+"/"+5);
+//            }
+//            else {
+//                rating.setText("Rating: " + user_rating);
+//            }
             TextView name = dialog.findViewById(R.id.provider_name);
             name.setText("Name: " + vendorList.get(0).getUserName());
 
@@ -242,7 +242,7 @@ public class VendorMapActivity extends FragmentActivity implements
                                     int user_jobs = jsonObject.getInt("daily_jobs");
 
                                     if(getDistance(service_lat, service_lon) < 7) {
-                                        vendorList.add(new Vendor(vendor_id, user_name, user_image, latitude, longitude, user_jobs));
+                                        vendorList.add(new Vendor(vendor_id, user_name, user_image, latitude, longitude));
                                     }
                                 }
                                 if(vendorList.isEmpty()){
@@ -347,7 +347,7 @@ public class VendorMapActivity extends FragmentActivity implements
     private void updateUserJobs(final ProgressDialog pd){
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("jobs", vendorList.get(0).getUserJobs()+1);
+//        jsonObject.addProperty("jobs", vendorList.get(0).getUserJobs()+1);
 
         Ion.with(this)
                 .load("PUT", misc.ROOT_PATH+"update_daily_jobs/"+vendorList.get(0).getUserId())

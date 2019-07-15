@@ -8,6 +8,10 @@
         <item name="colorAccent">#FFFFFF</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
     <style name="NoAction" parent="Theme.AppCompat.Light.NoActionBar"></style>
 
     <style name="AppTheme.NoActionBar">

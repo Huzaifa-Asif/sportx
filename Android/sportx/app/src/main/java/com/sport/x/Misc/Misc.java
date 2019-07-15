@@ -18,7 +18,7 @@ public class Misc {
     private boolean connected;
     private double lat, lon;
 
-    public static final String ROOT_PATH = "http://176.223.134.61:3300/";
+    public static final String ROOT_PATH = "https://sport-x.herokuapp.com/";
 
     public Misc(Context context) {
         this.context = context;

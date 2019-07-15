@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.Vendor;
+import com.sport.x.Models.Service_Provider;
+
+
 import com.sport.x.SharedPref.SharedPref;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -53,20 +55,23 @@ public class MapsActivity extends FragmentActivity implements
     private double service_lat = 0, service_lon = 0.0;
     private String provider = "no";
     private String service_id, user_image, service_name, user_name, user_rating, vendor_id, customer_id = null;
+    private String  service_provider_name, email, address, picture, contact, password, category;
+    private double latitude1, longitude1;
     Misc misc;
     SharedPref sharedPref;
     private Location currentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int LOCATION_REQUEST_CODE = 101;
-    private String u_rating;
+    private String u_rating, latitude, longitude;
     private Toolbar toolbar;
-    private ArrayList<Vendor> vendorList = new ArrayList<>();
-
+    private ArrayList<Service_Provider> vendorList = new ArrayList<>();
+    private int i, m, index;
+    private TextView serviceTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        //toolbar = findViewById(R.id.bar);
+
 
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
@@ -74,6 +79,9 @@ public class MapsActivity extends FragmentActivity implements
         Intent intent = getIntent();
         service_id = intent.getStringExtra("service_id");
         service_name = intent.getStringExtra("service_name");
+
+        serviceTitle = findViewById(R.id.title);
+        serviceTitle.setText(service_name + "Service Provider");
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(MapsActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapsActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -135,7 +143,7 @@ public class MapsActivity extends FragmentActivity implements
         mMap.setOnMarkerClickListener(this);
 
         if(misc.isConnectedToInternet()){
-            fetchVendor();
+            fetchService_Provider();
         }
         else{
             misc.showToast("No Internet Connection");
@@ -144,35 +152,39 @@ public class MapsActivity extends FragmentActivity implements
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if(marker.equals(myMarker)){
+     //   if(marker.equals(myMarker)){
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.service_provider_info);
 
             TextView serviceName = dialog.findViewById(R.id.service);
             serviceName.setText(service_name);
 
+            String provider= marker.getTitle();
+            float index1=marker.getAlpha();
+            index=(int)index1;
+
             TextView agree = dialog.findViewById(R.id.sure);
-            agree.setText("Are you Sure you want to hire " + vendorList.get(0).getUserName());
+            agree.setText("View Profile of : " + provider);
 
-            TextView rating = dialog.findViewById(R.id.provider_rating);
-            if(u_rating != null){
-                rating.setText("Rating: " + user_rating+"/"+5);
-            }
-            else {
-                rating.setText("Rating: " + user_rating);
-            }
-            TextView name = dialog.findViewById(R.id.provider_name);
-            name.setText("Name: " + vendorList.get(0).getUserName());
+//            TextView rating = dialog.findViewById(R.id.provider_rating);
+//            if(u_rating != null){
+//                rating.setText("Rating: " + user_rating+"/"+5);
+//            }
+//            else {
+//                rating.setText("Rating: " + user_rating);
+//            }
+            final TextView name = dialog.findViewById(R.id.provider_name);
+            name.setText("Name: " + provider);
 
-            ImageView imageView = dialog.findViewById(R.id.provider_image);
-            if(vendorList.get(0).getUserImage().isEmpty()) {
-                imageView.setImageResource(R.drawable.serviceicon);
-            }
-            else{
-                Ion.with(this)
-                        .load(vendorList.get(0).getUserImage())
-                        .intoImageView(imageView);
-            }
+//            ImageView imageView = dialog.findViewById(R.id.provider_image);
+//            if(vendorList.get(0).getServiceProviderPicture().isEmpty()) {
+//                imageView.setImageResource(R.drawable.serviceicon);
+//            }
+//            else{
+//                Ion.with(this)
+//                        .load(vendorList.get(0).getServiceProviderPicture())
+//                        .intoImageView(imageView);
+//            }
 
             TextView hire_button = dialog.findViewById(R.id.hire);
             TextView cancel_button = dialog.findViewById(R.id.cancel);
@@ -181,7 +193,22 @@ public class MapsActivity extends FragmentActivity implements
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    postJob();
+                    //startActivity(new Intent(getApplicationContext(), service_provider_profile_Activity.class));
+                    //finish();
+
+
+                    Intent intent = new Intent(getApplicationContext(), service_provider_profile_Activity.class);
+                    intent.putExtra("service_provider_name", vendorList.get(index).getServiceProviderName());
+                    intent.putExtra("service_name", service_name);
+                    intent.putExtra("service_provider_email", vendorList.get(index).getServiceProviderEmail());
+                    intent.putExtra("service_provider_phone_number", vendorList.get(index).getServiceProviderContact());
+                    intent.putExtra("service_provider_address", vendorList.get(index).getServiceProviderAddress());
+                    intent.putExtra("service_provider_latitude", vendorList.get(index).getUserLat());
+                    intent.putExtra("service_provider_longitude", vendorList.get(index).getUserLon());
+
+
+                    startActivity(intent);
+                   // postJob();
                 }
             });
 
@@ -193,18 +220,21 @@ public class MapsActivity extends FragmentActivity implements
             });
 
             dialog.show();
-        }
-        return false;
+        //}
+        // return false
+        return true;
     }
 
-    private void fetchVendor(){
+    private void fetchService_Provider(){
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Finding " + service_name);
+        pd.setMessage("Finding " + service_name + " Service Providers");
         pd.setCancelable(false);
         pd.show();
 
+        //misc.showToast(misc.ROOT_PATH+"search/serviceProviderByCategory/football");
+
         Ion.with(this)
-                .load(misc.ROOT_PATH+"fetch_vendors/"+service_id)
+                .load(misc.ROOT_PATH+"search/serviceProviderByCategory/"+service_name)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -219,24 +249,35 @@ public class MapsActivity extends FragmentActivity implements
                             try {
                                 JSONArray jsonArray = new JSONArray(result.getResult());
                                 if(jsonArray.length() < 1) {
-                                    misc.showToast("No " + service_name + " Found");
+                                    misc.showToast("No Service Provider of : " + service_name + " Found");
                                     pd.dismiss();
                                     return;
                                 }
                                 vendorList.clear();
-                                for(int i = 0; i < jsonArray.length(); i++){
-                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                                    vendor_id = jsonObject.getString("user_id");
-                                    user_name = jsonObject.getString("user_name");
-                                    user_image = jsonObject.getString("user_image").replace("\"", "");
-                                    service_lat = Double.parseDouble(jsonObject.getString("user_lat"));
-                                    service_lon = Double.parseDouble(jsonObject.getString("user_lon"));
-                                    String latitude = jsonObject.getString("user_lat");
-                                    String longitude = jsonObject.getString("user_lon");
-                                    int user_jobs = jsonObject.getInt("daily_jobs");
+                                for(i = 1; i < jsonArray.length(); i++){
 
-                                    if(getDistance(service_lat, service_lon) < 7) {
-                                        vendorList.add(new Vendor(vendor_id, user_name, user_image, latitude, longitude, user_jobs));
+//                                    misc.showToast("For Loop"+result.getResult());
+
+                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+
+                                    JSONObject locat  = jsonObject.getJSONObject("location");
+
+                                    latitude1 = locat.getDouble("lat");
+                                    longitude1 = locat.getDouble("long");
+
+                                    service_provider_name = jsonObject.getString("name");
+                                    email = jsonObject.getString("email");
+                                    address = jsonObject.getString("address");
+                                    //picture = jsonObject.getString("picture");
+                                    contact = jsonObject.getString("contact");
+                                    password = jsonObject.getString("password");
+                                    category = jsonObject.getString("category");
+
+//
+                                    //vendorList.add(new Service_Provider(service_provider_name, email, address, picture, contact, password, category, latitude1, longitude1));
+
+                                    if(getDistance(latitude1, longitude1) < 25) {
+                                        vendorList.add(new Service_Provider(service_provider_name, email, address, picture, contact, password, category, latitude1, longitude1));
                                     }
                                 }
                                 if(vendorList.isEmpty()){
@@ -244,15 +285,23 @@ public class MapsActivity extends FragmentActivity implements
                                     pd.dismiss();
                                     return;
                                 }
-                                LatLng serviceLocation = new LatLng(Double.parseDouble(vendorList.get(0).getUserLat()), Double.parseDouble(vendorList.get(0).getUserLon()));
-                                mMap.setMinZoomPreference(15);
-                                myMarker = mMap.addMarker(new MarkerOptions().position(serviceLocation).title("Service Location"));
+
+                                for(m = 0; m<vendorList.size();m++)
+                                {
+                                LatLng serviceLocation = new LatLng(vendorList.get(m).getUserLat(), vendorList.get(m).getUserLon());
+                                myMarker = mMap.addMarker(new MarkerOptions().position(serviceLocation).title(vendorList.get(m).getServiceProviderName()).alpha(m));
                                 mMap.moveCamera(CameraUpdateFactory.newLatLng(serviceLocation));
+                                }
+//                                LatLng serviceLocation = new LatLng(vendorList.get(0).getUserLat(), vendorList.get(0).getUserLon());
+//                                mMap.setMinZoomPreference(15);
+//                                myMarker = mMap.addMarker(new MarkerOptions().position(serviceLocation).title(vendorList.get(0).getServiceProviderName()));
+//                                mMap.moveCamera(CameraUpdateFactory.newLatLng(serviceLocation));
+                                mMap.setMinZoomPreference(12);
                                 pd.dismiss();
 
                                // double distance = getDistanceFromLatLonInKm(current_latitude, current_longitude, service_lat, service_lon);
                               //  misc.showToast(String.valueOf(getDistance(Double.parseDouble(vendorList.get(0).getUserLat()), Double.parseDouble(vendorList.get(0).getUserLon()))));
-                                fetchRating(vendorList.get(0).getUserId());
+                                //fetchRating(vendorList.get(0).getUserId());
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }
@@ -261,112 +310,116 @@ public class MapsActivity extends FragmentActivity implements
                 });
     }
 
-    private void fetchRating(String id) {
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Please wait...");
-        pd.setCancelable(false);
-        pd.show();
-
-        Ion.with(this)
-                .load(misc.ROOT_PATH+"fetch_average_rating/"+id)
-                .asString()
-                .withResponse()
-                .setCallback(new FutureCallback<Response<String>>() {
-                    @Override
-                    public void onCompleted(Exception e, Response<String> result) {
-                        if (e != null) {
-                            misc.showToast("Please check your connection");
-                            pd.dismiss();
-                            return;
-                        } else {
-                            try {
-                                JSONArray jsonArray = new JSONArray(result.getResult());
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                                    user_rating = jsonObject.getString("rating");
-                                    if(user_rating.equals("null")){
-                                        u_rating = null;
-                                        user_rating = "Not rated yet";
-                                        pd.dismiss();
-                                        return;
-                                    }
-                                    u_rating = user_rating;
-                                }
-
-                            } catch (JSONException e1) {
-                                e1.printStackTrace();
-                            }
-                            pd.dismiss();
-
-                        }
-                    }
-                });
-    }
-
-    private void postJob() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-
-        JsonObject job = new JsonObject();
-        job.addProperty("job_start_date", dateFormat.format(date));
-        job.addProperty("vendor_id", vendorList.get(0).getUserId());
-        job.addProperty("customer_id", sharedPref.getUserId());
-        job.addProperty("fk_service_id", service_id);
-
-        misc.showToast(String.valueOf(vendorList.get(0).getUserJobs()+1));
-
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Hiring " + user_name);
-        pd.setCancelable(false);
-        pd.show();
-
-        Ion.with(this)
-                .load(misc.ROOT_PATH+"new_job")
-                .setJsonObjectBody(job)
-                .asString()
-                .withResponse()
-                .setCallback(new FutureCallback<Response<String>>() {
-                    @Override
-                    public void onCompleted(Exception e, Response<String> result) {
-                        if(e != null) {
-                            misc.showToast("Please check your connection");
-                            pd.dismiss();
-                            return;
-                        }
-                        else{
-                            updateUserJobs(pd);
-                        }
-                    }
-                });
-    }
-
-    private void updateUserJobs(final ProgressDialog pd){
-
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("jobs", vendorList.get(0).getUserJobs()+1);
-
-        Ion.with(this)
-                .load("PUT", misc.ROOT_PATH+"update_daily_jobs/"+vendorList.get(0).getUserId())
-                .setJsonObjectBody(jsonObject)
-                .asString()
-                .withResponse()
-                .setCallback(new FutureCallback<Response<String>>() {
-                    @Override
-                    public void onCompleted(Exception e, Response<String> result) {
-                        if(e != null) {
-                            misc.showToast("Please check your connection");
-                            pd.dismiss();
-                            return;
-                        }
-                        else{
-                            pd.dismiss();
-                            misc.showToast(result.getResult());
-                            startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
-                            finish();
-                        }
-                    }
-                });
-    }
+//    private void fetchRating(String id) {
+//        final ProgressDialog pd = new ProgressDialog(this);
+//        pd.setMessage("Please wait...");
+//        pd.setCancelable(false);
+//        pd.show();
+//
+//        Ion.with(this)
+//                .load(misc.ROOT_PATH+"fetch_average_rating/"+id)
+//                .asString()
+//                .withResponse()
+//                .setCallback(new FutureCallback<Response<String>>() {
+//                    @Override
+//                    public void onCompleted(Exception e, Response<String> result) {
+//                        if (e != null) {
+//                            misc.showToast("Please check your connection");
+//                            pd.dismiss();
+//                            return;
+//                        } else {
+//                            try {
+//                                JSONArray jsonArray = new JSONArray(result.getResult());
+//                                for (int i = 0; i < jsonArray.length(); i++) {
+//                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                                    user_rating = jsonObject.getString("rating");
+//                                    if(user_rating.equals("null")){
+//                                        u_rating = null;
+//                                        user_rating = "Not rated yet";
+//                                        pd.dismiss();
+//                                        return;
+//                                    }
+//                                    u_rating = user_rating;
+//                                }
+//
+//                            } catch (JSONException e1) {
+//                                e1.printStackTrace();
+//                            }
+//                            pd.dismiss();
+//
+//                        }
+//                    }
+//                });
+//    }
+//
+//    private void postJob() {
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date = new Date();
+//
+//        JsonObject job = new JsonObject();
+//        job.addProperty("job_start_date", dateFormat.format(date));
+//        // job.addProperty("vendor_email", vendorList.get(0).getUserId());
+//        job.addProperty("customer_email", sharedPref.getUserId());
+//        job.addProperty("fk_service_id", service_id);
+//
+//        //misc.showToast(String.valueOf(vendorList.get(0).getUserJobs()+1));
+//
+//        final ProgressDialog pd = new ProgressDialog(this);
+//        pd.setMessage("Hiring " + user_name);
+//        pd.setCancelable(false);
+//        pd.show();
+//
+//        Ion.with(this)
+//                .load(misc.ROOT_PATH+"new_job")
+//                .setJsonObjectBody(job)
+//                .asString()
+//                .withResponse()
+//                .setCallback(new FutureCallback<Response<String>>() {
+//                    @Override
+//                    public void onCompleted(Exception e, Response<String> result) {
+//                        if(e != null) {
+//                            misc.showToast("Please check your connection");
+//                            pd.dismiss();
+//                            return;
+//                        }
+//                        else{
+//                            //updateUserJobs(pd);
+//                            pd.dismiss();
+//                            //misc.showToast(result.getResult());
+//                            startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
+//                            finish();
+//                        }
+//                    }
+//                });
+//    }
+//
+//    private void updateUserJobs(final ProgressDialog pd){
+//
+//        JsonObject jsonObject = new JsonObject();
+//        jsonObject.addProperty("jobs", vendorList.get(0).getUserJobs()+1);
+//
+//        Ion.with(this)
+//                .load("PUT", misc.ROOT_PATH+"update_daily_jobs/"+vendorList.get(0).getUserId())
+//                .setJsonObjectBody(jsonObject)
+//                .asString()
+//                .withResponse()
+//                .setCallback(new FutureCallback<Response<String>>() {
+//                    @Override
+//                    public void onCompleted(Exception e, Response<String> result) {
+//                        if(e != null) {
+//                            misc.showToast("Please check your connection");
+//                            pd.dismiss();
+//                            return;
+//                        }
+//                        else{
+//                            pd.dismiss();
+//                            misc.showToast(result.getResult());
+//                            startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
+//                            finish();
+//                        }
+//                    }
+//                });
+//    }
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, AllServiceActivity.class);

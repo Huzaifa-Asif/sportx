@@ -6,15 +6,15 @@ public class Vendor {
     private String userImage;
     private String userLat;
     private String userLon;
-    private int userJobs;
+   // private int userJobs;
 
-    public Vendor(String userId, String userName, String userImage, String userLat, String userLon, int userJobs) {
+    public Vendor(String userId, String userName, String userImage, String userLat, String userLon) {
         this.userId = userId;
         this.userName = userName;
         this.userImage = userImage;
         this.userLat = userLat;
         this.userLon = userLon;
-        this.userJobs = userJobs;
+        //this.userJobs = userJobs;
     }
 
     public String getUserId() {
@@ -37,7 +37,5 @@ public class Vendor {
         return userLon;
     }
 
-    public int getUserJobs() {
-        return userJobs;
-    }
+    //public int getUserJobs() { return userJobs; }
 }

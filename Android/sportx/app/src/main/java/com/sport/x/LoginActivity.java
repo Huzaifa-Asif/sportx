@@ -165,11 +165,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 {
 
                                     String id = jsonObject1.getString("_id");
+                                    String email = jsonObject1.getString("email");
                                     Integer role = jsonObject1.getInt("role");
 
                                     if(role == 2)
                                     {
-                                    sharedPref.createLoginSession(id, role);
+                                    sharedPref.createLoginSession(id, email, role);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AllServiceActivity.class);
                                     startActivity(intent);
@@ -177,7 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                     else if(role == 1 )
                                     {
-                                    sharedPref.createLoginSession(id, role);
+                                    sharedPref.createLoginSession(id, email, role);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, ServiceHomeActivity.class);
                                     startActivity(intent);
@@ -185,7 +186,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                     else if(role == 0 )
                                     {
-                                    sharedPref.createLoginSession(id, role);
+                                    sharedPref.createLoginSession(id, email, role);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                                     startActivity(intent);

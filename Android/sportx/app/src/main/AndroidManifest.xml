@@ -87,6 +87,8 @@
         <activity android:name="com.sport.x.Fragments.CustomerCompletedJobs" />
         <activity android:name="com.sport.x.CustomerCompletedJobDetailsActivity" />
         <activity android:name="com.sport.x.CustomerInProgressJobDetailsActivity" />
+        <activity android:name="com.sport.x.BookingActivity" />
+        <activity android:name="com.sport.x.service_provider_profile_Activity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
