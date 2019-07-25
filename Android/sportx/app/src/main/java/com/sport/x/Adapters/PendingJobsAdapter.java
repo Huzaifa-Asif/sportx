@@ -36,13 +36,13 @@ public class PendingJobsAdapter extends RecyclerView.Adapter<PendingJobsAdapter.
     @Override
     public PendingJobsAdapter.PendingJobsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.fragment_customer_pending_jobs, viewGroup, false);
+        View view = inflater.inflate(R.layout.pending_job_item, viewGroup, false);
         return new PendingJobsAdapter.PendingJobsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PendingJobsAdapter.PendingJobsViewHolder PendingJobsViewHolder, int i) {
-        PendingJobsViewHolder.setData(jobsListModel.get(i));
+    public void onBindViewHolder(@NonNull PendingJobsViewHolder pendingJobsViewHolder, int i) {
+        pendingJobsViewHolder.setData(jobsListModel.get(i));
 
     }
 
@@ -66,7 +66,7 @@ public class PendingJobsAdapter extends RecyclerView.Adapter<PendingJobsAdapter.
         }
 
         public void setData(Job job){
-            text_item.setText("Request for: "+job.getBookingType() + " In: "  + job.getServiceProviderName()+ " is pending");
+            text_item.setText("Request for: "+job.getBookingType() + " Booking, In: "  + job.getServiceProviderName()+ " is pending");
         }
 
         @Override

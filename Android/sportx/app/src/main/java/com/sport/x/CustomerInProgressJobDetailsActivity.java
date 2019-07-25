@@ -203,7 +203,7 @@ public class CustomerInProgressJobDetailsActivity extends AppCompatActivity impl
                                 String status = jsonObject.getString("status");
                                 String message = jsonObject.getString("message");
                                 onBackPressed();
-                                misc.showToast(message);
+                                misc.showToast("Booking Request Canceled");
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }
@@ -244,7 +244,7 @@ public class CustomerInProgressJobDetailsActivity extends AppCompatActivity impl
                                 String status = jsonObject.getString("status");
                                 String message = jsonObject.getString("message");
                                 onBackPressed();
-                                misc.showToast(message);
+                                misc.showToast("Booking Request Completed");
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }

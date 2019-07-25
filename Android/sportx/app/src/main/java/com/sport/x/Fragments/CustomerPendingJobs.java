@@ -15,7 +15,8 @@ import android.widget.TextView;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
-import com.sport.x.Adapters.InProgressJobsAdapter;
+
+import com.sport.x.Adapters.PendingJobsAdapter;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Job;
 import com.sport.x.R;
@@ -32,7 +33,7 @@ public class CustomerPendingJobs extends Fragment {
     Misc misc;
     SharedPref sharedPref;
     private ArrayList<Job> jobsListModel;
-    InProgressJobsAdapter jobsAdapter;
+    PendingJobsAdapter jobsAdapter;
     private RecyclerView view;
     private TextView textView;
 
@@ -47,11 +48,11 @@ public class CustomerPendingJobs extends Fragment {
         sharedPref = new SharedPref(context);
 
         jobsListModel = new ArrayList<>();
-        jobsAdapter = new InProgressJobsAdapter(context, jobsListModel);
+        jobsAdapter = new PendingJobsAdapter(context, jobsListModel);
 
         textView = rootView.findViewById(R.id.no_ip);
 
-        view = rootView.findViewById(R.id.in_progress_jobs);
+        view = rootView.findViewById(R.id.pending_jobs);
         view.setLayoutManager(new LinearLayoutManager(getActivity()));
         view.setAdapter(jobsAdapter);
 
@@ -106,7 +107,7 @@ public class CustomerPendingJobs extends Fragment {
 
                                     jobsListModel.add(new Job(job_id, date, state, bookingType, time, serviceProviderEmail, serviceProviderName, serviceProviderNumber, customerEmail, customerName, customerNumber));
                                 }
-                                jobsAdapter = new InProgressJobsAdapter(context, jobsListModel);
+                                jobsAdapter = new PendingJobsAdapter(context, jobsListModel);
                                 view.setAdapter(jobsAdapter);
 
                                 pd.dismiss();

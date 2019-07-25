@@ -64,7 +64,7 @@ public class CompletedJobsAdapter extends RecyclerView.Adapter<CompletedJobsAdap
 
         public void setData(Job job){
             comp_text.setText(job.getServiceProviderName());
-            comp_service.setText(job.getBookingType());
+            comp_service.setText(job.getBookingType()+ " Booking"+ " - On: "+job.getDate() + " " + job.getTime());
         }
 
         @Override

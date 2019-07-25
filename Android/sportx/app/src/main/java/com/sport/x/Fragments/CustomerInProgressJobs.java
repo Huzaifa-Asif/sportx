@@ -56,7 +56,7 @@ public class CustomerInProgressJobs extends Fragment {
         view.setAdapter(jobsAdapter);
 
         if(misc.isConnectedToInternet()) {
-            pendingJobs();
+            inProgressJobs();
         }
         else{
             misc.showToast("No Internet Connection");
@@ -64,7 +64,7 @@ public class CustomerInProgressJobs extends Fragment {
         return rootView;
     }
 
-    private void pendingJobs() {
+    private void inProgressJobs() {
         final ProgressDialog pd = new ProgressDialog(context);
         pd.setMessage("Please wait... ");
         pd.setCancelable(false);
