@@ -13,6 +13,7 @@ import android.os.Bundle;
 
 import com.sport.x.Fragments.CustomerCompletedJobs;
 import com.sport.x.Fragments.CustomerInProgressJobs;
+import com.sport.x.Fragments.CustomerPendingJobs;
 import com.sport.x.ServiceProviderActivities.AllProvidersActivity;
 import com.sport.x.SharedPref.SharedPref;
 
@@ -41,7 +42,7 @@ public class JobHistoryActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Job History");
+        getSupportActionBar().setTitle("Booking Management");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -74,9 +75,12 @@ public class JobHistoryActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
+                    CustomerPendingJobs customerPendingJobs = new CustomerPendingJobs();
+                    return customerPendingJobs;
+                case 1:
                     CustomerInProgressJobs customerInProgressJobs = new CustomerInProgressJobs();
                     return customerInProgressJobs;
-                case 1:
+                case 2:
                     CustomerCompletedJobs customerCompletedJobs = new CustomerCompletedJobs();
                     return customerCompletedJobs;
                 default:
@@ -88,13 +92,13 @@ public class JobHistoryActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 2;
+            return 3;
         }
     }
 
     @Override
     public void onBackPressed() {
-        if(sharedPref.getUserRole().equals("vendor")){
+        if(sharedPref.getUserRole().equals("1")){
             Intent intent = new Intent(this, AllProvidersActivity.class);
             startActivity(intent);
             finish();

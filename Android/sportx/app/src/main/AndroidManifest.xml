@@ -87,6 +87,7 @@
         <activity android:name="com.sport.x.Fragments.CustomerCompletedJobs" />
         <activity android:name="com.sport.x.CustomerCompletedJobDetailsActivity" />
         <activity android:name="com.sport.x.CustomerInProgressJobDetailsActivity" />
+        <activity android:name="com.sport.x.CustomerPendingJobDetailsActivity" />
         <activity android:name="com.sport.x.BookingActivity" />
         <activity android:name="com.sport.x.service_provider_profile_Activity" />
         <!--

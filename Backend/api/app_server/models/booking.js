@@ -18,10 +18,10 @@ const bookingSchema = new schema({
         type:String,
         default:'pending'
     },
-    serviceProviderId:{
+    serviceProviderEmail:{
         type:String
     },
-    customerId:{
+    customerEmail:{
         type:String
     }
 })

@@ -35,6 +35,7 @@ import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,6 +51,8 @@ public class ServiceHomeActivity extends AppCompatActivity
     Misc misc;
     SharedPref sharedPref;
     private String password;
+    private double latitude1, longitude1;
+    int i;
 
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {
@@ -199,9 +202,9 @@ public class ServiceHomeActivity extends AppCompatActivity
         pd.setCancelable(false);
         pd.show();
 
-        String id = sharedPref.getUserId();
+        String email = sharedPref.getEmail();
         Ion.with(this)
-                .load(misc.ROOT_PATH+"user_profile/"+id)
+                .load(misc.ROOT_PATH+"search/serviceProviderByEmail/"+email)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -215,21 +218,34 @@ public class ServiceHomeActivity extends AppCompatActivity
                         else{
                             try {
                                 pd.dismiss();
-                                JSONObject jsonObject = new JSONObject(result.getResult());
-                                current_latitude = Double.parseDouble(jsonObject.getString("user_lat"));
-                                current_longitude = Double.parseDouble(jsonObject.getString("user_lon"));
-                                String user_image = jsonObject.getString("user_image");
 
-                                if(user_image.isEmpty()){
-                                   // img1.setImageResource(R.drawable.serviceicon);
-                                }
-                                else{
-                                  //  Ion.with(getApplicationContext()).load(jsonObject.getString("user_image").replace("\"","")).intoImageView(img1);
+                                JSONArray jsonArray = new JSONArray(result.getResult());
+
+                                for(i = 1; i < jsonArray.length(); i++)
+                                {
+
+                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+
+                                    JSONObject locat = jsonObject.getJSONObject("location");
+
+                                    current_latitude = locat.getDouble("lat");
+                                    current_longitude = locat.getDouble("long");
+
+//                                current_latitude = Double.parseDouble(jsonObject.getString("lat"));
+//                                current_longitude = Double.parseDouble(jsonObject.getString("long"));
+                                    String user_image = jsonObject.getString("user_image");
+
+
+                                    if (user_image.isEmpty()) {
+                                        // img1.setImageResource(R.drawable.serviceicon);
+                                    } else {
+                                        //  Ion.with(getApplicationContext()).load(jsonObject.getString("user_image").replace("\"","")).intoImageView(img1);
+                                    }
                                 }
 
                              //   txt1.setText(jsonObject.getString("user_name"));
                               //  txt2.setText(jsonObject.getString("user_email"));
-                                password = jsonObject.getString("user_password");
+//                                password = jsonObject.getString("user_password");
                                 LatLng service = new LatLng(current_latitude, current_longitude);
                                 mMap.setMinZoomPreference(15);
                                 myMarker = mMap.addMarker(new MarkerOptions().position(service).title("Service Location"));

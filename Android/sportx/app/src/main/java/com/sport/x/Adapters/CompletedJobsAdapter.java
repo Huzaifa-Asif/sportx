@@ -48,13 +48,13 @@ public class CompletedJobsAdapter extends RecyclerView.Adapter<CompletedJobsAdap
     }
 
     public class CompletedJobsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        
+
         private ImageView comp_image;
         private TextView comp_text, comp_service;
 
         public CompletedJobsViewHolder(@NonNull View itemView) {
             super(itemView);
-            
+
             comp_image = itemView.findViewById(R.id.com_image);
             comp_text = itemView.findViewById(R.id.com_text);
             comp_service = itemView.findViewById(R.id.com_service);
@@ -63,22 +63,23 @@ public class CompletedJobsAdapter extends RecyclerView.Adapter<CompletedJobsAdap
         }
 
         public void setData(Job job){
-            comp_text.setText(job.getCustomerName());
-            comp_service.setText(job.getServiceName());
+            comp_text.setText(job.getServiceProviderName());
+            comp_service.setText(job.getBookingType());
         }
 
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(context, CustomerCompletedJobDetailsActivity.class);
+            intent.putExtra("date", jobsListModel.get(getAdapterPosition()).getDate());
             intent.putExtra("job_id", jobsListModel.get(getAdapterPosition()).getJobId());
-            intent.putExtra("address", jobsListModel.get(getAdapterPosition()).getVendorAddress());
-            intent.putExtra("city", jobsListModel.get(getAdapterPosition()).getVendorCity());
-            intent.putExtra("vendor_id", jobsListModel.get(getAdapterPosition()).getJobVendorId());
-            intent.putExtra("phone", jobsListModel.get(getAdapterPosition()).getVendorPhone());
-            intent.putExtra("service_name", jobsListModel.get(getAdapterPosition()).getServiceName());
-            intent.putExtra("vendor_name", jobsListModel.get(getAdapterPosition()).getCustomerName());
-            intent.putExtra("lat", jobsListModel.get(getAdapterPosition()).getServiceLat());
-            intent.putExtra("lon", jobsListModel.get(getAdapterPosition()).getServiceLon());
+            intent.putExtra("state", jobsListModel.get(getAdapterPosition()).getState());
+            intent.putExtra("bookingType", jobsListModel.get(getAdapterPosition()).getBookingType());
+            intent.putExtra("serviceProviderEmail", jobsListModel.get(getAdapterPosition()).getServiceProviderEmail());
+            intent.putExtra("serviceProviderName", jobsListModel.get(getAdapterPosition()).getServiceProviderName());
+            intent.putExtra("serviceProviderNumber", jobsListModel.get(getAdapterPosition()).getServiceProviderNumber());
+            intent.putExtra("customerEmail", jobsListModel.get(getAdapterPosition()).getCustomerEmail());
+            intent.putExtra("customerName", jobsListModel.get(getAdapterPosition()).getCustomerName());
+            intent.putExtra("customerNumber", jobsListModel.get(getAdapterPosition()).getCustomerNumber());
             context.startActivity(intent);
             ((Activity) context).finish();
         }

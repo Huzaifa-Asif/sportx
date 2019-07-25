@@ -1,6 +1,8 @@
 package com.sport.x.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sport.x.CustomerCompletedJobDetailsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Job;
 import com.sport.x.R;
@@ -46,7 +49,7 @@ public class ProviderCompletedAdapter extends RecyclerView.Adapter<ProviderCompl
         return jobsListModel.size();
     }
 
-    public class ProviderCompletedJobViewHolder extends RecyclerView.ViewHolder {
+    public class ProviderCompletedJobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView comp_image;
         private TextView comp_text, comp_service;
@@ -57,11 +60,31 @@ public class ProviderCompletedAdapter extends RecyclerView.Adapter<ProviderCompl
             comp_image = itemView.findViewById(R.id.com_image);
             comp_text = itemView.findViewById(R.id.com_text);
             comp_service = itemView.findViewById(R.id.com_service);
+
+            itemView.setOnClickListener(this);
         }
 
         public void setData(Job job){
             comp_text.setText(job.getCustomerName());
-            comp_service.setText(job.getServiceName());
+            comp_service.setText(job.getBookingType());
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(context, CustomerCompletedJobDetailsActivity.class);
+            intent.putExtra("date", jobsListModel.get(getAdapterPosition()).getDate());
+            intent.putExtra("job_id", jobsListModel.get(getAdapterPosition()).getJobId());
+            intent.putExtra("state", jobsListModel.get(getAdapterPosition()).getState());
+            intent.putExtra("time", jobsListModel.get(getAdapterPosition()).getTime());
+            intent.putExtra("bookingType", jobsListModel.get(getAdapterPosition()).getBookingType());
+            intent.putExtra("serviceProviderEmail", jobsListModel.get(getAdapterPosition()).getServiceProviderEmail());
+            intent.putExtra("serviceProviderName", jobsListModel.get(getAdapterPosition()).getServiceProviderName());
+            intent.putExtra("serviceProviderNumber", jobsListModel.get(getAdapterPosition()).getServiceProviderNumber());
+            intent.putExtra("customerEmail", jobsListModel.get(getAdapterPosition()).getCustomerEmail());
+            intent.putExtra("customerName", jobsListModel.get(getAdapterPosition()).getCustomerName());
+            intent.putExtra("customerNumber", jobsListModel.get(getAdapterPosition()).getCustomerNumber());
+            context.startActivity(intent);
+            ((Activity) context).finish();
         }
     }
 }

@@ -2,84 +2,88 @@ package com.sport.x.Models;
 
 public class Job {
     private String jobId;
-    private String jobStatus;
-    private String jobStartTime;
-    private String jobCustomerId;
-    private String jobVendorId;
-    private String jobServiceId;
+    private String date;
+    private String state;
+    private String bookingType;
+    private String time;
+    private String serviceProviderEmail;
+    private String serviceProviderName;
+    private String serviceProviderNumber;
+    private String customerEmail;
     private String customerName;
-    private String serviceName;
-    private String vendorPhone;
-    private String vendorAddress;
-    private String vendorCity;
-    private String serviceLat;
-    private String serviceLon;
+    private String customerNumber;
 
-    public Job(String jobId, String jobStatus, String jobStartTime, String jobCustomerId, String jobVendorId, String jobServiceId, String customerName, String serviceName, String vendorPhone, String vendorAddress, String vendorCity, String serviceLat, String serviceLon) {
+    public Job(String jobId, String date, String state, String bookingType, String time, String serviceProviderEmail, String serviceProviderName, String serviceProviderNumber, String customerEmail, String customerName, String customerNumber) {
         this.jobId = jobId;
-        this.jobStatus = jobStatus;
-        this.jobStartTime = jobStartTime;
-        this.jobCustomerId = jobCustomerId;
-        this.jobVendorId = jobVendorId;
-        this.jobServiceId = jobServiceId;
+        this.date = date;
+        this.state = state;
+        this.bookingType = bookingType;
+        this.time = time;
+        this.serviceProviderEmail = serviceProviderEmail;
+        this.serviceProviderName = serviceProviderName;
+        this.serviceProviderNumber = serviceProviderNumber;
+        this.customerEmail = customerEmail;
         this.customerName = customerName;
-        this.serviceName = serviceName;
-        this.vendorPhone = vendorPhone;
-        this.vendorAddress = vendorAddress;
-        this.vendorCity = vendorCity;
-        this.serviceLat = serviceLat;
-        this.serviceLon = serviceLon;
+        this.customerNumber = customerNumber;
+    }
+
+    public Job(String date, String state, String bookingType, String time, String serviceProviderEmail, String customerEmail, String serviceProviderName, String serviceProviderNumber, String customerName, String customerNumber) {
+        this.date = date;
+        this.bookingType = bookingType;
+        this.state = state;
+        this.time = time;
+        this.serviceProviderEmail = serviceProviderEmail;
+        this.serviceProviderName = serviceProviderName;
+        this.serviceProviderNumber = serviceProviderNumber;
+        this.customerEmail = customerEmail;
+        this.customerName = customerName;
+        this.customerNumber = customerNumber;
+
     }
 
     public String getJobId() {
         return jobId;
     }
 
-    public String getJobStatus() {
-        return jobStatus;
+    public String getDate() {
+        return date;
     }
 
-    public String getJobStartTime() {
-        return jobStartTime;
+    public String getBookingType() {
+        return bookingType;
     }
 
-    public String getJobCustomerId() {
-        return jobCustomerId;
+    public String getState() {
+        return state;
     }
 
-    public String getJobVendorId() {
-        return jobVendorId;
+    public String getTime() {
+        return time;
     }
 
-    public String getJobServiceId() {
-        return jobServiceId;
+    public String getServiceProviderEmail() {
+        return serviceProviderEmail;
+    }
+
+    public String getServiceProviderName() {
+        return serviceProviderName;
+    }
+
+    public String getServiceProviderNumber() {
+        return serviceProviderNumber;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
     public String getCustomerName() {
         return customerName;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public String getCustomerNumber() {
+        return customerNumber;
     }
 
-    public String getVendorPhone() {
-        return vendorPhone;
-    }
 
-    public String getVendorAddress() {
-        return vendorAddress;
-    }
-
-    public String getVendorCity() {
-        return vendorCity;
-    }
-
-    public String getServiceLat() {
-        return serviceLat;
-    }
-
-    public String getServiceLon() {
-        return serviceLon;
-    }
 }

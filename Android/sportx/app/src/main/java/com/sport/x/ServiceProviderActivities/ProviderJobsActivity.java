@@ -13,6 +13,7 @@ import android.os.Bundle;
 
 import com.sport.x.Fragments.ProviderCompletedJobs;
 import com.sport.x.Fragments.ProviderInProgressJobs;
+import com.sport.x.Fragments.ProviderPendingJobs;
 import com.sport.x.R;
 
 public class ProviderJobsActivity extends AppCompatActivity {
@@ -76,10 +77,14 @@ public class ProviderJobsActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
+                    ProviderPendingJobs providerPendingJobs = new ProviderPendingJobs();
+                    return providerPendingJobs;
+
+                case 1:
                     ProviderInProgressJobs providerInProgressJobs = new ProviderInProgressJobs();
                     return providerInProgressJobs;
 
-                case 1:
+                case 2:
                     ProviderCompletedJobs providerCompletedJobs = new ProviderCompletedJobs();
                     return providerCompletedJobs;
 
@@ -91,7 +96,7 @@ public class ProviderJobsActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            return 3;
         }
     }
 }

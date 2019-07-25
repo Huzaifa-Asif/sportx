@@ -12,19 +12,27 @@ import android.widget.TextView;
 
 import com.sport.x.AdminActivities.AllJobsActivity;
 import com.sport.x.Misc.Misc;
+import com.sport.x.ServiceProviderActivities.ProviderJobsActivity;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import static android.view.View.GONE;
+
 public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
 
-    private TextView text1, text2, text3;
-    private String job_id, vendor_id;
+    private TextView completed, text1, text2, text3;
+    private String job_id, customerEmail, serviceEmail;
     Misc misc;
     private RatingBar ratingBar;
     private EditText review;
@@ -40,10 +48,18 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
 
+        int userRole = sharedPref.getUserRole();
+
+
         text3 = findViewById(R.id.rate_service);
         ratingBar = findViewById(R.id.rate_job);
         review = findViewById(R.id.feedback);
+        completed = findViewById(R.id.job_completed);
         submit = findViewById(R.id.rate);
+
+
+        Intent intent = getIntent();
+        completed.setText("Job Completed By " + intent.getStringExtra("serviceProviderName"));
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,21 +75,26 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
         });
 
 
-        text1 = findViewById(R.id.job_completed);
         text2 = findViewById(R.id.rate_service);
 
-        Intent intent = getIntent();
         job_id = intent.getStringExtra("job_id");
-        vendor_id = intent.getStringExtra("vendor_id");
-        String name = intent.getStringExtra("vendor_name");
+        serviceEmail = intent.getStringExtra("serviceProviderEmail");
+        customerEmail = intent.getStringExtra("customerEmail");
+        String name = intent.getStringExtra("serviceProviderName");
         String service = intent.getStringExtra("service_name");
-        text1.setText("Job Completed By " + name + " " + service);
-        text2.setText("Rate " + name + " " + service + " for his work");
+        text2.setText("Rate " + name + " for his work");
+
+        if(userRole == 1) {
+            submit.setVisibility(GONE);
+            ratingBar.setEnabled(false);
+            review.setEnabled(false);
+            text2.setText("Job Rating");
+        }
 
         if(sharedPref.getUserId() == null) {
             text3.setText("Job Rating");
             review.setHint("");
-            submit.setVisibility(View.GONE);
+            submit.setVisibility(GONE);
             review.setEnabled(false);
             ratingBar.setEnabled(false);
         }
@@ -89,11 +110,11 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
     private void findRating(){
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Please wait... ");
-        pd.setCancelable(false);
+        pd.setCancelable(true);
         pd.show();
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"find_rating/"+job_id)
+                .load(misc.ROOT_PATH+"findRating/"+job_id)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -107,8 +128,12 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
                         else{
                             if(!result.getResult().isEmpty()){
                                 try {
-                                    JSONObject jsonObject = new JSONObject(result.getResult());
-                                    String ratingStars = jsonObject.getString("rating_stars");
+                                    JSONArray jsonArray = new JSONArray(result.getResult());
+                                    if(jsonArray.length() < 1) {
+                                        pd.dismiss();
+                                    }
+                                    JSONObject jsonObject = (JSONObject) jsonArray.get(0);
+                                    String ratingStars = jsonObject.getString("rating");
                                     String comment = jsonObject.getString("feedback");
 
                                     ratingBar.setRating(Float.parseFloat(ratingStars));
@@ -117,7 +142,7 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
                                     ratingBar.setEnabled(false);
                                     review.setEnabled(false);
 
-                                    submit.setVisibility(View.GONE);
+                                    submit.setVisibility(GONE);
                                     pd.dismiss();
                                 } catch (JSONException e1) {
                                     e1.printStackTrace();
@@ -142,11 +167,19 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
             return;
         }
 
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c);
+
         JsonObject rating = new JsonObject();
-        rating.addProperty("rating_stars", ratingBar.getRating());
+        rating.addProperty("rating", ratingBar.getRating());
         rating.addProperty("feedback", review.getText().toString());
-        rating.addProperty("job_id", job_id);
-        rating.addProperty("vendor_id", vendor_id);
+        rating.addProperty("date", formattedDate);
+        rating.addProperty("jobId", job_id);
+        rating.addProperty("customerEmail", customerEmail);
+        rating.addProperty("serviceProviderEmail", serviceEmail);
 
         Ion.with(this)
                 .load(misc.ROOT_PATH+"post_rating")
@@ -162,9 +195,16 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
                             return;
                         }
                         else{
-                            misc.showToast(result.getResult());
-                            pd.dismiss();
-                            onBackPressed();
+                            try {
+                                JSONObject jsonObject = new JSONObject(result.getResult());
+                                String message = jsonObject.getString("message");
+                                misc.showToast(message);
+                                pd.dismiss();
+                                onBackPressed();
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+
                         }
                     }
                 });
@@ -189,6 +229,11 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
     public void onBackPressed() {
         if(sharedPref.getUserId() == null) {
             Intent intent = new Intent(this, AllJobsActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(sharedPref.getUserRole() == 1) {
+            Intent intent = new Intent(this, ProviderJobsActivity.class);
             startActivity(intent);
             finish();
         }

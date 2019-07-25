@@ -64,22 +64,26 @@ public class InProgressJobsAdapter extends RecyclerView.Adapter<InProgressJobsAd
         }
 
         public void setData(Job job){
-            text_item.setText(job.getCustomerName() + " "  + job.getServiceName()+"'s"+ " Job is in progress " );
+            text_item.setText(job.getServiceProviderName() + " Booking of: "  + job.getBookingType()+" is in progress");
         }
 
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(context, CustomerInProgressJobDetailsActivity.class);
+            intent.putExtra("date", jobsListModel.get(getAdapterPosition()).getDate());
+            intent.putExtra("time", jobsListModel.get(getAdapterPosition()).getTime());
             intent.putExtra("job_id", jobsListModel.get(getAdapterPosition()).getJobId());
-            intent.putExtra("address", jobsListModel.get(getAdapterPosition()).getVendorAddress());
-            intent.putExtra("city", jobsListModel.get(getAdapterPosition()).getVendorCity());
-            intent.putExtra("phone", jobsListModel.get(getAdapterPosition()).getVendorPhone());
-            intent.putExtra("service_name", jobsListModel.get(getAdapterPosition()).getServiceName());
-            intent.putExtra("vendor_name", jobsListModel.get(getAdapterPosition()).getCustomerName());
-            intent.putExtra("lat", jobsListModel.get(getAdapterPosition()).getServiceLat());
-            intent.putExtra("lon", jobsListModel.get(getAdapterPosition()).getServiceLon());
+            intent.putExtra("state", jobsListModel.get(getAdapterPosition()).getState());
+            intent.putExtra("bookingType", jobsListModel.get(getAdapterPosition()).getBookingType());
+            intent.putExtra("serviceProviderEmail", jobsListModel.get(getAdapterPosition()).getServiceProviderEmail());
+            intent.putExtra("serviceProviderName", jobsListModel.get(getAdapterPosition()).getServiceProviderName());
+            intent.putExtra("serviceProviderNumber", jobsListModel.get(getAdapterPosition()).getServiceProviderNumber());
+            intent.putExtra("customerEmail", jobsListModel.get(getAdapterPosition()).getCustomerEmail());
+            intent.putExtra("customerName", jobsListModel.get(getAdapterPosition()).getCustomerName());
+            intent.putExtra("customerNumber", jobsListModel.get(getAdapterPosition()).getCustomerNumber());
             context.startActivity(intent);
             ((Activity) context).finish();
         }
+
     }
 }

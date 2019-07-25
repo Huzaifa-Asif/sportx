@@ -70,7 +70,7 @@ public class CustomerInProgressJobs extends Fragment {
         pd.setCancelable(false);
         pd.show();
         Ion.with(context)
-                .load(misc.ROOT_PATH+"in_progress_jobs/"+sharedPref.getUserId())
+                .load(misc.ROOT_PATH+"customerInProgressBookings/"+sharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -92,20 +92,19 @@ public class CustomerInProgressJobs extends Fragment {
                                 jobsListModel.clear();
                                 for(int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                                    String job_id = jsonObject.getString("job_id");
-                                    String job_status = jsonObject.getString("job_status");
-                                    String job_start_date = jsonObject.getString("job_start_date");
-                                    String vendor_id = jsonObject.getString("vendor_id");
-                                    String customer_id = jsonObject.getString("customer_id");
-                                    String service_id = jsonObject.getString("fk_service_id");
-                                    String customer_name = jsonObject.getString("user_name");
-                                    String service_name = jsonObject.getString("service_name");
-                                    String vendor_phone = jsonObject.getString("user_phone");
-                                    String address = jsonObject.getString("user_address");
-                                    String city = jsonObject.getString("user_city");
-                                    String lat = jsonObject.getString("user_lat");
-                                    String lon = jsonObject.getString("user_lon");
-                                    jobsListModel.add(new Job(job_id, job_status, job_start_date, customer_id, vendor_id, service_id, customer_name, service_name, vendor_phone, address, city, lat, lon));
+                                    String date = jsonObject.getString("date");
+                                    String job_id = jsonObject.getString("_id");
+                                    String bookingType = jsonObject.getString("bookingType");
+                                    String state = jsonObject.getString("state");
+                                    String time = jsonObject.getString("time");
+                                    String serviceProviderEmail = jsonObject.getString("serviceProviderEmail");
+                                    String serviceProviderName = jsonObject.getString("serviceProviderName");
+                                    String serviceProviderNumber = jsonObject.getString("serviceProviderNumber");
+                                    String customerEmail = jsonObject.getString("customerEmail");
+                                    String customerName = jsonObject.getString("customerName");
+                                    String customerNumber = jsonObject.getString("customerNumber");
+
+                                    jobsListModel.add(new Job(job_id, date, state, bookingType, time, serviceProviderEmail, serviceProviderName, serviceProviderNumber, customerEmail, customerName, customerNumber));
                                 }
                                 jobsAdapter = new InProgressJobsAdapter(context, jobsListModel);
                                 view.setAdapter(jobsAdapter);

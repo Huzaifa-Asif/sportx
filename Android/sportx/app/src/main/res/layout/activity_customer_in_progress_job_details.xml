@@ -19,6 +19,7 @@
         app:cardElevation="@dimen/_10sdp">
 
         <RelativeLayout
+            android:id="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
@@ -35,6 +36,7 @@
                 android:textSize="@dimen/_12sdp"
                 android:id="@+id/contact_details"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +48,6 @@
                 android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 />
-
 
 
             <TextView
@@ -67,8 +68,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Service: "
-                android:id="@+id/c_service"
+                android:text="Booking Type: "
+                android:id="@+id/c_booking_type"
                 android:layout_below="@id/c_name"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textSize="@dimen/_11sdp"
@@ -79,8 +80,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="City: "
-                android:id="@+id/c_city"
+                android:id="@+id/c_state"
                 android:layout_below="@id/c_phone"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/_11sdp"
+                android:layout_marginRight="@dimen/_35sdp"
+                android:textStyle="bold"
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date: "
+                android:id="@+id/c_date"
+                android:layout_below="@id/c_booking_type"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time: "
+                android:id="@+id/c_time"
+                android:layout_below="@id/c_state"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/_11sdp"
@@ -92,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_30sdp"
                 android:background="@color/colorPrimary"
-                android:layout_below="@+id/c_city"
+                android:layout_below="@+id/c_time"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:text="Make Call"
@@ -108,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_30sdp"
                 android:background="@color/white"
-                android:layout_below="@+id/c_city"
+                android:layout_below="@+id/c_time"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:text="Send SMS"
@@ -124,37 +151,34 @@
 
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_map"
-        android:layout_below="@id/card_details"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:cardElevation="@dimen/_10sdp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp">
-
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ip_map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"/>
-
-    </android.support.v7.widget.CardView>
-
     <Button
         android:id="@+id/complete_job"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@id/card_map"
+        android:layout_below="@id/card_details"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
-        android:text="Complete Job"
+        android:text="Complete Booking"
         android:textColor="#fff"
         android:background="@color/colorPrimary"
         />
+
+
+    <Button
+        android:id="@+id/cancel_job"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/complete_job"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:text="Cancel Booking"
+        android:textColor="#fff"
+        android:background="@color/red"
+        />
+
+
     <!--<Button-->
         <!--android:id="@+id/cancel_job"-->
         <!--android:layout_width="match_parent"-->

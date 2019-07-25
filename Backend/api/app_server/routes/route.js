@@ -20,7 +20,7 @@ var tournament = require('../controllers/tournament.js');
 
 router.get('/',function(req,res)
 {
-    res.json({message:"Hello Bitches"})
+    res.json({message:"Welcome to Sport-X Backend"})
 });
 
 
@@ -28,7 +28,7 @@ router.get('/',function(req,res)
 router.post('/signup_Admin', function (req, res) {
     var adminform=req.body;
     admin.addAdmin(adminform,function (err, admin) {
-        if (err) 
+        if (err)
         {
             console.log(err);
             return res.status(500).json({Message:"Error in Connecting to DB",status:false});
@@ -37,7 +37,7 @@ router.post('/signup_Admin', function (req, res) {
         result.status = true;
         return res.json(result);
         });
-            
+
 });
 
 
@@ -62,22 +62,22 @@ router.post('/signup_customer', function (req, res) {
                     return res.json({Message:"Email Already Exists",status:false});
                     else
                     {
-                        customer.addCustomer(customerform,function (err, customer) 
+                        customer.addCustomer(customerform,function (err, customer)
                         {
-                            if (err) 
+                            if (err)
                             {
                             return res.status(500).json({Message:"Error in Connecting to DB",status:false});
                             }
                             var result = customer.toObject();
                             result.status = true;
                             return res.json(result);
-                            
+
                         });
                     }
                 });
             }
          }
-  
+
      });
 });
 
@@ -96,7 +96,7 @@ router.post('/signup_serviceProvider', function (req, res) {
             else
             {
                 customer.getCustomerByEmail(serviceProviderform.email,function(err,result)
-                {   
+                {
                     if(err)
                     return res.status(500).json({Message:"Error in Connecting to DB",status:false});
                     else
@@ -112,16 +112,16 @@ router.post('/signup_serviceProvider', function (req, res) {
                                 var result = serviceProvider.toObject();
                                 result.status = true;
                                 return res.json(result);
-                                
+
                             });
                         }
 
                     }
                 });
-                
+
             }
          }
-  
+
      });
 });
 
@@ -131,7 +131,7 @@ router.post('/login', function (req, res) {
     let password=req.body.password;
     customer.login(email,password,res);
     serviceProvider.login(email,password,res);
-    
+
 });
 
 //Login for Admin
@@ -139,8 +139,8 @@ router.post('/loginAdmin', function (req, res) {
     let email=req.body.email;
     let password=req.body.password;
     admin.login(email,password,res);
-    
-    
+
+
 });
 
 // Get Service Provider by category
@@ -157,6 +157,22 @@ router.get('/search/serviceProviderByCategory/:category', function (req, res) {
         }
         else
         return res.status(500).json({Message:"No service Providers found with the category "+req.params.category,status:false});
+    });
+
+});
+
+
+// Get Service Provider by email
+router.get('/search/serviceProviderByEmail/:email', function (req, res) {
+    serviceProvider.getServiceProviderByEmail(req.params.email,function (err, serviceProviders) {
+        if (err) {
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        else if(serviceProviders)
+        return res.json(serviceProviders);
+        else
+        return res.status(500).json({Message:"No service Providers found with Names like "+req.params.name,status:false});
+
     });
 
 });
@@ -222,7 +238,7 @@ router.patch('/update_customer/:email', function (req, res) {
         var result = customer.toObject();
         result.status = true;
         return res.json(result);
-        
+
     });
 
 });
@@ -233,17 +249,32 @@ router.patch('/update_serviceProvider/:email', function (req, res) {
     var email = req.params.email;
     var serviceProviderform = req.body;
     serviceProvider.updateServiceProvider(email, serviceProviderform, {new:true}, function (err, serviceProvider) {
-        if (err) 
+        if (err)
         {
             return res.status(500).json({Message:"Error in Connecting to DB",status:false});
         }
         var result = serviceProvider.toObject();
         result.status = true;
         return res.json(result);
-        
+
     });
 
 });
+
+
+
+// Get Service Category
+router.get('/get_serviceCategory', function (req, res) {
+    serviceCategory.getServiceCategory(function (err, result) {
+        if (err)
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+
+     return res.json(result);
+
+    });
+
+});
+
 
 //Add Service Category
 router.post('/add_serviceCategory', function (req, res) {
@@ -258,17 +289,17 @@ router.post('/add_serviceCategory', function (req, res) {
         else
         {
             serviceCategory.addServiceCategory(serviceCategoryform,function (err, serviceCategory) {
-                if (err) 
+                if (err)
                 return res.status(500).json({Message:"Error in Connecting to DB",status:false});
-                
+
                 var result = serviceCategory.toObject();
                 result.status = true;
                 return res.json(result);
-                        
+
                 });
         }
         });
-            
+
 });
 
 
@@ -277,14 +308,14 @@ router.patch('/update_serviceCategory/:name', function (req, res) {
     var serviceCategoryform=req.body;
     var name=req.params.name;
     serviceCategory.updateServiceCategory(name,serviceCategoryform,{new:true},function (err, serviceCategory) {
-        if (err) 
+        if (err)
         return res.status(500).json({Message:"Error in Connecting to DB",status:false});
-        
+
         var result = serviceCategory.toObject();
         result.status = true;
         return res.json(result);
         });
-            
+
 });
 
 
@@ -292,12 +323,12 @@ router.patch('/update_serviceCategory/:name', function (req, res) {
 router.delete('/delete_serviceCategory/:name', function (req, res) {
     var name=req.params.name;
     serviceCategory.removeServiceCategory(name,function (err) {
-        if (err) 
+        if (err)
         return res.status(500).json({Message:"Error in Connecting to DB",status:false});
-        
+
         return res.json({status:true});
         });
-            
+
 });
 
 
@@ -305,9 +336,9 @@ router.delete('/delete_serviceCategory/:name', function (req, res) {
 router.post('/add_bookingDetails', function (req, res) {
     var bookingDetailsform=req.body;
     bookingDetails.addBookingDetails(bookingDetailsform,function (err, bookingDetails) {
-        if (err) 
+        if (err)
         return res.status(500).json({Message:"Error in Connecting to DB",status:false});
-        
+
         var result = bookingDetails.toObject();
         result.status = true;
         return res.json(result);
@@ -328,11 +359,11 @@ router.patch('/update_bookingDetails/:id', function (req, res) {
         result.status = true;
         return res.json(result);
         });
-            
+
 });
 
 
-//Delete Service Category
+//Delete booking details
 router.delete('/delete_bookingDetails/:id', function (req, res) {
     var id=req.params.id;
     bookingDetails.removeBookingDetails(id,function (err, bookingDetails) {
@@ -342,8 +373,54 @@ router.delete('/delete_bookingDetails/:id', function (req, res) {
                 }
         return res.json({status:true});
         });
-            
+
 });
+
+
+
+// Update Booking Status
+router.patch('/update_bookingState/:id', bookingDetails.updateBookingState);
+
+// Pending Bookings of Vendor
+router.get('/serviceProviderPendingBookings/:email', bookingDetails.serviceProviderPendingBookings);
+
+// In Progress Bookings of Vendor
+router.get('/serviceProviderInProgressBookings/:email', bookingDetails.serviceProviderInProgressBookings);
+
+// Completed Bookings of Vendor
+router.get('/serviceProviderCompletedBookings/:email', bookingDetails.serviceProviderCompletedBookings);
+
+
+// Pending Bookings of Customer
+router.get('/customerPendingBookings/:email', bookingDetails.customerPendingBookings);
+
+// In Progress Bookings of Customer
+router.get('/customerInProgressBookings/:email', bookingDetails.customerInProgressBookings);
+
+// Completed Bookings of Customer
+router.get('/customerCompletedBookings/:email', bookingDetails.customerCompletedBookings);
+
+// Get Booking Details by Email - Service Provider
+router.get('/get_bookingdetails/:email', function (req, res) {
+    bookingDetails.getBookingDetailsByEmail(req.params.email,function (err, result) {
+        if (err)
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+
+     return res.json(result);
+
+    });
+
+});
+
+
+// Ratings
+router.post('/post_rating', ratingAndFeedback.post_rating);
+
+// Find Rating of a Job
+router.get('/findRating/:id', ratingAndFeedback.findRating);
+
+
+
 
 
 // /* GET home page. */
@@ -355,14 +432,14 @@ router.delete('/delete_bookingDetails/:id', function (req, res) {
 //     <br>
 //     <p>  Please use /api/stocks/    or   /api/demands/ </p>
 
-//     <a href="http://localhost:3000/api/stocks/" target='blank'> Stock API </a> 
+//     <a href="http://localhost:3000/api/stocks/" target='blank'> Stock API </a>
 //     &ensp;  &ensp;
 //      <a href="http://localhost:3000/api/demands/" target='blank'> Demand API </a>
 //    </h2>
 //    </div>
 //     </html>
-    
-    
+
+
 //     `);
 // });
 

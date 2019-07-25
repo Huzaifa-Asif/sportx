@@ -153,24 +153,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Boolean status = jsonObject1.getBoolean("status");
 
 
-                                if(!status)
-                                {
-                                    pd.dismiss();
-                                    misc.showToast("Invalid Email or Password!");
-                                    return;
-                                }
 
 
-                                if(status)
+                               if(status==true)
                                 {
 
                                     String id = jsonObject1.getString("_id");
                                     String email = jsonObject1.getString("email");
                                     Integer role = jsonObject1.getInt("role");
+                                    String name = jsonObject1.getString("name");
+                                    String number = jsonObject1.getString("contact");
 
                                     if(role == 2)
                                     {
-                                    sharedPref.createLoginSession(id, email, role);
+                                    sharedPref.createLoginSession(id, email, role, name, number);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AllServiceActivity.class);
                                     startActivity(intent);
@@ -178,7 +174,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                     else if(role == 1 )
                                     {
-                                    sharedPref.createLoginSession(id, email, role);
+                                    sharedPref.createLoginSession(id, email, role, name, number);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, ServiceHomeActivity.class);
                                     startActivity(intent);
@@ -186,7 +182,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                     else if(role == 0 )
                                     {
-                                    sharedPref.createLoginSession(id, email, role);
+                                    sharedPref.createLoginSession(id, email, role, name, number);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                                     startActivity(intent);
@@ -194,6 +190,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                 }
 
+                               else if(status==false){
+                                   pd.dismiss();
+                                   misc.showToast("Invalid Email or Password!");
+                                   return;
+                               }
 
 
 

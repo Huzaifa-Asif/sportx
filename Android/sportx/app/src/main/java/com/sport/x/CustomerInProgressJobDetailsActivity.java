@@ -14,9 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.sport.x.AdminActivities.AllJobsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
+import com.sport.x.ServiceProviderActivities.ProviderJobsActivity;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,98 +32,107 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static android.view.View.GONE;
 
-public class CustomerInProgressJobDetailsActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener {
+public class CustomerInProgressJobDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private GoogleMap mMap;
     private Marker myMarker;
     private double current_latitude, current_longitude;
-    private TextView name, service, phone, city;
+    private TextView name, booking_type, phone, state, date, time;
     private Location currentLocation;
     private String phoneNumber, jobId;
-    private Button complete, msg, call;
+    private Button cancel,complete, msg, call;
     private EditText meesage;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int LOCATION_REQUEST_CODE = 101;
     SharedPref sharedPref;
     Misc misc;
     private boolean show = false;
+    private String jobStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_in_progress_job_details);
-        setTitle("Job In Progress");
+        setTitle("Job Request");
 
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
 
         name = findViewById(R.id.c_name);
-        service = findViewById(R.id.c_service);
+        booking_type = findViewById(R.id.c_booking_type);
         phone = findViewById(R.id.c_phone);
-        city = findViewById(R.id.c_city);
-        call = findViewById(R.id.make_call);
-        msg = findViewById(R.id.message);
+        state = findViewById(R.id.c_state);
+        date = findViewById(R.id.c_date);
+        time = findViewById(R.id.c_time);
 
-        msg.setOnClickListener(this);
-        complete = findViewById(R.id.complete_job);
-        complete.setOnClickListener(this);
+        call = findViewById(R.id.make_call);
         call.setOnClickListener(this);
 
-        String id = sharedPref.getUserId();
-        if(id == null) {
-            complete.setVisibility(GONE);
-        }
+        msg = findViewById(R.id.message);
+        msg.setOnClickListener(this);
+
+        cancel = findViewById(R.id.cancel_job);
+        cancel.setOnClickListener(this);
+
+        complete = findViewById(R.id.complete_job);
+        complete.setOnClickListener(this);
+
 
         Intent intent = getIntent();
         jobId = intent.getStringExtra("job_id");
 
-        name.setText("Name: " + intent.getStringExtra("vendor_name"));
-        service.setText("Service: " + intent.getStringExtra("service_name"));
-        phone.setText("Phone: " + intent.getStringExtra("phone"));
-        city.setText("City: " + intent.getStringExtra("city"));
-
-        phoneNumber = intent.getStringExtra("phone");
-
-        current_latitude = Double.parseDouble(intent.getStringExtra("lat"));
-        current_longitude = Double.parseDouble(intent.getStringExtra("lon"));
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.ip_map);
-        mapFragment.getMapAsync(CustomerInProgressJobDetailsActivity.this);
-
-
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        String id = sharedPref.getUserId();
+        if(id == null) {
+            cancel.setVisibility(GONE);
         }
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(current_latitude, current_longitude);
-        mMap.setMinZoomPreference(15);
-        myMarker = mMap.addMarker(new MarkerOptions().position(sydney).title("Service Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        int userRole = sharedPref.getUserRole();
+        if(userRole == 1) {
+
+            phoneNumber = intent.getStringExtra("customerNumber");
+
+            name.setText("Name: " + intent.getStringExtra("customerName"));
+            booking_type.setText("Booking Type: " + intent.getStringExtra("bookingType"));
+            phone.setText("Phone: " + intent.getStringExtra("customerNumber"));
+            state.setText("State: " + intent.getStringExtra("state"));
+            date.setText("Date: " + intent.getStringExtra("date"));
+            time.setText("Time: " + intent.getStringExtra("time"));
+
+        }
+        if(userRole == 2) {
+
+            cancel.setVisibility(GONE);
+
+            complete.setVisibility(GONE);
+
+            phoneNumber = intent.getStringExtra("serviceProviderNumber");
+
+            name.setText("Name: " + intent.getStringExtra("serviceProviderName"));
+            booking_type.setText("Booking Type: " + intent.getStringExtra("bookingType"));
+            phone.setText("Phone: " + intent.getStringExtra("serviceProviderNumber"));
+            state.setText("State: " + intent.getStringExtra("state"));
+            date.setText("Date: " + intent.getStringExtra("date"));
+            time.setText("Time: " + intent.getStringExtra("time"));
+
+        }
+
+
     }
 
     @Override
     public void onBackPressed() {
         if(sharedPref.getUserId() == null) {
             Intent intent = new Intent(this, AllJobsActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(sharedPref.getUserRole() == 1) {
+            Intent intent = new Intent(this, ProviderJobsActivity.class);
             startActivity(intent);
             finish();
         }
@@ -134,8 +145,11 @@ public class CustomerInProgressJobDetailsActivity extends AppCompatActivity impl
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == cancel.getId()) {
+            cancelJob("canceled");
+        }
         if(v.getId() == complete.getId()) {
-            completeJob();
+            completeJob("completed");
         }
         if(v.getId() == call.getId()){
             makeCall();
@@ -147,7 +161,7 @@ public class CustomerInProgressJobDetailsActivity extends AppCompatActivity impl
 
     private void makeCall(){
         Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + phoneNumber));
+        intent.setData(Uri.parse("tel:"+ phoneNumber));
         startActivity(intent);
     }
 
@@ -159,14 +173,19 @@ public class CustomerInProgressJobDetailsActivity extends AppCompatActivity impl
         startActivity(sendIntent);
     }
 
-    private void completeJob(){
+    private void cancelJob(String status){
+
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Completing Jobs... ");
+        pd.setMessage("cancelling Booking Request... ");
         pd.setCancelable(false);
         pd.show();
 
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("status", status);
+
         Ion.with(this)
-                .load("PUT",misc.ROOT_PATH+"complete_job/"+jobId)
+                .load("PATCH",misc.ROOT_PATH+"update_bookingState/"+jobId)
+                .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -179,9 +198,56 @@ public class CustomerInProgressJobDetailsActivity extends AppCompatActivity impl
                         }
                         else{
                             pd.dismiss();
-                            misc.showToast(result.getResult());
-                            onBackPressed();
+                            try {
+                                JSONObject jsonObject = new JSONObject(result.getResult());
+                                String status = jsonObject.getString("status");
+                                String message = jsonObject.getString("message");
+                                onBackPressed();
+                                misc.showToast(message);
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                    }
+                });
+    }
 
+
+
+    private void completeJob(String status){
+
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Completing Booking Request... ");
+        pd.setCancelable(false);
+        pd.show();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("status", status);
+
+        Ion.with(this)
+                .load("PATCH",misc.ROOT_PATH+"update_bookingState/"+jobId)
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if(e != null) {
+                            misc.showToast("Please check your connection");
+                            pd.dismiss();
+                            return;
+                        }
+                        else{
+                            pd.dismiss();
+                            try {
+                                JSONObject jsonObject = new JSONObject(result.getResult());
+                                String status = jsonObject.getString("status");
+                                String message = jsonObject.getString("message");
+                                onBackPressed();
+                                misc.showToast(message);
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
                         }
                     }
                 });

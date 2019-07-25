@@ -103,7 +103,7 @@ public class CompletedJobs extends Fragment {
                                     String city = jsonObject.getString("user_city");
                                     String lat = jsonObject.getString("user_lat");
                                     String lon = jsonObject.getString("user_lon");
-                                    jobsListModel.add(new Job(job_id, job_status, job_start_date, customer_id, vendor_id, service_id, customer_name, service_name, vendor_phone, address, city, lat, lon));
+//                                    jobsListModel.add(new Job(job_id, job_status, job_start_date, customer_id, vendor_id, service_id, customer_name, service_name, vendor_phone, address, city, lat, lon));
                                 }
                                 completedJobsAdapter = new CompletedJobsAdapter(context, jobsListModel);
                                 view.setAdapter(completedJobsAdapter);
