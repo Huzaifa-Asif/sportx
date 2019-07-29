@@ -388,10 +388,10 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         jsonObject.addProperty("address", address.getText().toString().trim());
         jsonObject.addProperty("password", password.getText().toString());
         jsonObject.addProperty("category", items);
-        jsonObject.addProperty("picture", bitmapTo64);
+        jsonObject.addProperty("picture_profile", bitmapTo64);
         jsonObject.addProperty("long", lon1);
         jsonObject.addProperty("lat", lat1);
-
+        Log.d("acaca:",bitmapTo64);
 
         Ion.with(this)
                 .load(misc.ROOT_PATH+"signup_serviceProvider")

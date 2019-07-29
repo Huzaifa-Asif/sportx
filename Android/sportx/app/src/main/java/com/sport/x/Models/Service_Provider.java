@@ -5,19 +5,19 @@ public class Service_Provider {
     private String name;
     private String email;
     private String address;
-    private String picture;
+    private String picture_profile;
     private String contact;
     private String password;
     private String category;
     private Double userLat;
     private Double userLon;
 
-    public Service_Provider( String name, String email, String address,String picture, String contact,  String password,  String category, Double userLat, Double userLon) {
+    public Service_Provider( String name, String email, String address,String picture_profile, String contact,  String password,  String category, Double userLat, Double userLon) {
 
         this.name = name;
         this.email = email;
         this.address = address;
-        this.picture = picture;
+        this.picture_profile = picture_profile;
         this.contact = contact;
         this.password = password;
         this.category = category;
@@ -44,7 +44,7 @@ public class Service_Provider {
     }
 
     public String getServiceProviderPicture() {
-        return picture;
+        return picture_profile;
     }
 
     public String getServiceProviderPassword() {

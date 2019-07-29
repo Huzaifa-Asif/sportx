@@ -1,29 +1,24 @@
 var base64Img = require('base64-img');
 var fs=require('fs');
-module.exports.uploadPicture= (name,base64) =>
+const cloudinary = require('cloudinary');
+
+module.exports.uploadPicture= async (base64) =>
 {
-    base64Img.img
-    ('data:image/png;base64,'+base64,             // Base64 String
-    'uploads',                                   //Destination Path
-    name,                                     //Image Name
-    function(err) 
+    var uploadString="data:image/png;base64,"+base64;
+    try
     {
-        if(err)
-        {
-            console.log(err);
-        }
-    });
-    return 'uploads/'+name+'.png';
+        imgUrl = await cloudinary.uploader.upload(uploadString, {folder: "user_images/"}, function(result){
+        return result.url;
+        });
+    }
+    catch(error)
+    {
+        console.log(error);
+        throw error;
+    }
+        
+    return imgUrl;
+
 } 
 
-module.exports.deleteFile= (filepath)=>
-{
-    // delete file named 'sample.txt'
-    fs.unlink(filepath, function (err) 
-    {
-        if (err) 
-        console.log(err);
-        else
-        console.log('File deleted!');
-    }); 
-}
+

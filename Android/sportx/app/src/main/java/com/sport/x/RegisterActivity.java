@@ -186,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
             InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             bitmapTo64 = bitmapToBase64(bitmap);
-            Log.d("Converted Image", bitmapTo64);
+            Log.d("Converted Image: ", bitmapTo64);
             image.setImageBitmap(bitmap);
             imagebase64 = bitmapTo64.toString();
         }
@@ -216,7 +216,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream .toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
@@ -241,11 +241,6 @@ public class RegisterActivity extends AppCompatActivity {
         pd.setMessage("Registration in process...");
         pd.setCancelable(false);
         pd.show();
-
-//        Log.d("Converted Image", "gggggg");
-//        Log.d("Converted Image", bitmapTo64);
-//        String temp ="";
-//        temp+=bitmapTo64;
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("name", name.getText().toString().trim());
@@ -354,7 +349,6 @@ public class RegisterActivity extends AppCompatActivity {
                         catch (JSONException e1) {
                             e1.printStackTrace();
                         }
-
 
 
                     }

@@ -44,22 +44,34 @@ router.post('/signup_Admin', function (req, res) {
 // Signup for customer
 router.post('/signup_customer', function (req, res) {
     var customerform=req.body;
-    customer.getCustomerByEmail(customerform.email,function(err,result)
+    customer.checkCustomerEmail(customerform.email,function(err,result)
     {
         if(err)
-        return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        {
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        
         else
         {
             if(result)
-            return res.json({Message:"Email Already Exists",status:false});
+            {
+                return res.json({Message:"Email Already Exists",status:false});
+            }
+        
             else
             {
-                serviceProvider.getServiceProviderByEmail(customerform.email,function(err,result)
+                serviceProvider.checkServiceProviderEmail(customerform.email,function(err,result)
                 {
                     if(err)
-                    return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                    {
+                        return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                    }
+                    
                     else if(result)
-                    return res.json({Message:"Email Already Exists",status:false});
+                    {
+                        return res.json({Message:"Email Already Exists",status:false});
+                    }
+                   
                     else
                     {
                         customer.addCustomer(customerform,function (err, customer)
@@ -85,7 +97,7 @@ router.post('/signup_customer', function (req, res) {
 // Signup for serviceProvider
 router.post('/signup_serviceProvider', function (req, res) {
     var serviceProviderform=req.body;
-    serviceProvider.getServiceProviderByEmail(serviceProviderform.email,function(err,result)
+    serviceProvider.checkServiceProviderEmail(serviceProviderform.email,function(err,result)
     {
         if(err)
         return res.status(500).json({Message:"Error in Connecting to DB",status:false});
@@ -95,7 +107,7 @@ router.post('/signup_serviceProvider', function (req, res) {
             return res.json({Message:"Email Already Exists",status:false});
             else
             {
-                customer.getCustomerByEmail(serviceProviderform.email,function(err,result)
+                customer.checkCustomerEmail(serviceProviderform.email,function(err,result)
                 {
                     if(err)
                     return res.status(500).json({Message:"Error in Connecting to DB",status:false});
@@ -419,6 +431,185 @@ router.post('/post_rating', ratingAndFeedback.post_rating);
 // Find Rating of a Job
 router.get('/findRating/:id', ratingAndFeedback.findRating);
 
+
+//Add Tournament
+router.post('/add_tournament',function(req,res)
+{
+    var addTournamentForm=req.body;
+    tournament.addTournament(addTournamentForm,function (err, tournament) {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+        var result = tournament.toObject();
+        result.status = true;
+        return res.json(result);
+        });
+
+});
+
+//Update Tournament
+router.patch('/update_tournament/:id', function (req, res) {
+    var tournamentForm=req.body;
+    var id=req.params.id;
+    tournament.updateTournament(id,tournamentForm,{new:true},function (err, tournament) 
+    {
+        if (err) 
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        else if(tournament)
+        {
+        var result = tournament.toObject();
+        result.status = true;
+        return res.json(result);
+        }
+        else
+        return res.status(500).json({Message:"No Such Tournament Exists",status:false});
+    });
+
+});
+
+
+//Delete Tournament
+router.delete('/delete_tournament/:id', function (req, res) {
+    var id=req.params.id;
+    tournament.removeTournament(id,function (err) {
+        if (err) 
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        return res.json({status:true});
+        });
+
+});
+
+//Get All Tournaments by state
+router.get('/get_tournament_by_state/:state', function (req, res) {
+    tournament.getTournamentByState(req.params.state,function (err, result) {
+        if (err)
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+
+     return res.json(result);
+
+    });
+
+});
+
+//Get Tournaments by Id
+router.get('/get_tournament_by_id/:id', function (req, res) {
+    tournament.getTournamentById(req.params.id,function (err, result) {
+        if (err)
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+
+     return res.json(result);
+
+    });
+
+});
+
+//Get Tournaments by serviceProvider Email
+router.get('/get_tournament_by_serviceProvider/:email', function (req, res) {
+    tournament.getTournamentByServiceProviderEmail(req.params.email,function (err, result) {
+        if (err)
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+
+     return res.json(result);
+
+    });
+
+});
+
+//Get Tournaments by adder Email
+router.get('/get_tournament_by_adder/:email', function (req, res) {
+    tournament.getTournamentByAdderEmail(req.params.email,function (err, result) {
+        if (err)
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+
+     return res.json(result);
+
+    });
+
+});
+
+//Add Team in Tournament
+router.post('/add_team',function(req,res)
+{
+    var addTeamForm=req.body;
+    team.addTeam(addTeamForm,function (err, team) {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+        var result = team.toObject();
+        result.status = true;
+        return res.json(result);
+        });
+
+});
+
+//Update Team
+router.patch('/update_team/:id', function (req, res) {
+    var teamForm=req.body;
+    var id=req.params.id;
+    team.updateTeam(id,teamForm,{new:true},function (err, team) 
+    {
+        if (err) 
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        else if(team)
+        {
+        var result = team.toObject();
+        result.status = true;
+        return res.json(result);
+        }
+        else
+        return res.status(500).json({Message:"No Such Team Exists",status:false});
+    });
+
+});
+
+//Delete Team
+router.delete('/delete_team/:id', function (req, res) {
+    var id=req.params.id;
+    team.removeTeam(id,function (err) {
+        if (err) 
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        return res.json({status:true});
+        });
+
+});
+
+//Get Team by Id
+router.get('/get_team_by_id/:id', function (req, res) {
+    team.getTeamById(req.params.id,function (err, result) {
+        if (err)
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+
+     return res.json(result);
+
+    });
+
+});
+
+//Get Teams by Tournament
+router.get('/get_team_by_tournament/:id', function (req, res) {
+    team.getTeamByTournament(req.params.id,function (err, result) {
+        if (err)
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+
+     return res.json(result);
+
+    });
+
+});
 
 
 
