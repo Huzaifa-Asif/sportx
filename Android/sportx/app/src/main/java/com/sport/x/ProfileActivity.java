@@ -183,8 +183,6 @@ public class ProfileActivity extends AppCompatActivity {
         String user_name = name.getText().toString().trim();
         String user_email = email.getText().toString().trim();
         String user_phone = phone.getText().toString().trim();
-        String user_password = password.getText().toString();
-        String user_re_password = confirm.getText().toString();
 
         String regex = "[A-Za-z A-Za-z]+";
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -204,40 +202,10 @@ public class ProfileActivity extends AppCompatActivity {
             phone.setError("Invalid Phone Number");
             return false;
         }
-        if(user_password.length() < 6 ) {
-            misc.showToast("Password should be min 6 characters");
-            password.setError("Password should be min 6 characters");
-            return false;
-        }
-        if(!user_password.equalsIgnoreCase(user_re_password)) {
-            misc.showToast("Password Mismatch");
-            confirm.setError("Password Mismatch");
-            return false;
-        }
 
         return true;
     }
 
-
-    private boolean validatePassword(){
-
-        String user_password = password.getText().toString();
-        String user_re_password = confirm.getText().toString();
-
-
-        if(user_password.length() < 6 ) {
-            misc.showToast("Password should be min 6 characters");
-            password.setError("Password should be min 6 characters");
-            return false;
-        }
-        if(!user_password.equalsIgnoreCase(user_re_password)) {
-            misc.showToast("Password Mismatch");
-            confirm.setError("Password Mismatch");
-            return false;
-        }
-
-        return true;
-    }
 
 
     private void fetchUserProfile(){
@@ -254,7 +222,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                 name.setText(sharedPref.getName());
                                 email.setText(sharedPref.getEmail());
-                                phone.setText(sharedPref.getNumber());
+                                phone.setText(sharedPref.getContact());
 
     }
 
@@ -317,11 +285,11 @@ public class ProfileActivity extends AppCompatActivity {
                                 String email = jsonObject2.getString("email");
                                 int role = jsonObject2.getInt("role");
                                 String name = jsonObject2.getString("name");
-                                String number = jsonObject2.getString("number");
+                                String contact = jsonObject2.getString("contact");
                                 String picture = jsonObject2.getString("picture");
 
                                 pd.dismiss();
-                                sharedPref.createLoginSession(id, email, role, name, number, picture);
+                                sharedPref.createLoginSession(id, email, role, name, contact, picture);
                                 misc.showToast("Profile Updated Successfully");
                                 Intent intent = new Intent(ProfileActivity.this, AllServiceActivity.class);
                                 startActivity(intent);
@@ -377,6 +345,14 @@ public class ProfileActivity extends AppCompatActivity {
                                 return;
                             }
                             else if (status) {
+                                String id = jsonObject2.getString("_id");
+                                String email = jsonObject2.getString("email");
+                                int role = jsonObject2.getInt("role");
+                                String name = jsonObject2.getString("name");
+                                String contact = jsonObject2.getString("contact");
+                                String picture = jsonObject2.getString("picture");
+                               sharedPref.createLoginSession(id, email, role, name, contact, picture);
+
                                 pd.dismiss();
                                 misc.showToast("Profile Updated Successfully");
                                 Intent intent = new Intent(ProfileActivity.this, AllServiceActivity.class);
@@ -397,61 +373,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-    private void updatePassword(){
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Updating Password...");
-        pd.setCancelable(false);
-        pd.show();
 
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("password", password.getText().toString());
-
-
-        Ion.with(this)
-                .load("PATCH", misc.ROOT_PATH+"update_customer/"+sharedPref.getEmail())
-                .setJsonObjectBody(jsonObject)
-                .asString()
-                .withResponse()
-                .setCallback(new FutureCallback<Response<String>>() {
-                    @Override
-                    public void onCompleted(Exception e, Response<String> result) {
-                        if (e != null) {
-                            pd.dismiss();
-                            misc.showToast("Please check your connection");
-                            pd.dismiss();
-                            return;
-                        }
-
-                        try{
-                            JSONObject jsonObject2 = new JSONObject(result.getResult());
-
-                            Boolean status = jsonObject2.getBoolean("status");
-
-
-                            if (!status) {
-                                String Message = jsonObject2.getString("Message");
-                                pd.dismiss();
-                                misc.showToast(Message);
-                                return;
-                            }
-                            else if (status) {
-                                pd.dismiss();
-                                misc.showToast("Password Updated Successfully");
-                                Intent intent = new Intent(ProfileActivity.this, AllServiceActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-
-                        }
-                        catch (JSONException e1) {
-                            e1.printStackTrace();
-                        }
-
-
-                    }
-                });
-
-    }
 
     private void base64ToBitmap(String b64) {
         misc.showToast(b64);

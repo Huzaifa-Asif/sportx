@@ -131,7 +131,13 @@ public class ServiceHomeActivity extends AppCompatActivity
             Intent profile = new Intent(this, ServiceProfileActivity.class);
             startActivity(profile);
             finish();
-        } else if (id == R.id.service_home) {
+        }
+        else if (id == R.id.service_update_password) {
+            Intent profile = new Intent(this, ServiceUpdatePassword.class);
+            startActivity(profile);
+            finish();
+        }
+        else if (id == R.id.service_home) {
             Intent home = new Intent(this, ServiceHomeActivity.class);
             startActivity(home);
             finish();

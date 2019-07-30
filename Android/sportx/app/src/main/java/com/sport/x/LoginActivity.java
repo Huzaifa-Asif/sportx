@@ -162,13 +162,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     String email = jsonObject1.getString("email");
                                     Integer role = jsonObject1.getInt("role");
                                     String name = jsonObject1.getString("name");
-                                    String number = jsonObject1.getString("contact");
+                                    String contact = jsonObject1.getString("contact");
 
                                     // Customer
                                     if(role == 2)
                                     {
                                         String picture = jsonObject1.getString("picture");
-                                    sharedPref.createLoginSession(id, email, role, name, number, picture);
+                                    sharedPref.createLoginSession(id, email, role, name, contact, picture);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AllServiceActivity.class);
                                     startActivity(intent);
@@ -179,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     else if(role == 1 )
                                     {
                                         String picture_profile = jsonObject1.getString("picture_profile");
-                                    sharedPref.createLoginSession(id, email, role, name, number, picture_profile);
+                                    sharedPref.createLoginSession(id, email, role, name, contact, picture_profile);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, ServiceHomeActivity.class);
                                     startActivity(intent);
@@ -188,7 +188,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     else if(role == 0 )
                                     {
                                         String picture = jsonObject1.getString("picture");
-                                    sharedPref.createLoginSession(id, email, role, name, number, picture);
+                                    sharedPref.createLoginSession(id, email, role, name, contact, picture);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                                     startActivity(intent);

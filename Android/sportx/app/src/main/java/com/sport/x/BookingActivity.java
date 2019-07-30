@@ -104,7 +104,7 @@ public class BookingActivity extends AppCompatActivity implements OnItemSelected
         sharedPref = new SharedPref(this);
         customer_email = sharedPref.getEmail();
         customer_name = sharedPref.getName();
-        customer_number = sharedPref.getNumber();
+        customer_number = sharedPref.getContact();
 
         name = findViewById(R.id.full_name);
         phone = findViewById(R.id.reg_phone);

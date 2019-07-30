@@ -204,7 +204,13 @@ public class AllServiceActivity extends AppCompatActivity
             Intent profile = new Intent(this, ProfileActivity.class);
             startActivity(profile);
             finish();
-        } else if (id == R.id.customer_history) {
+        }
+        else if (id == R.id.update_password) {
+            Intent update = new Intent(this, PasswordUpdate.class);
+            startActivity(update);
+            finish();
+        }
+        else if (id == R.id.customer_history) {
             Intent job = new Intent(this, JobHistoryActivity.class);
             startActivity(job);
             finish();
