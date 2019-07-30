@@ -164,17 +164,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     String name = jsonObject1.getString("name");
                                     String number = jsonObject1.getString("contact");
 
+                                    // Customer
                                     if(role == 2)
                                     {
-                                    sharedPref.createLoginSession(id, email, role, name, number);
+                                        String picture = jsonObject1.getString("picture");
+                                    sharedPref.createLoginSession(id, email, role, name, number, picture);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AllServiceActivity.class);
                                     startActivity(intent);
                                     finish();
                                     }
+
+                                    // Service Provider
                                     else if(role == 1 )
                                     {
-                                    sharedPref.createLoginSession(id, email, role, name, number);
+                                        String picture_profile = jsonObject1.getString("picture_profile");
+                                    sharedPref.createLoginSession(id, email, role, name, number, picture_profile);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, ServiceHomeActivity.class);
                                     startActivity(intent);
@@ -182,7 +187,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
                                     else if(role == 0 )
                                     {
-                                    sharedPref.createLoginSession(id, email, role, name, number);
+                                        String picture = jsonObject1.getString("picture");
+                                    sharedPref.createLoginSession(id, email, role, name, number, picture);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                                     startActivity(intent);

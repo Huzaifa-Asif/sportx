@@ -10,6 +10,16 @@ module.exports.getExpenseById = (id ,callback) =>  {
 	expense.findById(id, callback);
 }
 
+// Get Expense By ServiceProvider
+module.exports.getExpenseByServiceProvider = (email ,callback) =>  {
+	expense.find({serviceProviderEmail:email}, callback);
+}
+
+// Get Expense By Category
+module.exports.getExpenseByCategory = (email ,category,callback) =>  {
+	expense.find({serviceProviderEmail:email,expenseCategory:category}, callback);
+}
+
 // Add expense
 module.exports.addExpense = (expenseform, callback) => {
 	expense.create(expenseform, callback);
@@ -22,7 +32,7 @@ module.exports.updateExpense = (id, expenseform, options, callback) => {
 
         expenseCategory: expenseform.expenseCategory,
         amount: expenseform.amount,
-        serviceProviderId: expenseform.serviceProviderId,
+        serviceProviderEmail: expenseform.serviceProviderEmail,
         date: expenseform.date
         
         

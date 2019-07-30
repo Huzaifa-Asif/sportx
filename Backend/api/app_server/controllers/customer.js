@@ -10,7 +10,7 @@ module.exports.getCustomer = (callback, limit) => {
 }
 
 // Check email exists
-module.exports.checkcCustomerEmail = (email,callback) => {
+module.exports.checkCustomerEmail = (email,callback) => {
 	customer.findOne({email:email},callback);
 }
 // Login
@@ -34,9 +34,13 @@ module.exports.login = (email,password,res) => {
                 }
             else
 						{
-							return res.status(500).json({Message:"Wrong Email or Password",status:false});
+							return res.status(500).json({Message:"Wrong Password",status:false});
 						}
 
+        }
+        else
+        {
+            return res.status(500).json({Message:"Wrong Email",status:false});
         }
     });
 }
@@ -79,6 +83,11 @@ module.exports.addCustomer = async (customerform, callback) => {
 // Update Customer
 module.exports.updateCustomer = async (email, customerform, options, callback) => {
     var query = {email: email};
+    let record=new customer();
+    if(customerform.password)
+    {
+        customerform.password=record.hashPassword(customerform.password);
+    }
     if(customerform.picture)
     {
         try
@@ -91,11 +100,11 @@ module.exports.updateCustomer = async (email, customerform, options, callback) =
             throw error;
         }
         //urlImage = JSON(imgUrl.url);
-        record.picture=imgUrl.url;
+        customerform.picture=imgUrl.url;
     }
     else
     {
-        record.picture="";
+        customerform.picture="";
     }
    
     customer.findOneAndUpdate(query, customerform, options, callback);

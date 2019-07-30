@@ -55,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements
     private double service_lat = 0, service_lon = 0.0;
     private String provider = "no";
     private String service_id, user_image, service_name, user_name, user_rating, vendor_id, customer_id = null;
-    private String  service_provider_name, email, address, picture, contact, password, category;
+    private String  service_provider_name, email, address, picture_profile, contact, password, category;
     private double latitude1, longitude1;
     Misc misc;
     SharedPref sharedPref;
@@ -268,7 +268,7 @@ public class MapsActivity extends FragmentActivity implements
                                     service_provider_name = jsonObject.getString("name");
                                     email = jsonObject.getString("email");
                                     address = jsonObject.getString("address");
-                                    //picture = jsonObject.getString("picture");
+                                    picture_profile = jsonObject.getString("picture_profile");
                                     contact = jsonObject.getString("contact");
                                     password = jsonObject.getString("password");
                                     category = jsonObject.getString("category");
@@ -277,7 +277,7 @@ public class MapsActivity extends FragmentActivity implements
                                     //vendorList.add(new Service_Provider(service_provider_name, email, address, picture, contact, password, category, latitude1, longitude1));
 
                                     if(getDistance(latitude1, longitude1) < 25) {
-                                        vendorList.add(new Service_Provider(service_provider_name, email, address, picture, contact, password, category, latitude1, longitude1));
+                                        vendorList.add(new Service_Provider(service_provider_name, email, address, picture_profile, contact, password, category, latitude1, longitude1));
                                     }
                                 }
                                 if(vendorList.isEmpty()){
@@ -296,7 +296,7 @@ public class MapsActivity extends FragmentActivity implements
 //                                mMap.setMinZoomPreference(15);
 //                                myMarker = mMap.addMarker(new MarkerOptions().position(serviceLocation).title(vendorList.get(0).getServiceProviderName()));
 //                                mMap.moveCamera(CameraUpdateFactory.newLatLng(serviceLocation));
-                                mMap.setMinZoomPreference(12);
+                                mMap.setMinZoomPreference(10);
                                 pd.dismiss();
 
                                // double distance = getDistanceFromLatLonInKm(current_latitude, current_longitude, service_lat, service_lon);

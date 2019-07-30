@@ -10,9 +10,19 @@ module.exports.getRevenueById = (id ,callback) =>  {
 	revenue.findById(id, callback);
 }
 
+// Get revenue By Service Provider
+module.exports.getRevenueByServiceProvider = (email ,callback) =>  {
+	revenue.find({serviceProviderEmail:email}, callback);
+}
+
 // Add revenue
 module.exports.addRevenue = (revenueform, callback) => {
 	revenue.create(revenueform, callback);
+}
+
+// Get Revenue By Category
+module.exports.getRevenueByCategory = (email ,category,callback) =>  {
+	revenue.find({serviceProviderEmail:email,revenueCategory:category}, callback);
 }
 
 // Update revenue
@@ -22,8 +32,9 @@ module.exports.updateRevenue = (id, revenueform, options, callback) => {
 
         revenueCategory: revenueform.revenueCategory,
         amount: revenueform.amount,
-        serviceProviderId: revenueform.serviceProviderId,
-        customerId:revenueform.customerId,
+        serviceProviderEmail: revenueform.serviceProviderEmail,
+        customerEmail:revenueform.customerEmail,
+        bookingId:revenueform.bookingId,
         date: revenueform.date
         
         

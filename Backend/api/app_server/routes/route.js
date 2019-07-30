@@ -16,6 +16,7 @@ var serviceCategory = require('../controllers/serviceCategory.js');
 var serviceProvider = require('../controllers/serviceProvider.js');
 var team = require('../controllers/team.js');
 var tournament = require('../controllers/tournament.js');
+var functions =require('../controllers/functions.js');
 
 
 router.get('/',function(req,res)
@@ -141,9 +142,8 @@ router.post('/signup_serviceProvider', function (req, res) {
 router.post('/login', function (req, res) {
     let email=req.body.email;
     let password=req.body.password;
-    customer.login(email,password,res);
-    serviceProvider.login(email,password,res);
-
+    functions.login(email,password,res);
+    
 });
 
 //Login for Admin
@@ -591,8 +591,10 @@ router.delete('/delete_team/:id', function (req, res) {
 router.get('/get_team_by_id/:id', function (req, res) {
     team.getTeamById(req.params.id,function (err, result) {
         if (err)
-              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
-
+              {
+                console.log(err);
+                  return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+    }
      return res.json(result);
 
     });
@@ -603,8 +605,179 @@ router.get('/get_team_by_id/:id', function (req, res) {
 router.get('/get_team_by_tournament/:id', function (req, res) {
     team.getTeamByTournament(req.params.id,function (err, result) {
         if (err)
+        {
+            console.log(err);
               return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+     return res.json(result);
 
+    });
+
+});
+
+//Add ExpenseCategory
+router.post('/add_expenseCategory',function(req,res)
+{
+    var addExpenseCategoryForm=req.body;
+    expenseCategory.checkExpenseCategory(addExpenseCategoryForm.name,addExpenseCategoryForm.email,function(err,result)
+    {
+        if(err)
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        else if(result)
+        {
+            return res.status(500).json({Message:"This category already Exists for this service provider",status:false});
+        }
+        else
+        {
+            expenseCategory.addExpenseCategory(addExpenseCategoryForm,function (err, category) 
+            {
+                if (err) 
+                {
+                    console.log(err);
+                    return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+                var result = category.toObject();
+                result.status = true;
+                return res.json(result);
+            });
+        }
+    });
+
+});
+
+//Get ExpenseCategory by ServiceProvider
+router.get('/get_expenseCategory_by_serviceProvider/:email', function (req, res) {
+    expenseCategory.getExpenseCategoryByServiceProvider(req.params.email,function (err, result) {
+        if (err)
+        {
+            console.log(err);
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+     return res.json(result);
+
+    });
+
+});
+
+//Delete expenseCategory
+router.delete('/delete_expenseCategory/:id', function (req, res) {
+    var id=req.params.id;
+    expenseCategory.removeExpenseCategory(id,function (err) {
+        if (err) 
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        return res.json({status:true});
+        });
+
+});
+
+//Add RevenueCategory
+router.post('/add_revenueCategory',function(req,res)
+{
+    var addRevenueCategoryForm=req.body;
+    revenueCategory.checkRevenueCategory(addRevenueCategoryForm.name,addRevenueCategoryForm.email,function(err,result)
+    {
+        if(err)
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        else if(result)
+        {
+            return res.status(500).json({Message:"This category already Exists for this service provider",status:false});
+        }
+        else
+        {
+            revenueCategory.addRevenueCategory(addRevenueCategoryForm,function (err, category) 
+            {
+                if (err) 
+                {
+                    console.log(err);
+                    return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+                var result = category.toObject();
+                result.status = true;
+                return res.json(result);
+            });
+        }
+    });
+
+    
+
+});
+
+//Get RevenueCategory by ServiceProvider
+router.get('/get_revenueCategory_by_serviceProvider/:email', function (req, res) {
+    revenueCategory.getRevenueCategoryByServiceProvider(req.params.email,function (err, result) {
+        if (err)
+        {
+            console.log(err);
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+     return res.json(result);
+
+    });
+
+});
+
+//Delete RevenueCategory
+router.delete('/delete_revenueCategory/:id', function (req, res) {
+    var id=req.params.id;
+    revenueCategory.removeRevenueCategory(id,function (err) {
+        if (err) 
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        return res.json({status:true});
+        });
+
+});
+
+
+//Add Expense
+router.post('/add_expense',function(req,res)
+{
+    var addExpenseForm=req.body;
+    expense.addExpense(addExpenseForm,function (err, expense) {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+        var result = expense.toObject();
+        result.status = true;
+        return res.json(result);
+        });
+
+});
+
+//Get Expense by ServiceProvider
+router.get('/get_expense_by_serviceProvider/:email', function (req, res) {
+    expense.getExpenseByServiceProvider(req.params.email,function (err, result) {
+        if (err)
+        {
+            console.log(err);
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+     return res.json(result);
+
+    });
+
+});
+
+//Get Expense by Category
+router.get('/get_expense_by_category', function (req, res) {
+    expense.getExpenseByCategory(req.query.email,req.query.category,function (err, result) {
+        if (err)
+        {
+            console.log(err);
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
      return res.json(result);
 
     });
@@ -612,7 +785,76 @@ router.get('/get_team_by_tournament/:id', function (req, res) {
 });
 
 
+//Delete expenseCategory
+router.delete('/delete_expense/:id', function (req, res) {
+    var id=req.params.id;
+    expense.removeExpense(id,function (err) {
+        if (err) 
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        return res.json({status:true});
+        });
 
+});
+
+//Add Revenue
+router.post('/add_revenue',function(req,res)
+{
+    var addRevenueForm=req.body;
+    revenue.addRevenue(addRevenueForm,function (err, revenue) {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+        var result = revenue.toObject();
+        result.status = true;
+        return res.json(result);
+        });
+
+});
+
+//Get Revenue by ServiceProvider
+router.get('/get_revenue_by_serviceProvider/:email', function (req, res) {
+    revenue.getRevenueByServiceProvider(req.params.email,function (err, result) {
+        if (err)
+        {
+            console.log(err);
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+     return res.json(result);
+
+    });
+
+});
+
+//Get Revenue by Category
+router.get('/get_revenue_by_category', function (req, res) {
+    revenue.getRevenueByCategory(req.query.email,req.query.category,function (err, result) {
+        if (err)
+        {
+            console.log(err);
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+     return res.json(result);
+
+    });
+});
+
+//Delete Revenue
+router.delete('/delete_revenue/:id', function (req, res) {
+    var id=req.params.id;
+    revenue.removeRevenue(id,function (err) {
+        if (err) 
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        return res.json({status:true});
+        });
+
+});
 
 // /* GET home page. */
 // router.get('/', function (req, res, next) {

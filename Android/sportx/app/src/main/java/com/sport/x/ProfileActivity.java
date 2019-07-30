@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,12 +28,16 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.net.URL;
+
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -44,6 +49,9 @@ public class ProfileActivity extends AppCompatActivity {
     Misc misc;
     SharedPref sharedPref;
     private File uploadFile = null;
+
+    private String bitmapTo64;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +137,12 @@ public class ProfileActivity extends AppCompatActivity {
 
             InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+            bitmapTo64 = bitmapToBase64(bitmap);
+            Log.d("Converted Image: ", bitmapTo64);
+
             image.setImageBitmap(bitmap);
+
         }
         catch(Exception e){
             e.printStackTrace();
@@ -153,6 +166,14 @@ public class ProfileActivity extends AppCompatActivity {
             resultPath = null;
         }
         return resultPath;
+    }
+
+
+    private String bitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
 
@@ -197,50 +218,44 @@ public class ProfileActivity extends AppCompatActivity {
         return true;
     }
 
+
+    private boolean validatePassword(){
+
+        String user_password = password.getText().toString();
+        String user_re_password = confirm.getText().toString();
+
+
+        if(user_password.length() < 6 ) {
+            misc.showToast("Password should be min 6 characters");
+            password.setError("Password should be min 6 characters");
+            return false;
+        }
+        if(!user_password.equalsIgnoreCase(user_re_password)) {
+            misc.showToast("Password Mismatch");
+            confirm.setError("Password Mismatch");
+            return false;
+        }
+
+        return true;
+    }
+
+
     private void fetchUserProfile(){
 
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Loading Profile");
-        pd.setCancelable(false);
-        pd.show();
+        if((sharedPref.getPicture())==null)
+        {
+            image.setImageResource(R.drawable.user);
 
-        String id = sharedPref.getUserId();
-        Ion.with(this)
-                .load(misc.ROOT_PATH+"user_profile/"+id)
-                .asString()
-                .withResponse()
-                .setCallback(new FutureCallback<Response<String>>() {
-                    @Override
-                    public void onCompleted(Exception e, Response<String> result) {
-                        if(e != null) {
-                            pd.dismiss();
-                            misc.showToast("Internet Connection Problem");
-                            return;
-                        }
-                        else{
-                            try {
-                                pd.dismiss();
-                                JSONObject jsonObject = new JSONObject(result.getResult());
-                                String user_image = jsonObject.getString("user_image");
-                                if(user_image.isEmpty()) {
-                                    image.setImageResource(R.drawable.usersicon);
-                                }
-                                else{
-                                    Ion.with(getApplicationContext()).load(jsonObject.getString("user_image").replace("\"","")).intoImageView(image);
-                                }
+        }
+        else
+            {
+            Ion.with(getApplicationContext()).load(sharedPref.getPicture().replace("\"","")).intoImageView(image);
+        }
 
-                                name.setText(jsonObject.getString("user_name"));
-                                email.setText(jsonObject.getString("user_email"));
-                                phone.setText(jsonObject.getString("user_phone"));
-                                password.setText(jsonObject.getString("user_password"));
-                                confirm.setText(jsonObject.getString("user_password"));
+                                name.setText(sharedPref.getName());
+                                email.setText(sharedPref.getEmail());
+                                phone.setText(sharedPref.getNumber());
 
-                            } catch (JSONException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
-                    }
-                });
     }
 
     private void updateProfile(){
@@ -262,46 +277,15 @@ public class ProfileActivity extends AppCompatActivity {
         pd.setCancelable(false);
         pd.show();
 
-        Ion.with(this)
-                .load("PUT",misc.ROOT_PATH + "update_customer_profile/"+sharedPref.getUserId())
-                .setMultipartFile("user_image", uploadFile)
-                .setMultipartParameter("user_name", name.getText().toString().trim())
-                .setMultipartParameter("user_phone", phone.getText().toString().trim())
-                .setMultipartParameter("user_password", password.getText().toString())
-                .asString()
-                .withResponse()
-                .setCallback(new FutureCallback<Response<String>>() {
-                    @Override
-                    public void onCompleted(Exception e, Response<String> result) {
-                        if (e != null) {
-                            pd.dismiss();
-                            misc.showToast("Please check your connection");
-                            pd.dismiss();
-                            return;
-                        }
-                        pd.dismiss();
-                        misc.showToast(result.getResult());
-                        Intent intent = new Intent(ProfileActivity.this, AllServiceActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-    }
-
-    private void updateWithoutImage(){
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Updating Profile...");
-        pd.setCancelable(false);
-        pd.show();
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("user_name", name.getText().toString().trim());
-        jsonObject.addProperty("user_phone", phone.getText().toString());
-        jsonObject.addProperty("user_password", password.getText().toString());
+        jsonObject.addProperty("name", name.getText().toString().trim());
+        jsonObject.addProperty("contact", phone.getText().toString());
+        jsonObject.addProperty("picture", bitmapTo64);
 
 
         Ion.with(this)
-                .load("PUT", misc.ROOT_PATH+"update_customer/"+sharedPref.getUserId())
+                .load("PATCH", misc.ROOT_PATH+"update_customer/"+sharedPref.getEmail())
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -314,11 +298,156 @@ public class ProfileActivity extends AppCompatActivity {
                             pd.dismiss();
                             return;
                         }
-                        pd.dismiss();
-                        misc.showToast(result.getResult());
-                        Intent intent = new Intent(ProfileActivity.this, AllServiceActivity.class);
-                        startActivity(intent);
-                        finish();
+
+
+                        try{
+                            JSONObject jsonObject2 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject2.getBoolean("status");
+
+
+                            if (!status) {
+                                String Message = jsonObject2.getString("Message");
+                                pd.dismiss();
+                                misc.showToast(Message);
+                                return;
+                            }
+                            else if (status) {
+                                String id = jsonObject2.getString("_id");
+                                String email = jsonObject2.getString("email");
+                                int role = jsonObject2.getInt("role");
+                                String name = jsonObject2.getString("name");
+                                String number = jsonObject2.getString("number");
+                                String picture = jsonObject2.getString("picture");
+
+                                pd.dismiss();
+                                sharedPref.createLoginSession(id, email, role, name, number, picture);
+                                misc.showToast("Profile Updated Successfully");
+                                Intent intent = new Intent(ProfileActivity.this, AllServiceActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                });
+    }
+
+    private void updateWithoutImage(){
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Updating Profile...");
+        pd.setCancelable(false);
+        pd.show();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("name", name.getText().toString().trim());
+        jsonObject.addProperty("contact", phone.getText().toString());
+
+
+
+        Ion.with(this)
+                .load("PATCH", misc.ROOT_PATH+"update_customer/"+sharedPref.getEmail())
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            pd.dismiss();
+                            misc.showToast("Please check your connection");
+                            pd.dismiss();
+                            return;
+                        }
+
+                        try{
+                            JSONObject jsonObject2 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject2.getBoolean("status");
+
+
+                            if (!status) {
+                                String Message = jsonObject2.getString("Message");
+                                pd.dismiss();
+                                misc.showToast(Message);
+                                return;
+                            }
+                            else if (status) {
+                                pd.dismiss();
+                                misc.showToast("Profile Updated Successfully");
+                                Intent intent = new Intent(ProfileActivity.this, AllServiceActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
+                });
+
+    }
+
+
+
+    private void updatePassword(){
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Updating Password...");
+        pd.setCancelable(false);
+        pd.show();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("password", password.getText().toString());
+
+
+        Ion.with(this)
+                .load("PATCH", misc.ROOT_PATH+"update_customer/"+sharedPref.getEmail())
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            pd.dismiss();
+                            misc.showToast("Please check your connection");
+                            pd.dismiss();
+                            return;
+                        }
+
+                        try{
+                            JSONObject jsonObject2 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject2.getBoolean("status");
+
+
+                            if (!status) {
+                                String Message = jsonObject2.getString("Message");
+                                pd.dismiss();
+                                misc.showToast(Message);
+                                return;
+                            }
+                            else if (status) {
+                                pd.dismiss();
+                                misc.showToast("Password Updated Successfully");
+                                Intent intent = new Intent(ProfileActivity.this, AllServiceActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
                     }
                 });
 
