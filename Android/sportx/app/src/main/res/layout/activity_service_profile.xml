@@ -87,8 +87,9 @@
                 />
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_12sdp"
+                android:layout_height="80dp"
+                android:gravity="top"
+                android:padding="@dimen/_7sdp"
                 android:layout_marginLeft="@dimen/_18sdp"
                 android:layout_marginRight="@dimen/_18sdp"
                 android:layout_marginTop="@dimen/_8sdp"
@@ -97,7 +98,7 @@
                 android:textColorHint="@color/grey"
                 android:background="@drawable/edittext"
                 android:id="@+id/service_up_address"
-                android:inputType="text"
+                android:inputType="text|textMultiLine"
                 />
 
             <Button

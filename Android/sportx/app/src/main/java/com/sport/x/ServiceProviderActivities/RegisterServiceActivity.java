@@ -57,19 +57,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RegisterServiceActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button register;
-    private EditText name, email, phone, password, re_password, address, city;
+    private EditText name, email, phone, password, re_password, city,country,street_address;
     private CircleImageView image;
-    private String bitmapTo64, selectedGender = null;
+    private String bitmapTo64 = null;
     private static String resultPath = null;
     private final int REQUEST_CODE = 1;
     Misc misc;
     private ArrayList<String> selectedServices = new ArrayList<>();
     private ArrayList<Service> allServices = new ArrayList<>();
-    private ArrayAdapter<String> serviceAdapter;
-    private RadioButton male, female;
     private File uploadFile = null;
     private LatLng latlng=null;
-
+    private String address;
     private GridLayout checkBoxLayout;
 
     @Override
@@ -85,25 +83,12 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         name = findViewById(R.id.provider_name);
         email = findViewById(R.id.provider_register_email);
         phone = findViewById(R.id.provider_phone);
-        address = findViewById(R.id.provider_address);
+        street_address = findViewById(R.id.provider_address);
+        city=findViewById(R.id.provider_address);
+        country=findViewById(R.id.provider_country);
         re_password = findViewById(R.id.provider_confirm_password);
         password = findViewById(R.id.provider_password);
-//        charges = findViewById(R.id.provider_charges);
-//        cnic = findViewById(R.id.reg_cnic);
-
-//        male = findViewById(R.id.male);
-//        female = findViewById(R.id.female);
 //
-//        male.setOnClickListener(this);
-//        female.setOnClickListener(this);
-//
-//        if(male.isChecked()) {
-//            selectedGender = male.getText().toString();
-//        }
-//        if(female.isChecked()) {
-//            female.getText().toString();
-//        }
-
         image = findViewById(R.id.profile_pic_service);
         image.setOnClickListener(this);
 
@@ -121,17 +106,6 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
 
-//        if(v.getId() == male.getId()){
-//            if(male.isChecked()){
-//                selectedGender = male.getText().toString();
-//            }
-//        }
-//        if(v.getId() == female.getId()){
-//            if(female.isChecked()) {
-//                selectedGender = female.getText().toString();
-//            }
-//        }
-
         if(v.getId() == image.getId()) {
             ActivityCompat.requestPermissions
                     (RegisterServiceActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE);
@@ -141,9 +115,6 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
             if(misc.isConnectedToInternet()){
                 registerVendor();
             }
-//            Intent intent = new Intent(this, ServiceHomeActivity.class);
-//            startActivity(intent);
-//            finish();
         }
     }
 
@@ -288,11 +259,11 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         String user_phone = phone.getText().toString().toLowerCase().trim();
         String user_password = password.getText().toString();
         String user_re_password = re_password.getText().toString();
-        String user_address = address.getText().toString();
-//        String user_city = city.getText().toString();
-//        String user_charges = charges.getText().toString();
-//        String user_cnic = cnic.getText().toString();
-        latlng = misc.getCoordinates(user_address);
+        String user_street_address=street_address.getText().toString();
+        String user_city=city.getText().toString();
+        String user_country=country.getText().toString();
+        address=street_address.getText().toString()+", "+city.getText().toString()+", "+country.getText().toString();
+        latlng = misc.getCoordinates(address);
 
 
         String regex = "[A-Za-z A-Za-z]+";
@@ -323,26 +294,21 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
             re_password.setError("Password Mismatch");
             return false;
         }
-//        if(user_city.length() < 3) {
-//            misc.showToast("Invalid City");
-//            city.setError("Invalid City");
-//            return false;
-//        }
-        if(user_address.length() < 5) {
-            misc.showToast("Please Enter Full Address");
-            address.setError("Please Enter Full Address");
+        if(user_street_address.length() < 5) {
+            misc.showToast("Please Enter Full Street Address");
+            street_address.setError("Please Enter Full Street Address");
             return false;
         }
-//        if(user_charges.isEmpty() || user_charges.length() < 3) {
-//            misc.showToast("Charges must be Min Rs 100");
-//            address.setError("Charges must be Min Rs 100");
-//            return false;
-//        }
-//        if(user_cnic.length() < 13) {
-//            misc.showToast("Invalid CNIC");
-//            cnic.setError("Invalid CNIC");
-//            return false;
-//        }
+        if(user_city.isEmpty()) {
+            misc.showToast("Please Enter City Name");
+            street_address.setError("Please Enter City Name");
+            return false;
+        }
+        if(user_country.isEmpty()) {
+            misc.showToast("Please Enter Country Name");
+            street_address.setError("Please Enter Country Name");
+            return false;
+        }
         if(latlng == null) {
             misc.showToast("Service Location Not Found");
             return false;
@@ -383,7 +349,7 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         jsonObject.addProperty("name", name.getText().toString().trim());
         jsonObject.addProperty("email", email.getText().toString().trim());
         jsonObject.addProperty("contact", phone.getText().toString().trim());
-        jsonObject.addProperty("address", address.getText().toString().trim());
+        jsonObject.addProperty("address", address);
         jsonObject.addProperty("password", password.getText().toString());
         jsonObject.addProperty("category", items);
         jsonObject.addProperty("picture_profile", bitmapTo64);
@@ -445,7 +411,7 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         jsonObject.addProperty("name", name.getText().toString().trim());
         jsonObject.addProperty("email", email.getText().toString().trim());
         jsonObject.addProperty("contact", phone.getText().toString().trim());
-        jsonObject.addProperty("address", address.getText().toString().trim());
+        jsonObject.addProperty("address", address);
         jsonObject.addProperty("password", password.getText().toString());
         jsonObject.addProperty("category", items);
         jsonObject.addProperty("long", latlng.longitude);

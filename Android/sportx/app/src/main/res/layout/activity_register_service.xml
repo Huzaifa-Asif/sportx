@@ -51,45 +51,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Select Gender"-->
-                <!--android:textColor="@color/grey"-->
-                <!--android:layout_marginLeft="@dimen/_18sdp"-->
-                <!--android:textStyle="bold"-->
-                <!--android:textSize="@dimen/_13sdp"-->
-                <!--android:layout_marginBottom="@dimen/_9sdp"-->
-                <!--/>-->
-            <!--<RadioGroup-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/_18sdp"-->
-                <!--android:layout_marginRight="@dimen/_18sdp"-->
-                <!--android:layout_marginBottom="@dimen/_10sdp"-->
-                <!--android:orientation="horizontal">-->
-
-
-                    <!--<RadioButton-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="Male"-->
-                        <!--android:textColor="@color/grey"-->
-                        <!--android:checked="true"-->
-                        <!--android:buttonTint="@color/colorPrimary"-->
-                        <!--android:id="@+id/male"-->
-                        <!--/>-->
-                    <!--<RadioButton-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="Female"-->
-                        <!--android:textColor="@color/grey"-->
-                        <!--android:layout_marginLeft="@dimen/_18sdp"-->
-                        <!--android:buttonTint="@color/colorPrimary"-->
-                        <!--android:id="@+id/female"-->
-                        <!--/>-->
-
-            <!--</RadioGroup>-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -156,6 +117,22 @@
 
             <EditText
                 android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="top"
+                android:padding="@dimen/_7sdp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:hint="Street Address"
+                android:textColor="@color/grey"
+                android:textColorHint="@color/grey"
+                android:background="@drawable/edittext"
+                android:id="@+id/provider_address"
+
+                android:inputType="text|textMultiLine"
+                />
+            <EditText
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_7sdp"
                 android:layout_marginLeft="@dimen/_18sdp"
@@ -168,22 +145,19 @@
                 android:id="@+id/provider_city"
                 android:inputType="text"
                 />
-
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="top"
+                android:layout_height="wrap_content"
                 android:padding="@dimen/_7sdp"
                 android:layout_marginLeft="@dimen/_18sdp"
                 android:layout_marginRight="@dimen/_18sdp"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:hint="Address"
+                android:hint="Country"
                 android:textColor="@color/grey"
                 android:textColorHint="@color/grey"
                 android:background="@drawable/edittext"
-                android:id="@+id/provider_address"
-
-                android:inputType="text|textMultiLine"
+                android:id="@+id/provider_country"
+                android:inputType="text"
                 />
 
             <TextView
