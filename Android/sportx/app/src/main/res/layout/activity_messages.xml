@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.patientActivities.PatientMainActivity">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/app_bar_main"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_messages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view"
+        android:layout_below="@+id/header"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"></android.support.v7.widget.RecyclerView>
+
+    <View
+
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/footer"
+        android:background="@color/colorLight" />
+
+    <LinearLayout
+
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/_7sdp"
+        android:weightSum="10">
+
+        <ImageView
+            android:onClick="openGallary"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@drawable/ic_add"
+            tools:ignore="OnClick" />
+
+        <EditText
+            android:id="@+id/edt_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="7.3"
+            android:background="@color/colorWhite"
+            android:hint="Enter message"
+            android:padding="@dimen/_5sdp"
+            android:textSize="@dimen/_11sdp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_send"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_17sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.7"
+            android:background="@drawable/bg_list_item_blue"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="onSendButtonClick"
+            android:text="Send"
+            android:textAlignment="gravity"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_6sdp"
+            tools:ignore="OnClick" />
+
+    </LinearLayout>
+
+</RelativeLayout>

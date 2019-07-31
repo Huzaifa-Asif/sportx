@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_2sdp"
+    android:layout_marginTop="@dimen/_2sdp"
+    android:layout_marginEnd="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_7sdp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/btn_animation_ripple"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="10">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/img_user"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/user" />
+
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:padding="@dimen/_3sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:text=""
+                android:textAlignment="gravity"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_disease"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/_11sdp"
+                android:text=""
+                android:alpha=".7"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_9sdp" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
