@@ -133,7 +133,7 @@ public class ServiceHomeActivity extends AppCompatActivity
             finish();
         }
         else if (id == R.id.service_update_password) {
-            Intent profile = new Intent(this, ServiceUpdatePassword.class);
+            Intent profile = new Intent(this, SerivceUpdatePasswordActivity.class);
             startActivity(profile);
             finish();
         }

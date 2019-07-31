@@ -68,8 +68,7 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
     private ArrayAdapter<String> serviceAdapter;
     private RadioButton male, female;
     private File uploadFile = null;
-
-    private double lat1, lon1;
+    private LatLng latlng=null;
 
     private GridLayout checkBoxLayout;
 
@@ -293,9 +292,8 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
 //        String user_city = city.getText().toString();
 //        String user_charges = charges.getText().toString();
 //        String user_cnic = cnic.getText().toString();
-        LatLng lat1Lng1 = misc.getCoordinates(user_address);
+        latlng = misc.getCoordinates(user_address);
 
-        getCoordinates(user_address);
 
         String regex = "[A-Za-z A-Za-z]+";
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -345,7 +343,7 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
 //            cnic.setError("Invalid CNIC");
 //            return false;
 //        }
-        if(lat1Lng1 == null) {
+        if(latlng == null) {
             misc.showToast("Service Location Not Found");
             return false;
         }
@@ -389,9 +387,9 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         jsonObject.addProperty("password", password.getText().toString());
         jsonObject.addProperty("category", items);
         jsonObject.addProperty("picture_profile", bitmapTo64);
-        jsonObject.addProperty("long", lon1);
-        jsonObject.addProperty("lat", lat1);
-        Log.d("acaca:",bitmapTo64);
+        jsonObject.addProperty("long", latlng.longitude);
+        jsonObject.addProperty("lat", latlng.latitude);
+
 
         Ion.with(this)
                 .load(misc.ROOT_PATH+"signup_serviceProvider")
@@ -450,8 +448,8 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         jsonObject.addProperty("address", address.getText().toString().trim());
         jsonObject.addProperty("password", password.getText().toString());
         jsonObject.addProperty("category", items);
-        jsonObject.addProperty("long", lon1);
-        jsonObject.addProperty("lat", lat1);
+        jsonObject.addProperty("long", latlng.longitude);
+        jsonObject.addProperty("lat", latlng.latitude);
 
 
         Ion.with(this)
@@ -493,18 +491,5 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
         finish();
     }
 
-    public void getCoordinates(String location) {
-        Geocoder gc = new Geocoder(this);
-        LatLng lat1Lng1 = null;
-        try {
-            List<Address> address = gc.getFromLocationName(location, 1);
-            Address add = address.get(0);
-            lat1 = add.getLatitude();
-            lon1 = add.getLongitude();
-            misc.showToast("Lat : " + lat1 + " Lon : " + lon1);
-        } catch (IOException e) {
-            misc.showToast("Service Location not found");
-            e.printStackTrace();
-        }
-    }
+
 }

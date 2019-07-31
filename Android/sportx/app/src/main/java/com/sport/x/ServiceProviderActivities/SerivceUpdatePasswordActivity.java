@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.sport.x.AllServiceActivity;
 import com.sport.x.Misc.Misc;
+import com.sport.x.PasswordUpdate;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
@@ -16,31 +18,48 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 
-public class SerivceUpdatePasswordActivity extends AppCompatActivity implements View.OnClickListener {
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    private String user_password;
-    private EditText password, confirm_password;
-    private Button submit;
+public class SerivceUpdatePasswordActivity extends AppCompatActivity  {
+
+    private EditText  password, confirm;
+    private Button update;
     Misc misc;
     SharedPref sharedPref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_serivce_update_password);
+        setTitle("Password Update");
+        password = findViewById(R.id.up_password);
+        confirm = findViewById(R.id.up_confirm_password);
+
+
+        update = findViewById(R.id.update_button);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!misc.isConnectedToInternet()){
+                    misc.showToast("No Internet Connection");
+                }
+                else{
+                    updateProfile();
+                }
+            }
+        });
 
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
 
-        password = findViewById(R.id.service_up_password);
-        confirm_password = findViewById(R.id.service_up_confirm_password);
+        if(misc.isConnectedToInternet()) {
 
-        submit = findViewById(R.id.update_password);
-        submit.setOnClickListener(this);
-
-        Intent intent = getIntent();
-        user_password = intent.getStringExtra("password");
-
+        }
+        else{
+            misc.showToast("No Internet Connection");
+        }
     }
 
     @Override
@@ -50,71 +69,89 @@ public class SerivceUpdatePasswordActivity extends AppCompatActivity implements 
         finish();
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == submit.getId()){
-            if(misc.isConnectedToInternet()){
-                updatePassword();
-            }
-            else{
-                misc.showToast("No Internet connection");
-            }
-        }
-    }
 
-    private boolean validate(){
-        String pass = password.getText().toString();
-        String up_pass = confirm_password.getText().toString();
 
-        if(pass.length() < 6) {
-            password.setError("Password is short");
+    private boolean validatePassword(){
+
+        String user_password = password.getText().toString();
+        String user_re_password = confirm.getText().toString();
+
+
+        if(user_password.length() < 6 ) {
+            misc.showToast("Password should be min 6 characters");
+            password.setError("Password should be min 6 characters");
             return false;
         }
-        if(!pass.equals(up_pass)){
-            confirm_password.setError("Password Mismatch");
-            return false;
-        }
-        if(pass.equals(user_password)){
-            misc.showToast("Password is same to old password. Please try different");
-            return false;
-        }
-        if(pass.isEmpty() || up_pass.isEmpty()) {
-            misc.showToast("Password Required");
+        if(!user_password.equalsIgnoreCase(user_re_password)) {
+            misc.showToast("Password Mismatch");
+            confirm.setError("Password Mismatch");
             return false;
         }
 
         return true;
     }
 
+    private void updateProfile(){
+        if(validatePassword()){
+
+            updatePassword();
+        }
+    }
+
+
     private void updatePassword(){
-        if(validate()) {
-            final ProgressDialog pd = new ProgressDialog(this);
-            pd.setMessage("Please wait...");
-            pd.setCancelable(false);
-            pd.show();
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Updating Password...");
+        pd.setCancelable(false);
+        pd.show();
 
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("user_password", password.getText().toString());
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("password", password.getText().toString());
 
-            Ion.with(this)
-                    .load("PUT", misc.ROOT_PATH+"update_password/"+sharedPref.getUserId())
-                    .setJsonObjectBody(jsonObject)
-                    .asString()
-                    .withResponse()
-                    .setCallback(new FutureCallback<Response<String>>() {
-                        @Override
-                        public void onCompleted(Exception e, Response<String> result) {
-                            if(e != null) {
-                                misc.showToast("Please check your connection");
+
+        Ion.with(this)
+                .load("PATCH", misc.ROOT_PATH+"update_serviceProvider/"+sharedPref.getEmail())
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            pd.dismiss();
+                            misc.showToast("Please check your connection");
+                            pd.dismiss();
+                            return;
+                        }
+
+                        try{
+                            JSONObject jsonObject2 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject2.getBoolean("status");
+
+
+                            if (!status) {
+                                String Message = jsonObject2.getString("Message");
                                 pd.dismiss();
+                                misc.showToast(Message);
                                 return;
                             }
-                            else{
-                                misc.showToast(result.getResult());
-                                onBackPressed();
+                            else if (status) {
+                                pd.dismiss();
+                                misc.showToast("Password Updated Successfully");
+                                Intent intent = new Intent(SerivceUpdatePasswordActivity.this, ServiceHomeActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
+
                         }
-                    });
-        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
+                });
+
     }
 }

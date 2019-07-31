@@ -18,7 +18,7 @@ public class SharedPref {
         editor = sharedPreferences.edit();
     }
 
-    public void createLoginSession(String _id, String email, Integer role, String name, String contact,String picture ) {
+    public void createLoginSession(String _id, String email, String address, Integer role, String name, String contact,String picture ) {
         editor.putBoolean("login", true);
         editor.putString("_id", _id);
         editor.putString("email", email);
@@ -26,6 +26,7 @@ public class SharedPref {
         editor.putString("name", name);
         editor.putString("contact", contact);
         editor.putString("picture", picture);
+        editor.putString("address", address);
         editor.commit();
     }
 
@@ -48,6 +49,11 @@ public class SharedPref {
     public String getName() {
         String name = sharedPreferences.getString("name", null);
         return name;
+    }
+
+    public String getAddress() {
+        String address = sharedPreferences.getString("address", null);
+        return address;
     }
 
     public String getContact() {

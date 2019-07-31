@@ -41,7 +41,7 @@ import java.net.URL;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private EditText name, email, phone, password, confirm;
+    private EditText name, email, phone;
     private ImageView image;
     private Button update;
     private static String resultPath = null;
@@ -62,8 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
         name = findViewById(R.id.up_full_name);
         email = findViewById(R.id.update_email);
         phone = findViewById(R.id.up_phone);
-        password = findViewById(R.id.up_password);
-        confirm = findViewById(R.id.up_confirm_password);
 
         email.setEnabled(false);
 
@@ -287,9 +285,9 @@ public class ProfileActivity extends AppCompatActivity {
                                 String name = jsonObject2.getString("name");
                                 String contact = jsonObject2.getString("contact");
                                 String picture = jsonObject2.getString("picture");
-
+                                String address="";
                                 pd.dismiss();
-                                sharedPref.createLoginSession(id, email, role, name, contact, picture);
+                                sharedPref.createLoginSession(id, email,address, role, name, contact, picture);
                                 misc.showToast("Profile Updated Successfully");
                                 Intent intent = new Intent(ProfileActivity.this, AllServiceActivity.class);
                                 startActivity(intent);
@@ -351,7 +349,8 @@ public class ProfileActivity extends AppCompatActivity {
                                 String name = jsonObject2.getString("name");
                                 String contact = jsonObject2.getString("contact");
                                 String picture = jsonObject2.getString("picture");
-                               sharedPref.createLoginSession(id, email, role, name, contact, picture);
+                                String address="";
+                               sharedPref.createLoginSession(id, email,address, role, name, contact, picture);
 
                                 pd.dismiss();
                                 misc.showToast("Profile Updated Successfully");

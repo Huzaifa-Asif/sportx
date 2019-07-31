@@ -29,6 +29,8 @@ import org.json.JSONObject;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import static android.util.Log.*;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button login, register;
@@ -167,8 +169,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     // Customer
                                     if(role == 2)
                                     {
+                                        String address="";
                                         String picture = jsonObject1.getString("picture");
-                                    sharedPref.createLoginSession(id, email, role, name, contact, picture);
+                                    sharedPref.createLoginSession(id, email,address, role, name, contact, picture);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AllServiceActivity.class);
                                     startActivity(intent);
@@ -179,7 +182,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     else if(role == 1 )
                                     {
                                         String picture_profile = jsonObject1.getString("picture_profile");
-                                    sharedPref.createLoginSession(id, email, role, name, contact, picture_profile);
+                                        String address = jsonObject1.getString("address");
+                                        sharedPref.createLoginSession(id, email, address, role, name, contact, picture_profile);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, ServiceHomeActivity.class);
                                     startActivity(intent);
@@ -188,7 +192,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     else if(role == 0 )
                                     {
                                         String picture = jsonObject1.getString("picture");
-                                    sharedPref.createLoginSession(id, email, role, name, contact, picture);
+                                        String address="";
+                                    sharedPref.createLoginSession(id, email,address, role, name, contact, picture);
                                     pd.dismiss();
                                     Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                                     startActivity(intent);
@@ -219,10 +224,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+                d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
         } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
-            Log.e("KeyHash:", e.toString());
+            e("KeyHash:", e.toString());
         }
     }
 

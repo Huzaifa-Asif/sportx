@@ -94,7 +94,6 @@
 
         <activity android:name="com.sport.x.PasswordUpdate" />
 
-        <activity android:name="com.sport.x.ServiceProviderActivities.ServiceUpdatePassword" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
