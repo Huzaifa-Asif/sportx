@@ -14,7 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 //import com.dps.mydoctor.R;
 //import com.dps.mydoctor.activities.BaseActivity;
@@ -24,8 +26,13 @@ import android.widget.ImageView;
 //import com.dps.mydoctor.utils.ApiConstant;
 //import com.dps.mydoctor.utils.RestApiCall;
 
+import com.sport.x.AdminActivities.AllJobsActivity;
+import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Conversation;
-import com.sport.x.Adapters.
+import com.sport.x.Adapters.ConversationsAdapter;
+import com.sport.x.ServiceProviderActivities.ProviderJobsActivity;
+import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.SharedPref.SharedPref;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,42 +43,55 @@ import java.util.ArrayList;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
-public class ConversationActivity extends AppCompatActivity{
+public class ConversationActivity extends AppCompatActivity {
 
     RecyclerView rv_conversations;
-    ArrayList<ConversationsModel> conversationsModels=null;
+    ArrayList<Conversation> conversationModel=null;
     ConversationsAdapter conversationsAdapter=null;
     SwipeRefreshLayout srf_conversations=null;
+
+    Misc misc;
+    SharedPref sharedPref;
+
+
     @Override
-    public int myView() {
-        return R.layout.activity_conversations;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_conversations);
+        setTitle("Conversations");
+
+        misc = new Misc(this);
+        sharedPref = new SharedPref(this);
+
+
     }
+
 
     @Override
     public void activityCreated() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //What to do on back clicked
-                ConversationsActivity.this.finish();
-            }
-        });
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //What to do on back clicked
+//                ConversationsActivity.this.finish();
+//            }
+//        });
         // getSupportActionBar().setTitle("Conversations");
-        myVdoctorApp.setToolBarTitle(toolbar,"Conversations");
+//        myVdoctorApp.setToolBarTitle(toolbar,"Conversations");
         rv_conversations=findViewById(R.id.rv_conversations);
         srf_conversations=findViewById(R.id.srf_conversations);
         rv_conversations.setLayoutManager(new LinearLayoutManager(this));
-        conversationsModels=new ArrayList<>();
+        conversationModel=new ArrayList<>();
        /*conversationsModels.add(new ConversationsModel("","Test Patient",""));
         conversationsModels.add(new ConversationsModel("","Test Patient",""));
         conversationsModels.add(new ConversationsModel("","Test Patient",""));
         conversationsModels.add(new ConversationsModel("","Test Patient",""));*/
 
-        conversationsAdapter=new ConversationsAdapter(this,myVdoctorApp,appPreference.getType(), conversationsModels, new OnItemClickListener() {
+        conversationsAdapter=new ConversationsAdapter(this,sharedPref.getUserRole(), conversationModel, new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 if(appPreference.getType().equals("1")){
@@ -101,16 +121,39 @@ public class ConversationActivity extends AppCompatActivity{
 
     }
 
-    public void startNextActivity(int position){
-        String user_name="";
-        if(appPreference.getType().equals("1")){
-            user_name=conversationsModels.get(position).getPatient_full_name();
-        }else{
-            user_name=conversationsModels.get(position).getDoctor_full_name();
+
+
+    // On back press method
+    @Override
+    public void onBackPressed() {
+
+        if(sharedPref.getUserRole() == 1) {
+            Intent intent = new Intent(this, ServiceHomeActivity.class);
+            startActivity(intent);
+            finish();
         }
-        Intent intent=new Intent(getApplication(),MessagesActivity.class);
-        intent.putExtra("conversation_id",conversationsModels.get(position).getConversation_id());
-        intent.putExtra("user_name",user_name);
+        else{
+            Intent intent = new Intent(this, AllServiceActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+
+
+    public void startNextActivity(int position){
+        String user_email="";
+        if(sharedPref.getUserRole()==2){
+            user_email=conversationModel.get(position).getConversationCustomerEmail();
+        }else{
+            user_email=conversationModel.get(position).getConversationServiceProviderEmail();
+        }
+        Intent intent=new Intent(getApplication(),MessageActivity.class);
+        intent.putExtra("conversationId",conversationModel.get(position).getConversation_id());
+        intent.putExtra("customer_email",user_name);
+        intent.putExtra("customer_email",user_name);
+        intent.putExtra("customer_email",user_name);
+
         intent.putExtra("index",position);
         intent.putExtra("fee",conversationsModels.get(position).getCall_fee());
         if(appPreference.getType().equals("1")) {

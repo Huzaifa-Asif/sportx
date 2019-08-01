@@ -22,27 +22,40 @@ import android.widget.TextView;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.sport.x.AdminActivities.CustomerDetailsActivity;
+import com.sport.x.MapsActivity;
+
+import com.sport.x.Models.ConversationMessage;
 import com.sport.x.Models.Customer;
 import com.sport.x.R;
+import com.sport.x.SharedPref.SharedPref;
 import com.squareup.picasso.Picasso;
+import com.sport.x.SharedPref.SharedPref;
+
+
+import com.sport.x.Models.ConversationMessage;
+
+import com.koushikdutta.ion.Ion;
+
+import android.content.Context;
 
 import java.util.ArrayList;
 
 public class ConversationMessagesAdapter extends RecyclerView.Adapter<ConversationMessagesAdapter.MyHolder> {
 
     private Context context;
-    private OnItemClickListener listener;
+    private SharedPref.OnItemClickListener listener;
+    SharedPref SharedPref;
+    ArrayList<ConversationMessage> messageModel = new ArrayList<ConversationMessage>();
 
-    ArrayList<MessagesModel> messagesModels = new ArrayList<MessagesModel>();
-    MyVdoctorApp myVdoctorApp;
-    String userId;
+    int role=100;
 
-    public MessageAdapter(Context context,MyVdoctorApp myVdoctorApp,String userId, ArrayList<MessagesModel> messagesModels, OnItemClickListener listener) {
+
+
+    public ConversationMessagesAdapter(Context context,int role, ArrayList<ConversationMessage> messageModel, SharedPref.OnItemClickListener listener) {
         this.context = context;
-        this.myVdoctorApp = myVdoctorApp;
-        this.userId = userId;
+        this.role = role;
         this.listener = listener;
-        this.messagesModels = messagesModels;
+        this.messageModel = messageModel;
 
     }
 
@@ -67,7 +80,7 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter<Conversati
     @Override
     public void onBindViewHolder(MyHolder holder, int position) {
         //  Log.e("size",messagesModels.size()+"");
-        holder.setData(messagesModels.get(position),messagesModels.get(position).getSender(),position);
+        holder.setData(messageModel.get(position),messageModel.get(position).getConversationSenderEmail(),position);
 
     }
 
@@ -76,7 +89,7 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter<Conversati
        */
     @Override
     public int getItemCount() {
-        return messagesModels.size();
+        return messageModel.size();
     }
 
     /*
@@ -86,13 +99,13 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter<Conversati
 
         TextView tv_message_gray,tv_message_blue;
         ImageView img_gray,img_blue;
-        MessagesModel messagesModel = null;
+        ConversationMessage messagesModel = null;
 
-        public void setData(MessagesModel messagesModel,String sender,int pos) {
+        public void setData(ConversationMessage messageModel,String senderEmail,int pos) {
             this.messagesModel= messagesModel;
-            if(messagesModel.getMessage_type().equals("text")) {
-                if (sender.equals(userId)) {
-                    tv_message_gray.setText(messagesModel.getMessage());
+            if(messagesModel.getConversationType().equals("text")) {
+                if (senderEmail.equals(SharedPref.getEmail())) {
+                    tv_message_gray.setText(messagesModel.getConversationMessage());
                     tv_message_gray.setVisibility(View.VISIBLE);
                     tv_message_blue.setVisibility(View.GONE);
                     img_gray.setVisibility(View.GONE);
@@ -100,37 +113,50 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter<Conversati
                 } else {
                     tv_message_blue.setVisibility(View.VISIBLE);
                     tv_message_gray.setVisibility(View.GONE);
-                    tv_message_blue.setText(messagesModel.getMessage());
+                    tv_message_blue.setText(messagesModel.getConversationMessage());
                     img_gray.setVisibility(View.GONE);
                     img_blue.setVisibility(View.GONE);
                 }
             }else {
-                if (sender.equals(userId)) {
-                    myVdoctorApp.setImageFromURL(context,img_gray,ApiConstant.MESSAGE_ATTACHMENT_PATH+messagesModel.getAttachment());
+                if (senderEmail.equals(SharedPref.getEmail())) {
+
+                    Ion.with(context.getApplicationContext()).load(SharedPref.getPicture().replace("\"","")).intoImageView(img_gray);
+                    //myVdoctorApp.setImageFromURL(context,img_gray,ApiConstant.MESSAGE_ATTACHMENT_PATH+messagesModel.getAttachment());
+
                     tv_message_gray.setVisibility(View.GONE);
                     tv_message_blue.setVisibility(View.GONE);
                     img_gray.setVisibility(View.VISIBLE);
                     img_blue.setVisibility(View.GONE);
+
+
                     img_gray.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent=new Intent(context, FullScreenImageActivity.class);
-                            intent.putExtra("img_url",ApiConstant.MESSAGE_ATTACHMENT_PATH+messagesModel.getAttachment());
+                            Intent intent=new Intent(context, MapsActivity.class);
+                            intent.putExtra("img_url",messagesModel.getConversationFilePath());
                             intent.putExtra("username","Attachment");
                             context.startActivity(intent);
                         }
                     });
-                } else {
-                    myVdoctorApp.setImageFromURL(context,img_blue,ApiConstant.MESSAGE_ATTACHMENT_PATH+messagesModel.getAttachment());
+
+
+                }
+                else {
+//                    myVdoctorApp.setImageFromURL(context,img_blue,ApiConstant.MESSAGE_ATTACHMENT_PATH+messagesModel.getAttachment());
+
+                    Ion.with(context.getApplicationContext()).load(SharedPref.getPicture().replace("\"","")).intoImageView(img_blue);
+
                     tv_message_blue.setVisibility(View.GONE);
                     tv_message_gray.setVisibility(View.GONE);
                     img_gray.setVisibility(View.GONE);
                     img_blue.setVisibility(View.VISIBLE);
+
+
                     img_blue.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent=new Intent(context, FullScreenImageActivity.class);
-                            intent.putExtra("img_url",ApiConstant.MESSAGE_ATTACHMENT_PATH+messagesModel.getAttachment());
+                            Intent intent=new Intent(context, MapsActivity.class);
+                            intent.putExtra("img_url",messagesModel.getConversationFilePath());
                             intent.putExtra("username","Attachment");
                             context.startActivity(intent);
                         }

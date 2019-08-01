@@ -22,6 +22,11 @@ import com.sport.x.Models.Customer;
 import com.sport.x.R;
 import com.squareup.picasso.Picasso;
 
+
+import com.sport.x.Misc.Misc;
+import com.sport.x.Models.Conversation;
+
+
 import java.util.ArrayList;
 
 
@@ -30,15 +35,15 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
 
     private Context context;
-    private OnItemClickListener listener;
-    String type = "";
-    ArrayList<ConversationsModel> conversationsModels = new ArrayList<ConversationsModel>();
-    MyVdoctorApp myVdoctorApp;
+//    private OnItemClickListener listener;
+    int role=100;
+    ArrayList<Conversation> conversationModel = new ArrayList<Conversation>();
 
-    public ConversationsAdapter(Context context, MyVdoctorApp myVdoctorApp, String type, ArrayList<ConversationsModel> conversationsModels, OnItemClickListener listener) {
+
+    public ConversationsAdapter(Context context, int role, ArrayList<Conversation> conversationModel, OnItemClickListener listener) {
         this.context = context;
         this.myVdoctorApp = myVdoctorApp;
-        this.type = type;
+        this.role = role;
         this.listener = listener;
         this.conversationsModels = conversationsModels;
 
@@ -89,7 +94,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
         public void setData(ConversationsModel conversationsModel) {
             this.conversationsModel = conversationsModel;
 
-            if (type.equals("1")) {
+            if (role==2) {
                 tv_name.setText(conversationsModel.getPatient_full_name());
                 myVdoctorApp.setUserImageFromURL(context, img_user, ApiConstant.PROFILE_PICTURE_PATH + conversationsModel.getPatient_profile_picture());
 
