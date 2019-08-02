@@ -321,24 +321,24 @@ public class MessageActivity extends AppCompatActivity {
                                 return;
                             }
                             vendorList.clear();
-                            for(i = 1; i < jsonArray.length(); i++){
+                            for(int i = 1; i < jsonArray.length(); i++){
 
 //                                    misc.showToast("For Loop"+result.getResult());
 
                                 JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
-                                JSONObject locat  = jsonObject.getJSONObject("location");
+                                JSONObject location  = jsonObject.getJSONObject("location");
 
-                                latitude1 = locat.getDouble("lat");
-                                longitude1 = locat.getDouble("long");
+                                double latitude1 = location.getDouble("lat");
+                                double longitude1 = location.getDouble("long");
 
-                                service_provider_name = jsonObject.getString("name");
-                                email = jsonObject.getString("email");
-                                address = jsonObject.getString("address");
-                                picture_profile = jsonObject.getString("picture_profile");
-                                contact = jsonObject.getString("contact");
-                                password = jsonObject.getString("password");
-                                category = jsonObject.getString("category");
+                                String service_provider_name = jsonObject.getString("name");
+                                String email = jsonObject.getString("email");
+                                String address = jsonObject.getString("address");
+                                String picture_profile = jsonObject.getString("picture_profile");
+                                String contact = jsonObject.getString("contact");
+                                String password = jsonObject.getString("password");
+                                String category = jsonObject.getString("category");
 
 //
                                 //vendorList.add(new Service_Provider(service_provider_name, email, address, picture, contact, password, category, latitude1, longitude1));

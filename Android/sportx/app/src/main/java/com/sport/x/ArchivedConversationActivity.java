@@ -17,8 +17,6 @@ import android.view.View;
 //import com.dps.mydoctor.utils.ApiConstant;
 //import com.dps.mydoctor.utils.RestApiCall;
 
-import com.sport.x.Adapters.ConversationsAdapter;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
