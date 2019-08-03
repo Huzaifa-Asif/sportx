@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.sport.x.ConversationActivity;
 import com.sport.x.HelpActivity;
 import com.sport.x.LoginActivity;
 import com.sport.x.Misc.Misc;
@@ -135,6 +136,11 @@ public class ServiceHomeActivity extends AppCompatActivity
         else if (id == R.id.service_update_password) {
             Intent profile = new Intent(this, SerivceUpdatePasswordActivity.class);
             startActivity(profile);
+            finish();
+        }
+        else if (id == R.id.conversation) {
+            Intent conversation = new Intent(this, ConversationActivity.class);
+            startActivity(conversation);
             finish();
         }
         else if (id == R.id.service_home) {

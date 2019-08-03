@@ -1,6 +1,7 @@
 package com.sport.x;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -203,6 +204,11 @@ public class AllServiceActivity extends AppCompatActivity
         } else if (id == R.id.customer_profile) {
             Intent profile = new Intent(this, ProfileActivity.class);
             startActivity(profile);
+            finish();
+        }
+        else if (id == R.id.conversation) {
+            Intent conversation = new Intent(this, ConversationActivity.class);
+            startActivity(conversation);
             finish();
         }
         else if (id == R.id.update_password) {

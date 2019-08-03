@@ -57,10 +57,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.sport.x.AdminActivities.CustomerDetailsActivity" />
         <activity android:name="com.sport.x.ServiceProviderActivities.VendorMapActivity" />
-        <activity
-            android:name="com.sport.x.JobHistoryActivity"
-            android:label="@string/title_activity_job_history"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name="com.sport.x.AdminActivities.AddServiceActivity" />
         <activity android:name="com.sport.x.AdminActivities.RegisteredServiceProvidersActivity" />
         <activity android:name="com.sport.x.AdminActivities.ServiceProviderDetailsActivity" />
@@ -95,6 +92,11 @@
         <activity android:name="com.sport.x.PasswordUpdate" />
 
 
+
+        <activity android:name="com.sport.x.JobHistoryActivity" />
+
+
+        <activity android:name="com.sport.x.ConversationActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

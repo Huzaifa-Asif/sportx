@@ -170,10 +170,10 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter<Conversati
         public MyHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            tv_message_gray =  itemView.findViewById(R.id.tv_message_gray);
-            tv_message_blue =  itemView.findViewById(R.id.tv_message_blue);
-            img_gray =  itemView.findViewById(R.id.img_gray);
-            img_blue =  itemView.findViewById(R.id.img_blue);
+//            tv_message_gray =  itemView.findViewById(R.id.tv_message_gray);
+//            tv_message_blue =  itemView.findViewById(R.id.tv_message_blue);
+//            img_gray =  itemView.findViewById(R.id.img_gray);
+//            img_blue =  itemView.findViewById(R.id.img_blue);
         }
 
         @Override
