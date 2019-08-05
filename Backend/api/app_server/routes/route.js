@@ -5,7 +5,7 @@ var router = express.Router();
 var admin = require('../controllers/admin.js');
 var booking = require('../controllers/booking.js');
 var bookingDetails = require('../controllers/bookingDetails.js');
-var chatbox = require('../controllers/chatbox.js');
+var conversation = require('../controllers/conversation.js');
 var customer = require('../controllers/customer.js');
 var expense = require('../controllers/expense.js');
 var expenseCategory = require('../controllers/expenseCategory.js');
@@ -17,6 +17,8 @@ var serviceProvider = require('../controllers/serviceProvider.js');
 var team = require('../controllers/team.js');
 var tournament = require('../controllers/tournament.js');
 var functions =require('../controllers/functions.js');
+var functions =require('../controllers/functions.js');
+var message =require('../controllers/message.js');
 
 
 router.get('/',function(req,res)
@@ -711,7 +713,7 @@ router.post('/add_revenueCategory',function(req,res)
 
 });
 
-//Get RevenueCategory by ServiceProvider
+//Get RevenueCategory by ServiceProvider ff
 router.get('/get_revenueCategory_by_serviceProvider/:email', function (req, res) {
     revenueCategory.getRevenueCategoryByServiceProvider(req.params.email,function (err, result) {
         if (err)
@@ -856,157 +858,202 @@ router.delete('/delete_revenue/:id', function (req, res) {
 
 });
 
-// /* GET home page. */
-// router.get('/', function (req, res, next) {
-//     res.send(`
-//     <html>
-//     <div style="text-align:center;">
-//     <h2>
-//     <br>
-//     <p>  Please use /api/stocks/    or   /api/demands/ </p>
+//Add Conversation
+router.post('/add_conversation',function(req,res)
+{
+    var addConversationForm=req.body;
+    conversation.checkConversation(addConversationForm.serviceProviderEmail,addConversationForm.customerEmail,function(err,result)
+    {
+        if(err)
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        else if(result)
+        {
+            if(result.state=="archived")
+            {
+                conversation.setConversationState(result._id,{state:"active"},{new:true},function (err, conversation) 
+                {
+                    if (err) 
+                    {
+                        console.log(err);
+                        return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                    }
+                    var result = conversation.toObject();
+                    result.status = true;
+                    return res.json(result);
+                });
+            }
+            else
+            {
+                result1=result.toObject();
+                result1.status=true;
+                return res.json(result1);
+            }
+        }
+        else
+        {
+            conversation.addConversation(addConversationForm,function (err, conversation) 
+            {
+                if (err) 
+                {
+                    console.log(err);
+                    return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+                var result = conversation.toObject();
+                result.status = true;
+                return res.json(result);
+            });
+        }
+    });
 
-//     <a href="http://localhost:3000/api/stocks/" target='blank'> Stock API </a>
-//     &ensp;  &ensp;
-//      <a href="http://localhost:3000/api/demands/" target='blank'> Demand API </a>
-//    </h2>
-//    </div>
-//     </html>
+});
 
+//Get Conversation by id
+router.get('/get_conversation_by_id/:id', function (req, res) {
+    conversation.getConversationById(req.params.id,function (err, result) {
+        if (err)
+        {
+            console.log(err);
+              return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+     return res.json(result);
 
-//     `);
-// });
+    });
+});
 
-
-// // View Stocks
-// router.get('/api/stocks/', function (req, res) {
-//     Stock.getStocks(function (err, Stocks) {
-//         if (err) {
-//             throw err;
+// //Get Conversation by email
+// router.get('/get_conversation_by_email/:email', function (req, res) {
+//     conversation.getConversationByEmail(req.params.email,function (err, result) {
+//         if (err)
+//         {
+//             console.log(err);
+//             return res.status(500).json({Message:"Error in Connecting to DB",status:false});
 //         }
-//         res.json(Stocks);
-
-//     });
-
-// });
-
-// // Find Stock By Id
-// router.get('/api/stocks/:_id', function (req, res) {
-//     Stock.getStockById(req.params._id, function (err, Stock) {
-//         if (err) {
-//             throw err;
+//         else
+//         {
+//             return res.json(result);
 //         }
-//         res.json(Stock);
-
 //     });
-
 // });
 
-// // Add Stocks
-// router.post('/api/stocks/', function (req, res) {
-//     var stockform = req.body;
-//     Stock.addStock(stockform, function (err, stockform) {
-//         if (err) {
-//             throw err;
-//         }
-//         res.json(stockform);
+//Get Conversation by email
+router.get('/get_conversation_by_email_active/:email', function (req, res) {
+    conversation.getConversationByEmail(req,res,'active');       
+});
 
-//     });
+//Get Conversation by email
+router.get('/get_conversation_by_email_archived/:email', function (req, res) {
+    conversation.getConversationByEmail(req,res,'archived');       
+});
 
-// });
+//Set Conversation State
+router.patch('/set_conversation_state/:id',function(req,res)
+{
+    let conversationForm=req.body;
+    conversation.setConversationState(req.params.id,conversationForm,{new:true},function (err, conversation) {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+        var result = conversation.toObject();
+        result.status = true;
+        return res.json(result);
+        });
 
-// // Update Stocks
-// router.put('/api/stocks/:_id', function (req, res) {
-//     var id = req.params._id;
-//     var stockform = req.body;
-//     Stock.updateStock(id, stockform, {}, function (err, stockform) {
-//         if (err) {
-//             throw err;
-//         }
-//         res.json(stockform);
+});
 
-//     });
+//Send Message
+router.post('/send_message',function(req,res)
+{
+    var addMessageForm=req.body;
+    message.addmessage(addMessageForm,function (err, message) 
+            {
+                if (err) 
+                {
+                    console.log(err);
+                    return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+                var result = message.toObject();
+                result.status = true;
+                return res.json(result);
+            });
 
-// });
+});
+
+//Get Messages by Conversation Id
+router.get('/get_message_by_conversationId/:id', function (req, res) {
+    
+    message.getMessageByConversationId(req.params.id, function (err, result) 
+    {
+        if (err)
+        {
+            console.log(err);
+            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+        }
+        else
+        {
+            let conversationId=result[0].conversationId;
+            conversation.getConversationById(conversationId,async function (err, conversation) 
+            {
+                if (err)
+                {
+                    console.log(err);
+                    return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                }
+                else
+                {
+                    let customerEmail=conversation.customerEmail;
+                    let serviceProviderEmail=conversation.serviceProviderEmail;
+                    let finalCustomer,finalServiceProvider;
+                    customer.getCustomerByEmail(customerEmail,function(err,customer)
+                    {
+                        if(err)
+                        {
+                            console.log(err);
+                            return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                        }
+                        else
+                        {
+                            finalCustomer=customer.toObject();
+                            serviceProvider.getServiceProviderByEmail(serviceProviderEmail,function(err,serviceProvider)
+                            {
+                                if(err)
+                                {
+                                    console.log(err);
+                                    return res.status(500).json({Message:"Error in Connecting to DB",status:false});
+                                }
+                                else
+                                {   
+                                    let finalResult=[];   
+                                    finalServiceProvider=serviceProvider.toObject();
+                                    for(let i=0;i<result.length;i++)
+                                    {
+                                        let finalMessage=result[i].toObject();
+                                        finalResult[i]={
+                                            message:finalMessage,
+                                            customer:finalCustomer,
+                                            serviceProvider:finalServiceProvider
+
+                                        }
+                                    }
+                                    return res.json(finalResult);
+                                }
+
+                            });
+                        }
+                    });
+                        
+                }
+            });
+        }
+        
+    });
+
+});
 
 
-// // Delete Stocks
-// router.delete('/api/stocks/:_id', function (req, res) {
-//     var id = req.params._id;
-//     Stock.removeStock(id, function (err, stock) {
-//         if (err) {
-//             throw err;
-//         }
-//         res.json("Stock Deleted Successfully");
-
-//     });
-
-// });
-
-
-// // View Demands
-// router.get('/api/demands/', function (req, res) {
-//     Demand.getDemands(function (err, Demands) {
-//         if (err) {
-//             throw err;
-//         }
-//         res.json(Demands);
-
-//     });
-
-// });
-
-// // Find Demand By Id
-// router.get('/api/demands/:_id', function (req, res) {
-//     Demand.getDemandById(req.params._id, function (err, Demand) {
-//         if (err) {
-//             throw err;
-//         }
-//         res.json(Demand);
-
-//     });
-
-// });
-
-// // Add Demands
-// router.post('/api/demands/', function (req, res) {
-//     var demandform = req.body;
-//     Demand.addDemand(demandform, function (err, demandform) {
-//         if (err) {
-//             throw err;
-//         }
-//         res.json(demandform);
-
-//     });
-
-// });
-
-// // Update Demand
-// router.put('/api/demands/:_id', function (req, res) {
-//     var id = req.params._id;
-//     var demandform = req.body;
-//     Demand.updateDemand(id, demandform, {}, function (err, demandform) {
-//         if (err) {
-//             throw err;
-//         }
-//         res.json(demandform);
-
-//     });
-
-// });
-
-
-// // Delete Demand
-// router.delete('/api/demands/:_id', function (req, res) {
-//     var id = req.params._id;
-//     Demand.removeDemand(id, function (err, demand) {
-//         if (err) {
-//             throw err;
-//         }
-//         res.json(demand);
-
-//     });
-
-// });
 
 
 module.exports = router;

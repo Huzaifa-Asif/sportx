@@ -1,6 +1,5 @@
 var customer =require('../models/customer.js');
 var functions =require('../controllers/functions.js');
-const cloudinary = require('cloudinary');
 
 
 
@@ -48,6 +47,11 @@ module.exports.login = (email,password,res) => {
 // Get Customer By ID
 module.exports.getCustomerById = (id ,callback) =>  {
 	customer.findById(id, callback);
+}
+
+// Get Customer By Email
+module.exports.getCustomerByEmail = (email ,callback) =>  {
+	customer.findOne({email:email}, callback);
 }
 
 // Add Customer
