@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
 import com.sport.x.CustomerInProgressJobDetailsActivity;
+import com.sport.x.MessageActivity;
 import com.sport.x.Misc.Misc;
 //import com.sport.x.Models.Job;
 import com.sport.x.Models.Conversation;
@@ -101,20 +102,10 @@ public class ConversationActiveAdapter extends RecyclerView.Adapter<Conversation
 
         @Override
         public void onClick(View v) {
-//            Intent intent = new Intent(context, CustomerInProgressJobDetailsActivity.class);
-//            intent.putExtra("date", conversationsListModel.get(getAdapterPosition()).getDate());
-//            intent.putExtra("time", conversationsListModel.get(getAdapterPosition()).getTime());
-//            intent.putExtra("job_id", conversationsListModel.get(getAdapterPosition()).getJobId());
-//            intent.putExtra("state", conversationsListModel.get(getAdapterPosition()).getState());
-//            intent.putExtra("bookingType", conversationsListModel.get(getAdapterPosition()).getBookingType());
-//            intent.putExtra("serviceProviderEmail", conversationsListModel.get(getAdapterPosition()).getServiceProviderEmail());
-//            intent.putExtra("serviceProviderName", conversationsListModel.get(getAdapterPosition()).getServiceProviderName());
-//            intent.putExtra("serviceProviderNumber", conversationsListModel.get(getAdapterPosition()).getServiceProviderNumber());
-//            intent.putExtra("customerEmail", conversationsListModel.get(getAdapterPosition()).getCustomerEmail());
-//            intent.putExtra("customerName", conversationsListModel.get(getAdapterPosition()).getCustomerName());
-//            intent.putExtra("customerNumber", conversationsListModel.get(getAdapterPosition()).getCustomerNumber());
-//            context.startActivity(intent);
-//            ((Activity) context).finish();
+            Intent intent = new Intent(context, MessageActivity.class);
+            intent.putExtra("conversationId", conversationsListModel.get(getAdapterPosition()).getConversationId());
+            context.startActivity(intent);
+            ((Activity) context).finish();
         }
 
     }

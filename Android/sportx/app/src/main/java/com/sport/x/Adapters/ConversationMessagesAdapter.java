@@ -3,6 +3,7 @@ package com.sport.x.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,18 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//import com.dps.mydoctor.MyVdoctorApp;
-//import com.dps.mydoctor.R;
-//import com.dps.mydoctor.activities.sharedActivities.FullScreenImageActivity;
-//import com.dps.mydoctor.callbacks.OnItemClickListener;
-//import com.dps.mydoctor.models.ConversationsModel;
-//import com.dps.mydoctor.models.MessagesModel;
-//import com.dps.mydoctor.utils.ApiConstant;
+
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.sport.x.AdminActivities.CustomerDetailsActivity;
 import com.sport.x.MapsActivity;
 
+import com.sport.x.Models.Conversation;
 import com.sport.x.Models.ConversationMessage;
 import com.sport.x.Models.Customer;
 import com.sport.x.R;
@@ -39,147 +35,123 @@ import com.koushikdutta.ion.Ion;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class ConversationMessagesAdapter extends RecyclerView.Adapter<ConversationMessagesAdapter.MyHolder> {
+public class ConversationMessagesAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private SharedPref.OnItemClickListener listener;
     SharedPref SharedPref;
-    ArrayList<ConversationMessage> messageModel = new ArrayList<ConversationMessage>();
+    ArrayList<ConversationMessage> messages = new ArrayList<ConversationMessage>();
+    int role = 100;
+    private static final int VIEW_TYPE_MESSAGE_SENT = 1;
+    private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
 
-    int role=100;
-
-
-
-    public ConversationMessagesAdapter(Context context,int role, ArrayList<ConversationMessage> messageModel, SharedPref.OnItemClickListener listener) {
+    public ConversationMessagesAdapter(Context context, ArrayList<ConversationMessage> messagesList) {
         this.context = context;
-        this.role = role;
-        this.listener = listener;
-        this.messageModel = messageModel;
+        this.messages = messagesList;
+        SharedPref= new SharedPref(context);
 
     }
 
-     /*
-    INITIALIZE VIEWHOLDER
-     */
 
-    @Override
-    public MyHolder onCreateViewHolder(ViewGroup parent, int i) {
-        View v = LayoutInflater.from(context).inflate(R.layout.layout_item_message, parent, false);
-        return new MyHolder(v);
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return 0;
-    }
-
-    /*
-      BIND
-       */
-    @Override
-    public void onBindViewHolder(MyHolder holder, int position) {
-        //  Log.e("size",messagesModels.size()+"");
-        holder.setData(messageModel.get(position),messageModel.get(position).getConversationSenderEmail(),position);
-
-    }
-
-    /*
-      TOTAL SPACECRAFTS NUM
-       */
+    //Get Total Messages
     @Override
     public int getItemCount() {
-        return messageModel.size();
+        return messages.size();
     }
 
-    /*
-    VIEW HOLDER CLASS
-     */
-    class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tv_message_gray,tv_message_blue;
-        ImageView img_gray,img_blue;
-        ConversationMessage messagesModel = null;
-
-        public void setData(ConversationMessage messageModel,String senderEmail,int pos) {
-            this.messagesModel= messagesModel;
-            if(messagesModel.getConversationType().equals("text")) {
-                if (senderEmail.equals(SharedPref.getEmail())) {
-                    tv_message_gray.setText(messagesModel.getConversationMessage());
-                    tv_message_gray.setVisibility(View.VISIBLE);
-                    tv_message_blue.setVisibility(View.GONE);
-                    img_gray.setVisibility(View.GONE);
-                    img_blue.setVisibility(View.GONE);
-                } else {
-                    tv_message_blue.setVisibility(View.VISIBLE);
-                    tv_message_gray.setVisibility(View.GONE);
-                    tv_message_blue.setText(messagesModel.getConversationMessage());
-                    img_gray.setVisibility(View.GONE);
-                    img_blue.setVisibility(View.GONE);
-                }
-            }else {
-                if (senderEmail.equals(SharedPref.getEmail())) {
-
-                    Ion.with(context.getApplicationContext()).load(SharedPref.getPicture().replace("\"","")).intoImageView(img_gray);
-                    //myVdoctorApp.setImageFromURL(context,img_gray,ApiConstant.MESSAGE_ATTACHMENT_PATH+messagesModel.getAttachment());
-
-                    tv_message_gray.setVisibility(View.GONE);
-                    tv_message_blue.setVisibility(View.GONE);
-                    img_gray.setVisibility(View.VISIBLE);
-                    img_blue.setVisibility(View.GONE);
+    // Determines the appropriate ViewType according to the sender of the message.
+    @Override
+    public int getItemViewType(int position) {
+        ConversationMessage message = (ConversationMessage) messages.get(position);
+        if (message.getConversationSenderEmail().equals(SharedPref.getEmail()))
+//        if (message.getConversationSenderEmail().equals("ali"))
+        {
+            // If the current user is the sender of the message
+            return VIEW_TYPE_MESSAGE_SENT;
+        } else {
+            // If some other user sent the message
+            return VIEW_TYPE_MESSAGE_RECEIVED;
+        }
+    }
 
 
-                    img_gray.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent=new Intent(context, MapsActivity.class);
-                            intent.putExtra("img_url",messagesModel.getConversationFilePath());
-                            intent.putExtra("username","Attachment");
-                            context.startActivity(intent);
-                        }
-                    });
+    // Inflates the appropriate layout according to the ViewType.
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
 
-
-                }
-                else {
-//                    myVdoctorApp.setImageFromURL(context,img_blue,ApiConstant.MESSAGE_ATTACHMENT_PATH+messagesModel.getAttachment());
-
-                    Ion.with(context.getApplicationContext()).load(SharedPref.getPicture().replace("\"","")).intoImageView(img_blue);
-
-                    tv_message_blue.setVisibility(View.GONE);
-                    tv_message_gray.setVisibility(View.GONE);
-                    img_gray.setVisibility(View.GONE);
-                    img_blue.setVisibility(View.VISIBLE);
-
-
-                    img_blue.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent=new Intent(context, MapsActivity.class);
-                            intent.putExtra("img_url",messagesModel.getConversationFilePath());
-                            intent.putExtra("username","Attachment");
-                            context.startActivity(intent);
-                        }
-                    });
-                }
-            }
-            // Log.e("position",pos+"");
-            //img_user.setText(directoryModel.getAddress());
+        if (viewType == VIEW_TYPE_MESSAGE_SENT) {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_message_sent, parent, false);
+            return new SentMessageHolder(view);
+        } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_message_received, parent, false);
+            return new ReceivedMessageHolder(view);
         }
 
-        public MyHolder(View itemView) {
+        return null;
+    }
+
+    // Passes the message object to a ViewHolder so that the contents can be bound to UI.
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ConversationMessage message = (ConversationMessage) messages.get(position);
+
+        switch (holder.getItemViewType()) {
+            case VIEW_TYPE_MESSAGE_SENT:
+                ((SentMessageHolder) holder).bind(message);
+                break;
+            case VIEW_TYPE_MESSAGE_RECEIVED:
+                ((ReceivedMessageHolder) holder).bind(message);
+        }
+    }
+
+    private class SentMessageHolder extends RecyclerView.ViewHolder {
+        TextView messageText, timeText;
+
+        SentMessageHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
-//            tv_message_gray =  itemView.findViewById(R.id.tv_message_gray);
-//            tv_message_blue =  itemView.findViewById(R.id.tv_message_blue);
-//            img_gray =  itemView.findViewById(R.id.img_gray);
-//            img_blue =  itemView.findViewById(R.id.img_blue);
+
+            messageText = (TextView) itemView.findViewById(R.id.text_message_body);
+            timeText = (TextView) itemView.findViewById(R.id.text_message_time);
         }
 
-        @Override
-        public void onClick(View v) {
-            listener.onItemClick(getAdapterPosition());
-        }
+        void bind(ConversationMessage message) {
+            messageText.setText(message.getConversationMessage());
 
+            // Format the stored timestamp into a readable String using method.
+            //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+            timeText.setText(message.getConversationDate());
+        }
     }
-}
+
+    private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
+        TextView messageText, timeText, nameText;
+        ImageView profileImage;
+
+        ReceivedMessageHolder(View itemView) {
+            super(itemView);
+
+            messageText = (TextView) itemView.findViewById(R.id.text_message_body);
+            timeText = (TextView) itemView.findViewById(R.id.text_message_time);
+            nameText = (TextView) itemView.findViewById(R.id.text_message_name);
+            profileImage = (ImageView) itemView.findViewById(R.id.image_message_profile);
+        }
+        void bind(ConversationMessage message) {
+            messageText.setText(message.getConversationMessage());
+
+            // Format the stored timestamp into a readable String using method.
+            //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+            timeText.setText(message.getConversationDate());
+
+            nameText.setText(message.getConversationSenderEmail());
+
+            // Insert the profile image from the URL into the ImageView.
+            //Utils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);
+        }
+    }
+    }

@@ -1,76 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!--tools:context=".activities.patientActivities.PatientMainActivity"-->
+    android:layout_height="match_parent"
+    >
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reyclerview_message_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
+    <!-- A horizontal line between the chatbox and RecyclerView -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#dfdfdf"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_chatbox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/rv_messages"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_above="@+id/view"-->
-        <!--android:layout_below="@+id/header"-->
-        <!--android:layout_marginStart="@dimen/_15sdp"-->
-        <!--android:layout_marginTop="@dimen/_15sdp"-->
-        <!--android:layout_marginEnd="@dimen/_15sdp"></android.support.v7.widget.RecyclerView>-->
+    <LinearLayout
+        android:id="@+id/layout_chatbox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:minHeight="48dp"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
 
-    <!--<View-->
+        <EditText
+            android:id="@+id/newMessage"
+            android:hint="Enter message"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:maxLines="6"/>
 
-        <!--android:id="@+id/view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:layout_above="@+id/footer"-->
-        <!--android:background="@color/colorLight" />-->
+        <Button
+            android:id="@+id/button_chatbox_send"
+            android:text="SEND"
+            android:textSize="14dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:layout_gravity="bottom" />
 
-    <!--<LinearLayout-->
+    </LinearLayout>
 
-        <!--android:id="@+id/footer"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:padding="@dimen/_7sdp"-->
-        <!--android:weightSum="10">-->
-
-        <!--<ImageView-->
-            <!--android:onClick="openGallary"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="@dimen/_25sdp"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_weight="1"-->
-            <!--android:src="@drawable/ic_add"-->
-            <!--tools:ignore="OnClick" />-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/edt_message"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_weight="7.3"-->
-            <!--android:background="@color/colorWhite"-->
-            <!--android:hint="Enter message"-->
-            <!--android:padding="@dimen/_5sdp"-->
-            <!--android:textSize="@dimen/_11sdp" />-->
-
-        <!--<android.support.v7.widget.AppCompatButton-->
-            <!--android:id="@+id/btn_send"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="@dimen/_17sdp"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_weight="1.7"-->
-            <!--android:background="@drawable/bg_list_item_blue"-->
-            <!--android:gravity="center_vertical|center_horizontal"-->
-            <!--android:onClick="onSendButtonClick"-->
-            <!--android:text="Send"-->
-            <!--android:textAlignment="gravity"-->
-            <!--android:textColor="@color/colorWhite"-->
-            <!--android:textSize="@dimen/_6sdp"-->
-            <!--tools:ignore="OnClick" />-->
-
-    <!--</LinearLayout>-->
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

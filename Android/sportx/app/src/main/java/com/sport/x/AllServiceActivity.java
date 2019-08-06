@@ -88,6 +88,7 @@ public class AllServiceActivity extends AppCompatActivity
         searchService = findViewById(R.id.sv_search);
         recyclerView = findViewById(R.id.customer_services);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setAdapter(customerServiceAdapter);
 
 //        electrician = findViewById(R.id.electricians);
 //        electrician.setOnClickListener(this);
