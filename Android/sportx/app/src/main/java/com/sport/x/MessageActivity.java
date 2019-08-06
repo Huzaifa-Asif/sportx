@@ -34,52 +34,30 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//import com.dps.mydoctor.MyVdoctorApp;
-//import com.dps.mydoctor.R;
-//import com.dps.mydoctor.activities.sharedActivities.FullScreenImageActivity;
-//import com.dps.mydoctor.callbacks.OnItemClickListener;
-//import com.dps.mydoctor.models.ConversationsModel;
-//import com.dps.mydoctor.models.MessagesModel;
-//import com.dps.mydoctor.utils.ApiConstant;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
-import com.sport.x.Adapters.ConversationActiveAdapter;
 import com.sport.x.Adapters.ConversationMessagesAdapter;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
-import com.sport.x.Models.Service_Provider;
 import com.sport.x.SharedPref.SharedPref;
 
 
 import com.sport.x.Models.ConversationMessage;
-import com.sport.x.SharedPref.SharedPref;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 
 
-import android.content.Context;
 
 import com.sport.x.Misc.Misc;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class MessageActivity extends AppCompatActivity {
@@ -108,14 +86,14 @@ public class MessageActivity extends AppCompatActivity {
     private ConversationMessagesAdapter mMessageAdapter;
     private EditText newMessage;
     private Button send;
-
+    private String customerName,serviceProviderName,customerPicture,serviceProviderPicture,customerEmail,serviceProviderEmail;
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-        setTitle("Conversations");
+        setTitle("Messages");
         context=this;
         SharedPref = new SharedPref(context);
         misc=new Misc(context);
@@ -128,6 +106,10 @@ public class MessageActivity extends AppCompatActivity {
             pd.show();
         }
 
+        if (handler != null) {
+            handler.removeCallbacks(mUpdateTimeTask);
+            handler.postDelayed(mUpdateTimeTask, 3000);
+        }
 
 
         send.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +129,33 @@ public class MessageActivity extends AppCompatActivity {
         mMessageAdapter = new ConversationMessagesAdapter(this, messages);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
         mMessageRecycler.setAdapter(mMessageAdapter);
+
+        newMessage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // TODO Auto-generated method stub
+                if (count > 0) {
+                    enableSendButton();
+                } else {
+                    disableSendButton();
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                // TODO Auto-generated method stub
+            }
+        });
+
+
     }
 
 
@@ -158,8 +167,11 @@ public class MessageActivity extends AppCompatActivity {
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Fetching all messages");
         pd.setCancelable(false);
-        pd.show();
+        if(messages.size()==0) {
+            pd.show();
+        }
         final int messagesSize = messages.size();
+
         Ion.with(this)
                 .load("GET", misc.ROOT_PATH + "get_message_by_conversationId/" + conversationId)
                 .asString()
@@ -183,13 +195,10 @@ public class MessageActivity extends AppCompatActivity {
                                 return;
                             }
                             pd.dismiss();
-                            for (int i = 0; i < jsonArray.length(); i++) {
+                            for (int i = messagesSize; i < jsonArray.length(); i++) {
 
 
-                                JSONObject jsonObjectConversation = (JSONObject) jsonArray.get(i);
-                                JSONObject jsonObjectCustomer = jsonObjectConversation.getJSONObject("customer");
-                                JSONObject jsonObjectServiceProvider = jsonObjectConversation.getJSONObject("serviceProvider");
-                                JSONObject jsonObjectMessage = jsonObjectConversation.getJSONObject("message");
+                                JSONObject jsonObjectMessage = (JSONObject) jsonArray.get(i);
 
                                 String conversationMessageId = jsonObjectMessage.getString("_id");
                                 String conversationId = jsonObjectMessage.getString("conversationId");
@@ -198,21 +207,27 @@ public class MessageActivity extends AppCompatActivity {
                                 String type = jsonObjectMessage.getString("type");
 //                                String file_path = jsonObjectMessage.getString("file_path");
                                 String file_path = "No Value";
-//                                String date = jsonObjectMessage.getString("date");
-                                String date = "12-10-2019";
-                                messages.add(new ConversationMessage(conversationMessageId, conversationId, senderEmail, message, type, file_path, date));
+                                String date = jsonObjectMessage.getString("date");
+                                customerName=jsonObjectMessage.getString("customerName");
+                                serviceProviderName=jsonObjectMessage.getString("serviceProviderName");
+                                customerEmail=jsonObjectMessage.getString("customerEmail");
+                                serviceProviderEmail=jsonObjectMessage.getString("serviceProviderEmail");
+                                customerPicture=jsonObjectMessage.getString("customerPicture");
+                                serviceProviderPicture=jsonObjectMessage.getString("serviceProviderPicture");
+                                messages.add(new ConversationMessage(conversationMessageId, conversationId, senderEmail, message, type, file_path, date,customerName,serviceProviderName,customerPicture,serviceProviderPicture,customerEmail,serviceProviderEmail));
 
                             }
-                            mMessageAdapter = new ConversationMessagesAdapter(context, messages);
-                            mMessageRecycler.setAdapter(mMessageAdapter);
 
+                            if (messages.size() > messagesSize) {
+                                mMessageAdapter.notifyDataSetChanged();
+                                mMessageRecycler.smoothScrollToPosition(messages.size() - 1);
+                            }
 
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
-//                        if (messageModel.size() > messagesSize) {
-//                                messageAdapter.notifyDataSetChanged();
-//                                rv_messages.smoothScrollToPosition(messageModel.size() - 1);
+//                        if (messages.size() > messagesSize) {
+//                                mMessageAdapter.notifyDataSetChanged();
 //                        }
 
                     }
@@ -226,7 +241,6 @@ public class MessageActivity extends AppCompatActivity {
         pd.setMessage("Sending Message...");
         pd.setCancelable(false);
         pd.show();
-
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("conversationId", conversationId);
         jsonObject.addProperty("senderEmail", SharedPref.getEmail());
@@ -274,13 +288,11 @@ public class MessageActivity extends AppCompatActivity {
                                 String newtype = jsonObject1.getString("type");
 //                                String file_path = jsonObjectMessage.getString("file_path");
                                 String newfile_path = "No Value";
-//                                String date = jsonObjectMessage.getString("date");
-                                String newdate = "12-10-2019";
+                                String newdate = jsonObject1.getString("date");
 
-                                messages.add(new ConversationMessage(newconversationMessageId, conversationId, newsenderEmail, newmessage, newtype, newfile_path, newdate));
+                                messages.add(new ConversationMessage(newconversationMessageId, conversationId, newsenderEmail, newmessage, newtype, newfile_path, newdate,customerName,serviceProviderName,customerPicture,serviceProviderPicture,customerEmail,serviceProviderEmail));
                                 newMessage.getText().clear();
-                                mMessageAdapter = new ConversationMessagesAdapter(context, messages);
-                                mMessageRecycler.setAdapter(mMessageAdapter);
+                                mMessageAdapter.notifyDataSetChanged();
                             }
 
                         }
@@ -295,6 +307,47 @@ public class MessageActivity extends AppCompatActivity {
     }
 
 
+    public void enableSendButton() {
+        send.setClickable(true);
+        send.setAlpha(1);
+    }
+
+    public void disableSendButton() {
+        send.setClickable(false);
+        send.setAlpha((float) 0.7);
+    }
+
+
+    Handler handler = new Handler();
+    Runnable mUpdateTimeTask = new Runnable() {
+        public void run() {
+            callConversationMessagesWebservice(false);
+            handler.postDelayed(this, 3000);
+        }
+    };
+
+        public void onResume() {
+        super.onResume();
+        if (handler != null) {
+            handler.removeCallbacks(mUpdateTimeTask);
+            handler.postDelayed(mUpdateTimeTask, 3000);
+        }
+    }
+
+    public void onStop() {
+        super.onStop();
+        if (handler != null) {
+            handler.removeCallbacks(mUpdateTimeTask);
+        }
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        if (handler != null) {
+            handler.removeCallbacks(mUpdateTimeTask);
+
+        }
+    }
 
 
 }
@@ -709,9 +762,6 @@ public class MessageActivity extends AppCompatActivity {
 //
 //    public void onDestroy() {
 //        super.onDestroy();
-//       /* if (counter != null) {
-//            counter.cancel();
-//        }*/
 //        if (handler != null) {
 //            handler.removeCallbacks(mUpdateTimeTask);
 //

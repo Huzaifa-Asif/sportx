@@ -112,12 +112,14 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
 
     private class SentMessageHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText;
+        ImageView profileImageSent;
 
         SentMessageHolder(View itemView) {
             super(itemView);
 
             messageText = (TextView) itemView.findViewById(R.id.text_message_body);
             timeText = (TextView) itemView.findViewById(R.id.text_message_time);
+            profileImageSent = (ImageView) itemView.findViewById(R.id.image_message_profile_sent);
         }
 
         void bind(ConversationMessage message) {
@@ -126,6 +128,23 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
             // Format the stored timestamp into a readable String using method.
             //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
             timeText.setText(message.getConversationDate());
+
+
+            if(SharedPref.getEmail().equals(message.getCustomerEmail()))
+            {
+                Ion.with(context).load(message.getCustomerPicture().replace("\"","")).intoImageView(profileImageSent);
+            }
+            else if(SharedPref.getEmail().equals(message.getServiceProviderEmail()))
+            {
+                Ion.with(context).load(message.getServiceProviderPicture().replace("\"","")).intoImageView(profileImageSent);
+            }
+            else
+            {
+                profileImageSent.setImageResource(R.drawable.user);
+
+            }
+
+
         }
     }
 
@@ -148,7 +167,29 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
             //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
             timeText.setText(message.getConversationDate());
 
-            nameText.setText(message.getConversationSenderEmail());
+            if(SharedPref.getUserRole()==1)
+            {
+                nameText.setText(message.getServiceProviderName());
+            }
+            else
+            {
+                nameText.setText(message.getCustomerName());
+            }
+
+
+            if(SharedPref.getEmail().equals(message.getCustomerEmail()))
+            {
+                Ion.with(context).load(message.getCustomerPicture().replace("\"","")).intoImageView(profileImage);
+            }
+            else if(SharedPref.getEmail().equals(message.getServiceProviderEmail()))
+            {
+                Ion.with(context).load(message.getServiceProviderPicture().replace("\"","")).intoImageView(profileImage);
+            }
+            else
+            {
+                profileImage.setImageResource(R.drawable.user);
+
+            }
 
             // Insert the profile image from the URL into the ImageView.
             //Utils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);

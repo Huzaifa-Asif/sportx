@@ -7,6 +7,15 @@
     android:layout_height="wrap_content"
     android:paddingTop="8dp">
 
+    <ImageView
+        android:id="@+id/image_message_profile_sent"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/circle"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <TextView
         android:id="@+id/text_message_body"
         android:text="hello, hello!"
