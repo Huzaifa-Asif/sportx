@@ -3,9 +3,13 @@ package com.sport.x.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,8 +38,21 @@ import com.koushikdutta.ion.Ion;
 
 import android.content.Context;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import java.io.File;
+
 
 public class ConversationMessagesAdapter extends RecyclerView.Adapter {
 
@@ -46,6 +63,8 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
     int role = 100;
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
+
+    private String bitmapTo64;
 
     public ConversationMessagesAdapter(Context context, ArrayList<ConversationMessage> messagesList) {
         this.context = context;
@@ -119,7 +138,7 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
 
             messageText = (TextView) itemView.findViewById(R.id.text_message_body);
             timeText = (TextView) itemView.findViewById(R.id.text_message_time);
-            profileImageSent = (ImageView) itemView.findViewById(R.id.image_message_profile_sent);
+//            profileImageSent = (ImageView) itemView.findViewById(R.id.image_message_profile_sent);
         }
 
         void bind(ConversationMessage message) {
@@ -129,20 +148,20 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
             //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
             timeText.setText(message.getConversationDate());
 
-
-            if(SharedPref.getEmail().equals(message.getCustomerEmail()))
-            {
-                Ion.with(context).load(message.getCustomerPicture().replace("\"","")).intoImageView(profileImageSent);
-            }
-            else if(SharedPref.getEmail().equals(message.getServiceProviderEmail()))
-            {
-                Ion.with(context).load(message.getServiceProviderPicture().replace("\"","")).intoImageView(profileImageSent);
-            }
-            else
-            {
-                profileImageSent.setImageResource(R.drawable.user);
-
-            }
+//
+//            if(SharedPref.getEmail().equals(message.getCustomerEmail()))
+//            {
+//                Ion.with(context).load(message.getCustomerPicture().replace("\"","")).intoImageView(profileImageSent);
+//            }
+//            else if(SharedPref.getEmail().equals(message.getServiceProviderEmail()))
+//            {
+//                Ion.with(context).load(message.getServiceProviderPicture().replace("\"","")).intoImageView(profileImageSent);
+//            }
+//            else
+//            {
+//                profileImageSent.setImageResource(R.drawable.user);
+//
+//            }
 
 
         }
@@ -151,6 +170,10 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText, nameText;
         ImageView profileImage;
+        Bitmap image;
+        Bitmap bit2=null;
+        Bitmap bit=null;
+
 
         ReceivedMessageHolder(View itemView) {
             super(itemView);
@@ -158,7 +181,7 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
             messageText = (TextView) itemView.findViewById(R.id.text_message_body);
             timeText = (TextView) itemView.findViewById(R.id.text_message_time);
             nameText = (TextView) itemView.findViewById(R.id.text_message_name);
-            profileImage = (ImageView) itemView.findViewById(R.id.image_message_profile);
+            profileImage = itemView.findViewById(R.id.image_message_profile);
         }
         void bind(ConversationMessage message) {
             messageText.setText(message.getConversationMessage());
@@ -179,11 +202,24 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
 
             if(SharedPref.getEmail().equals(message.getCustomerEmail()))
             {
-                Ion.with(context).load(message.getCustomerPicture().replace("\"","")).intoImageView(profileImage);
+
+
+                try {
+                    bit = BitmapFactory.decodeStream((InputStream)new URL(message.getCustomerPicture()).getContent());
+                } catch (Exception e) {}
+                profileImage.setImageBitmap(bit);
+                //Ion.with(context).load(message.getCustomerPicture().replace("\"","")).intoImageView(profileImage);
             }
             else if(SharedPref.getEmail().equals(message.getServiceProviderEmail()))
             {
-                Ion.with(context).load(message.getServiceProviderPicture().replace("\"","")).intoImageView(profileImage);
+
+                try {
+                    bit2 = BitmapFactory.decodeStream((InputStream)new URL(message.getServiceProviderPicture()).getContent());
+                } catch (Exception e) {}
+                profileImage.setImageBitmap(bit2);
+                //profileImage.setImageBitmap(image);
+
+//                Ion.with(context).load(message.getServiceProviderPicture().replace("\"","")).intoImageView(profileImage);
             }
             else
             {

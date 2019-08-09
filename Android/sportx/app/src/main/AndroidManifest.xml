@@ -97,6 +97,12 @@
 
 
         <activity android:name="com.sport.x.ConversationActivity" />
+
+
+        <activity android:name="com.sport.x.TournamentActivity" />
+
+
+        <activity android:name="com.sport.x.CreateTournamentActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

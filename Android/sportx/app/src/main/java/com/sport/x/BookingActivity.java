@@ -80,7 +80,7 @@ public class BookingActivity extends AppCompatActivity implements OnItemSelected
 
     private String  booking_date, booking_time, booking_type;
 
-    Spinner bookingType = null;;
+    Spinner bookingType = null;
 
     // Intent get and set variables
     private double service_provider_longitude, service_provider_latitude;

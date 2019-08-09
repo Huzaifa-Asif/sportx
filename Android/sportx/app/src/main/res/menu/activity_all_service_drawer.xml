@@ -18,6 +18,11 @@
             android:title="Conversations" />
 
         <item
+            android:id="@+id/tournament"
+            android:icon="@drawable/tournament"
+            android:title="Tournaments" />
+
+        <item
             android:id="@+id/customer_profile"
             android:icon="@drawable/profile"
             android:title="Profile" />

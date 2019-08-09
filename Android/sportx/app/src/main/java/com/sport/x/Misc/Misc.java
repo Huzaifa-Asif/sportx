@@ -19,7 +19,7 @@ public class Misc {
     private double lat, lon;
 
     public static final String ROOT_PATH = "https://sport-x.herokuapp.com/";
-    //public static final String ROOT_PATH = "http://localhost:3300/";
+//    public static final String ROOT_PATH = "http://192.168.1.7:3300/";
 
     public Misc(Context context) {
         this.context = context;

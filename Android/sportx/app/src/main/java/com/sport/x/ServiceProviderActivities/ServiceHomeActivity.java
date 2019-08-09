@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.sport.x.ConversationActivity;
+import com.sport.x.CreateTournamentActivity;
 import com.sport.x.HelpActivity;
 import com.sport.x.LoginActivity;
 import com.sport.x.Misc.Misc;
@@ -140,6 +141,16 @@ public class ServiceHomeActivity extends AppCompatActivity
         }
         else if (id == R.id.conversation) {
             Intent conversation = new Intent(this, ConversationActivity.class);
+            startActivity(conversation);
+            finish();
+        }
+        else if (id == R.id.tournament) {
+//            Intent conversation = new Intent(this, ConversationActivity.class);
+//            startActivity(conversation);
+//            finish();
+        }
+        else if (id == R.id.createtournament) {
+            Intent conversation = new Intent(this, CreateTournamentActivity.class);
             startActivity(conversation);
             finish();
         }

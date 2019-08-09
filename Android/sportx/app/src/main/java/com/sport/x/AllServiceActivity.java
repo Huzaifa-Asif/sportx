@@ -212,6 +212,11 @@ public class AllServiceActivity extends AppCompatActivity
             startActivity(conversation);
             finish();
         }
+        else if (id == R.id.tournament) {
+//            Intent conversation = new Intent(this, ConversationActivity.class);
+//            startActivity(conversation);
+//            finish();
+        }
         else if (id == R.id.update_password) {
             Intent update = new Intent(this, PasswordUpdate.class);
             startActivity(update);

@@ -34,6 +34,22 @@
         <item>Tournament</item>
     </array>
 
+    <array name="tournamentType">
+        <item>Select Tournament Type</item>
+        <item>League</item>
+        <item>Groups</item>
+        <item>Knockout</item>
+    </array>
+
+
+    <array name="tournamentTeams">
+        <item>No of Teams</item>
+        <item>8 teams</item>
+        <item>16 teams</item>
+        <item>24 teams</item>
+        <item>32 teams</item>
+    </array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

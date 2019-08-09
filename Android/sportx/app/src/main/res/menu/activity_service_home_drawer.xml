@@ -16,6 +16,17 @@
             android:id="@+id/conversation"
             android:icon="@drawable/conversation"
             android:title="Conversations" />
+
+        <item
+            android:id="@+id/tournament"
+            android:icon="@drawable/tournament"
+            android:title="Manage Tournaments" />
+
+        <item
+            android:id="@+id/createtournament"
+            android:icon="@drawable/tournament"
+            android:title="Create Tournaments" />
+
         <item
             android:id="@+id/service_profile"
             android:icon="@drawable/profile"
