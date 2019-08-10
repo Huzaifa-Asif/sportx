@@ -55,7 +55,7 @@
             android:text="Tournament Type: Knockout"
             android:id="@+id/com_service"
             android:layout_alignParentRight="true"
-            android:paddingRight="30px"
+            android:paddingRight="50px"
             android:layout_marginLeft="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_20sdp"
             />

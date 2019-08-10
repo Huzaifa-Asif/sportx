@@ -71,20 +71,20 @@ public class InActiveTournamentAdapter extends RecyclerView.Adapter<InActiveTour
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, CustomerPendingJobDetailsActivity.class);
-            intent.putExtra("date", tournamentsListModel.get(getAdapterPosition()).getDate());
-            intent.putExtra("time", tournamentsListModel.get(getAdapterPosition()).getTime());
-            intent.putExtra("job_id", tournamentsListModel.get(getAdapterPosition()).getJobId());
-            intent.putExtra("state", tournamentsListModel.get(getAdapterPosition()).getState());
-            intent.putExtra("bookingType", tournamentsListModel.get(getAdapterPosition()).getBookingType());
-            intent.putExtra("serviceProviderEmail", tournamentsListModel.get(getAdapterPosition()).getServiceProviderEmail());
-            intent.putExtra("serviceProviderName", tournamentsListModel.get(getAdapterPosition()).getServiceProviderName());
-            intent.putExtra("serviceProviderNumber", tournamentsListModel.get(getAdapterPosition()).getServiceProviderNumber());
-            intent.putExtra("customerEmail", tournamentsListModel.get(getAdapterPosition()).getCustomerEmail());
-            intent.putExtra("customerName", tournamentsListModel.get(getAdapterPosition()).getCustomerName());
-            intent.putExtra("customerNumber", tournamentsListModel.get(getAdapterPosition()).getCustomerNumber());
-            context.startActivity(intent);
-            ((Activity) context).finish();
+//            Intent intent = new Intent(context, CustomerPendingJobDetailsActivity.class);
+//            intent.putExtra("date", tournamentsListModel.get(getAdapterPosition()).getDate());
+//            intent.putExtra("time", tournamentsListModel.get(getAdapterPosition()).getTime());
+//            intent.putExtra("job_id", tournamentsListModel.get(getAdapterPosition()).getJobId());
+//            intent.putExtra("state", tournamentsListModel.get(getAdapterPosition()).getState());
+//            intent.putExtra("bookingType", tournamentsListModel.get(getAdapterPosition()).getBookingType());
+//            intent.putExtra("serviceProviderEmail", tournamentsListModel.get(getAdapterPosition()).getServiceProviderEmail());
+//            intent.putExtra("serviceProviderName", tournamentsListModel.get(getAdapterPosition()).getServiceProviderName());
+//            intent.putExtra("serviceProviderNumber", tournamentsListModel.get(getAdapterPosition()).getServiceProviderNumber());
+//            intent.putExtra("customerEmail", tournamentsListModel.get(getAdapterPosition()).getCustomerEmail());
+//            intent.putExtra("customerName", tournamentsListModel.get(getAdapterPosition()).getCustomerName());
+//            intent.putExtra("customerNumber", tournamentsListModel.get(getAdapterPosition()).getCustomerNumber());
+//            context.startActivity(intent);
+//            ((Activity) context).finish();
         }
 
     }
