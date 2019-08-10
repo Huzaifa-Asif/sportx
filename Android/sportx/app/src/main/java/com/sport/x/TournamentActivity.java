@@ -3,7 +3,6 @@ package com.sport.x;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,10 +10,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
-import com.sport.x.Fragments.CustomerCompletedJobs;
-import com.sport.x.Fragments.CustomerInProgressJobs;
-import com.sport.x.Fragments.CustomerPendingJobs;
-import com.sport.x.ServiceProviderActivities.AllProvidersActivity;
+import com.sport.x.Fragments.TournamentCompleted;
+import com.sport.x.Fragments.TournamentInProgress;
+import com.sport.x.Fragments.TournamentInActive;
+import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
 
 public class TournamentActivity extends AppCompatActivity {
@@ -76,14 +75,14 @@ public class TournamentActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    CustomerPendingJobs customerPendingJobs = new CustomerPendingJobs();
-                    return customerPendingJobs;
+                    TournamentInActive tournamentInActive = new TournamentInActive();
+                    return tournamentInActive;
                 case 1:
-                    CustomerInProgressJobs customerInProgressJobs = new CustomerInProgressJobs();
-                    return customerInProgressJobs;
+                    TournamentInProgress tournamentInProgress = new TournamentInProgress();
+                    return tournamentInProgress;
                 case 2:
-                    CustomerCompletedJobs customerCompletedJobs = new CustomerCompletedJobs();
-                    return customerCompletedJobs;
+                    TournamentCompleted tournamentCompleted = new TournamentCompleted();
+                    return tournamentCompleted;
                 default:
                     return null;
 
@@ -100,7 +99,7 @@ public class TournamentActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(sharedPref.getUserRole().equals("1")){
-            Intent intent = new Intent(this, AllProvidersActivity.class);
+            Intent intent = new Intent(this, ServiceHomeActivity.class);
             startActivity(intent);
             finish();
         }

@@ -12,9 +12,10 @@ public class Tournament {
     private String serviceProviderEmail;
     private String adderEmail;
     private String startDate;
+    private String startTime;
     private String date;
 
-    public Tournament(String tournamentId, String state, String name, String teams, String winningPrize, String entryFee, String tournamentType, String maxDays, String serviceProviderEmail, String adderEmail, String startDate, String date) {
+    public Tournament(String tournamentId, String state, String name, String teams, String winningPrize, String entryFee, String tournamentType, String maxDays, String serviceProviderEmail, String adderEmail, String startDate,String startTime, String date) {
         this.tournamentId = tournamentId;
         this.state = state;
         this.name = name;
@@ -26,6 +27,7 @@ public class Tournament {
         this.serviceProviderEmail = serviceProviderEmail;
         this.adderEmail = adderEmail;
         this.startDate = startDate;
+        this.startTime = startTime;
         this.date = date;
     }
 
@@ -71,6 +73,10 @@ public class Tournament {
 
     public String getTournamentStartDate() {
         return startDate;
+    }
+
+    public String getTournamentStartTime() {
+        return startTime;
     }
 
     public String getTournamentRecordDate() {
