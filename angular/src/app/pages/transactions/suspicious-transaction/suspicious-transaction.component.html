@@ -1,0 +1,1251 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel2">
+    Suspicious Transaction Form</h5>
+  <button type="button" (click)="closeMe()" class="close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="sptForm" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+
+    <!-- Form -->
+    <div>
+
+      <div class="row">
+        <div class="col-12">
+
+
+          <!-- Date -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label"><span class="digits">1:&ensp;</span> Date:</label>
+            <div class="col-sm-5">
+              <input class="form-control input-air-primary digits" type="date" formControlName="date"
+                [ngClass]="{ 'is-invalid': submitted && f.date.errors }">
+
+              <div *ngIf="submitted && f['date'].errors" class="text text-danger">
+                <div *ngIf="f['date'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Type -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label"><span class="digits">2:&ensp;Report Type:</span></label>
+            <div class="col-sm-9">
+              <div class="form-group m-checkbox-inline mb-0">
+                <div class="checkbox checkbox-dark">
+                  <input id="inline-1" type="checkbox" value="Initial Report" formControlName="initialReport"
+                    [ngClass]="{ 'is-invalid': submitted && f.initialReport.errors }">
+                  <label for="inline-1">Initial Report</label>
+                </div>
+                <div class="checkbox checkbox-dark">
+                  <input id="inline-2" type="checkbox" value="Corrected Report" formControlName="correctedReport"
+                    [ngClass]="{ 'is-invalid': submitted && f.correctedReport.errors }">
+                  <label for="inline-2">Corrected Report</label>
+                </div>
+                <div class="checkbox checkbox-dark">
+                  <input id="inline-3" type="checkbox" value="Supplemental Report" formControlName="supplementalReport"
+                    [ngClass]="{ 'is-invalid': submitted && f.supplementalReport.errors }">
+                  <label for="inline-3">Supplemental Report</label>
+                </div>
+              </div>
+              <div *ngIf="submitted && f['initialReport'].errors" class="text text-danger">
+                <div *ngIf="f['initialReport'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section -->
+          <transaction-form-section title="Part-I" description="Reporting Financial Institution Information">
+          </transaction-form-section>
+
+          <!-- Name of Institution -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">3:&ensp;</span> Name of Institution:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NIFT Code -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">4:&ensp;</span> NIFT Code:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address of Financial Institution -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">5:&ensp;</span> Address of Financial
+              Institution:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Name of Branch Where transaction / activity occured -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">6:&ensp;</span> Name of Branch Where transaction
+              / activity occured:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch Code -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">7:&ensp;</span> Branch Code:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address of Branch -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">8:&ensp;</span> Address of Branch:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 	Primary Regulator: -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">9:&ensp;</span> Primary Regulator:</label>
+            <div class="col-sm-7">
+
+              <div class="form-group m-checkbox-inline mb-0 custom-radio-ml">
+                <div class="radio radio-primary">
+                  <input type="radio" name="primaryRegulator" id="radioinline1" value="SBP"
+                    formControlName="primaryRegulator">
+                  <label for="radioinline1" class="mb-0">SBP</label>
+                </div>
+                <div class="radio radio-primary">
+                  <input type="radio" name="primaryRegulator" id="radioinline2" value="SECP"
+                    formControlName="primaryRegulator">
+                  <label for="radioinline2" class="mb-0">SECP</label>
+                </div>
+                <div class="radio radio-primary">
+                  <input type="radio" name="primaryRegulator" id="radioinline3" value="Other"
+                    formControlName="primaryRegulator">
+                  <label for="radioinline3" class="mb-0">Other</label>
+                  <input class="input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+              </div>
+
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Heading -->
+          <h6 class="ml-3">Reporting Officer:</h6>
+
+
+          <!-- Name -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">10:&ensp;</span> Name:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="roName"
+                [ngClass]="{ 'is-invalid': submitted && f.roName.errors }">
+
+              <div *ngIf="submitted && f['roName'].errors" class="text text-danger">
+                <div *ngIf="f['roName'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Designation -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">11:&ensp;</span> Designation:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="roDesignation"
+                [ngClass]="{ 'is-invalid': submitted && f.roDesignation.errors }">
+
+              <div *ngIf="submitted && f['roDesignation'].errors" class="text text-danger">
+                <div *ngIf="f['roDesignation'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Phone Number -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">12:&ensp;</span> Phone Number:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="roPhoneNo"
+                [ngClass]="{ 'is-invalid': submitted && f.roPhoneNo.errors }">
+
+              <div *ngIf="submitted && f['roPhoneNo'].errors" class="text text-danger">
+                <div *ngIf="f['roPhoneNo'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Fax Number -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">13:&ensp;</span> Fax Number:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="roFaxNo"
+                [ngClass]="{ 'is-invalid': submitted && f.roFaxNo.errors }">
+
+              <div *ngIf="submitted && f['roFaxNo'].errors" class="text text-danger">
+                <div *ngIf="f['roFaxNo'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Email Address -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">14:&ensp;</span> Email Address:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cell Number -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">15:&ensp;</span> Cell Number:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Heading -->
+          <h6>Contact For Assistance (If different from Reporting Officer):</h6>
+
+
+          <!-- Name -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">16:&ensp;</span> Name:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="asstName"
+                [ngClass]="{ 'is-invalid': submitted && f.asstName.errors }">
+
+              <div *ngIf="submitted && f['asstName'].errors" class="text text-danger">
+                <div *ngIf="f['asstName'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Designation -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">17:&ensp;</span> Designation:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="asstDesignation"
+                [ngClass]="{ 'is-invalid': submitted && f.asstDesignation.errors }">
+
+              <div *ngIf="submitted && f['asstDesignation'].errors" class="text text-danger">
+                <div *ngIf="f['asstDesignation'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Phone Number -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">18:&ensp;</span> Phone Number:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="asstPhoneNo"
+                [ngClass]="{ 'is-invalid': submitted && f.asstPhoneNo.errors }">
+
+              <div *ngIf="submitted && f['asstPhoneNo'].errors" class="text text-danger">
+                <div *ngIf="f['asstPhoneNo'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Fax Number -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">19:&ensp;</span> Fax Number:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="asstFaxNo"
+                [ngClass]="{ 'is-invalid': submitted && f.asstFaxNo.errors }">
+
+              <div *ngIf="submitted && f['asstFaxNo'].errors" class="text text-danger">
+                <div *ngIf="f['asstFaxNo'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Email Address -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">20:&ensp;</span> Email Address:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cell Number -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">21:&ensp;</span> Cell Number:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Section -->
+          <transaction-form-section title="Part-II" description="Suspect Information"></transaction-form-section>
+
+
+          <!-- Name -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">22:&ensp;</span> Name:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="siName"
+                [ngClass]="{ 'is-invalid': submitted && f.siName.errors }">
+
+              <div *ngIf="submitted && f['siName'].errors" class="text text-danger">
+                <div *ngIf="f['siName'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Father Name -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">23:&ensp;</span>Father Name:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Permanent Address -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">24:&ensp;</span>Permanent Address:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Present Address -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">25:&ensp;</span>Present Address:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="siAddress"
+                [ngClass]="{ 'is-invalid': submitted && f.siAddress.errors }">
+
+              <div *ngIf="submitted && f['siAddress'].errors" class="text text-danger">
+                <div *ngIf="f['siAddress'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Present Address -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">26:&ensp;</span>Present Address:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Phone Number(s) - Residence (Include area code) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">27:&ensp;</span>Phone Number(s) - Residence
+              (Include area code):</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone Number(s) - Office (Include area code) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">28:&ensp;</span>Phone Number(s) - Office
+              (Include area code):</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fax Number(s) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">29:&ensp;</span>Fax Number(s):</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cell Number(s) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">30:&ensp;</span>Cell Number(s):</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="siCellNo"
+                [ngClass]="{ 'is-invalid': submitted && f.siCellNo.errors }">
+
+              <div *ngIf="submitted && f['siCellNo'].errors" class="text text-danger">
+                <div *ngIf="f['siCellNo'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CNIC Number -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">31:&ensp;</span>CNIC Number:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="siCNIC"
+                [ngClass]="{ 'is-invalid': submitted && f.siCNIC.errors }">
+
+              <div *ngIf="submitted && f['siCNIC'].errors" class="text text-danger">
+                <div *ngIf="f['siCNIC'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NIC Number (in case CNIC number is not available) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">32:&ensp;</span>NIC Number (in case CNIC number
+              is not available):</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Any other Identification Number -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">33:&ensp;</span>Any other Identification
+              Number:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- National Tax Number (NTN), if available -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">34:&ensp;</span>National Tax Number (NTN), if
+              available:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Date of Birth -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">35:&ensp;</span> Date of Birth:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary digits" type="date" formControlName="date"
+                [ngClass]="{ 'is-invalid': submitted && f.date.errors }">
+
+              <div *ngIf="submitted && f['date'].errors" class="text text-danger">
+                <div *ngIf="f['date'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Nationality -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">36:&ensp;</span>Nationality:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Occupation/Type of Business -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">37:&ensp;</span>Occupation/Type of
+              Business:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="siOccupation"
+                [ngClass]="{ 'is-invalid': submitted && f.siOccupation.errors }">
+
+              <div *ngIf="submitted && f['siOccupation'].errors" class="text text-danger">
+                <div *ngIf="f['siOccupation'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Relationship with Financial Institution -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">38:&ensp;</span>Relationship with Financial
+              Institution:</label>
+            <div class="col-sm-7">
+              <select class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                <option value="Account Holder">Account Holder</option>
+                <option value="Agent">Agent</option>
+                <option value="Employee">Employee</option>
+                <option value="Walk-in-Customer">Walk-in-Customer</option>
+                <option value="Other">Other</option>
+              </select>
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Relationship with the Reporting Institution Other -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">&nbsp;&nbsp;&nbsp;&ensp;</span>Relationship with
+              the Reporting
+              Institution Other:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Business Relation with Suspect (if any) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">39:&ensp;</span>Business Relation with Suspect
+              (if any):</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Is Relationship Still Maintained With the Person? -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">40:&ensp;</span>Is Relationship Still Maintained
+              With the Person?:</label>
+            <div class="col-sm-7">
+              <div class="form-group m-checkbox-inline mb-0 custom-radio-ml">
+                <div class="radio radio-primary">
+                  <input type="radio" name="isRelationShipMentained" id="radioinline11" value="Yes"
+                    formControlName="isRelationShipMentained">
+                  <label for="radioinline11" class="mb-0">Yes</label>
+                </div>
+                <div class="radio radio-primary">
+                  <input type="radio" name="isRelationShipMentained" id="radioinline22" value="No"
+                    formControlName="isRelationShipMentained">
+                  <label for="radioinline22" class="mb-0">No</label>
+                </div>
+              </div>
+
+              <div *ngIf="submitted && f['isRelationShipMentained'].errors" class="text text-danger">
+                <div *ngIf="f['isRelationShipMentained'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- In Case No, Mention Date of Termination of Relationship -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">41:&ensp;</span> In Case No, Mention Date of
+              Termination of Relationship:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary digits" type="date" formControlName="date"
+                [ngClass]="{ 'is-invalid': submitted && f.date.errors }">
+
+              <div *ngIf="submitted && f['date'].errors" class="text text-danger">
+                <div *ngIf="f['date'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Capacity in which the person is performing the transactions / acts -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">42:&ensp;</span>Capacity in which the person is
+              performing the transactions / acts:</label>
+            <div class="col-sm-7">
+              <select class="form-control input-air-primary" type="text" formControlName="siActs"
+                [ngClass]="{ 'is-invalid': submitted && f.siActs.errors }">
+                <option value="Account Holder">Account Holder</option>
+                <option value="Agent">Agent</option>
+                <option value="Broker">Broker</option>
+                <option value="Company">Company</option>
+                <option value="Individual">Individual</option>
+                <option value="Other">Other</option>
+              </select>
+              <div *ngIf="submitted && f['siActs'].errors" class="text text-danger">
+                <div *ngIf="f['siActs'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Transaction Capicity - Other -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">&nbsp;&nbsp;&nbsp;&ensp;</span>Transaction
+              Capicity - Other:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Identities of other persons known to be involved in reported activity -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">43:&ensp;</span>Identities of other persons
+              known to be involved in reported activity:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Section -->
+          <transaction-form-section title="Part-III" description="Suspicious Transaction Information">
+          </transaction-form-section>
+
+
+          <!-- Date of Suspicious Transaction -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">44:&ensp;</span> Date of Suspicious
+              Transaction:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary digits" type="date" formControlName="date"
+                [ngClass]="{ 'is-invalid': submitted && f.date.errors }">
+
+              <div *ngIf="submitted && f['date'].errors" class="text text-danger">
+                <div *ngIf="f['date'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Amount involved (Please Specify Currency) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">45:&ensp;</span>Amount involved (Please Specify
+              Currency):</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="stiAmount"
+                [ngClass]="{ 'is-invalid': submitted && f.stiAmount.errors }">
+
+              <div *ngIf="submitted && f['stiAmount'].errors" class="text text-danger">
+                <div *ngIf="f['stiAmount'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Suspicious Transactions -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">46:&ensp;</span>Suspicious Transactions:</label>
+            <div class="col-sm-7">
+              <br>
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Date -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">&nbsp;&nbsp;&nbsp;&ensp;</span>Date:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary digits" type="date" formControlName="date"
+                [ngClass]="{ 'is-invalid': submitted && f.date.errors }">
+
+              <div *ngIf="submitted && f['date'].errors" class="text text-danger">
+                <div *ngIf="f['date'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Amount -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">&nbsp;&nbsp;&nbsp;&ensp;</span>Amount:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Description -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span
+                class="digits">&nbsp;&nbsp;&nbsp;&ensp;</span>Description:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brief Narrative (Reasons for Suspicion) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">47:&ensp;</span>Brief Narrative (Reasons for
+              Suspicion):</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="stiNarrative"
+                [ngClass]="{ 'is-invalid': submitted && f.stiNarrative.errors }">
+
+              <div *ngIf="submitted && f['stiNarrative'].errors" class="text text-danger">
+                <div *ngIf="f['stiNarrative'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Suspected Predicate Offence (Transaction Characterization) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">48:&ensp;</span>Suspected Predicate Offence
+              (Transaction Characterization):</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Agency Name -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">49:&ensp;</span>Agency Name:</label>
+            <div class="col-sm-7">
+              <select class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                <option value="Anti Narcotics Force">Anti Narcotics Force</option>
+                <option value="National Accountability Bureau">National Accountability Bureau</option>
+                <option value="Dederal Investigation Agency">Dederal Investigation Agency</option>
+                <option value="Police">Police</option>
+              </select>
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Section -->
+          <transaction-form-section title="Part-IV" description="Account Information"></transaction-form-section>
+
+
+          <!-- Account number (s) effected, if any -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">50:&ensp;</span>Account number (s) effected, if
+              any:</label>
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-6">
+                  a)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  b)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  c)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  d)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+              </div>
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Account (s) opened on (dd/mm/yyyy) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">51:&ensp;</span>Account (s) opened on
+              (dd/mm/yyyy):</label>
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-6">
+                  a)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  b)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  c)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  d)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+              </div>
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Account (s) opened on (dd/mm/yyyy) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">52:&ensp;</span>Current Status of the Account
+              (s):</label>
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-6">
+                  a)<select class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                    <option value="Active">Active</option>
+                    <option value="Blocked">Blocked</option>
+                    <option value="Closed">Closed</option>
+                    <option value="Dormant">Dormant</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  b)<select class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                    <option value="Active">Active</option>
+                    <option value="Blocked">Blocked</option>
+                    <option value="Closed">Closed</option>
+                    <option value="Dormant">Dormant</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  c)<select class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                    <option value="Active">Active</option>
+                    <option value="Blocked">Blocked</option>
+                    <option value="Closed">Closed</option>
+                    <option value="Dormant">Dormant</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  d)<select class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                    <option value="Active">Active</option>
+                    <option value="Blocked">Blocked</option>
+                    <option value="Closed">Closed</option>
+                    <option value="Dormant">Dormant</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+              </div>
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Purpose of account(s) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">53:&ensp;</span>Purpose of account(s):</label>
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-6">
+                  a)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  b)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  c)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  d)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+              </div>
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Average Monthly Turnover of account(s) -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">54:&ensp;</span>Average Monthly Turnover of
+              account(s):</label>
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-6">
+                  a)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  b)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  c)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  d)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+              </div>
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aggregate Credits for last 3 Years -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">55:&ensp;</span>Aggregate Credits for last 3
+              Years:</label>
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-6">
+                  a)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  b)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  c)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  d)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+              </div>
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aggregate Debits for last 3 Years -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">&nbsp;&nbsp;&nbsp;&ensp;</span>Aggregate Debits
+              for last 3
+              Years:</label>
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-6">
+                  a)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  b)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  c)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+                <div class="col-6">
+                  d)<input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+              </div>
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 	Nature of Account (s): -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">57:&ensp;</span> Nature of Account (s):</label>
+            <div class="col-sm-7">
+
+              <div class="form-group m-checkbox-inline mb-0 custom-radio-ml">
+                <div class="radio radio-primary">
+                  <input type="radio" name="natureOfAccount" id="radioinline111" value="Individual"
+                    formControlName="natureOfAccount">
+                  <label for="radioinline111" class="mb-0">Individual</label>
+                </div>
+                <div class="radio radio-primary">
+                  <input type="radio" name="natureOfAccount" id="radioinline222" value="Partnership"
+                    formControlName="natureOfAccount">
+                  <label for="radioinline222" class="mb-0">Partnership</label>
+                </div>
+                <div class="radio radio-primary">
+                  <input type="radio" name="natureOfAccount" id="radioinline333" value="Company"
+                    formControlName="natureOfAccount">
+                  <label for="radioinline333" class="mb-0">Company</label>
+                </div>
+                <div class="radio radio-primary">
+                  <input type="radio" name="natureOfAccount" id="radioinline444" value="Trust"
+                    formControlName="natureOfAccount">
+                  <label for="radioinline444" class="mb-0">Trust</label>
+                </div>
+                <div class="radio radio-primary">
+                  <input type="radio" name="natureOfAccount" id="radioinline555" value="Other"
+                    formControlName="natureOfAccount">
+                  <label for="radioinline555" class="mb-0">Other</label>
+                  <input class="input-air-primary" type="text" formControlName="nameOfInstitution"
+                    [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+                </div>
+              </div>
+
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transaction Method -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">58:&ensp;</span>Transaction Method:</label>
+            <div class="col-sm-7">
+              <select class="form-control input-air-primary" type="text" formControlName="aiTransactionMethod"
+                [ngClass]="{ 'is-invalid': submitted && f.aiTransactionMethod.errors }">
+                <option value="Cash">Cash</option>
+                <option value="Cheque">Cheque</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Deposit">Deposit</option>
+                <option value="Draft">Draft</option>
+                <option value="Fixed Deposit">Fixed Deposit</option>
+                <option value="LC">LC</option>
+                <option value="Online Transfer">Online Transfer</option>
+                <option value="Payment">Payment</option>
+                <option value="Remittance">Remittance</option>
+                <option value="Transfer">Transfer</option>
+              </select>
+              <div *ngIf="submitted && f['aiTransactionMethod'].errors" class="text text-danger">
+                <div *ngIf="f['aiTransactionMethod'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Transaction Method Other -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">&nbsp;&nbsp;&nbsp;&ensp;</span>Transaction
+              Method Other:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 	Copies of Following Documents are attached: -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">59:&ensp;</span>Copies of Following Documents
+              are attached:</label>
+            <div class="col-sm-7">
+
+              <div class="form-group mb-0">
+                <div class="checkbox checkbox-dark">
+                  <input id="inline-111" type="checkbox"
+                    value="Customer Identification documents / Account Opening Form" formControlName="initialReport"
+                    [ngClass]="{ 'is-invalid': submitted && f.initialReport.errors }">
+                  <label for="inline-111">Customer Identification documents / Account Opening Form</label>
+                </div>
+                <div class="checkbox checkbox-dark">
+                  <input id="inline-222" type="checkbox" value="KYC / CDD of Customer or Suspect"
+                    formControlName="correctedReport"
+                    [ngClass]="{ 'is-invalid': submitted && f.correctedReport.errors }">
+                  <label for="inline-222">KYC / CDD of Customer or Suspect</label>
+                </div>
+                <div class="checkbox checkbox-dark">
+                  <input id="inline-333" type="checkbox"
+                    value="Other Documents obtained at the time of opening of account / relationship"
+                    formControlName="supplementalReport"
+                    [ngClass]="{ 'is-invalid': submitted && f.supplementalReport.errors }">
+                  <label for="inline-333">Other Documents obtained at the time of opening of account /
+                    relationship</label>
+                </div>
+                <div class="checkbox checkbox-dark">
+                  <input id="inline-444" type="checkbox" value="Relevent documents supporting the STR"
+                    formControlName="supplementalReport"
+                    [ngClass]="{ 'is-invalid': submitted && f.supplementalReport.errors }">
+                  <label for="inline-444">Relevent documents supporting the STR</label>
+                </div>
+              </div>
+              <div *ngIf="submitted && f['initialReport'].errors" class="text text-danger">
+                <div *ngIf="f['initialReport'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Transaction Method Other -->
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label"><span class="digits">60:&ensp;</span>Any other relevant
+              information:</label>
+            <div class="col-sm-7">
+              <input class="form-control input-air-primary" type="text" formControlName="nameOfInstitution"
+                [ngClass]="{ 'is-invalid': submitted && f.nameOfInstitution.errors }">
+
+              <div *ngIf="submitted && f['nameOfInstitution'].errors" class="text text-danger">
+                <div *ngIf="f['nameOfInstitution'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer">
+
+    <div *ngIf="isRequested">
+      <button type="button" class="btn btn-default" (click)="closeMe()">Close</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <!-- Loader  -->
+    <div *ngIf="!isRequested">
+      <button type="button" class="btn btn-default">Please Wait...</button>
+    </div>
+
+  </div>
+
+</form>

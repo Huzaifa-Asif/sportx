@@ -1,0 +1,172 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel2">
+    <span *ngIf="!isDataLoaded">Please wait...</span>
+    <span *ngIf="isDataLoaded">Updation {{user.UserName}}'s Accout</span></h5>
+  <button type="button" class="close" (click)="closeMe()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+
+    <!-- Loader  -->
+    <div *ngIf="!isDataLoaded" class="row justify-content-center">
+      <div class="col-2">
+        <div class="loader-box">
+          <div class="loader">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Records -->
+    <div *ngIf="isDataLoaded">
+
+      <div class="row">
+
+        <!-- Left Section -->
+        <div class="col-6">
+
+          <!-- Full Name -->
+          <div class="form-row">
+            <div class="col-12 mb-3">
+              <label for="fullName">Full Name</label>
+              <input type="text" class="form-control input-air-primary" id="fullName" formControlName="fullName"
+                [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" autocomplete="new-password">
+
+              <div *ngIf="submitted && f['fullName'].errors" class="text text-danger">
+                <div *ngIf="f['fullName'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Type -->
+          <div class="form-row">
+            <div class="col-12 mb-3">
+              <label for="userTypeId">User Type</label>
+              <select class="form-control input-air-primary" id="userTypeId" formControlName="userTypeId"
+                [ngClass]="{ 'is-invalid': submitted && f.userTypeId.errors }">
+                <option value="">Select Type</option>
+                <option *ngFor="let type of types" value="{{type.UserTypeId}}">{{type.UserTypeName}}
+                </option>
+              </select>
+
+              <div *ngIf="submitted && f['userTypeId'].errors" class="text text-danger">
+                <div *ngIf="f['userTypeId'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch -->
+          <div class="form-row">
+            <div class="col-12 mb-3">
+              <label for="branchId">Branch</label>
+              <select class="form-control input-air-primary" id="branchId" formControlName="branchId"
+                [ngClass]="{ 'is-invalid': submitted && f.branchId.errors }">
+                <option value="">Select Region</option>
+                <option *ngFor="let branch of branches" value="{{branch.BranchId}}">{{branch.BranchName}}</option>
+              </select>
+
+              <div *ngIf="submitted && f['branchId'].errors" class="text text-danger">
+                <div *ngIf="f['branchId'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Status -->
+
+          <div class="form-row">
+            <div class="col-12 mb-3">
+              <label for="branchId">Status</label>
+
+              <div class="form-group m-checkbox-inline mb-0 custom-radio-ml">
+                <div class="radio radio-primary">
+                  <input type="radio" name="locked" id="radioinline1" value="false" formControlName="locked">
+                  <label for="radioinline1" class="mb-0">Active</label>
+                </div>
+                <div class="radio radio-primary">
+                  <input type="radio" name="locked" id="radioinline2" value="true" formControlName="locked">
+                  <label for="radioinline2" class="mb-0">Blocked</label>
+                </div>
+              </div>
+
+              <div *ngIf="submitted && f['locked'].errors" class="text text-danger">
+                <div *ngIf="f['locked'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Section -->
+        <div class="col-6">
+
+          <!-- Username (Login) -->
+          <div class="form-row">
+            <div class="col-12 mb-3">
+              <label for="username">Username (Login)</label>
+              <input type="text" class="form-control input-air-primary" id="username" formControlName="username"
+                [ngClass]="{ 'is-invalid': submitted && f.username.errors }" autocomplete="new-password">
+
+              <div *ngIf="submitted && f['username'].errors" class="text text-danger">
+                <div *ngIf="f['username'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Password (Login) -->
+          <div class="form-row">
+            <div class="col-12 mb-3">
+              <label for="newPassword">New Password</label>
+              <input type="password" class="form-control input-air-primary" id="newPassword"
+                formControlName="newPassword" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }"
+                autocomplete="new-password">
+
+              <div *ngIf="submitted && f['newPassword'].errors" class="text text-danger">
+                <div *ngIf="f['newPassword'].errors.required">Required</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Password (Login) -->
+          <div class="form-row">
+            <div class="col-12 mb-3">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" class="form-control input-air-primary" id="confirmPassword"
+                formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
+
+              <div *ngIf="submitted && f['confirmPassword'].errors" class="text text-danger">
+                <div *ngIf="f['confirmPassword'].errors.required">Required</div>
+                <div *ngIf="f['confirmPassword'].hasError('NoPassswordMatch')">Password do not match</div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+  <div *ngIf="isDataLoaded" class="modal-footer">
+
+    <div *ngIf="isRequested">
+      <button type="button" class="btn btn-default" (click)="closeMe()">Close</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <!-- Loader  -->
+    <div *ngIf="!isRequested">
+      <button type="button" class="btn btn-default">Please Wait...</button>
+    </div>
+
+  </div>
+
+</form>
