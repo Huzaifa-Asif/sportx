@@ -75,32 +75,6 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.reg_password);
         re_password = findViewById(R.id.confirm_password);
 
-//        male = findViewById(R.id.cus_male);
-//        female = findViewById(R.id.cus_female);
-//
-//        male.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(male.isChecked()){
-//                    selectedGender = male.getText().toString();
-//                }
-//            }
-//        });
-//        female.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(female.isChecked()) {
-//                    selectedGender = female.getText().toString();
-//                }
-//            }
-//        });
-//
-//        if(male.isChecked()){
-//            selectedGender = male.getText().toString();
-//        }
-//        if(female.isChecked()) {
-//            selectedGender = female.getText().toString();
-//        }
 
         register = findViewById(R.id.register_button);
         register.setOnClickListener(new View.OnClickListener() {

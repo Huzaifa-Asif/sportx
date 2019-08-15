@@ -62,20 +62,6 @@ import com.sport.x.Misc.Misc;
 
 public class MessageActivity extends AppCompatActivity {
 
-//    RecyclerView rv_messages;
-//    int index;
-//    String conversationId;
-//    String conversationMessageId, senderEmail, message, type,file_path,date;
-//    ArrayList<ConversationMessage> messageModel = null;
-//    ConversationMessagesAdapter messageAdapter = null;
-//    EditText edt_message;
-//    Button btn_send;/*
-//    CountDownTimer counter = null;*/
-//    SharedPref SharedPref;
-//    File file = null;
-//    int REQUEST_GET_SINGLE_FILE = 101;
-//    int REQUEST_GET_CAMERA_FILE = 100;
-//    int count = 0;
 
     String conversationId;
     Misc misc;
