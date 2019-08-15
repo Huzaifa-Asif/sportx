@@ -1,0 +1,69 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-6">
+        <h3>Accounts</h3>
+      </div>
+      <div class="col-lg-6 text-right">
+        <!-- <button type="button" class="btn btn-pill btn-outline-primary btn-sm" data-toggle="modal"
+          data-target="#myModal">Add New</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends -->
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <!-- <div class="card-header">
+            <h5>Table Option</h5>
+          </div> -->
+        <div class="card-body">
+
+          <div class="table-responsive">
+
+            <table *ngIf="accounts.length > 0" datatable class="row-border hover">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Branch</th>
+                  <th>Currency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let a of accounts">
+                  <td>{{a.AccountCode}}</td>
+                  <td>{{a.AccountName}}</td>
+                  <td>{{a.BranchName}}</td>
+                  <td>{{a.ShortName}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Container-fluid Ends -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="">
+      <button type="button" class="close theme-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="modal-body">
+        <!-- <app-currencies-add></app-currencies-add> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -53,20 +53,24 @@ public class InActiveTournamentAdapter extends RecyclerView.Adapter<InActiveTour
 
     public class InActiveTournamentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView text_item;
+        private TextView text_item, date_item, type;
         private ImageView image_item;
 
         public InActiveTournamentViewHolder(@NonNull View itemView) {
             super(itemView);
 
             text_item = itemView.findViewById(R.id.ip_text);
+            date_item = itemView.findViewById(R.id.com_date);
+            type = itemView.findViewById(R.id.com_type);
             image_item = itemView.findViewById(R.id.ip_image);
 
             itemView.setOnClickListener(this);
         }
 
         public void setData(Tournament tournament){
-            text_item.setText("Name: "+tournament.getTournamentName() + " Type: "  + tournament.getTournamentType());
+            text_item.setText(tournament.getTournamentName());
+            date_item.setText(tournament.getTournamentRecordDate());
+            type.setText(tournament.getTournamentType());
         }
 
         @Override

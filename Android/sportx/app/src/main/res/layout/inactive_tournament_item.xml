@@ -52,11 +52,11 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:textSize="14sp"
-            android:text="Tournament Type: Knockout"
-            android:id="@+id/com_service"
-            android:layout_alignParentRight="true"
+            android:text="Knockout"
+            android:id="@+id/com_type"
+            android:layout_toRightOf="@+id/com_date"
             android:paddingRight="50px"
-            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
             />
 
