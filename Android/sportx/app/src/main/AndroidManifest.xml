@@ -81,7 +81,6 @@
         <activity android:name="com.sport.x.ServiceProviderActivities.RegisterServiceActivity" />
         <activity android:name="com.sport.x.RegisterAsActivity" />
         <activity android:name="com.sport.x.ProfileActivity" />
-        <!--<activity android:name="com.sport.x.Fragments.CustomerCompletedJobs" />-->
         <activity android:name="com.sport.x.CustomerCompletedJobDetailsActivity" />
         <activity android:name="com.sport.x.CustomerInProgressJobDetailsActivity" />
         <activity android:name="com.sport.x.CustomerPendingJobDetailsActivity" />
@@ -97,6 +96,7 @@
 
 
         <activity android:name="com.sport.x.ConversationActivity" />
+
 
 
         <activity android:name="com.sport.x.TournamentActivity" />
@@ -129,11 +129,24 @@
         <activity
             android:name="com.sport.x.SplashActivity"
             android:theme="@style/NoAction">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name="com.sport.x.ServiceProviderActivities.ExpenseActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.sport.x.ServiceProviderActivities.AddExpenseActivity" >
+        </activity>
+        <activity android:name="com.sport.x.ServiceProviderActivities.AddRevenueActivity" >
+        </activity>
+        <activity android:name="com.sport.x.ServiceProviderActivities.RevenueActivity" >
         </activity>
         <activity
             android:name="com.sport.x.MessageActivity"
