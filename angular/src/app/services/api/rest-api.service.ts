@@ -43,6 +43,17 @@ export class RestApiService {
     });
   }
 
+  patch(path,unique, data) {
+    return new Promise((resolve, reject) => {
+      this.http.patch(environment.apiURL + '/' + path+unique, data).subscribe((response: any) => {
+        resolve(response);
+      }, (error: any) => {
+        reject(error);
+      });
+    });
+  }
+
+
   getReport(path, data, name, type) {
 
     return new Promise((resolve, reject) => {

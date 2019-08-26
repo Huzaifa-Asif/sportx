@@ -32,7 +32,7 @@ import static android.view.View.GONE;
 public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
 
     private TextView completed, text1, text2, text3;
-    private String job_id, customerEmail, serviceEmail;
+    private String job_id, customerEmail, serviceEmail, serviceName;
     Misc misc;
     private RatingBar ratingBar;
     private EditText review;
@@ -79,6 +79,7 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
 
         job_id = intent.getStringExtra("job_id");
         serviceEmail = intent.getStringExtra("serviceProviderEmail");
+        serviceName = intent.getStringExtra("serviceProviderName");
         customerEmail = intent.getStringExtra("customerEmail");
         String name = intent.getStringExtra("serviceProviderName");
         String service = intent.getStringExtra("service_name");
@@ -180,6 +181,7 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
         rating.addProperty("jobId", job_id);
         rating.addProperty("customerEmail", customerEmail);
         rating.addProperty("serviceProviderEmail", serviceEmail);
+        rating.addProperty("serviceProviderName", serviceName);
 
         Ion.with(this)
                 .load(misc.ROOT_PATH+"post_rating")

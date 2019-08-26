@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { RestApiService } from 'src/app/services/api/rest-api.service';
-import { HelperService } from 'src/app/services/helper/helper.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { RestApiService } from '../../../services/api/rest-api.service';
+import { HelperService } from '../../../services/helper/helper.service';
+import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 

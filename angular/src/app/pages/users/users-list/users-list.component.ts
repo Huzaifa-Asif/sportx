@@ -17,43 +17,55 @@ export class UsersListComponent implements OnInit {
   userId;
   users = [];
 
+  
+
   dtOptions: DataTables.Settings = {};
+
 
   constructor(private api: RestApiService, private router: Router, private helper: HelperService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    console.log("ngOnInit called")
     this.getUsers();
   }
 
+
   getUsers() {
-    this.api.get('Users/List').then((response: any) => {
+    this.api.get('get_serviceProvider').then((response: any) => {
       this.users = response;
+
 
       this.dtOptions = {
         data: this.users,
         columns: [{
-          title: 'User Name',
-          data: 'UserName',
+          title: 'Name',
+          data: 'name',
           render: function (data, type, row) {
-            return '<span title="' + row.UserId + '">' + data + '</span>';
+            return '<span title="' + row.email + '">' + data + '</span>';
           }
         },
         {
-          title: 'Type',
-          data: 'UserTypeName'
+          title: 'Address',
+          data: 'address'
         },
         {
-          title: 'Branch',
-          data: 'BranchName'
+          title: 'Category',
+          data: 'category'
         },
         {
-          title: 'Status',
-          data: 'Locked',
+          title: 'State',
+          data: 'state',
           render: function (data, type, row) {
-            if (data === true) {
+            if (data === "approved") {
+              return '<span class="badge badge-pill badge-success">Approved</span>';
+            }
+            else if (data === "pending") {
+              return '<span class="badge badge-pill badge-warning">Pending</span>';
+            }
+            else if (data === "blocked") {
               return '<span class="badge badge-pill badge-danger">Blocked</span>';
             }
-            return '<span class="badge badge-pill badge-success">Active</span>';
+            
           }
         }],
         rowCallback: (row: Node, data: any[] | Object, index: number) => {
@@ -86,6 +98,7 @@ export class UsersListComponent implements OnInit {
     const modalRef = this.modalService.open(UsersEditComponent);
     modalRef.componentInstance.user = user;
 
-    modalRef.result.then(() => { this.ngOnInit(); }, () => { this.ngOnInit(); });
+    // modalRef.result.then(() => { window.location.reload() }, () => { window.location.reload()});
+    // modalRef.result.then(() => { this.ngOnInit(); }, () => { this.ngOnInit(); });
   }
 }

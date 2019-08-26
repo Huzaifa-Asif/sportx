@@ -5,7 +5,7 @@ import { HelperService } from 'src/app/services/helper/helper.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { UsersListComponent } from '../users-list/users-list.component';
 @Component({
   selector: 'app-users-edit',
   templateUrl: './users-edit.component.html',
@@ -17,11 +17,15 @@ export class UsersEditComponent implements OnInit {
   isDataLoaded = false;
   isRequested = true;
 
+
   userId;
+  email;
   userForm: FormGroup;
 
   branches = [];
-  types = [];
+  services = [];
+
+  status = [];
 
   isPasswordValidated = true;
 
@@ -29,8 +33,8 @@ export class UsersEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private api: RestApiService, private helper: HelperService,
     private auth: AuthService, private router: Router, private activeModal: NgbActiveModal) {
-    if (this.auth.user.UserID) {
-      this.userId = this.auth.user.UserID;
+    if (this.auth.user.email) {
+      this.email = this.auth.user.email;
     } else {
       this.router.navigateByUrl('auth/login');
     }
@@ -41,16 +45,24 @@ export class UsersEditComponent implements OnInit {
     this.submitted = false;
     this.isDataLoaded = false;
 
+    this.status = [
+      { name:"pending"},
+      { name:"approved"},
+      { name:"blocked"}
+    ]
+
     this.getUsersData();
 
+
     this.userForm = this.fb.group({
-      updaterUserId: [this.userId, Validators.required],
-      userId: [this.user.UserRecId, Validators.required],
-      fullName: [this.user.UserName, Validators.required],
-      userTypeId: [this.user.UserTypeId, Validators.required],
-      branchId: [this.user.BranchId, Validators.required],
-      locked: [this.user.Locked.toString(), Validators.required],
-      username: [this.user.UserId, Validators.required],
+      name: [this.user.name, Validators.required],
+      contact: [this.user.contact, Validators.required],
+      category: [this.user.category, Validators.required],
+      address: [this.user.address, Validators.required],
+      state: [this.user.state.toString(), Validators.required],
+      email: [this.user.email, Validators.required],
+      lat: [this.user.location.lat, Validators.required],
+      long: [this.user.location.long, Validators.required],
       newPassword: [''],
       confirmPassword: [''],
     });
@@ -60,10 +72,19 @@ export class UsersEditComponent implements OnInit {
   get f() { return this.userForm.controls; }
 
   getUsersData() {
-    this.api.get('Users/GetData').then((data: any) => {
+
+    this.api.get('get_serviceCategory').then((data: any) => {
       // console.log('Data', data);
-      this.branches = data.branches;
-      this.types = data.types;
+      let i=0;
+      this.services=data;
+      // for(i;i<data.length;i++)
+      // {
+      //   this.categories[i] = data[i].name;
+      //   // this.services[i] = data[i].name;
+      //   // console.log("service",data[i].name)
+      // }
+
+      // console.log("All services",this.services)
       this.isDataLoaded = true;
     }).catch(err => console.log('Error', err));
   }
@@ -83,8 +104,8 @@ export class UsersEditComponent implements OnInit {
       if (this.isPasswordValidated) {
 
         this.isRequested = false;
-        const userName = this.user.UserName;
-        const username = this.userForm.controls['username'].value;
+        const userName = this.user.name;
+        const username = this.userForm.controls['name'].value;
         this._sendUpdateRequest(this.userForm.value, userName, username);
 
       }
@@ -93,10 +114,18 @@ export class UsersEditComponent implements OnInit {
   }
 
   _sendUpdateRequest(data, userName, username) {
-    this.api.post('Users/Update', data).then((response: any) => {
+    console.log("Req",data)
+
+    this.api.patch('update_serviceProvider/', data.email, data).then((response: any) => {
 
       this.isRequested = true;
       this.helper.successBigToast('Success', 'Successfully updated: ' + userName + '\'s Account');
+      
+      setTimeout(() => 
+      {
+        window.location.reload();
+      },
+      3000);
 
     }, (error: any) => {
 
@@ -112,6 +141,7 @@ export class UsersEditComponent implements OnInit {
 
       this.helper.failureBigToast('Failed!', 'Invalid data, kindly check updated data.');
     });
+
   }
 
   _passwordCheck() {

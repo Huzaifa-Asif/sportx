@@ -15,8 +15,10 @@ module.exports.checkCustomerEmail = (email,callback) => {
 // Login
 module.exports.login = (email,password,res) => {
     let record=new customer();
-    customer.findOne({email:email},function(err,result)
-    {
+    customer.findOne({email:email}).
+    where('state').equals('approved').
+    exec(function(err,result)
+        {
         if (err)
 				{
 					return res.status(500).json({Message:"Error in Connecting to DB",status:false});
@@ -80,6 +82,19 @@ module.exports.addCustomer = async (customerform, callback) => {
         record.picture="";
     }
     
+    if(!customerform.email)
+    {
+        record.email="";
+    }
+    if(!customerform.contact)
+    {
+        record.contact="";
+    }
+
+    if(!customerform.name)
+    {
+        record.name="";
+    }
 
     record.save(callback);
 }

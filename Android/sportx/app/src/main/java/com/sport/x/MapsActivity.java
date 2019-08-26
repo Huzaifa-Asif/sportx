@@ -296,7 +296,7 @@ public class MapsActivity extends FragmentActivity implements
 //                                mMap.setMinZoomPreference(15);
 //                                myMarker = mMap.addMarker(new MarkerOptions().position(serviceLocation).title(vendorList.get(0).getServiceProviderName()));
 //                                mMap.moveCamera(CameraUpdateFactory.newLatLng(serviceLocation));
-                                mMap.setMinZoomPreference(10);
+                                mMap.setMinZoomPreference(12);
                                 pd.dismiss();
 
                                // double distance = getDistanceFromLatLonInKm(current_latitude, current_longitude, service_lat, service_lon);
