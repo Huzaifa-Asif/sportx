@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -289,7 +290,9 @@ public class MapsActivity extends FragmentActivity implements
                                 for(m = 0; m<vendorList.size();m++)
                                 {
                                 LatLng serviceLocation = new LatLng(vendorList.get(m).getUserLat(), vendorList.get(m).getUserLon());
+
                                 myMarker = mMap.addMarker(new MarkerOptions().position(serviceLocation).title(vendorList.get(m).getServiceProviderName()).alpha(m));
+
                                 mMap.moveCamera(CameraUpdateFactory.newLatLng(serviceLocation));
                                 }
 //                                LatLng serviceLocation = new LatLng(vendorList.get(0).getUserLat(), vendorList.get(0).getUserLon());

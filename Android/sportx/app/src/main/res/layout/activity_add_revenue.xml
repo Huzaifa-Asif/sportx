@@ -100,7 +100,7 @@
             android:backgroundTint="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/in_date"
+            android:id="@+id/in_date1"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="@dimen/_18sdp"
             android:layout_marginRight="@dimen/_8sdp"

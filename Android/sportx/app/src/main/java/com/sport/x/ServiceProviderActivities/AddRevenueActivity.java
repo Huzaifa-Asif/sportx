@@ -61,7 +61,7 @@ public class AddRevenueActivity extends AppCompatActivity implements OnItemSelec
         misc = new Misc(context);
         newCategory=findViewById(R.id.newCategory);
         amount=findViewById(R.id.amount);
-        txtDate=findViewById(R.id.in_date);
+        txtDate=findViewById(R.id.in_date1);
         description=findViewById(R.id.description);
         add=findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +182,7 @@ public class AddRevenueActivity extends AppCompatActivity implements OnItemSelec
         jsonObject.addProperty("revenueCategory", revenueCategory);
         jsonObject.addProperty("serviceProviderEmail", SharedPref.getEmail());
         jsonObject.addProperty("amount", amount.getText().toString());
-        jsonObject.addProperty("date", date.getText().toString());
+        jsonObject.addProperty("date", txtDate.getText().toString());
         jsonObject.addProperty("description",description.getText().toString());
 
 
@@ -257,6 +257,11 @@ public class AddRevenueActivity extends AppCompatActivity implements OnItemSelec
         datePickerDialog.show();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, RevenueActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 }
