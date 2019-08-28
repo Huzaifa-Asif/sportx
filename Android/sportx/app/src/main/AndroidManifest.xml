@@ -129,18 +129,13 @@
         <activity
             android:name="com.sport.x.SplashActivity"
             android:theme="@style/NoAction">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name="com.sport.x.ServiceProviderActivities.ExpenseActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.sport.x.ServiceProviderActivities.ExpenseActivity" >
         </activity>
         <activity android:name="com.sport.x.ServiceProviderActivities.AddExpenseActivity" >
         </activity>
