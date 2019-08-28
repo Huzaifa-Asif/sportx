@@ -27,6 +27,8 @@ import com.sport.x.LoginActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,6 +36,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
@@ -260,24 +264,13 @@ public class ServiceHomeActivity extends AppCompatActivity
                                     Log.wtf("Lat:",""+current_latitude);
                                     Log.wtf("Lat:",""+current_longitude);
 
-//                                current_latitude = Double.parseDouble(jsonObject.getString("lat"));
-//                                current_longitude = Double.parseDouble(jsonObject.getString("long"));
                                     String user_image = jsonObject.getString("picture_profile");
 
 
-                                    if (user_image.isEmpty()) {
-                                         img1.setImageResource(R.drawable.serviceicon);
-                                    } else {
-                                          Ion.with(getApplicationContext()).load(jsonObject.getString("user_image").replace("\"","")).intoImageView(img1);
-                                    }
-
-
-                             //   txt1.setText(jsonObject.getString("user_name"));
-                              //  txt2.setText(jsonObject.getString("user_email"));
-//                                password = jsonObject.getString("user_password");
                                 LatLng service = new LatLng(current_latitude, current_longitude);
                                 mMap.setMinZoomPreference(15);
                                 myMarker = mMap.addMarker(new MarkerOptions().position(service).title("Service Location"));
+
                                 mMap.moveCamera(CameraUpdateFactory.newLatLng(service));
                             } catch (JSONException e1) {
                                 e1.printStackTrace();

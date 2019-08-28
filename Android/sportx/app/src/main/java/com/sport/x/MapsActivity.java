@@ -32,7 +32,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
@@ -161,7 +160,7 @@ public class MapsActivity extends FragmentActivity implements
             serviceName.setText(service_name);
 
             String provider= marker.getTitle();
-            float index1=marker.getAlpha();
+            float index1=marker.getZIndex();
             index=(int)index1;
 
             TextView agree = dialog.findViewById(R.id.sure);
@@ -286,19 +285,16 @@ public class MapsActivity extends FragmentActivity implements
                                     pd.dismiss();
                                     return;
                                 }
-
                                 for(m = 0; m<vendorList.size();m++)
                                 {
-                                LatLng serviceLocation = new LatLng(vendorList.get(m).getUserLat(), vendorList.get(m).getUserLon());
+                                    LatLng serviceLocation = new LatLng(vendorList.get(m).getUserLat(), vendorList.get(m).getUserLon());
 
-                                myMarker = mMap.addMarker(new MarkerOptions().position(serviceLocation).title(vendorList.get(m).getServiceProviderName()).alpha(m));
+                                    myMarker = mMap.addMarker(new MarkerOptions().position(serviceLocation).title(vendorList.get(m).getServiceProviderName()).zIndex(m));
 
-                                mMap.moveCamera(CameraUpdateFactory.newLatLng(serviceLocation));
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLng(serviceLocation));
                                 }
-//                                LatLng serviceLocation = new LatLng(vendorList.get(0).getUserLat(), vendorList.get(0).getUserLon());
-//                                mMap.setMinZoomPreference(15);
-//                                myMarker = mMap.addMarker(new MarkerOptions().position(serviceLocation).title(vendorList.get(0).getServiceProviderName()));
-//                                mMap.moveCamera(CameraUpdateFactory.newLatLng(serviceLocation));
+
+//
                                 mMap.setMinZoomPreference(12);
                                 pd.dismiss();
 
@@ -313,116 +309,6 @@ public class MapsActivity extends FragmentActivity implements
                 });
     }
 
-//    private void fetchRating(String id) {
-//        final ProgressDialog pd = new ProgressDialog(this);
-//        pd.setMessage("Please wait...");
-//        pd.setCancelable(false);
-//        pd.show();
-//
-//        Ion.with(this)
-//                .load(misc.ROOT_PATH+"fetch_average_rating/"+id)
-//                .asString()
-//                .withResponse()
-//                .setCallback(new FutureCallback<Response<String>>() {
-//                    @Override
-//                    public void onCompleted(Exception e, Response<String> result) {
-//                        if (e != null) {
-//                            misc.showToast("Please check your connection");
-//                            pd.dismiss();
-//                            return;
-//                        } else {
-//                            try {
-//                                JSONArray jsonArray = new JSONArray(result.getResult());
-//                                for (int i = 0; i < jsonArray.length(); i++) {
-//                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                                    user_rating = jsonObject.getString("rating");
-//                                    if(user_rating.equals("null")){
-//                                        u_rating = null;
-//                                        user_rating = "Not rated yet";
-//                                        pd.dismiss();
-//                                        return;
-//                                    }
-//                                    u_rating = user_rating;
-//                                }
-//
-//                            } catch (JSONException e1) {
-//                                e1.printStackTrace();
-//                            }
-//                            pd.dismiss();
-//
-//                        }
-//                    }
-//                });
-//    }
-//
-//    private void postJob() {
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Date date = new Date();
-//
-//        JsonObject job = new JsonObject();
-//        job.addProperty("job_start_date", dateFormat.format(date));
-//        // job.addProperty("vendor_email", vendorList.get(0).getUserId());
-//        job.addProperty("customer_email", sharedPref.getUserId());
-//        job.addProperty("fk_service_id", service_id);
-//
-//        //misc.showToast(String.valueOf(vendorList.get(0).getUserJobs()+1));
-//
-//        final ProgressDialog pd = new ProgressDialog(this);
-//        pd.setMessage("Hiring " + user_name);
-//        pd.setCancelable(false);
-//        pd.show();
-//
-//        Ion.with(this)
-//                .load(misc.ROOT_PATH+"new_job")
-//                .setJsonObjectBody(job)
-//                .asString()
-//                .withResponse()
-//                .setCallback(new FutureCallback<Response<String>>() {
-//                    @Override
-//                    public void onCompleted(Exception e, Response<String> result) {
-//                        if(e != null) {
-//                            misc.showToast("Please check your connection");
-//                            pd.dismiss();
-//                            return;
-//                        }
-//                        else{
-//                            //updateUserJobs(pd);
-//                            pd.dismiss();
-//                            //misc.showToast(result.getResult());
-//                            startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
-//                            finish();
-//                        }
-//                    }
-//                });
-//    }
-//
-//    private void updateUserJobs(final ProgressDialog pd){
-//
-//        JsonObject jsonObject = new JsonObject();
-//        jsonObject.addProperty("jobs", vendorList.get(0).getUserJobs()+1);
-//
-//        Ion.with(this)
-//                .load("PUT", misc.ROOT_PATH+"update_daily_jobs/"+vendorList.get(0).getUserId())
-//                .setJsonObjectBody(jsonObject)
-//                .asString()
-//                .withResponse()
-//                .setCallback(new FutureCallback<Response<String>>() {
-//                    @Override
-//                    public void onCompleted(Exception e, Response<String> result) {
-//                        if(e != null) {
-//                            misc.showToast("Please check your connection");
-//                            pd.dismiss();
-//                            return;
-//                        }
-//                        else{
-//                            pd.dismiss();
-//                            misc.showToast(result.getResult());
-//                            startActivity(new Intent(getApplicationContext(), JobHistoryActivity.class));
-//                            finish();
-//                        }
-//                    }
-//                });
-//    }
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, AllServiceActivity.class);
