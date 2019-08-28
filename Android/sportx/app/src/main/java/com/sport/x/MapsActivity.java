@@ -295,7 +295,7 @@ public class MapsActivity extends FragmentActivity implements
                                 }
 
 //
-                                mMap.setMinZoomPreference(12);
+                                mMap.setMinZoomPreference(10);
                                 pd.dismiss();
 
                                // double distance = getDistanceFromLatLonInKm(current_latitude, current_longitude, service_lat, service_lon);

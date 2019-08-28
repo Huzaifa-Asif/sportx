@@ -42,6 +42,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.sport.x.TournamentActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -156,9 +157,9 @@ public class ServiceHomeActivity extends AppCompatActivity
             finish();
         }
         else if (id == R.id.tournament) {
-//            Intent conversation = new Intent(this, ConversationActivity.class);
-//            startActivity(conversation);
-//            finish();
+            Intent conversation = new Intent(this, TournamentActivity.class);
+            startActivity(conversation);
+            finish();
         }
         else if (id == R.id.createtournament) {
             Intent conversation = new Intent(this, CreateTournamentActivity.class);

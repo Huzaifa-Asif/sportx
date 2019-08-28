@@ -52,7 +52,7 @@ public class TournamentInActive extends Fragment {
 
         textView = rootView.findViewById(R.id.no_ip);
 
-        view = rootView.findViewById(R.id.pending_jobs);
+        view = rootView.findViewById(R.id.pending_tournaments);
         view.setLayoutManager(new LinearLayoutManager(getActivity()));
         view.setAdapter(tournamentAdapter);
 

@@ -98,7 +98,8 @@ public class TournamentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(sharedPref.getUserRole().equals("1")){
+
+        if(sharedPref.getUserRole()==1){
             Intent intent = new Intent(this, ServiceHomeActivity.class);
             startActivity(intent);
             finish();

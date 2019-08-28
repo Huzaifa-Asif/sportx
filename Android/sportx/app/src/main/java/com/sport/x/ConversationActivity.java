@@ -96,7 +96,7 @@ public class ConversationActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(sharedPref.getUserRole().equals("1")){
+        if(sharedPref.getUserRole()==1){
             Intent intent = new Intent(this, AllProvidersActivity.class);
             startActivity(intent);
             finish();

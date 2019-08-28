@@ -36,7 +36,7 @@ public class InActiveTournamentAdapter extends RecyclerView.Adapter<InActiveTour
     @Override
     public InActiveTournamentAdapter.InActiveTournamentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.pending_job_item, viewGroup, false);
+        View view = inflater.inflate(R.layout.inactive_tournament_item, viewGroup, false);
         return new InActiveTournamentAdapter.InActiveTournamentViewHolder(view);
     }
 
@@ -59,10 +59,10 @@ public class InActiveTournamentAdapter extends RecyclerView.Adapter<InActiveTour
         public InActiveTournamentViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            text_item = itemView.findViewById(R.id.ip_text);
+            text_item = itemView.findViewById(R.id.com_text);
             date_item = itemView.findViewById(R.id.com_date);
             type = itemView.findViewById(R.id.com_type);
-            image_item = itemView.findViewById(R.id.ip_image);
+            image_item = itemView.findViewById(R.id.com_image);
 
             itemView.setOnClickListener(this);
         }
