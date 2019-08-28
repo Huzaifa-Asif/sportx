@@ -16,7 +16,10 @@
             android:id="@+id/conversation"
             android:icon="@drawable/conversation"
             android:title="Conversations" />
-
+        <item
+            android:id="@+id/accounts"
+            android:icon="@drawable/accounts"
+            android:title="Accounts" />
         <item
             android:id="@+id/tournament"
             android:icon="@drawable/tournament"

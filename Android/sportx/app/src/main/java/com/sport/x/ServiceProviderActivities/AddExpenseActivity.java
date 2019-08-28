@@ -51,6 +51,7 @@ public class AddExpenseActivity extends AppCompatActivity implements OnItemSelec
     Button add;
     String expenseCategory;
     private int mYear, mMonth, mDay;
+    Boolean flag=false;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +114,7 @@ public class AddExpenseActivity extends AppCompatActivity implements OnItemSelec
         if(parent.getItemAtPosition(position).toString().equals("Other"))
         {
             newCategory.setVisibility(View.VISIBLE);
+            flag=true;
         }
         else
         {
@@ -180,7 +182,14 @@ public class AddExpenseActivity extends AppCompatActivity implements OnItemSelec
         pd.setCancelable(false);
         pd.show();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("expenseCategory", expenseCategory);
+        if(flag)
+        {
+            jsonObject.addProperty("expenseCategory", newCategory.getText().toString());
+        }
+        else
+        {
+            jsonObject.addProperty("expenseCategory", expenseCategory);
+        }
         jsonObject.addProperty("serviceProviderEmail", SharedPref.getEmail());
         jsonObject.addProperty("amount", Integer.parseInt(amount.getText().toString()));
         jsonObject.addProperty("date", txtDate.getText().toString());
@@ -234,6 +243,12 @@ public class AddExpenseActivity extends AppCompatActivity implements OnItemSelec
 
                     }
                 });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ExpenseActivity.class);
+        startActivity(intent);
+        finish();
     }
     private boolean validate(){
 

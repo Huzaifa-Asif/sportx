@@ -80,8 +80,13 @@ public class ExpenseActivity extends AppCompatActivity {
         expenseAdapter = new ExpenseAdapter(this, expenses);
         expenseRecycler.setLayoutManager(new LinearLayoutManager(this));
         expenseRecycler.setAdapter(expenseAdapter);
-        expenseRecycler.setNestedScrollingEnabled(false);
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ServiceHomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void callExpenseWebservice(boolean isShowDialog)

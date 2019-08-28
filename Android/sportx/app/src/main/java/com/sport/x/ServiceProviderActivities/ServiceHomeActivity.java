@@ -1,6 +1,7 @@
 package com.sport.x.ServiceProviderActivities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -144,6 +146,11 @@ public class ServiceHomeActivity extends AppCompatActivity
             startActivity(conversation);
             finish();
         }
+        else if (id == R.id.accounts) {
+            Intent accounts = new Intent(this, AccountsActivity.class);
+            startActivity(accounts);
+            finish();
+        }
         else if (id == R.id.tournament) {
 //            Intent conversation = new Intent(this, ConversationActivity.class);
 //            startActivity(conversation);
@@ -242,29 +249,28 @@ public class ServiceHomeActivity extends AppCompatActivity
                             try {
                                 pd.dismiss();
 
-                                JSONArray jsonArray = new JSONArray(result.getResult());
+                                JSONObject jsonObject = new JSONObject(result.getResult());
 
-                                for(i = 1; i < jsonArray.length(); i++)
-                                {
 
-                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
                                     JSONObject locat = jsonObject.getJSONObject("location");
 
                                     current_latitude = locat.getDouble("lat");
                                     current_longitude = locat.getDouble("long");
+                                    Log.wtf("Lat:",""+current_latitude);
+                                    Log.wtf("Lat:",""+current_longitude);
 
 //                                current_latitude = Double.parseDouble(jsonObject.getString("lat"));
 //                                current_longitude = Double.parseDouble(jsonObject.getString("long"));
-                                    String user_image = jsonObject.getString("user_image");
+                                    String user_image = jsonObject.getString("picture_profile");
 
 
                                     if (user_image.isEmpty()) {
-                                        // img1.setImageResource(R.drawable.serviceicon);
+                                         img1.setImageResource(R.drawable.serviceicon);
                                     } else {
-                                        //  Ion.with(getApplicationContext()).load(jsonObject.getString("user_image").replace("\"","")).intoImageView(img1);
+                                          Ion.with(getApplicationContext()).load(jsonObject.getString("user_image").replace("\"","")).intoImageView(img1);
                                     }
-                                }
+
 
                              //   txt1.setText(jsonObject.getString("user_name"));
                               //  txt2.setText(jsonObject.getString("user_email"));

@@ -83,6 +83,12 @@ public class RevenueActivity extends AppCompatActivity {
         revenueRecycler.setAdapter(revenueAdapter);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ServiceHomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
     public void callrevenueWebservice(boolean isShowDialog)
     {
 
