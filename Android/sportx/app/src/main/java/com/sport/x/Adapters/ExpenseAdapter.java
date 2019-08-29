@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.koushikdutta.async.future.FutureCallback;
@@ -36,7 +37,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
     private Context context;
     Misc misc;
     SharedPref sharedPref;
-    Button details;
+    ImageButton details;
     public ExpenseAdapter(Context context, ArrayList<Expense> expenses){
         this.context = context;
         this.expenses = expenses;

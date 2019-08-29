@@ -4,18 +4,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:paddingRight="16dp"
-    android:paddingLeft="16dp"
+    android:paddingRight="8dp"
+    android:paddingLeft="8dp"
+
     android:orientation="vertical" >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal" >
 
         <TextView
@@ -26,7 +26,6 @@
             android:textSize="12sp"
             android:width="100dp"
             android:height="@dimen/_30sdp"/>
-
 
         <TextView
             android:id="@+id/amountField"
@@ -51,6 +50,9 @@
 
 
     </LinearLayout>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -71,7 +73,7 @@
             android:src="@drawable/ic_add_circle_green_24dp" />
 
     </FrameLayout>
-
+    </HorizontalScrollView>
 </LinearLayout>
 
 
