@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RestApiService } from 'src/app/services/api/rest-api.service';
+import { RestApiService } from '../../../services/api/rest-api.service';
 import { Router } from '@angular/router';
-import { HelperService } from 'src/app/services/helper/helper.service';
+import { HelperService } from '../../../services/helper/helper.service';
 import { UsersAddComponent } from '../users-add/users-add.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersEditComponent } from '../users-edit/users-edit.component';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HelperService } from '../../../services/helper/helper.service';
 import * as Chartist from 'chartist';
 import { ChartEvent, ChartType } from 'ng-chartist';
-import { RestApiService } from 'src/app/services/api/rest-api.service';
+import { RestApiService } from '../../../services/api/rest-api.service';
 
 export interface Chart {
   type: ChartType;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from 'src/app/services/helper/helper.service';
-import { RestApiService } from 'src/app/services/api/rest-api.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { HelperService } from '../../../services/helper/helper.service';
+import { RestApiService } from '../../../services/api/rest-api.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard-cashier',

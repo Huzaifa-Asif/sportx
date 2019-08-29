@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItemsAdmin, MenuItemsCashier, Menu } from './sidebar-items';
 import { Router, ActivatedRoute } from "@angular/router";
 import * as $ from 'jquery';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',

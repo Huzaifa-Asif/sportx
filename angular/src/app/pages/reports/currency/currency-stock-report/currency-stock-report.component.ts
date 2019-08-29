@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RestApiService } from 'src/app/services/api/rest-api.service';
-import { HelperService } from 'src/app/services/helper/helper.service';
+import { RestApiService } from '../../../../services/api/rest-api.service';
+import { HelperService } from '../../../../services/helper/helper.service';
 
 @Component({
   selector: 'app-currency-stock-report',
