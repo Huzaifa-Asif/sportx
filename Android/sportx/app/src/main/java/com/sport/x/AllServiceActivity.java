@@ -68,12 +68,11 @@ public class AllServiceActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Book Services");
-
         context = this;
 
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
-
+        misc.saveCurrentToken();
         serviceListModel = new ArrayList<>();
 
         refresh = findViewById(R.id.swipe);

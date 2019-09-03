@@ -11,6 +11,7 @@ public class SharedPref {
     private static final String PREF_NAME = "SportxLog";
     private static final String IS_LOGIN = "IsLoggedIn";
     int PRIVATE_MODE = 0;
+    String token;
 
     public SharedPref(Context context) {
         this.context = context;
@@ -28,6 +29,14 @@ public class SharedPref {
         editor.putString("picture", picture);
         editor.putString("address", address);
         editor.commit();
+    }
+    public void setToken(String newtoken)
+    {
+        token=newtoken;
+    }
+    public String getToken()
+    {
+        return token;
     }
 
     public String getUserId() {
@@ -82,5 +91,6 @@ public class SharedPref {
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
+
 
 }

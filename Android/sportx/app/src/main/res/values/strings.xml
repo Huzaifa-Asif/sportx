@@ -23,7 +23,7 @@
     <string name="title_activity_all_jobs">AllJobsActivity</string>
     <string name="title_activity_provider_job">ProviderJobActivity</string>
     <string name="title_activity_provider_jobs">ProviderJobsActivity</string>
-
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
     <array name="bookingType">
         <item>Select-Booking-Type</item>
         <item>1-hour</item>
