@@ -181,7 +181,7 @@ public class CustomerInProgressJobDetailsActivity extends AppCompatActivity impl
         pd.show();
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("status", status);
+        jsonObject.addProperty("state", status);
 
         Ion.with(this)
                 .load("PATCH",misc.ROOT_PATH+"update_bookingState/"+jobId)
@@ -222,7 +222,7 @@ public class CustomerInProgressJobDetailsActivity extends AppCompatActivity impl
         pd.show();
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("status", status);
+        jsonObject.addProperty("state", status);
 
         Ion.with(this)
                 .load("PATCH",misc.ROOT_PATH+"update_bookingState/"+jobId)

@@ -24,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.sport.x.Adapters.CustomerServiceAdapter;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Service;
@@ -72,6 +73,7 @@ public class AllServiceActivity extends AppCompatActivity
 
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
         misc.saveCurrentToken();
         serviceListModel = new ArrayList<>();
 
