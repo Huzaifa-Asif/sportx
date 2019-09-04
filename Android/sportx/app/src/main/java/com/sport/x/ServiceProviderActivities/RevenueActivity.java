@@ -63,6 +63,7 @@ public class RevenueActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         revenueRecycler =  findViewById(R.id.reyclerview_revenue_list);
         revenueRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override

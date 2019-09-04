@@ -237,6 +237,11 @@ public class BookingActivity extends AppCompatActivity implements OnItemSelected
         booking_date= txtDate.getText().toString();
         booking_time= txtTime.getText().toString();
 
+        if(booking_type.equals("Select Booking Type") ){
+            misc.showToast("Kindly Select Booking Type");
+            return false;
+        }
+
 
         if(booking_date.length() < 7 ){
             misc.showToast("Invalid Date");
