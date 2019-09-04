@@ -1,13 +1,17 @@
 package com.sport.x.notifications;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -30,7 +34,6 @@ import org.json.JSONObject;
 public class MyService extends FirebaseMessagingService {
 
 Misc misc;
-SharedPref sharedPref;
     public MyService() {
 
     }
@@ -53,13 +56,17 @@ SharedPref sharedPref;
 
     public void showNotification(String title, String body)
     {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "sportx")
-                .setSmallIcon(R.drawable.ic_launcher_background)
+        String channelId = "Default";
+        NotificationCompat.Builder builder = new  NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
-                .setContentText(body)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        NotificationManagerCompat manager=NotificationManagerCompat.from(this);
-        manager.notify(0,builder.build());
+                .setContentText(body).setAutoCancel(true);
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT);
+            manager.createNotificationChannel(channel);
+        }
+        manager.notify(0, builder.build());
     }
 //    private void showAlertDialog(String title,String message){
 //        AlertDialog.Builder builder = new AlertDialog.Builder(this);

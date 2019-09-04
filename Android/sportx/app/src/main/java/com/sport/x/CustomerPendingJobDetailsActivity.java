@@ -179,7 +179,7 @@ public class CustomerPendingJobDetailsActivity extends AppCompatActivity impleme
         pd.show();
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("status", status);
+        jsonObject.addProperty("state", status);
 
         Ion.with(this)
                 .load("PATCH",misc.ROOT_PATH+"update_bookingState/"+jobId)

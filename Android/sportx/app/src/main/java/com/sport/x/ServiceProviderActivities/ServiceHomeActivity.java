@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.sport.x.ConversationActivity;
 import com.sport.x.CreateTournamentActivity;
 import com.sport.x.HelpActivity;
@@ -82,7 +83,9 @@ public class ServiceHomeActivity extends AppCompatActivity
 
         sharedPref = new SharedPref(this);
         misc = new Misc(this);
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
         misc.saveCurrentToken();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
