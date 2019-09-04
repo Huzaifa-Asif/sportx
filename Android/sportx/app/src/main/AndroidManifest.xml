@@ -69,6 +69,7 @@
         <activity android:name=".AdminActivities.AllComplaintsActivity" />
         <activity android:name=".AdminActivities.AdminHomeActivity" />
         <activity android:name=".ServiceProviderActivities.AllProvidersActivity" />
+        <activity android:name=".TournamentDetailActivity" />
         <activity android:name=".ComplainActivity" />
         <activity android:name=".HelpActivity" />
         <activity

@@ -76,6 +76,7 @@ public class Misc {
     public void showToast(String msg){
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
+
     public void addToken(String token){
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("token", token);

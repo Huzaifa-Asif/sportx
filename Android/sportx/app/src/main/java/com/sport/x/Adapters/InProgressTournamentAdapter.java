@@ -1,6 +1,8 @@
 package com.sport.x.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Tournament;
 import com.sport.x.R;
+import com.sport.x.TournamentDetailActivity;
 
 import java.util.ArrayList;
 
@@ -74,20 +77,22 @@ public class InProgressTournamentAdapter extends RecyclerView.Adapter<InProgress
 
         @Override
         public void onClick(View v) {
-//            Intent intent = new Intent(context, CustomerPendingJobDetailsActivity.class);
-//            intent.putExtra("date", tournamentsListModel.get(getAdapterPosition()).getDate());
-//            intent.putExtra("time", tournamentsListModel.get(getAdapterPosition()).getTime());
-//            intent.putExtra("job_id", tournamentsListModel.get(getAdapterPosition()).getJobId());
-//            intent.putExtra("state", tournamentsListModel.get(getAdapterPosition()).getState());
-//            intent.putExtra("bookingType", tournamentsListModel.get(getAdapterPosition()).getBookingType());
-//            intent.putExtra("serviceProviderEmail", tournamentsListModel.get(getAdapterPosition()).getServiceProviderEmail());
-//            intent.putExtra("serviceProviderName", tournamentsListModel.get(getAdapterPosition()).getServiceProviderName());
-//            intent.putExtra("serviceProviderNumber", tournamentsListModel.get(getAdapterPosition()).getServiceProviderNumber());
-//            intent.putExtra("customerEmail", tournamentsListModel.get(getAdapterPosition()).getCustomerEmail());
-//            intent.putExtra("customerName", tournamentsListModel.get(getAdapterPosition()).getCustomerName());
-//            intent.putExtra("customerNumber", tournamentsListModel.get(getAdapterPosition()).getCustomerNumber());
-//            context.startActivity(intent);
-//            ((Activity) context).finish();
+            Intent intent = new Intent(context, TournamentDetailActivity.class);
+            intent.putExtra("tournament_id", tournamentsListModel.get(getAdapterPosition()).getTournamentId());
+            intent.putExtra("state", tournamentsListModel.get(getAdapterPosition()).getTournamentState());
+            intent.putExtra("name", tournamentsListModel.get(getAdapterPosition()).getTournamentName());
+            intent.putExtra("teams", tournamentsListModel.get(getAdapterPosition()).getTournamentTeam());
+            intent.putExtra("winningPrize", tournamentsListModel.get(getAdapterPosition()).getTournamentWinningPrize());
+            intent.putExtra("entryFee", tournamentsListModel.get(getAdapterPosition()).getTournamentEntryFee());
+            intent.putExtra("tournamentType", tournamentsListModel.get(getAdapterPosition()).getTournamentType());
+            intent.putExtra("maxDays", tournamentsListModel.get(getAdapterPosition()).getTournamentMaxDays());
+            intent.putExtra("serviceProviderEmail", tournamentsListModel.get(getAdapterPosition()).getTournamentServiceProviderEmail());
+            intent.putExtra("adderEmail", tournamentsListModel.get(getAdapterPosition()).getTournamentAdderEmail());
+            intent.putExtra("startDate", tournamentsListModel.get(getAdapterPosition()).getTournamentStartDate());
+            intent.putExtra("startTime", tournamentsListModel.get(getAdapterPosition()).getTournamentStartTime());
+            intent.putExtra("date", tournamentsListModel.get(getAdapterPosition()).getTournamentRecordDate());
+            context.startActivity(intent);
+            ((Activity) context).finish();
         }
 
     }
