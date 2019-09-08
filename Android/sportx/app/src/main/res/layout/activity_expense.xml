@@ -46,9 +46,6 @@
             android:width="100dp"
             android:height="@dimen/_30sdp"/>
 
-
-
-
     </LinearLayout>
     <HorizontalScrollView
         android:layout_width="match_parent"
