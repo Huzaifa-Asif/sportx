@@ -40,7 +40,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'org.jraf:android-switch-backport:2.0.1'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
-
+    implementation 'com.squareup.picasso:picasso:+'
 
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
     testImplementation 'junit:junit:4.12'

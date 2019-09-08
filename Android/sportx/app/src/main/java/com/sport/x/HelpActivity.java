@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
 
-public class HelpActivity extends AppCompatActivity {
+public class HelpActivity extends CustomerMenu {
 
     private String provider = "no";
     private TextView phone;
@@ -19,7 +20,7 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help);
+        super.inflateView(R.layout.activity_help);
         setTitle("Help");
 
         phone = findViewById(R.id.number);

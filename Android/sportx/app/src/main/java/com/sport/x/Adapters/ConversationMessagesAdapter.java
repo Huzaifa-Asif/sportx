@@ -57,7 +57,7 @@ import java.io.File;
 public class ConversationMessagesAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private SharedPref.OnItemClickListener listener;
+
     SharedPref SharedPref;
     ArrayList<ConversationMessage> messages = new ArrayList<ConversationMessage>();
     int role = 100;
@@ -148,7 +148,7 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
             //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
             timeText.setText(message.getConversationDate());
 
-//
+
 //            if(SharedPref.getEmail().equals(message.getCustomerEmail()))
 //            {
 //                Ion.with(context).load(message.getCustomerPicture().replace("\"","")).intoImageView(profileImageSent);
@@ -169,11 +169,11 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
 
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText, nameText;
-        ImageView profileImage;
+        CircularImageView profileImage;
         Bitmap image;
         Bitmap bit2=null;
         Bitmap bit=null;
-
+        Picasso picasso;
 
         ReceivedMessageHolder(View itemView) {
             super(itemView);
@@ -199,36 +199,46 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
                 nameText.setText(message.getCustomerName());
             }
 
-
-            if(SharedPref.getEmail().equals(message.getCustomerEmail()))
+            if(SharedPref.getUserRole()==2)
             {
-
-
-                try {
-                    bit = BitmapFactory.decodeStream((InputStream)new URL(message.getCustomerPicture()).getContent());
-                } catch (Exception e) {}
-                profileImage.setImageBitmap(bit);
-                //Ion.with(context).load(message.getCustomerPicture().replace("\"","")).intoImageView(profileImage);
+                Picasso.get()
+                        .load(message.getServiceProviderPicture().replace("\"",""))
+                        .placeholder(R.drawable.user)
+                        .error(R.drawable.user)
+                        .resize(52, 52)
+                        .centerCrop()
+                        .into(profileImage);
             }
-            else if(SharedPref.getEmail().equals(message.getServiceProviderEmail()))
+            else if(SharedPref.getUserRole()==1)
             {
-
-                try {
-                    bit2 = BitmapFactory.decodeStream((InputStream)new URL(message.getServiceProviderPicture()).getContent());
-                } catch (Exception e) {}
-                profileImage.setImageBitmap(bit2);
-                //profileImage.setImageBitmap(image);
-
-//                Ion.with(context).load(message.getServiceProviderPicture().replace("\"","")).intoImageView(profileImage);
+                Picasso.get()
+                        .load(message.getCustomerPicture().replace("\"",""))
+                        .placeholder(R.drawable.user)
+                        .error(R.drawable.user)
+                        .resize(52, 52)
+                        .centerCrop()
+                        .into(profileImage);
             }
             else
             {
                 profileImage.setImageResource(R.drawable.user);
-
             }
 
-            // Insert the profile image from the URL into the ImageView.
-            //Utils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);
+        }
+        public void setImageFromURL( CircularImageView imageView,String url) {
+
+
+                picasso.load(url)
+                        .error(R.drawable.ic_launcher_background)
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .into(imageView);
+                try {
+                    Picasso.setSingletonInstance(picasso);
+                } catch (IllegalStateException ignored) {
+
+                }
+
+
         }
     }
     }

@@ -35,6 +35,18 @@
                 android:textSize="@dimen/_12sdp"
                 android:id="@+id/contact_details"
                 />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/comparebutton"
+                android:src="@drawable/compare"
+                android:padding="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+
+                />
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

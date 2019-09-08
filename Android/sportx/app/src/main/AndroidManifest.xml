@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ServiceProviderActivities.InProgressJobDetails" />
+
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -60,7 +60,7 @@
             android:label="@string/title_activity_all_jobs"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AdminActivities.CustomerDetailsActivity" />
-        <activity android:name=".ServiceProviderActivities.VendorMapActivity" />
+        <activity android:name=".CompareActivity" />
         <activity android:name=".AdminActivities.AddServiceActivity" />
         <activity android:name=".AdminActivities.RegisteredServiceProvidersActivity" />
         <activity android:name=".AdminActivities.ServiceProviderDetailsActivity" />
@@ -68,8 +68,6 @@
         <activity android:name=".AdminActivities.AllCustomersActivity" />
         <activity android:name=".AdminActivities.AllComplaintsActivity" />
         <activity android:name=".AdminActivities.AdminHomeActivity" />
-        <activity android:name=".ServiceProviderActivities.AllProvidersActivity" />
-        <activity android:name=".TournamentDetailActivity" />
         <activity android:name=".ComplainActivity" />
         <activity android:name=".HelpActivity" />
         <activity
@@ -110,8 +108,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity" />
+            />
         <activity android:name=".RegisterActivity"></activity>
         <activity
             android:name=".LoginActivity"

@@ -35,7 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class RevenueActivity extends AppCompatActivity {
+public class RevenueActivity extends ServiceProviderMenu {
 
 
     Misc misc;
@@ -48,7 +48,7 @@ public class RevenueActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_revenue);
+        super.inflateView(R.layout.activity_revenue);
         setTitle("revenues");
         context = this;
         SharedPref = new SharedPref(context);
@@ -86,7 +86,7 @@ public class RevenueActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, ServiceHomeActivity.class);
+        Intent intent = new Intent(this, AccountsActivity.class);
         startActivity(intent);
         finish();
     }

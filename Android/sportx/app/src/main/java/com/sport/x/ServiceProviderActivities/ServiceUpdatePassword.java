@@ -40,7 +40,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
-public class ServiceUpdatePassword extends AppCompatActivity{
+public class ServiceUpdatePassword extends ServiceProviderMenu{
 
     private EditText  password, confirm;
     private Button update;
@@ -52,7 +52,7 @@ public class ServiceUpdatePassword extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.password_update);
+        super.inflateView(R.layout.password_update);
         setTitle("Password Update");
         password = findViewById(R.id.up_password);
         confirm = findViewById(R.id.up_confirm_password);
@@ -84,7 +84,7 @@ public class ServiceUpdatePassword extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, AllServiceActivity.class);
+        Intent intent = new Intent(this, ServiceHomeActivity.class);
         startActivity(intent);
         finish();
     }

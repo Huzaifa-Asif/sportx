@@ -42,10 +42,7 @@
             android:id="@+id/service_update"
             android:icon="@drawable/ic_border_color_black_24dp"
             android:title="Update Services" />
-        <item
-            android:id="@+id/service_providers"
-            android:icon="@drawable/ic_search"
-            android:title="Service Providers" />
+
 
         <item
             android:id="@+id/up_password"

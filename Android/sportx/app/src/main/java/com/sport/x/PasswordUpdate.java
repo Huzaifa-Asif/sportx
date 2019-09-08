@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sport.x.Misc.Misc;
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -39,7 +40,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 
-public class PasswordUpdate extends AppCompatActivity {
+public class PasswordUpdate extends CustomerMenu {
     private EditText  password, confirm;
     private Button update;
     Misc misc;
@@ -50,7 +51,7 @@ public class PasswordUpdate extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.password_update);
+        super.inflateView(R.layout.password_update);
         setTitle("Password Update");
         password = findViewById(R.id.up_password);
         confirm = findViewById(R.id.up_confirm_password);

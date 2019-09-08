@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.sport.x.AdminActivities.AllJobsActivity;
 import com.sport.x.Misc.Misc;
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
 import com.sport.x.ServiceProviderActivities.ProviderJobsActivity;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
@@ -29,7 +30,7 @@ import java.util.Date;
 
 import static android.view.View.GONE;
 
-public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
+public class CustomerCompletedJobDetailsActivity extends CustomerMenu {
 
     private TextView completed, text1, text2, text3;
     private String job_id, customerEmail, serviceEmail, serviceName;
@@ -42,7 +43,7 @@ public class CustomerCompletedJobDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_completed_job_details);
+        super.inflateView(R.layout.activity_customer_completed_job_details);
         setTitle("Job Details");
 
         misc = new Misc(this);

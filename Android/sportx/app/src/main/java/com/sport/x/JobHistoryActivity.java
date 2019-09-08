@@ -2,8 +2,6 @@ package com.sport.x;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,10 +12,11 @@ import android.os.Bundle;
 import com.sport.x.Fragments.CustomerCompletedJobs;
 import com.sport.x.Fragments.CustomerInProgressJobs;
 import com.sport.x.Fragments.CustomerPendingJobs;
-import com.sport.x.ServiceProviderActivities.AllProvidersActivity;
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
+import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
 
-public class JobHistoryActivity extends AppCompatActivity {
+public class JobHistoryActivity extends CustomerMenu {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -38,7 +37,7 @@ public class JobHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_history);
+        super.inflateView(R.layout.activity_job_history);
         setTitle("Booking Management");
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -100,7 +99,7 @@ public class JobHistoryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(sharedPref.getUserRole().equals("1")){
-            Intent intent = new Intent(this, AllProvidersActivity.class);
+            Intent intent = new Intent(this, ServiceHomeActivity.class);
             startActivity(intent);
             finish();
         }

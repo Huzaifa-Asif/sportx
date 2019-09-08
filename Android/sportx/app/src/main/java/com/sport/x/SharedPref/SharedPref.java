@@ -10,13 +10,14 @@ public class SharedPref {
     Context context;
     private static final String PREF_NAME = "SportxLog";
     private static final String IS_LOGIN = "IsLoggedIn";
-    int PRIVATE_MODE = 0;
-    String token;
+    private int PRIVATE_MODE = 0;
+    private String token,compareServiceProvider1,compareServiceProvider2;
 
     public SharedPref(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = sharedPreferences.edit();
+
     }
 
     public void createLoginSession(String _id, String email, String address, Integer role, String name, String contact,String picture ) {
@@ -30,13 +31,15 @@ public class SharedPref {
         editor.putString("address", address);
         editor.commit();
     }
-    public void setToken(String newtoken)
+    public void setToken(String newToken)
     {
-        token=newtoken;
+        editor.putString("token", newToken);
+        editor.commit();
+
     }
     public String getToken()
     {
-        return token;
+        return sharedPreferences.getString("token", null);
     }
 
     public String getUserId() {
@@ -87,10 +90,25 @@ public class SharedPref {
         editor.commit();
     }
 
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
+    public String getCompareServiceProvider2() {
+        return sharedPreferences.getString("compareServiceProvider2", null);
     }
+
+    public void setCompareServiceProvider2(String compareServiceProvider2) {
+        editor.putString("compareServiceProvider2", compareServiceProvider2);
+        editor.commit();
+    }
+
+    public String getCompareServiceProvider1() {
+        return sharedPreferences.getString("compareServiceProvider1", null);
+    }
+
+    public void setCompareServiceProvider1(String compareServiceProvider1) {
+        editor.putString("compareServiceProvider1", compareServiceProvider1);
+        editor.commit();
+    }
+
+
 
 
 }

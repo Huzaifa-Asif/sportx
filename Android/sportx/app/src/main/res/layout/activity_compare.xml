@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:background="@drawable/rounded_corner"
+    android:orientation="vertical">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:divider="@color/grey"
+    android:showDividers="middle"
+    >
+
+
+    <!-- first row of the table layout-->
+    <TableRow
+        android:id="@+id/row1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:collapseColumns="0"
+
+        android:weightSum="3"
+        android:divider="@color/grey"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/name"
+            android:text="Name"
+            android:background="@color/colorPrimary"
+            android:textStyle="bold"
+
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+
+
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/name1"
+            android:text="Name 1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/name2"
+            android:text="Name 2"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <!-- Add elements/columns in the first row-->
+
+    </TableRow>
+    <TableRow
+        android:id="@+id/row2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+
+        android:divider="@color/grey"
+        android:showDividers="middle">
+
+        <!-- Add elements/columns in the first row-->
+        <TextView
+            android:id="@+id/bookings"
+            android:text="Total Booking"
+            android:background="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/bookings1"
+            android:text="Bookings 1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/bookings2"
+            android:text="Bookings 2"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+
+    </TableRow>
+    <TableRow
+        android:id="@+id/row3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@color/grey"
+        android:showDividers="middle">
+
+        <!-- Add elements/columns in the first row-->
+        <TextView
+            android:id="@+id/ratings"
+            android:text="Total Ratings"
+            android:textStyle="bold"
+            android:background="@color/colorPrimary"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/ratings1"
+            android:text="Ratings 1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/ratings2"
+            android:text="Ratings 2"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+
+    </TableRow>
+    <TableRow
+        android:id="@+id/row4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        android:divider="@color/grey"
+        android:showDividers="middle">
+
+        <!-- Add elements/columns in the first row-->
+        <TextView
+            android:id="@+id/avg"
+            android:text="Avg. Rating"
+            android:background="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/avg1"
+            android:text="Avg. 1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/avg2"
+            android:text="Avg. 2"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+
+    </TableRow>
+    <TableRow
+        android:id="@+id/row5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        android:divider="@color/grey"
+        android:showDividers="middle">
+
+        <!-- Add elements/columns in the first row-->
+        <TextView
+            android:id="@+id/distance"
+            android:text="Distance"
+            android:background="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center">
+        </TextView>
+        <TextView
+            android:id="@+id/distance1"
+            android:text="Distance 1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center">
+        </TextView>
+        <TextView
+            android:id="@+id/distance2"
+            android:text="Distance 2"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center">
+        </TextView>
+
+    </TableRow>
+
+</TableLayout>
+</LinearLayout>

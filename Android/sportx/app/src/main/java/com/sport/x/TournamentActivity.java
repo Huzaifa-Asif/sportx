@@ -14,9 +14,10 @@ import com.sport.x.Fragments.TournamentCompleted;
 import com.sport.x.Fragments.TournamentInProgress;
 import com.sport.x.Fragments.TournamentInActive;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.ServiceProviderActivities.ServiceProviderMenu;
 import com.sport.x.SharedPref.SharedPref;
 
-public class TournamentActivity extends AppCompatActivity {
+public class TournamentActivity extends ServiceProviderMenu {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -37,7 +38,7 @@ public class TournamentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tournament);
+        super.inflateView(R.layout.activity_tournament);
         setTitle("Tournament Management");
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

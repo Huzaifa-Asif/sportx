@@ -18,6 +18,7 @@ import com.google.gson.JsonObject;
 import com.sport.x.AdminActivities.AllJobsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
 import com.sport.x.ServiceProviderActivities.ProviderJobsActivity;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -37,7 +38,7 @@ import org.json.JSONObject;
 
 import static android.view.View.GONE;
 
-public class CustomerInProgressJobDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class CustomerInProgressJobDetailsActivity extends CustomerMenu implements View.OnClickListener {
 
     private GoogleMap mMap;
     private Marker myMarker;
@@ -57,7 +58,7 @@ public class CustomerInProgressJobDetailsActivity extends AppCompatActivity impl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_in_progress_job_details);
+        super.inflateView(R.layout.activity_customer_in_progress_job_details);
         setTitle("Job Request");
 
         misc = new Misc(this);

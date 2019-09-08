@@ -29,6 +29,7 @@ import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.sport.x.Misc.Misc;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.ServiceProviderActivities.ServiceProviderMenu;
 import com.sport.x.SharedPref.SharedPref;
 
 import org.json.JSONException;
@@ -62,7 +63,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class CreateTournamentActivity extends AppCompatActivity implements OnItemSelectedListener{
+public class CreateTournamentActivity extends ServiceProviderMenu implements OnItemSelectedListener{
 
     private EditText name, no_of_days, entry_fee, winning_prize, txtDate, txtTime;
 
@@ -83,7 +84,7 @@ public class CreateTournamentActivity extends AppCompatActivity implements OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_tournament);
+        super.inflateView(R.layout.activity_create_tournament);
         setTitle("Create Tournament");
 
         misc = new Misc(this);

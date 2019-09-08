@@ -1,6 +1,7 @@
 package com.sport.x;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,9 +10,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -27,11 +30,12 @@ import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.sport.x.AdminActivities.AllJobsActivity;
 import com.sport.x.Misc.Misc;
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
 import com.sport.x.SharedPref.SharedPref;
 
 import static android.view.View.GONE;
 
-public class service_provider_profile_Activity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener {
+public class service_provider_profile_Activity extends CustomerMenu implements OnMapReadyCallback, View.OnClickListener {
 
     private GoogleMap mMap;
     private Marker myMarker;
@@ -40,6 +44,7 @@ public class service_provider_profile_Activity extends AppCompatActivity impleme
     private double service_provider_longitude, service_provider_latitude;
     private String phoneNumber, service_name, service_provider_email,service_provider_name, service_provider_address, service_provider_phone_number;
     private Button book, msg, call;
+    private ImageButton compare;
     private EditText meesage;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int LOCATION_REQUEST_CODE = 101;
@@ -50,7 +55,7 @@ public class service_provider_profile_Activity extends AppCompatActivity impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_provider_profile);
+        super.inflateView(R.layout.activity_service_provider_profile);
         setTitle("Service Provider Profile");
 
         misc = new Misc(this);
@@ -71,6 +76,8 @@ public class service_provider_profile_Activity extends AppCompatActivity impleme
 
         call.setOnClickListener(this);
 
+        compare=findViewById(R.id.comparebutton);
+        compare.setOnClickListener(this);
 //        String id = sharedPref.getUserId();
 //        if(id == null) {
 //            complete.setVisibility(GONE);
@@ -85,8 +92,6 @@ public class service_provider_profile_Activity extends AppCompatActivity impleme
         service_provider_phone_number = intent.getStringExtra("service_provider_phone_number");
         service_provider_latitude=intent.getDoubleExtra("service_provider_latitude",33);
         service_provider_longitude=intent.getDoubleExtra("service_provider_longitude",73);
-
-
 
         name.setText("Name: " + service_provider_name);
         email.setText("Email: " + service_provider_email);
@@ -131,18 +136,12 @@ public class service_provider_profile_Activity extends AppCompatActivity impleme
 
     @Override
     public void onBackPressed() {
-//        if(sharedPref.getUserId() == null) {
-//            Intent intent = new Intent(this, MapsActivity.class);
-//            intent.putExtra("service_name",service_name);
-//            startActivity(intent);
-//            finish();
-//        }
-//        else{
+
             Intent intent = new Intent(this, MapsActivity.class);
             intent.putExtra("service_name",service_name);
             startActivity(intent);
             finish();
-//        }
+
     }
 
     @Override
@@ -150,23 +149,64 @@ public class service_provider_profile_Activity extends AppCompatActivity impleme
         if(v.getId() == book.getId()) {
             Book();
         }
-        if(v.getId() == call.getId()){
+        else if(v.getId() == call.getId()){
             makeCall();
         }
-        if(v.getId() == msg.getId()){
+        else if(v.getId() == msg.getId()){
             sendSMS();
+        }
+        else if(v.getId() == compare.getId()){
+
+            slecetForComparison();
         }
     }
 
-//    public void Book(View v)
-//    {
-//        Intent intent5 = new Intent(this, BookingActivity.class);
-//        intent5.putExtra("service_name",service_name);
-//        intent5.putExtra("service_email",email.getText().toString());
-//        startActivity(intent5
-//        );
-//        finish();
-//    }
+
+    private void slecetForComparison()
+    {
+        String serviceProvider1=sharedPref.getCompareServiceProvider1(),serviceProvider2=sharedPref.getCompareServiceProvider2();
+
+        if(serviceProvider1==null)
+        {
+
+            sharedPref.setCompareServiceProvider1(service_provider_email);
+            misc.showToast("Service Provider "+service_provider_name+" added for comparison");
+        }
+        else if(serviceProvider2==null)
+        {
+
+            sharedPref.setCompareServiceProvider2(service_provider_email);
+            misc.showToast("Service Provider "+service_provider_name+" added for comparison");
+        }
+        else
+        {
+            final Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.compare_dialog);
+            Button btnServiceProvider1=dialog.findViewById(R.id.serviceProvider1);
+            Button btnServiceProvider2=dialog.findViewById(R.id.serviceProvider2);
+            btnServiceProvider1.setText(serviceProvider1);
+            btnServiceProvider2.setText(serviceProvider2);
+            btnServiceProvider1.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    sharedPref.setCompareServiceProvider1(service_provider_email);
+                    misc.showToast("Service Provider "+service_provider_name+" added for comparison");
+                    dialog.dismiss();
+
+                }
+            });
+            btnServiceProvider2.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    sharedPref.setCompareServiceProvider2(service_provider_email);
+                    misc.showToast("Service Provider "+service_provider_name+" added for comparison");
+                    dialog.dismiss();
+
+                }
+            });
+            dialog.show();
+
+        }
+    }
+
     private void makeCall(){
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + service_provider_phone_number));

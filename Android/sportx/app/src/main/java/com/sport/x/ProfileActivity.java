@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sport.x.Misc.Misc;
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -39,7 +40,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends CustomerMenu {
 
     private EditText name, email, phone;
     private ImageView image;
@@ -56,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        super.inflateView(R.layout.activity_profile);
         setTitle("Profile");
 
         name = findViewById(R.id.up_full_name);
@@ -248,6 +249,7 @@ public class ProfileActivity extends AppCompatActivity {
         jsonObject.addProperty("name", name.getText().toString().trim());
         jsonObject.addProperty("contact", phone.getText().toString());
         jsonObject.addProperty("picture", bitmapTo64);
+
 
 
         Ion.with(this)

@@ -20,6 +20,7 @@ import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Service_Provider;
 
 
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -45,7 +46,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MapsActivity extends FragmentActivity implements
+public class MapsActivity extends CustomerMenu implements
         OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {
 
@@ -70,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        super.inflateView(R.layout.activity_maps);
 
 
         misc = new Misc(this);
@@ -80,8 +81,8 @@ public class MapsActivity extends FragmentActivity implements
         service_id = intent.getStringExtra("service_id");
         service_name = intent.getStringExtra("service_name");
 
-        serviceTitle = findViewById(R.id.title);
-        serviceTitle.setText(service_name + "Service Provider");
+
+        setTitle(service_name + " Service Providers");
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(MapsActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapsActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

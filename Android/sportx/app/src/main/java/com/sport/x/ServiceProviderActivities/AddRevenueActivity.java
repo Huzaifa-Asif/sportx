@@ -40,7 +40,7 @@ import java.util.Locale;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class AddRevenueActivity extends AppCompatActivity implements OnItemSelectedListener {
+public class AddRevenueActivity extends ServiceProviderMenu implements OnItemSelectedListener {
     String email="khuz@gmail.com";
     Context context;
     SharedPref SharedPref;
@@ -54,7 +54,7 @@ public class AddRevenueActivity extends AppCompatActivity implements OnItemSelec
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_revenue);
+        super.inflateView(R.layout.activity_add_revenue);
         setTitle("Add revenue");
         context = this;
         SharedPref = new SharedPref(context);

@@ -10,12 +10,12 @@ import com.sport.x.LoginActivity;
 import com.sport.x.R;
 import com.sport.x.RegisterActivity;
 
-public class AccountsActivity extends AppCompatActivity implements View.OnClickListener  {
+public class AccountsActivity extends ServiceProviderMenu implements View.OnClickListener  {
     private CardView expense, expenseCategory,revenue,revenueCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accounts);
+        super.inflateView(R.layout.activity_accounts);
         setTitle("Accounts");
 
         expense = findViewById(R.id.expense);

@@ -35,6 +35,7 @@ import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Expense;
 import com.sport.x.Models.TournamentTeam;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.ServiceProviderActivities.ServiceProviderMenu;
 import com.sport.x.SharedPref.SharedPref;
 
 import org.json.JSONArray;
@@ -43,7 +44,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class TournamentDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class TournamentDetailActivity extends ServiceProviderMenu implements View.OnClickListener {
 
 
     private TextView _name,_service_provider, _type, _no_of_teams, _entry_fee, _no_of_days,_start_date, _winning_prize, _team_text;
@@ -60,7 +61,7 @@ public class TournamentDetailActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tournament_detail);
+        super.inflateView(R.layout.activity_tournament_detail);
         setTitle("Tournament");
 
         misc = new Misc(this);

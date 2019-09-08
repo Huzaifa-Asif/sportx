@@ -13,6 +13,10 @@
             android:icon="@drawable/job_history"
             android:title="Booking Management" />
         <item
+            android:id="@+id/compare"
+            android:icon="@drawable/compare"
+            android:title="Compare" />
+        <item
             android:id="@+id/conversation"
             android:icon="@drawable/conversation"
             android:title="Conversations" />

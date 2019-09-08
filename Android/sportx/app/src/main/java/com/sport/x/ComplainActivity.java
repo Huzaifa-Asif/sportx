@@ -9,13 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sport.x.Misc.Misc;
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 
-public class ComplainActivity extends AppCompatActivity {
+public class ComplainActivity extends CustomerMenu {
 
     private EditText msg;
     private Button submit;
@@ -25,7 +26,7 @@ public class ComplainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complain);
+        super.inflateView(R.layout.activity_complain);
         setTitle("Complain");
 
         misc = new Misc(this);

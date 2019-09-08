@@ -21,7 +21,7 @@ import com.koushikdutta.ion.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SerivceUpdatePasswordActivity extends AppCompatActivity  {
+public class SerivceUpdatePasswordActivity extends ServiceProviderMenu  {
 
     private EditText  password, confirm;
     private Button update;
@@ -32,7 +32,7 @@ public class SerivceUpdatePasswordActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_serivce_update_password);
+        super.inflateView(R.layout.activity_serivce_update_password);
         setTitle("Password Update");
         password = findViewById(R.id.up_password);
         confirm = findViewById(R.id.up_confirm_password);

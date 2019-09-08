@@ -3,20 +3,11 @@ package com.sport.x.ServiceProviderActivities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -33,7 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ExpenseActivity extends AppCompatActivity {
+public class ExpenseActivity extends ServiceProviderMenu {
 
     Misc misc;
     SharedPref SharedPref;
@@ -44,7 +35,9 @@ public class ExpenseActivity extends AppCompatActivity {
     FloatingActionButton add;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expense);
+
+        super.inflateView(R.layout.activity_expense);
+
         setTitle("Expenses");
         context = this;
         SharedPref = new SharedPref(context);
@@ -84,7 +77,7 @@ public class ExpenseActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, ServiceHomeActivity.class);
+        Intent intent = new Intent(this, AccountsActivity.class);
         startActivity(intent);
         finish();
     }

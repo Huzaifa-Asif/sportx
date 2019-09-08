@@ -18,6 +18,7 @@ import com.google.gson.JsonObject;
 import com.sport.x.AdminActivities.AllJobsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
 import com.sport.x.ServiceProviderActivities.ProviderJobsActivity;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,7 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import static android.view.View.GONE;
 
-public class CustomerPendingJobDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class CustomerPendingJobDetailsActivity extends CustomerMenu implements View.OnClickListener {
 
     private GoogleMap mMap;
     private Marker myMarker;
@@ -56,7 +57,7 @@ public class CustomerPendingJobDetailsActivity extends AppCompatActivity impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_pending_job_details);
+        super.inflateView(R.layout.activity_customer_pending_job_details);
         setTitle("Pending Request");
 
         misc = new Misc(this);

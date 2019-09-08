@@ -16,7 +16,7 @@ import com.sport.x.Fragments.ProviderInProgressJobs;
 import com.sport.x.Fragments.ProviderPendingJobs;
 import com.sport.x.R;
 
-public class ProviderJobsActivity extends AppCompatActivity {
+public class ProviderJobsActivity extends ServiceProviderMenu {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -36,7 +36,7 @@ public class ProviderJobsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_provider_jobs);
+        super.inflateView(R.layout.activity_provider_jobs);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -48,7 +48,7 @@ import java.net.URL;
 import java.util.List;
 
 
-public class ServiceProfileActivity extends AppCompatActivity  {
+public class ServiceProfileActivity extends ServiceProviderMenu  {
 
     private Button update;
     private ImageView image;
@@ -64,7 +64,7 @@ public class ServiceProfileActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_profile);
+        super.inflateView(R.layout.activity_service_profile);
         setTitle("Update Profile");
 
         misc = new Misc(this);

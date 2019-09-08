@@ -28,6 +28,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.sport.x.Adapters.CustomerServiceAdapter;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Service;
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
+import com.sport.x.ServiceProviderActivities.ServiceProviderMenu;
 import com.sport.x.SharedPref.SharedPref;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -39,8 +41,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class AllServiceActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, SearchView.OnQueryTextListener {
+public class AllServiceActivity extends CustomerMenu
+        implements  View.OnClickListener, SearchView.OnQueryTextListener {
 
     Misc misc;
     SharedPref sharedPref;
@@ -65,14 +67,13 @@ public class AllServiceActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_service);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        super.inflateView(R.layout.content_all_service);
         setTitle("Book Services");
         context = this;
 
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
+
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
         misc.saveCurrentToken();
         serviceListModel = new ArrayList<>();
@@ -94,14 +95,6 @@ public class AllServiceActivity extends AppCompatActivity
 //        electrician = findViewById(R.id.electricians);
 //        electrician.setOnClickListener(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         searchService.setOnQueryTextListener(this);
         searchService.setOnClickListener(this);
@@ -194,59 +187,6 @@ public class AllServiceActivity extends AppCompatActivity
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.customer_home) {
-            Intent home = new Intent(this, AllServiceActivity.class);
-            startActivity(home);
-            finish();
-        } else if (id == R.id.customer_profile) {
-            Intent profile = new Intent(this, ProfileActivity.class);
-            startActivity(profile);
-            finish();
-        }
-        else if (id == R.id.conversation) {
-            Intent conversation = new Intent(this, ConversationActivity.class);
-            startActivity(conversation);
-            finish();
-        }
-        else if (id == R.id.tournament) {
-//            Intent conversation = new Intent(this, ConversationActivity.class);
-//            startActivity(conversation);
-//            finish();
-        }
-        else if (id == R.id.update_password) {
-            Intent update = new Intent(this, PasswordUpdate.class);
-            startActivity(update);
-            finish();
-        }
-        else if (id == R.id.customer_history) {
-            Intent job = new Intent(this, JobHistoryActivity.class);
-            startActivity(job);
-            finish();
-        } else if (id == R.id.customer_complaints) {
-            Intent complain = new Intent(this, ComplainActivity.class);
-            startActivity(complain);
-            finish();
-        } else if (id == R.id.customer_help) {
-            Intent help = new Intent(this, HelpActivity.class);
-            help.putExtra("provider", "no");
-            startActivity(help);
-            finish();
-        } else if (id == R.id.customer_logout) {
-            sharedPref.clearSession();
-            Intent logout = new Intent(this, LoginActivity.class);
-            startActivity(logout);
-            finish();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
     @Override
     public void onClick(View v) {

@@ -54,7 +54,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RegisterServiceActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterServiceActivity extends ServiceProviderMenu implements View.OnClickListener {
 
     private Button register;
     private EditText name, email, phone, password, re_password, city,country,street_address;
@@ -73,7 +73,7 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_service);
+        super.inflateView(R.layout.activity_register_service);
         setTitle("Register As Service Provider");
 
         misc = new Misc(this);
@@ -452,7 +452,7 @@ public class RegisterServiceActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, RegisterAsActivity.class);
+        Intent intent = new Intent(this, ServiceHomeActivity.class);
         startActivity(intent);
         finish();
     }

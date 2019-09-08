@@ -42,6 +42,9 @@ import com.sport.x.Adapters.ConversationMessagesAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import com.sport.x.ServiceProviderActivities.CustomerMenu;
+import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
 
 
@@ -60,7 +63,7 @@ import com.koushikdutta.ion.Response;
 import com.sport.x.Misc.Misc;
 
 
-public class MessageActivity extends AppCompatActivity {
+public class MessageActivity extends CustomerMenu {
 
 
     String conversationId;
@@ -78,7 +81,7 @@ public class MessageActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages);
+        super.inflateView(R.layout.activity_messages);
         setTitle("Messages");
         context=this;
         SharedPref = new SharedPref(context);
@@ -140,6 +143,16 @@ public class MessageActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
+
+
+    }
+    @Override
+    public void onBackPressed() {
+
+            Intent intent = new Intent(this, ConversationActivity.class);
+            startActivity(intent);
+            finish();
+
 
 
     }

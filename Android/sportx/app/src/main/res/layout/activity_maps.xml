@@ -6,14 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MapsActivity" >
 
-    <!--<include-->
-        <!--layout="@layout/app_bar_layout"-->
-        <!--android:id="@+id/bar"/>-->
 
-    <include
-        layout="@layout/maptop"
-        android:id="@+id/map_top"
-        />
 
     <fragment
         android:layout_width="match_parent"

@@ -26,7 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class UpdateServicesActivity extends AppCompatActivity {
+public class UpdateServicesActivity extends ServiceProviderMenu {
 
     private GridLayout up_services;
     Misc misc;
@@ -40,7 +40,7 @@ public class UpdateServicesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_services);
+        super.inflateView(R.layout.activity_update_services);
 
         misc = new Misc(this);
         sharedPref = new SharedPref(this);

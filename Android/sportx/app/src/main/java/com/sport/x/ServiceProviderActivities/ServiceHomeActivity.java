@@ -49,7 +49,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ServiceHomeActivity extends AppCompatActivity
+public class ServiceHomeActivity extends ServiceProviderMenu
         implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -76,28 +76,14 @@ public class ServiceHomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        super.inflateView(R.layout.content_service_home);
+
         setTitle("Home");
 
         sharedPref = new SharedPref(this);
         misc = new Misc(this);
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
         misc.saveCurrentToken();
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View headerView = navigationView.getHeaderView(0);
-       // txt1 = headerView.findViewById(R.id.textView);
-        txt2 = headerView.findViewById(R.id.textView1);
-      //  img1 = headerView.findViewById(R.id.imageView);
-        navigationView.setNavigationItemSelectedListener(this);
 
         if(!hasPermissions(this, PERMISSIONS)){
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
@@ -132,81 +118,6 @@ public class ServiceHomeActivity extends AppCompatActivity
         }
     }
 
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.service_profile) {
-            Intent profile = new Intent(this, ServiceProfileActivity.class);
-            startActivity(profile);
-            finish();
-        }
-        else if (id == R.id.service_update_password) {
-            Intent profile = new Intent(this, SerivceUpdatePasswordActivity.class);
-            startActivity(profile);
-            finish();
-        }
-        else if (id == R.id.conversation) {
-            Intent conversation = new Intent(this, ConversationActivity.class);
-            startActivity(conversation);
-            finish();
-        }
-        else if (id == R.id.accounts) {
-            Intent accounts = new Intent(this, AccountsActivity.class);
-            startActivity(accounts);
-            finish();
-        }
-        else if (id == R.id.tournament) {
-            Intent conversation = new Intent(this, TournamentActivity.class);
-            startActivity(conversation);
-            finish();
-        }
-        else if (id == R.id.createtournament) {
-            Intent conversation = new Intent(this, CreateTournamentActivity.class);
-            startActivity(conversation);
-            finish();
-        }
-        else if (id == R.id.service_home) {
-            Intent home = new Intent(this, ServiceHomeActivity.class);
-            startActivity(home);
-            finish();
-        } else if (id == R.id.service_providers) {
-            Intent providers = new Intent(this, AllProvidersActivity.class);
-            startActivity(providers);
-            finish();
-        }else if (id == R.id.service_jobs) {
-            Intent providers = new Intent(this, ProviderJobsActivity.class);
-            startActivity(providers);
-            finish();
-        }else if (id == R.id.service_update) {
-            Intent update = new Intent(this, UpdateServicesActivity.class);
-            startActivity(update);
-            finish();
-        } else if (id == R.id.service_help) {
-            Intent help = new Intent(this, HelpActivity.class);
-            help.putExtra("provider", "yes");
-            startActivity(help);
-            finish();
-            finish();
-        } else if (id == R.id.logout) {
-            sharedPref.clearSession();
-            Intent logout = new Intent(this, LoginActivity.class);
-            startActivity(logout);
-            finish();
-        }
-        else if (id == R.id.up_password) {
-            Intent updatePassword = new Intent(this, SerivceUpdatePasswordActivity.class);
-            updatePassword.putExtra("password", password);
-            startActivity(updatePassword);
-            finish();
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

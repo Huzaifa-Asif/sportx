@@ -30,6 +30,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.sport.x.ServiceProviderActivities.ServiceProviderMenu;
 import com.sport.x.SharedPref.SharedPref;
 
 import org.json.JSONObject;
@@ -63,7 +64,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class BookingActivity extends AppCompatActivity implements OnItemSelectedListener {
+public class BookingActivity extends ServiceProviderMenu implements OnItemSelectedListener {
 
     private EditText name, email, phone, password, re_password;
     private RadioButton male, female;
@@ -97,7 +98,7 @@ public class BookingActivity extends AppCompatActivity implements OnItemSelected
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_booking);
+        super.inflateView(R.layout.activity_booking);
         setTitle("Service Provider Booking");
 
         misc = new Misc(this);
@@ -333,7 +334,6 @@ public class BookingActivity extends AppCompatActivity implements OnItemSelected
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, service_provider_profile_Activity.class);
-
         intent.putExtra("service_provider_name",service_provider_name);
         intent.putExtra("service_name", service_name);
         intent.putExtra("service_provider_email", service_provider_email);
