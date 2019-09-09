@@ -87,12 +87,12 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
         }
 
 //        TournamentTeam team
-        public void callDeleteExpenseWebservice(boolean isShowDialog,String id) {
+        public void callDeleteExpenseWebservice(boolean isShowDialog,String id, Integer pos) {
 
-//            final TournamentTeam deletedTeam=team;
+            final Integer pos_id=pos;
 
             Ion.with(context)
-                    .load("DELETE", misc.ROOT_PATH + "delete_expense/" + id)
+                    .load("DELETE", misc.ROOT_PATH + "delete_team/" + id)
                     .asString()
                     .withResponse()
                     .setCallback(new FutureCallback<Response<String>>() {
@@ -106,11 +106,12 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                             }
 
                             try {
-                                JSONObject jsonObjectExpenseDeleted = new JSONObject(result.getResult());
-                                Boolean status = jsonObjectExpenseDeleted.getBoolean("status");
+                                JSONObject jsonObjectTeamDeleted = new JSONObject(result.getResult());
+                                Boolean status = jsonObjectTeamDeleted.getBoolean("status");
                                 if(status) {
-//                                    teams.remove(deletedTeam);
-//                                    notifyDataSetChanged();
+                                    teams.remove(pos_id);
+                                    notifyDataSetChanged();
+                                    misc.showToast("Team Deleted");
                                 }
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
@@ -122,12 +123,13 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                     });
         }
 
-        public void callUpdateStateWebservice(boolean isShowDialog,String id) {
+        public void callUpdateStateWebservice(boolean isShowDialog,String id, Integer pos) {
 
-//            final TournamentTeam deletedTeam=team;
+            final Integer pos_id=pos;
+//            final String state_val=state;
 
             Ion.with(context)
-                    .load("DELETE", misc.ROOT_PATH + "delete_expense/" + id)
+                    .load("PATCH", misc.ROOT_PATH + "update_team/" + id)
                     .asString()
                     .withResponse()
                     .setCallback(new FutureCallback<Response<String>>() {
@@ -144,7 +146,7 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                                 JSONObject jsonObjectExpenseDeleted = new JSONObject(result.getResult());
                                 Boolean status = jsonObjectExpenseDeleted.getBoolean("status");
                                 if(status) {
-//                                    teams.remove(deletedTeam);
+//                                    teams.set(pos_id, state_val,teams);
 //                                    notifyDataSetChanged();
                                 }
                             } catch (JSONException e1) {
@@ -161,6 +163,8 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
         public void onClick(View v) {
 
             Log.d("adapter position: ",""+getAdapterPosition());
+                    final int adapterPosition = getAdapterPosition();
+
 
                     final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.team_details_popup);
@@ -170,6 +174,9 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                     teamContact.setText(teams.get(getAdapterPosition()).getTournamentTeamContact());
                     TextView teamState = dialog.findViewById(R.id.teamState);
                     teamState.setText(teams.get(getAdapterPosition()).getTournamentTeamState());
+
+                    String teamStateValue = teams.get(getAdapterPosition()).getTournamentTeamState();
+                    String teamStateVal;
 
                     teamContact.setOnClickListener(new View.OnClickListener()
                     {
@@ -186,18 +193,24 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                     public void onClick(View v)
                         {
 
-                            callDeleteExpenseWebservice(true,teams.get(getAdapterPosition()).getTournamentTeamId());
+                            callDeleteExpenseWebservice(true,teams.get(getAdapterPosition()).getTournamentTeamId(), adapterPosition);
                             dialog.dismiss();
 
                         }
                     });
 
 
-                    Button state=dialog.findViewById(R.id.updateState);
-                    state.setOnClickListener(new View.OnClickListener() {
+                    Button stateButton=dialog.findViewById(R.id.updateState);
+                    if(teamStateValue.equals("pending") || teamStateValue.equals("blocked"))
+                    {
+                        stateButton.setText("approve");
+                        teamStateVal="approve";
+
+                    }
+                    stateButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                         {
-                        callUpdateStateWebservice(true,teams.get(getAdapterPosition()).getTournamentTeamId());
+                        callUpdateStateWebservice(true,teams.get(getAdapterPosition()).getTournamentTeamId(), adapterPosition);
                         dialog.dismiss();
 
                         }

@@ -216,7 +216,7 @@ public class TournamentDetailActivity extends ServiceProviderMenu implements Vie
 
 //                                Log.d( "TeamPlayers: ",TeamPlayers.getString(0));
 
-                                teams.add(new TournamentTeam(state, name, players, tournamentId, teamId, adderEmail, teamContact));
+                                teams.add(new TournamentTeam(state, name, players,teamId, tournamentId,  adderEmail, teamContact));
 
                             }
 

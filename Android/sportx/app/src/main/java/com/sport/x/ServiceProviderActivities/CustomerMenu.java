@@ -24,6 +24,7 @@ import com.sport.x.PasswordUpdate;
 import com.sport.x.ProfileActivity;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
+import com.sport.x.TournamentActivity;
 
 public class CustomerMenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -86,9 +87,9 @@ public class CustomerMenu extends AppCompatActivity implements NavigationView.On
             finish();
         }
         else if (id == R.id.tournament) {
-//            Intent conversation = new Intent(this, ConversationActivity.class);
-//            startActivity(conversation);
-//            finish();
+            Intent conversation = new Intent(this, TournamentActivity.class);
+            startActivity(conversation);
+            finish();
         }
         else if (id == R.id.update_password) {
             Intent update = new Intent(this, PasswordUpdate.class);
