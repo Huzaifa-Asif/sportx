@@ -10,11 +10,11 @@ import android.support.v4.view.ViewPager;
 
 import com.sport.x.Fragments.ConversationActive;
 import com.sport.x.Fragments.ConversationArchived;
-import com.sport.x.ServiceProviderActivities.CustomerMenu;
+import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
 
-public class ConversationActivity extends CustomerMenu {
+public class ConversationActivity extends Menu {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -37,9 +37,7 @@ public class ConversationActivity extends CustomerMenu {
         super.onCreate(savedInstanceState);
         super.inflateView(R.layout.activity_conversation);
         setTitle("Conversations");
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setTitle("Conversations");
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

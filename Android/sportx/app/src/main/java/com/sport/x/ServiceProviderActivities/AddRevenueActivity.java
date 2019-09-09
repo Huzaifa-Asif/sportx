@@ -40,7 +40,7 @@ import java.util.Locale;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class AddRevenueActivity extends ServiceProviderMenu implements OnItemSelectedListener {
+public class AddRevenueActivity extends Menu implements OnItemSelectedListener {
     String email="khuz@gmail.com";
     Context context;
     SharedPref SharedPref;

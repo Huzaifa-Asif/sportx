@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sport.x.CustomerInProgressJobDetailsActivity;
+import com.sport.x.InProgressJobDetailsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Job;
 import com.sport.x.R;
@@ -67,7 +67,7 @@ public class ProviderInProgessAdapter extends RecyclerView.Adapter<ProviderInPro
 
 
         public void onClick(View v) {
-            Intent intent = new Intent(context, CustomerInProgressJobDetailsActivity.class);
+            Intent intent = new Intent(context, InProgressJobDetailsActivity.class);
             intent.putExtra("date", jobsListModel.get(getAdapterPosition()).getDate());
             intent.putExtra("job_id", jobsListModel.get(getAdapterPosition()).getJobId());
             intent.putExtra("state", jobsListModel.get(getAdapterPosition()).getState());

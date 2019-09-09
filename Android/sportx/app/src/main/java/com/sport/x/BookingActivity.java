@@ -1,70 +1,43 @@
 package com.sport.x;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.sport.x.Misc.Misc;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
-import com.sport.x.ServiceProviderActivities.ServiceProviderMenu;
+import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.SharedPref.SharedPref;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.InputStream;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 // Date and Time
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class BookingActivity extends ServiceProviderMenu implements OnItemSelectedListener {
+public class BookingActivity extends Menu implements OnItemSelectedListener, View.OnClickListener {
 
     private EditText name, email, phone, password, re_password;
     private RadioButton male, female;
@@ -114,13 +87,13 @@ public class BookingActivity extends ServiceProviderMenu implements OnItemSelect
 
         // Date and Time
 
-        //btnDatePicker=(Button)findViewById(R.id.btn_date);
-        //btnTimePicker=(Button)findViewById(R.id.btn_time);
+        btnDatePicker=(Button)findViewById(R.id.btn_date);
+        btnTimePicker=(Button)findViewById(R.id.btn_time);
         txtDate=(EditText)findViewById(R.id.in_date);
         txtTime=(EditText)findViewById(R.id.in_time);
 
-//        btnDatePicker.setOnClickListener(this);
-//        btnTimePicker.setOnClickListener(this);
+        btnDatePicker.setOnClickListener(this);
+        btnTimePicker.setOnClickListener(this);
 
         // Get Service Provider Profile Intent data
 
@@ -180,16 +153,14 @@ public class BookingActivity extends ServiceProviderMenu implements OnItemSelect
         }
     }
 
-//
 
-//    @Override
-//    public void onClick(View v)
-//    {
+    @Override
+    public void onClick(View v) {
 
-//
-//        if (v == btnDatePicker) {
 
-            protected  void DatePickerClick(View v){
+        if (v == btnDatePicker) {
+
+
             // Get Current Date
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
@@ -197,7 +168,7 @@ public class BookingActivity extends ServiceProviderMenu implements OnItemSelect
             mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(this,R.style.DialogTheme,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.DialogTheme,
                     new DatePickerDialog.OnDateSetListener() {
 
                         @Override
@@ -210,9 +181,9 @@ public class BookingActivity extends ServiceProviderMenu implements OnItemSelect
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
+        else if (v == btnTimePicker) {
 
 
-            protected void TimePickerClick(View v){
             // Get Current Time
             final Calendar c = Calendar.getInstance();
             mHour = c.get(Calendar.HOUR_OF_DAY);
@@ -231,7 +202,7 @@ public class BookingActivity extends ServiceProviderMenu implements OnItemSelect
                     }, mHour, mMinute, false);
             timePickerDialog.show();
         }
-
+    }
 
     private boolean validate(){
 

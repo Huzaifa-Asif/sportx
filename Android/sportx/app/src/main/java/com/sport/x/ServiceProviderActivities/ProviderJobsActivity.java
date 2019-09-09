@@ -16,7 +16,7 @@ import com.sport.x.Fragments.ProviderInProgressJobs;
 import com.sport.x.Fragments.ProviderPendingJobs;
 import com.sport.x.R;
 
-public class ProviderJobsActivity extends ServiceProviderMenu {
+public class ProviderJobsActivity extends Menu {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -37,10 +37,8 @@ public class ProviderJobsActivity extends ServiceProviderMenu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.inflateView(R.layout.activity_provider_jobs);
+        setTitle("Booking Management Service Provider");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Job History");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

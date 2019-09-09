@@ -49,7 +49,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ServiceHomeActivity extends ServiceProviderMenu
+public class ServiceHomeActivity extends Menu
         implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
 

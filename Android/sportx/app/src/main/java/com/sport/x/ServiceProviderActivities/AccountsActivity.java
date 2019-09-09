@@ -10,7 +10,7 @@ import com.sport.x.LoginActivity;
 import com.sport.x.R;
 import com.sport.x.RegisterActivity;
 
-public class AccountsActivity extends ServiceProviderMenu implements View.OnClickListener  {
+public class AccountsActivity extends Menu implements View.OnClickListener  {
     private CardView expense, expenseCategory,revenue,revenueCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

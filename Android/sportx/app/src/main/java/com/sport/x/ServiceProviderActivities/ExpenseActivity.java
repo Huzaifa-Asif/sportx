@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ExpenseActivity extends ServiceProviderMenu {
+public class ExpenseActivity extends Menu {
 
     Misc misc;
     SharedPref SharedPref;

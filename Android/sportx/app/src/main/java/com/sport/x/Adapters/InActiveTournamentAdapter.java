@@ -11,9 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sport.x.CustomerPendingJobDetailsActivity;
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.Job;
 import com.sport.x.Models.Tournament;
 import com.sport.x.R;
 import com.sport.x.TournamentDetailActivity;

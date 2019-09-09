@@ -12,11 +12,11 @@ import android.os.Bundle;
 import com.sport.x.Fragments.CustomerCompletedJobs;
 import com.sport.x.Fragments.CustomerInProgressJobs;
 import com.sport.x.Fragments.CustomerPendingJobs;
-import com.sport.x.ServiceProviderActivities.CustomerMenu;
+import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
 
-public class JobHistoryActivity extends CustomerMenu {
+public class JobHistoryActivity extends Menu {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -40,9 +40,7 @@ public class JobHistoryActivity extends CustomerMenu {
         super.inflateView(R.layout.activity_job_history);
         setTitle("Booking Management");
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setTitle("Booking Management");
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

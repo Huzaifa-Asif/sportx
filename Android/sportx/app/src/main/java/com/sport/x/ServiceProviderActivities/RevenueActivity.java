@@ -35,7 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class RevenueActivity extends ServiceProviderMenu {
+public class RevenueActivity extends Menu {
 
 
     Misc misc;

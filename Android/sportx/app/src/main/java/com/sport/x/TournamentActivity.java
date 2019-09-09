@@ -2,7 +2,6 @@ package com.sport.x;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,11 +12,11 @@ import android.os.Bundle;
 import com.sport.x.Fragments.TournamentCompleted;
 import com.sport.x.Fragments.TournamentInProgress;
 import com.sport.x.Fragments.TournamentInActive;
+import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
-import com.sport.x.ServiceProviderActivities.ServiceProviderMenu;
 import com.sport.x.SharedPref.SharedPref;
 
-public class TournamentActivity extends ServiceProviderMenu {
+public class TournamentActivity extends Menu {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
