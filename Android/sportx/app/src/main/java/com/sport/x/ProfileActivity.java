@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -23,13 +22,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sport.x.Misc.Misc;
-import com.sport.x.ServiceProviderActivities.CustomerMenu;
+import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,10 +35,9 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
-import java.net.URL;
 
 
-public class ProfileActivity extends CustomerMenu {
+public class ProfileActivity extends Menu {
 
     private EditText name, email, phone;
     private ImageView image;

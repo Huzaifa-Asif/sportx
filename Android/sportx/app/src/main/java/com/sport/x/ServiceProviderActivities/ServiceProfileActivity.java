@@ -48,7 +48,7 @@ import java.net.URL;
 import java.util.List;
 
 
-public class ServiceProfileActivity extends ServiceProviderMenu  {
+public class ServiceProfileActivity extends Menu  {
 
     private Button update;
     private ImageView image;

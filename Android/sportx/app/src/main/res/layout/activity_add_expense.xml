@@ -7,7 +7,7 @@
     android:paddingRight="16dp"
     android:paddingLeft="16dp"
     android:orientation="vertical" >
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
@@ -43,7 +43,7 @@
                 android:height="@dimen/_30sdp"/>
 
     </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
@@ -92,8 +92,6 @@
             android:text="SELECT DATE"
             android:id="@+id/btn_date"
             android:onClick="DatePickerClick"
-            android:layout_alignBottom="@+id/in_date"
-            android:layout_alignEnd="@+id/in_date"
             android:background="@color/colorPrimary"
             android:textColor="#fff"
             />

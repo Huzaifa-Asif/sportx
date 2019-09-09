@@ -26,7 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class UpdateServicesActivity extends ServiceProviderMenu {
+public class UpdateServicesActivity extends Menu {
 
     private GridLayout up_services;
     Misc misc;

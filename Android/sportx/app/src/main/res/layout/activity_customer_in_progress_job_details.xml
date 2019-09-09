@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="#fff"
     android:layout_height="match_parent"
-    tools:context=".CustomerInProgressJobDetailsActivity">
+    tools:context=".InProgressJobDetailsActivity">
 
 
     <android.support.v7.widget.CardView

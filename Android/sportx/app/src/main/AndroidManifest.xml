@@ -83,9 +83,9 @@
         <activity android:name=".ServiceProviderActivities.RegisterServiceActivity" />
         <activity android:name=".RegisterAsActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".CustomerCompletedJobDetailsActivity" />
-        <activity android:name=".CustomerInProgressJobDetailsActivity" />
-        <activity android:name=".CustomerPendingJobDetailsActivity" />
+        <activity android:name=".CompletedJobDetailsActivity" />
+        <activity android:name=".InProgressJobDetailsActivity" />
+        <activity android:name=".PendingJobDetailsActivity" />
         <activity android:name=".BookingActivity" />
         <activity android:name=".service_provider_profile_Activity" />
         <activity android:name=".PasswordUpdate" />
@@ -125,9 +125,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".notifications.Notifications">
 
-        </activity>
+
+
 
         <activity android:name=".ServiceProviderActivities.ExpenseActivity"></activity>
         <activity android:name=".ServiceProviderActivities.AccountsActivity"></activity>

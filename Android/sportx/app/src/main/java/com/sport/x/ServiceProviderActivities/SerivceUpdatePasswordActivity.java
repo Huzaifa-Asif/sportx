@@ -21,7 +21,7 @@ import com.koushikdutta.ion.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SerivceUpdatePasswordActivity extends ServiceProviderMenu  {
+public class SerivceUpdatePasswordActivity extends Menu  {
 
     private EditText  password, confirm;
     private Button update;

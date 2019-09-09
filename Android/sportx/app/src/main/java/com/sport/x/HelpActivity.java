@@ -2,16 +2,15 @@ package com.sport.x;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.sport.x.ServiceProviderActivities.CustomerMenu;
+import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
 
-public class HelpActivity extends CustomerMenu {
+public class HelpActivity extends Menu {
 
     private String provider = "no";
     private TextView phone;

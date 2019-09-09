@@ -10,19 +10,21 @@
     android:orientation="vertical" >
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:paddingRight="8dp"
-        android:paddingLeft="16dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="16dp"
+        android:weightSum="3"
         android:background="@color/colorPrimary"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/categoryField"
             android:text="Category"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:width="100dp"
@@ -31,7 +33,8 @@
         <TextView
             android:id="@+id/amountField"
             android:text="Amount"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:width="100dp"
@@ -41,25 +44,28 @@
         <TextView
             android:id="@+id/dateField"
             android:text="Date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:width="100dp"
             android:height="@dimen/_30sdp"/>
 
     </LinearLayout>
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        >
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/reyclerview_expense_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="-8dp"
         />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
@@ -71,7 +77,7 @@
             android:src="@drawable/ic_add_circle_green_24dp" />
 
     </FrameLayout>
-    </HorizontalScrollView>
+    </ScrollView>
 </LinearLayout>
 
 

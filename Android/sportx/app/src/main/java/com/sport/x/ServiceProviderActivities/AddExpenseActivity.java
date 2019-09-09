@@ -40,7 +40,7 @@ import java.util.Locale;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class AddExpenseActivity extends ServiceProviderMenu implements OnItemSelectedListener {
+public class AddExpenseActivity extends Menu implements OnItemSelectedListener {
     String email="khuz@gmail.com";
     Context context;
     SharedPref SharedPref;
@@ -48,7 +48,8 @@ public class AddExpenseActivity extends ServiceProviderMenu implements OnItemSel
     Spinner spin;
     ArrayList<String> categories = new ArrayList<String>();
     EditText newCategory,amount,description,txtDate;
-    Button add;
+    Button add,date;
+
     String expenseCategory;
     private int mYear, mMonth, mDay;
     Boolean flag=false;
@@ -71,6 +72,7 @@ public class AddExpenseActivity extends ServiceProviderMenu implements OnItemSel
                 callAddExpenseWebService();
             }
         });
+        date=findViewById(R.id.btn_date);
 
         newCategory.setVisibility(View.INVISIBLE);
         categories.add("Select Category");
@@ -113,6 +115,7 @@ public class AddExpenseActivity extends ServiceProviderMenu implements OnItemSel
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(parent.getItemAtPosition(position).toString().equals("Other"))
         {
+
             newCategory.setVisibility(View.VISIBLE);
             flag=true;
         }

@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sport.x.CustomerInProgressJobDetailsActivity;
-import com.sport.x.CustomerPendingJobDetailsActivity;
+import com.sport.x.PendingJobDetailsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Job;
 import com.sport.x.R;
@@ -71,7 +70,7 @@ public class PendingJobsAdapter extends RecyclerView.Adapter<PendingJobsAdapter.
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, CustomerPendingJobDetailsActivity.class);
+            Intent intent = new Intent(context, PendingJobDetailsActivity.class);
             intent.putExtra("date", jobsListModel.get(getAdapterPosition()).getDate());
             intent.putExtra("time", jobsListModel.get(getAdapterPosition()).getTime());
             intent.putExtra("job_id", jobsListModel.get(getAdapterPosition()).getJobId());

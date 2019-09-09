@@ -32,7 +32,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ExpenseCategoryActivity extends ServiceProviderMenu {
+public class ExpenseCategoryActivity extends Menu {
     Misc misc;
     SharedPref SharedPref;
     Context context;

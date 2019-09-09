@@ -40,7 +40,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
-public class ServiceUpdatePassword extends ServiceProviderMenu{
+public class ServiceUpdatePassword extends Menu{
 
     private EditText  password, confirm;
     private Button update;

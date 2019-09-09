@@ -54,7 +54,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RegisterServiceActivity extends ServiceProviderMenu implements View.OnClickListener {
+public class RegisterServiceActivity extends Menu implements View.OnClickListener {
 
     private Button register;
     private EditText name, email, phone, password, re_password, city,country,street_address;

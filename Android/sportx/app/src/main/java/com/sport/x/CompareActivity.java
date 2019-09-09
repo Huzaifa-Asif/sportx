@@ -1,12 +1,17 @@
 package com.sport.x;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,14 +24,14 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.sport.x.Misc.Misc;
-import com.sport.x.ServiceProviderActivities.CustomerMenu;
+import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.SharedPref.SharedPref;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CompareActivity extends CustomerMenu {
+public class CompareActivity extends Menu {
 TextView name1,name2,bookings1,bookings2,ratings1,ratings2,avg1,avg2,distance1,distance2;
 Misc misc;
 SharedPref sharedPref;
@@ -34,7 +39,7 @@ private Location currentLocation;
 private FusedLocationProviderClient fusedLocationProviderClient;
 private double current_latitude, current_longitude;
 private static final int LOCATION_REQUEST_CODE = 101;
-
+Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +57,7 @@ private static final int LOCATION_REQUEST_CODE = 101;
         distance2 = findViewById(R.id.distance2);
         misc=new Misc(this);
         sharedPref=new SharedPref(this);
+        context=this;
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(CompareActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(CompareActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
@@ -83,9 +89,42 @@ private static final int LOCATION_REQUEST_CODE = 101;
                     current_longitude = currentLocation.getLongitude();
                     String email1=sharedPref.getCompareServiceProvider1();
                     String email2=sharedPref.getCompareServiceProvider2();
-                    if(email1.equals("") || email2.equals(""))
+                    Log.wtf("sp1",email1);
+                    Log.wtf("sp1",email2);
+                    if(email1==null || email2==null)
                     {
-                        misc.showToast("Please Select Service Providers for Comparison");
+                        final Dialog dialog = new Dialog(context);
+                        dialog.setContentView(R.layout.compare_dialog_service_provider_short);
+                        TextView serviceProvider1=dialog.findViewById(R.id.serviceProvider1);
+                        TextView serviceProvider2=dialog.findViewById(R.id.serviceProvider2);
+                        if(email1==null)
+                        {
+                            serviceProvider1.setText("NULL");
+                        }
+                        else
+                        {
+                            serviceProvider1.setText(email1);
+                        }
+                        if(email2==null)
+                        {
+                            serviceProvider2.setText("NULL");
+                        }
+                        else
+                        {
+                            serviceProvider2.setText(email2);
+                        }
+
+                        Button accept=dialog.findViewById(R.id.accept);
+                        accept.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                                Intent intent = new Intent(context, AllServiceActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        });
+                        dialog.show();
                     }
                     else
                     {
