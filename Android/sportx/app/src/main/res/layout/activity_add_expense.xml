@@ -91,7 +91,6 @@
             android:layout_height="wrap_content"
             android:text="SELECT DATE"
             android:id="@+id/btn_date"
-            android:onClick="DatePickerClick"
             android:background="@color/colorPrimary"
             android:textColor="#fff"
             />

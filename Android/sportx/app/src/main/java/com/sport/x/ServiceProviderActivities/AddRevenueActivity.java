@@ -40,7 +40,7 @@ import java.util.Locale;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class AddRevenueActivity extends Menu implements OnItemSelectedListener {
+public class AddRevenueActivity extends Menu implements OnItemSelectedListener,View.OnClickListener {
     String email="khuz@gmail.com";
     Context context;
     SharedPref SharedPref;
@@ -48,7 +48,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener {
     Spinner spin;
     ArrayList<String> categories = new ArrayList<String>();
     EditText newCategory,amount,date,description,txtDate;
-    Button add;
+    Button add,btndate;
     String revenueCategory;
     private int mYear, mMonth, mDay;
 
@@ -69,7 +69,8 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener {
                 callAddrevenueWebService();
             }
         });
-
+        btndate=findViewById(R.id.btn_date);
+        btndate.setOnClickListener(this);
         newCategory.setVisibility(View.INVISIBLE);
         categories.add("Select Category");
         callrevenueCategoryWebservice(true);
@@ -106,6 +107,30 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener {
 
     }
 
+    @Override
+    public void onClick(View v) {
+
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.DialogTheme,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+
+    }
 
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -235,27 +260,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener {
                 });
     }
 
-    protected  void DatePickerClick(View v){
-        // Get Current Date
-        final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
 
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,R.style.DialogTheme,
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-
-                        txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
-    }
 
     @Override
     public void onBackPressed() {

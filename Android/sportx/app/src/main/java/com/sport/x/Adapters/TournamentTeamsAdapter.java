@@ -109,7 +109,8 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                                 JSONObject jsonObjectTeamDeleted = new JSONObject(result.getResult());
                                 Boolean status = jsonObjectTeamDeleted.getBoolean("status");
                                 if(status) {
-                                    teams.remove(pos_id);
+                                    teams.remove(teams.get(pos_id));
+
                                     notifyDataSetChanged();
                                     misc.showToast("Team Deleted");
                                 }
