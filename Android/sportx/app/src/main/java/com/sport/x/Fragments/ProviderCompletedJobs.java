@@ -72,7 +72,7 @@ public class ProviderCompletedJobs extends Fragment {
         pd.setCancelable(false);
         pd.show();
         Ion.with(context)
-                .load(misc.ROOT_PATH+"serviceProviderCompletedBookings/"+sharedPref.getEmail())
+                .load(misc.ROOT_PATH+"bookingdetails/serviceProviderCompletedBookings/"+sharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

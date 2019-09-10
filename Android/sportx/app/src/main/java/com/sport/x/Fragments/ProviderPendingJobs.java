@@ -71,7 +71,7 @@ public class ProviderPendingJobs extends Fragment {
         pd.setCancelable(false);
         pd.show();
         Ion.with(context)
-                .load(misc.ROOT_PATH+"serviceProviderPendingBookings/"+sharedPref.getEmail())
+                .load(misc.ROOT_PATH+"bookingdetails/serviceProviderPendingBookings/"+sharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

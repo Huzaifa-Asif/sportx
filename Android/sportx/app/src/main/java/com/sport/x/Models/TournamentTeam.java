@@ -4,6 +4,9 @@ import org.json.JSONArray;
 
 public class TournamentTeam {
 
+
+
+
     private String state;
     private String name;
 //    private String [] players = new String[15];
@@ -24,6 +27,16 @@ public class TournamentTeam {
         this.adderEmail = adderEmail;
         this.teamContact = teamContact;
 
+    }
+
+    // setter
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    // getters
+    public String getState() {
+        return state;
     }
 
     public String getTournamentTeamState() {

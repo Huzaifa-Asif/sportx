@@ -254,7 +254,7 @@ public class BookingActivity extends Menu implements OnItemSelectedListener, Vie
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"add_bookingDetails")
+                .load(misc.ROOT_PATH+"bookingdetails/add_bookingDetails")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

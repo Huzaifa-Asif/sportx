@@ -73,7 +73,7 @@ public class ConversationActive extends Fragment {
         pd.setCancelable(false);
         pd.show();
         Ion.with(context)
-                .load(misc.ROOT_PATH+"get_conversation_by_email_active/"+sharedPref.getEmail())
+                .load(misc.ROOT_PATH+"conversation/get_conversation_by_email_active/"+sharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

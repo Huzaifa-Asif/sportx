@@ -225,7 +225,7 @@ public class RegisterActivity extends AppCompatActivity {
 //        jsonObject.addProperty("user_gender", selectedGender);
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"signup_customer")
+                .load(misc.ROOT_PATH+"customer/signup_customer")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -284,7 +284,7 @@ public class RegisterActivity extends AppCompatActivity {
 //        jsonObject.addProperty("user_gender", selectedGender);
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"signup_customer")
+                .load(misc.ROOT_PATH+"customer/signup_customer")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

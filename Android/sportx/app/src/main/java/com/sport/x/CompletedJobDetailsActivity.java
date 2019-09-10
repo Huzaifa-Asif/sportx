@@ -115,7 +115,7 @@ public class CompletedJobDetailsActivity extends Menu {
         pd.show();
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"findRating/"+job_id)
+                .load(misc.ROOT_PATH+"ratingandfeedback/findRating/"+job_id)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -184,7 +184,7 @@ public class CompletedJobDetailsActivity extends Menu {
         rating.addProperty("serviceProviderName", serviceName);
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"post_rating")
+                .load(misc.ROOT_PATH+"ratingandfeedback/post_rating")
                 .setJsonObjectBody(rating)
                 .asString()
                 .withResponse()

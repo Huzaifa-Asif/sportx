@@ -175,7 +175,7 @@ public class InProgressJobDetailsActivity extends Menu implements View.OnClickLi
         jsonObject.addProperty("state", status);
 
         Ion.with(this)
-                .load("PATCH",misc.ROOT_PATH+"update_bookingState/"+jobId)
+                .load("PATCH",misc.ROOT_PATH+"bookingdetails/update_bookingState/"+jobId)
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -216,7 +216,7 @@ public class InProgressJobDetailsActivity extends Menu implements View.OnClickLi
         jsonObject.addProperty("state", status);
 
         Ion.with(this)
-                .load("PATCH",misc.ROOT_PATH+"update_bookingState/"+jobId)
+                .load("PATCH",misc.ROOT_PATH+"bookingdetails/update_bookingState/"+jobId)
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

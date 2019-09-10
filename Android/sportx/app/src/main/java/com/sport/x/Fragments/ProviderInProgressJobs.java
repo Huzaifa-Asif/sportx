@@ -69,7 +69,7 @@ public class ProviderInProgressJobs extends Fragment {
         pd.setCancelable(false);
         pd.show();
         Ion.with(context)
-                .load(misc.ROOT_PATH+"serviceProviderInProgressBookings/"+sharedPref.getEmail())
+                .load(misc.ROOT_PATH+"bookingdetails/serviceProviderInProgressBookings/"+sharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

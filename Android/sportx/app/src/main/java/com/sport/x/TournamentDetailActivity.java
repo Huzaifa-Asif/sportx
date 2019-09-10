@@ -159,7 +159,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         final int teamSize = teams.size();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "get_team_by_tournament/" + tournament_id)
+                .load("GET", misc.ROOT_PATH + "tournament/get_team_by_tournament/" + tournament_id)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

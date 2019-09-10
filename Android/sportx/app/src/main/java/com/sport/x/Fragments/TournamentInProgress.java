@@ -73,7 +73,7 @@ public class TournamentInProgress extends Fragment {
         pd.setCancelable(false);
         pd.show();
         Ion.with(context)
-                .load(misc.ROOT_PATH+"get_tournament_by_serviceProvider/"+sharedPref.getEmail())
+                .load(misc.ROOT_PATH+"tournament/get_tournament_by_serviceProvider/"+sharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

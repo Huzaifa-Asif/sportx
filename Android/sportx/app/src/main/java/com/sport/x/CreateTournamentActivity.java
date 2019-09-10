@@ -294,7 +294,7 @@ public class CreateTournamentActivity extends Menu implements OnItemSelectedList
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"add_tournament")
+                .load(misc.ROOT_PATH+"tournament/add_tournament")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

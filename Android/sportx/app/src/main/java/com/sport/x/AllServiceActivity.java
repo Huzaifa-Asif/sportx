@@ -124,7 +124,7 @@ public class AllServiceActivity extends Menu
     public void getServices(){
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"get_serviceCategory")
+                .load(misc.ROOT_PATH+"servicecategory/get_serviceCategory")
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

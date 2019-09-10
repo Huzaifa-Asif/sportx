@@ -154,7 +154,7 @@ public class MessageActivity extends Menu {
         final int messagesSize = messages.size();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "get_message_by_conversationId/" + conversationId)
+                .load("GET", misc.ROOT_PATH + "message/get_message_by_conversationId/" + conversationId)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -232,7 +232,7 @@ public class MessageActivity extends Menu {
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"send_message")
+                .load(misc.ROOT_PATH+"message/send_message")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         jsonObject.addProperty("password", password);
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"login")
+                .load(misc.ROOT_PATH+"shared/login")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

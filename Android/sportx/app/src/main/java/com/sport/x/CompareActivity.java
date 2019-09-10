@@ -159,7 +159,7 @@ Context context;
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"compare")
+                .load(misc.ROOT_PATH+"serviceprovider/compare")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

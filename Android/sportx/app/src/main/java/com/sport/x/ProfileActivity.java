@@ -250,7 +250,7 @@ public class ProfileActivity extends Menu {
 
 
         Ion.with(this)
-                .load("PATCH", misc.ROOT_PATH+"update_customer/"+sharedPref.getEmail())
+                .load("PATCH", misc.ROOT_PATH+"customer/update_customer/"+sharedPref.getEmail())
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -315,7 +315,7 @@ public class ProfileActivity extends Menu {
 
 
         Ion.with(this)
-                .load("PATCH", misc.ROOT_PATH+"update_customer/"+sharedPref.getEmail())
+                .load("PATCH", misc.ROOT_PATH+"customer/update_customer/"+sharedPref.getEmail())
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
