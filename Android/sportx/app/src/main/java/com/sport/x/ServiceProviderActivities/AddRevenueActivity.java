@@ -51,6 +51,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
     Button add,btndate;
     String revenueCategory;
     private int mYear, mMonth, mDay;
+    Boolean flag=false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,6 +139,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
         if(parent.getItemAtPosition(position).toString().equals("Other"))
         {
             newCategory.setVisibility(View.VISIBLE);
+            flag=true;
         }
         else
         {
@@ -205,7 +207,16 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
         pd.setCancelable(false);
         pd.show();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("revenueCategory", revenueCategory);
+        if(flag)
+        {
+            jsonObject.addProperty("revenueCategory", newCategory.getText().toString());
+        }
+        else
+        {
+            jsonObject.addProperty("revenueCategory", revenueCategory);
+        }
+
+
         jsonObject.addProperty("serviceProviderEmail", SharedPref.getEmail());
         jsonObject.addProperty("amount", amount.getText().toString());
         jsonObject.addProperty("date", txtDate.getText().toString());

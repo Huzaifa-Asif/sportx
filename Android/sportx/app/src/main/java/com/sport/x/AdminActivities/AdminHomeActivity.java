@@ -38,11 +38,11 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
             startActivity(intent);
             finish();
         }
-        if(v.getId() == job_history.getId()){
-            Intent intent = new Intent(this, AllJobsActivity.class);
-            startActivity(intent);
-            finish();
-        }
+//        if(v.getId() == job_history.getId()){
+//            Intent intent = new Intent(this, AllJobsActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
         if(v.getId() == service_providers.getId()){
             Intent intent = new Intent(this, AllServiceProvidersActivity.class);
             startActivity(intent);

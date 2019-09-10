@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
-import com.sport.x.AdminActivities.AllJobsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.ServiceProviderActivities.ProviderJobsActivity;
@@ -115,11 +114,7 @@ public class PendingJobDetailsActivity extends Menu implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        if(sharedPref.getUserId() == null) {
-            Intent intent = new Intent(this, AllJobsActivity.class);
-            startActivity(intent);
-            finish();
-        }
+
         if(sharedPref.getUserRole() == 1) {
             Intent intent = new Intent(this, ProviderJobsActivity.class);
             startActivity(intent);

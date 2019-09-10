@@ -84,7 +84,7 @@ public class Misc {
         if(SharedPref.getUserRole()==1)
         {
             Ion.with(context)
-                    .load("PATCH", misc.ROOT_PATH+"update_serviceProvider/"+SharedPref.getEmail())
+                    .load("PATCH", misc.ROOT_PATH+"serviceprovider/update_serviceProvider/"+SharedPref.getEmail())
                     .setJsonObjectBody(jsonObject)
                     .asString()
                     .withResponse()
@@ -120,7 +120,7 @@ public class Misc {
         else if(SharedPref.getUserRole()==2)
         {
             Ion.with(context)
-                    .load("PATCH",misc.ROOT_PATH+"update_customer/"+SharedPref.getEmail())
+                    .load("PATCH",misc.ROOT_PATH+"customer/update_customer/"+SharedPref.getEmail())
                     .setJsonObjectBody(jsonObject)
                     .asString()
                     .withResponse()
