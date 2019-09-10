@@ -41,7 +41,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 
 public class AddRevenueActivity extends Menu implements OnItemSelectedListener,View.OnClickListener {
-    String email="khuz@gmail.com";
+    String email;
     Context context;
     SharedPref SharedPref;
     Misc misc;
@@ -59,6 +59,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
         context = this;
         SharedPref = new SharedPref(context);
         misc = new Misc(context);
+        email=sharedPref.getEmail();
         newCategory=findViewById(R.id.newCategory);
         amount=findViewById(R.id.amount);
         txtDate=findViewById(R.id.in_date1);

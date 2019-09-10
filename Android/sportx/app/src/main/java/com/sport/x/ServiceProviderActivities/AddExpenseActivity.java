@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -76,9 +77,9 @@ public class AddExpenseActivity extends Menu implements OnItemSelectedListener,V
         });
         date=findViewById(R.id.btn_date);
         date.setOnClickListener(this);
-
-        newCategory.setVisibility(View.INVISIBLE);
+        newCategory.setVisibility(View.GONE);
         categories.add("Select Category");
+        email=sharedPref.getEmail();
         callExpenseCategoryWebservice(true);
         spin = findViewById(R.id.spinner);
         final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
@@ -88,6 +89,7 @@ public class AddExpenseActivity extends Menu implements OnItemSelectedListener,V
                 if (position == 0) {
                     // Disable the first item from Spinner
                     // First item will be use for hint
+
                     return false;
                 } else {
                     return true;
@@ -102,6 +104,7 @@ public class AddExpenseActivity extends Menu implements OnItemSelectedListener,V
                 if (position == 0) {
                     // Set the hint text color gray
                     tv.setTextColor(Color.GRAY);
+
                 } else {
                     tv.setTextColor(Color.BLACK);
                 }

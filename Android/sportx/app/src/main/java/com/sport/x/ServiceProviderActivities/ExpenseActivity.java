@@ -71,8 +71,19 @@ public class ExpenseActivity extends Menu {
             }
         });
         expenseAdapter = new ExpenseAdapter(this, expenses);
-        expenseRecycler.setLayoutManager(new LinearLayoutManager(this));
         expenseRecycler.setAdapter(expenseAdapter);
+        expenseRecycler.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this)
+        {
+
+            @Override
+            public boolean isAutoMeasureEnabled() {
+                return false;
+            }
+        };
+
+        expenseRecycler.setLayoutManager(llm);
+
 
     }
     @Override

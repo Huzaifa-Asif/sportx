@@ -98,7 +98,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
                     date.setText(expenseDetails.getDate());
                     TextView description = dialog.findViewById(R.id.description);
                     description.setText(expenseDetails.getDescription());
-                    Button delete=dialog.findViewById(R.id.delete);
+                    ImageButton delete=dialog.findViewById(R.id.delete);
                     delete.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             callDeleteExpenseWebservice(true,expenseDetails.getExpenseId(),expense);

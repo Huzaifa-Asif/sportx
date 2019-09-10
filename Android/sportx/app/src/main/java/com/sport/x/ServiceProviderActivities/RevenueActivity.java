@@ -80,8 +80,18 @@ public class RevenueActivity extends Menu {
             }
         });
         revenueAdapter = new RevenueAdapter(this, revenues);
-        revenueRecycler.setLayoutManager(new LinearLayoutManager(this));
         revenueRecycler.setAdapter(revenueAdapter);
+        revenueRecycler.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this)
+        {
+
+            @Override
+            public boolean isAutoMeasureEnabled() {
+                return false;
+            }
+        };
+
+        revenueRecycler.setLayoutManager(llm);
     }
 
     @Override
