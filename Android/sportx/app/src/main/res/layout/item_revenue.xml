@@ -1,127 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingRight="8dp"
-    android:paddingLeft="8dp"
     android:layout_gravity="fill_vertical"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:layout_marginTop="-8dp"
+    android:weightSum="4">
 
-    <View
-        android:layout_width="2dp"
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="match_parent"
-        android:background="#c0c0c0"/>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="fill_vertical"
+
         >
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@+id/category"/>
 
         <TextView
             android:id="@+id/category"
-            android:text="John Doe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:textSize="12sp"
-            android:width="100dp"
-            android:height="@dimen/_30sdp"/>
+            android:layout_alignParentTop="true"
+            android:padding="16dp"
+            android:gravity="center"
+            android:textSize="12sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_alignBottom="@id/category"
-            android:background="#c0c0c0"/>
+            android:background="@color/colorPrimary" />
 
     </RelativeLayout>
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#c0c0c0"/>
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        >
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@+id/amount"/>
+
 
         <TextView
             android:id="@+id/amount"
-            android:text="John Doe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:gravity="center"
             android:textSize="12sp"
-            android:width="100dp"
-            android:height="@dimen/_30sdp"/>
+            android:padding="16dp"/>
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_alignBottom="@id/amount"
-            android:background="#c0c0c0"/>
+            android:background="@color/colorPrimary" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#c0c0c0"/>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        >
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@+id/date"/>
+
         <TextView
             android:id="@+id/date"
-            android:text="John Doe"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:width="100dp"
-            android:height="@dimen/_30sdp"/>
+            android:padding="16dp"/>
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_alignBottom="@id/date"
-            android:background="#c0c0c0"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#c0c0c0"/>
+            android:background="@color/colorPrimary" />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        >
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@+id/date"/>
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
 
         <ImageButton
             android:id="@+id/details"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="0dp"
-            android:src="@drawable/eye"
-            android:text="Details"
+            android:layout_height="wrap_content"
+
+            android:layout_centerInParent="true"
+            android:layout_marginStart="4dp"
+            android:background="#0000"
+            app:srcCompat="@drawable/eye"
             android:textSize="12sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 

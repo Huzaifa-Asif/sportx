@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
@@ -40,8 +39,6 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
     Misc misc;
     SharedPref sharedPref;
     ImageButton details;
-    String teamStateVal="";
-    TournamentTeam teamUpdate;
     public TournamentTeamsAdapter(Context context, ArrayList<TournamentTeam> teams){
         this.context = context;
         this.teams = teams;
@@ -95,7 +92,7 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
             final Integer pos_id=pos;
 
             Ion.with(context)
-                    .load("DELETE", misc.ROOT_PATH + "delete_team/" + id)
+                    .load("DELETE", misc.ROOT_PATH + "team/delete_team/" + id)
                     .asString()
                     .withResponse()
                     .setCallback(new FutureCallback<Response<String>>() {
@@ -127,17 +124,13 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                     });
         }
 
-        public void callUpdateStateWebservice(boolean isShowDialog,String id, Integer pos, String state) {
+        public void callUpdateStateWebservice(boolean isShowDialog,String id, Integer pos) {
 
             final Integer pos_id=pos;
-            final String state_val=state;
-
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("state", state_val);
+//            final String state_val=state;
 
             Ion.with(context)
-                    .load("PATCH", misc.ROOT_PATH + "update_team/" + id)
-                    .setJsonObjectBody(jsonObject)
+                    .load("PATCH", misc.ROOT_PATH + "team/update_team/" + id)
                     .asString()
                     .withResponse()
                     .setCallback(new FutureCallback<Response<String>>() {
@@ -154,12 +147,8 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                                 JSONObject jsonObjectExpenseDeleted = new JSONObject(result.getResult());
                                 Boolean status = jsonObjectExpenseDeleted.getBoolean("status");
                                 if(status) {
-
-                                    teamUpdate=teams.get(pos_id);
-                                    teamUpdate.setState(state_val);
-                                    teams.set(pos_id,teamUpdate);
-                                    notifyDataSetChanged();
-                                    misc.showToast("Team State Updated");
+//                                    teams.set(pos_id, state_val,teams);
+//                                    notifyDataSetChanged();
                                 }
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
@@ -173,7 +162,6 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
 
         @Override
         public void onClick(View v) {
-            teamStateVal="";
 
             Log.d("adapter position: ",""+getAdapterPosition());
                     final int adapterPosition = getAdapterPosition();
@@ -189,7 +177,7 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                     teamState.setText(teams.get(getAdapterPosition()).getTournamentTeamState());
 
                     String teamStateValue = teams.get(getAdapterPosition()).getTournamentTeamState();
-//                    String teamStateVal="";
+                    String teamStateVal;
 
                     teamContact.setOnClickListener(new View.OnClickListener()
                     {
@@ -214,22 +202,16 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
 
 
                     Button stateButton=dialog.findViewById(R.id.updateState);
-                    if(teamStateValue.equalsIgnoreCase("pending") || teamStateValue.equalsIgnoreCase("blocked"))
+                    if(teamStateValue.equals("pending") || teamStateValue.equals("blocked"))
                     {
                         stateButton.setText("approve");
-                        teamStateVal="approved";
-
-                    }
-                    else if(teamStateValue.equalsIgnoreCase("approved"))
-                    {
-                        stateButton.setText("blocked");
-                        teamStateVal="blocked";
+                        teamStateVal="approve";
 
                     }
                     stateButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                         {
-                        callUpdateStateWebservice(true,teams.get(getAdapterPosition()).getTournamentTeamId(), adapterPosition, teamStateVal );
+                        callUpdateStateWebservice(true,teams.get(getAdapterPosition()).getTournamentTeamId(), adapterPosition);
                         dialog.dismiss();
 
                         }

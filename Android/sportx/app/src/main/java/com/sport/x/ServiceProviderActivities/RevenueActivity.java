@@ -49,7 +49,7 @@ public class RevenueActivity extends Menu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.inflateView(R.layout.activity_revenue);
-        setTitle("revenues");
+        setTitle("Revenues");
         context = this;
         SharedPref = new SharedPref(context);
         misc = new Misc(context);
@@ -113,7 +113,7 @@ public class RevenueActivity extends Menu {
         final int revenueSize = revenues.size();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "get_revenue_by_serviceProvider/" + SharedPref.getEmail())
+                .load("GET", misc.ROOT_PATH + "revenue/get_revenue_by_serviceProvider/" + SharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

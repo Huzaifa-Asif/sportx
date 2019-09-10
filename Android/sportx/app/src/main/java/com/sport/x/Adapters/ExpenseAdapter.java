@@ -117,7 +117,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
             final Expense deletedExpense=expense;
 
             Ion.with(context)
-                    .load("DELETE", misc.ROOT_PATH + "delete_expense/" + id)
+                    .load("DELETE", misc.ROOT_PATH + "expense/delete_expense/" + id)
                     .asString()
                     .withResponse()
                     .setCallback(new FutureCallback<Response<String>>() {

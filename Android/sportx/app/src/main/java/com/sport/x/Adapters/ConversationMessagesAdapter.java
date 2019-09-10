@@ -225,20 +225,6 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
             }
 
         }
-        public void setImageFromURL( CircularImageView imageView,String url) {
 
-
-                picasso.load(url)
-                        .error(R.drawable.ic_launcher_background)
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .into(imageView);
-                try {
-                    Picasso.setSingletonInstance(picasso);
-                } catch (IllegalStateException ignored) {
-
-                }
-
-
-        }
     }
     }

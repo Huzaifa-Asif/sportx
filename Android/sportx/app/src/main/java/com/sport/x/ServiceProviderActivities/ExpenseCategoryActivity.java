@@ -111,7 +111,7 @@ public class ExpenseCategoryActivity extends Menu {
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"add_expenseCategory")
+                .load(misc.ROOT_PATH+"expensecategory/add_expenseCategory")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -171,7 +171,7 @@ public class ExpenseCategoryActivity extends Menu {
         final int expenseCategorySize = categories.size();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "get_expenseCategory_by_serviceProvider/" + SharedPref.getEmail())
+                .load("GET", misc.ROOT_PATH + "expensecategory/get_expenseCategory_by_serviceProvider/" + SharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

@@ -106,7 +106,7 @@ public class ExpenseActivity extends Menu {
         final int expenseSize = expenses.size();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "get_expense_by_serviceProvider/" + SharedPref.getEmail())
+                .load("GET", misc.ROOT_PATH + "expense/get_expense_by_serviceProvider/" + SharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

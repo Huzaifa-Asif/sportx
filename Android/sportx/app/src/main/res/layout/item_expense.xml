@@ -2,6 +2,7 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="fill_vertical"
@@ -138,7 +139,7 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="4dp"
             android:background="#0000"
-            android:src="@drawable/eye"
+            app:srcCompat="@drawable/eye"
             android:textSize="12sp" />
         <View
             android:layout_width="match_parent"

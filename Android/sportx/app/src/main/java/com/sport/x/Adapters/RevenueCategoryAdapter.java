@@ -93,7 +93,7 @@ public class RevenueCategoryAdapter extends RecyclerView.Adapter<RevenueCategory
             final RevenueCategory deletedRevenueCategory=RevenueCategory;
 
             Ion.with(context)
-                    .load("DELETE", misc.ROOT_PATH + "delete_revenueCategory/" + id)
+                    .load("DELETE", misc.ROOT_PATH + "revenuecategory/delete_revenueCategory/" + id)
                     .asString()
                     .withResponse()
                     .setCallback(new FutureCallback<Response<String>>() {

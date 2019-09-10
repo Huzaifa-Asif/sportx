@@ -188,7 +188,7 @@ public class RegisterServiceActivity extends Menu implements View.OnClickListene
         pd.show();
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"get_serviceCategory")
+                .load(misc.ROOT_PATH+"serviceCategory/get_serviceCategory")
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -358,7 +358,7 @@ public class RegisterServiceActivity extends Menu implements View.OnClickListene
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"signup_serviceProvider")
+                .load(misc.ROOT_PATH+"serviceProvider/signup_serviceProvider")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -419,7 +419,7 @@ public class RegisterServiceActivity extends Menu implements View.OnClickListene
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"signup_serviceProvider")
+                .load(misc.ROOT_PATH+"serviceprovider/signup_serviceProvider")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

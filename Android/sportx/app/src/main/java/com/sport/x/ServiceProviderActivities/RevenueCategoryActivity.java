@@ -96,7 +96,7 @@ public class RevenueCategoryActivity extends Menu {
     private void callAddRevenueCategoryWebservice(){
 
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Adding Expense Category...");
+        pd.setMessage("Adding revenue Category...");
         pd.setCancelable(false);
         pd.show();
         JsonObject jsonObject = new JsonObject();
@@ -106,7 +106,7 @@ public class RevenueCategoryActivity extends Menu {
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"add_expenseCategory")
+                .load(misc.ROOT_PATH+"revenuecategory/add_revenueCategory")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -135,7 +135,7 @@ public class RevenueCategoryActivity extends Menu {
                             }
                             else if (status) {
                                 pd.dismiss();
-                                misc.showToast("Expense Added");
+                                misc.showToast("revenue Added");
 
 
 
@@ -167,7 +167,7 @@ public class RevenueCategoryActivity extends Menu {
         final int revenueCategorySize = categories.size();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "get_revenueCategory_by_serviceProvider/" + SharedPref.getEmail())
+                .load("GET", misc.ROOT_PATH + "revenuecategory/get_revenueCategory_by_serviceProvider/" + SharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

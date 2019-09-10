@@ -98,7 +98,7 @@ public class RevenueAdapter extends RecyclerView.Adapter<RevenueAdapter.revenueV
                     date.setText(revenueDetails.getDate());
                     TextView description = dialog.findViewById(R.id.description);
                     description.setText(revenueDetails.getDescription());
-                    Button delete=dialog.findViewById(R.id.delete);
+                    ImageButton delete=dialog.findViewById(R.id.delete);
                     delete.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             callDeleterevenueWebservice(true,revenueDetails.getrevenueId(),revenue);
@@ -117,7 +117,7 @@ public class RevenueAdapter extends RecyclerView.Adapter<RevenueAdapter.revenueV
             final Revenue deletedrevenue=revenue;
 
             Ion.with(context)
-                    .load("DELETE", misc.ROOT_PATH + "delete_revenue/" + id)
+                    .load("DELETE", misc.ROOT_PATH + "revenue/delete_revenue/" + id)
                     .asString()
                     .withResponse()
                     .setCallback(new FutureCallback<Response<String>>() {

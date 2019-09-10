@@ -153,7 +153,7 @@ public class ServiceHomeActivity extends Menu
 
         String email = sharedPref.getEmail();
         Ion.with(this)
-                .load(misc.ROOT_PATH+"search/serviceProviderByEmail/"+email)
+                .load(misc.ROOT_PATH+"serviceprovider/search/serviceProviderByEmail/"+email)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

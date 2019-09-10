@@ -47,7 +47,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
     Misc misc;
     Spinner spin;
     ArrayList<String> categories = new ArrayList<String>();
-    EditText newCategory,amount,date,description,txtDate;
+    EditText newCategory,amount,description,txtDate;
     Button add,btndate;
     String revenueCategory;
     private int mYear, mMonth, mDay;
@@ -72,7 +72,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
         });
         btndate=findViewById(R.id.btn_date);
         btndate.setOnClickListener(this);
-        newCategory.setVisibility(View.INVISIBLE);
+        newCategory.setVisibility(View.GONE);
         categories.add("Select Category");
         callrevenueCategoryWebservice(true);
         spin = findViewById(R.id.spinner);
@@ -160,7 +160,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
     {
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "get_revenueCategory_by_serviceProvider/" + email)
+                .load("GET", misc.ROOT_PATH + "revenueCategory/get_revenueCategory_by_serviceProvider/" + email)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -213,7 +213,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"add_revenue")
+                .load(misc.ROOT_PATH+"revenue/add_revenue")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

@@ -170,7 +170,7 @@ public class AddExpenseActivity extends Menu implements OnItemSelectedListener,V
     {
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "get_expenseCategory_by_serviceProvider/" + email)
+                .load("GET", misc.ROOT_PATH + "expensecategory/get_expenseCategory_by_serviceProvider/" + email)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -230,7 +230,7 @@ public class AddExpenseActivity extends Menu implements OnItemSelectedListener,V
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"add_expense")
+                .load(misc.ROOT_PATH+"expense/add_expense")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
