@@ -56,8 +56,15 @@ public class RevenueCategoryActivity extends Menu {
                 Button add=dialog.findViewById(R.id.add);
                 add.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        callAddRevenueCategoryWebservice();
-                        dialog.dismiss();
+                        if(newCategory.getText().toString().isEmpty())
+                        {
+                            misc.showToast("Please Enter New Category Name");
+                        }
+                        else {
+                            callAddRevenueCategoryWebservice();
+                            dialog.dismiss();
+                        }
+
 
                     }
                 });
@@ -66,7 +73,7 @@ public class RevenueCategoryActivity extends Menu {
         });
 
 
-        revenueCategoryRecycler =  findViewById(R.id.reyclerview_revenue_list);
+        revenueCategoryRecycler =  findViewById(R.id.reyclerview_revenue_category_list);
         revenueCategoryRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy){
@@ -135,12 +142,13 @@ public class RevenueCategoryActivity extends Menu {
                             }
                             else if (status) {
                                 pd.dismiss();
-                                misc.showToast("revenue Added");
-
-
-
+                                misc.showToast("Revenue Category Added");
                             }
-
+                            String id=jsonObject1.getString("_id");
+                            String name=jsonObject1.getString("name");
+                            String serviceProviderEmail=jsonObject1.getString("serviceProviderEmail");
+                            categories.add(new RevenueCategory(id,name,serviceProviderEmail));
+                            revenueCategoryAdapter.notifyDataSetChanged();
                         }
                         catch (JSONException e1) {
                             e1.printStackTrace();

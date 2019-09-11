@@ -91,7 +91,6 @@
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/colorPrimary"
             app:srcCompat="@drawable/add"
             app:fabCustomSize="52dp"
             app:maxImageSize="52dp"

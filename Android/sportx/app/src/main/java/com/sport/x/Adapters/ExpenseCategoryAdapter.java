@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.koushikdutta.async.future.FutureCallback;
@@ -30,14 +31,14 @@ import java.util.ArrayList;
 
 
 
-public class ExpenseCategoryAdapter extends RecyclerView.Adapter<ExpenseCategoryAdapter.ExpenseViewHolder> {
+public class ExpenseCategoryAdapter extends RecyclerView.Adapter<ExpenseCategoryAdapter.ExpenseCategoryViewHolder> {
 
 
     private ArrayList<ExpenseCategory> categories = new ArrayList<>();
     private Context context;
     Misc misc;
     SharedPref sharedPref;
-    Button delete;
+    ImageButton delete;
     public ExpenseCategoryAdapter(Context context, ArrayList<ExpenseCategory> categories){
         this.context = context;
         this.categories = categories;
@@ -46,14 +47,15 @@ public class ExpenseCategoryAdapter extends RecyclerView.Adapter<ExpenseCategory
     }
     @NonNull
     @Override
-    public ExpenseCategoryAdapter.ExpenseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ExpenseCategoryAdapter.ExpenseCategoryViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view = inflater.inflate(R.layout.item_expense_category, viewGroup, false);
-        return new ExpenseCategoryAdapter.ExpenseViewHolder(view);
+        return new ExpenseCategoryAdapter.ExpenseCategoryViewHolder(view);
     }
     @Override
-    public void onBindViewHolder(@NonNull ExpenseCategoryAdapter.ExpenseViewHolder ExpenseViewHolder, int i) {
-        ExpenseViewHolder.setData(categories.get(i));
+    public void onBindViewHolder(@NonNull ExpenseCategoryAdapter.ExpenseCategoryViewHolder ExpenseCategoryViewHolder, int i) {
+        ExpenseCategoryViewHolder.setData(categories.get(i));
+
 
     }
     @Override
@@ -62,27 +64,27 @@ public class ExpenseCategoryAdapter extends RecyclerView.Adapter<ExpenseCategory
     }
 
 
-    public class ExpenseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ExpenseCategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView category;
 
 
-        public ExpenseViewHolder(@NonNull View itemView) {
+        public ExpenseCategoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
             category = itemView.findViewById(R.id.category);
             delete=itemView.findViewById(R.id.delete);
 
-            delete.setOnClickListener(this);
 
         }
 
         public void setData(final ExpenseCategory expenseCategory)
         {
-            category.setText(expenseCategory.getName());
+            final ExpenseCategory expenseCategory1=expenseCategory;
+            category.setText(expenseCategory1.getName());
             delete.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    callDeleteExpenseCategoryWebservice(true,expenseCategory.getExpenseCategoryId(),expenseCategory);
+                    callDeleteExpenseCategoryWebservice(true,expenseCategory1.getExpenseCategoryId(),expenseCategory1);
                 }
             });
 

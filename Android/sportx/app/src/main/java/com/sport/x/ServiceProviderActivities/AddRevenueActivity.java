@@ -24,6 +24,7 @@ import com.koushikdutta.ion.Response;
 import com.sport.x.CreateTournamentActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.ConversationMessage;
+import com.sport.x.Models.Revenue;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 
@@ -51,7 +52,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
     Button add,btndate;
     String revenueCategory;
     private int mYear, mMonth, mDay;
-    Boolean flag=false;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +69,11 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
         add=findViewById(R.id.add);
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callAddrevenueWebService();
+                if(validate())
+                {
+                    callAddrevenueWebService();
+                }
+
             }
         });
         btndate=findViewById(R.id.btn_date);
@@ -126,7 +131,25 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
 
-                        txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        String dayString,monthString,yearString;
+                        if(dayOfMonth<10)
+                        {
+                            dayString="0"+dayOfMonth;
+                        }
+                        else
+                        {
+                            dayString=""+dayOfMonth;
+                        }
+                        if(monthOfYear+1<10)
+                        {
+                            monthString="0"+(monthOfYear+1);
+                        }
+                        else
+                        {
+                            monthString=""+(monthOfYear+1);
+                        }
+                        yearString=""+year;
+                        txtDate.setText(dayString + "-" +monthString + "-" + yearString);
 
                     }
                 }, mYear, mMonth, mDay);
@@ -139,11 +162,12 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
         if(parent.getItemAtPosition(position).toString().equals("Other"))
         {
             newCategory.setVisibility(View.VISIBLE);
-            flag=true;
+
         }
         else
         {
             revenueCategory=parent.getItemAtPosition(position).toString();
+            newCategory.setVisibility(View.GONE);
         }
 
     }
@@ -156,7 +180,41 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
 
 
 
+    private boolean validate(){
 
+        String amount1 = amount.getText().toString().trim();
+        String date=txtDate.getText().toString();
+        String description1= description.getText().toString();
+        String newCategory1=newCategory.getText().toString();
+        if(date.length() < 7 ){
+            misc.showToast("Invalid Date");
+            return false;
+        }
+        else if(description1.isEmpty())
+        {
+            misc.showToast("Kindly Enter description");
+            return false;
+        }
+        else if(amount1.isEmpty())
+        {
+            misc.showToast("Kindly Enter Amount");
+            return false;
+        }
+        else if(spin.getSelectedItem().toString().equals("Select Category"))
+        {
+            misc.showToast("Kindly Select Category");
+            return false;
+        }
+        else if(spin.getSelectedItem().toString().equals("Other")&& newCategory1.isEmpty())
+        {
+            misc.showToast("Kindly Enter New Category");
+            return false;
+        }
+
+
+
+        return true;
+    }
 
     public void callrevenueCategoryWebservice(boolean isShowDialog)
     {
@@ -207,7 +265,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
         pd.setCancelable(false);
         pd.show();
         JsonObject jsonObject = new JsonObject();
-        if(flag)
+        if(spin.getSelectedItem().toString().equals("Other"))
         {
             jsonObject.addProperty("revenueCategory", newCategory.getText().toString());
         }

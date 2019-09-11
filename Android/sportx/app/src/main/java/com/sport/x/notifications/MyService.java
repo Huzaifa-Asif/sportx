@@ -58,7 +58,7 @@ Misc misc;
     {
         String channelId = "Default";
         NotificationCompat.Builder builder = new  NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.applogo)
                 .setContentTitle(title)
                 .setContentText(body).setAutoCancel(true);
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

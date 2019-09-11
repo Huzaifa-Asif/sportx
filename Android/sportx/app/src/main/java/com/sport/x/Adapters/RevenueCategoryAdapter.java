@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.koushikdutta.async.future.FutureCallback;
@@ -37,7 +38,7 @@ public class RevenueCategoryAdapter extends RecyclerView.Adapter<RevenueCategory
     private Context context;
     Misc misc;
     SharedPref sharedPref;
-    Button delete;
+    ImageButton delete;
     public RevenueCategoryAdapter(Context context, ArrayList<RevenueCategory> categories){
         this.context = context;
         this.categories = categories;
