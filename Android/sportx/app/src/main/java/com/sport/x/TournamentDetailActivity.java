@@ -39,7 +39,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
     private Button  accept_tournament, cancel_tournament, team_register;
     FloatingActionButton add_team;
     private EditText team_name, team_contact;
-    private ArrayList<TournamentTeam> teamsListModel;
+
 
     JSONArray players;
 
@@ -61,7 +61,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
 
-        teamsListModel  = new ArrayList<>();
+
 
         _name = findViewById(R.id.c_name);
         _service_provider = findViewById(R.id.c_service_provider);
@@ -212,8 +212,8 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
                             else if (status) {
                                 String team_id = jsonObject1.getString("_id");
                                 misc.showToast("Team Registered");
-                                teamsListModel.add(new TournamentTeam(team_state, team_name.getText().toString(), players,team_id,tournament_id,sharedPref.getEmail(),team_contact.getText().toString()));
-                                
+                                teams.add(new TournamentTeam(team_state, team_name.getText().toString(), players,team_id,tournament_id,sharedPref.getEmail(),team_contact.getText().toString()));
+                                teamAdapter.notifyDataSetChanged();
                             }
 
                         }
