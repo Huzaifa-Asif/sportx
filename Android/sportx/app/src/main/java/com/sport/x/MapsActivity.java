@@ -229,7 +229,7 @@ public class MapsActivity extends Menu implements
         //misc.showToast(misc.ROOT_PATH+"search/serviceProviderByCategory/football");
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"search/serviceProviderByCategory/"+service_name)
+                .load(misc.ROOT_PATH+"serviceprovider/search/serviceProviderByCategory/"+service_name)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
@@ -39,6 +40,8 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
     Misc misc;
     SharedPref sharedPref;
     ImageButton details;
+    TournamentTeam teamUpdate;
+    String teamStateVal;
     public TournamentTeamsAdapter(Context context, ArrayList<TournamentTeam> teams){
         this.context = context;
         this.teams = teams;
@@ -124,13 +127,16 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                     });
         }
 
-        public void callUpdateStateWebservice(boolean isShowDialog,String id, Integer pos) {
+        public void callUpdateStateWebservice(boolean isShowDialog,String id, Integer pos, String teamState) {
 
             final Integer pos_id=pos;
 //            final String state_val=state;
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("state", teamState);
 
             Ion.with(context)
                     .load("PATCH", misc.ROOT_PATH + "team/update_team/" + id)
+                    .setJsonObjectBody(jsonObject)
                     .asString()
                     .withResponse()
                     .setCallback(new FutureCallback<Response<String>>() {
@@ -144,11 +150,16 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                             }
 
                             try {
-                                JSONObject jsonObjectExpenseDeleted = new JSONObject(result.getResult());
-                                Boolean status = jsonObjectExpenseDeleted.getBoolean("status");
+                                JSONObject jsonObjectTeamUpdated = new JSONObject(result.getResult());
+                                Boolean status = jsonObjectTeamUpdated.getBoolean("status");
+                                String state = jsonObjectTeamUpdated.getString("state");
                                 if(status) {
-//                                    teams.set(pos_id, state_val,teams);
-//                                    notifyDataSetChanged();
+
+                                    teamUpdate=teams.get(pos_id);
+                                    teamUpdate.setState(state);
+                                    teams.set(pos_id, teamUpdate);
+                                    notifyDataSetChanged();
+                                    misc.showToast("Team State Updated");
                                 }
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
@@ -177,7 +188,7 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                     teamState.setText(teams.get(getAdapterPosition()).getTournamentTeamState());
 
                     String teamStateValue = teams.get(getAdapterPosition()).getTournamentTeamState();
-                    String teamStateVal;
+
 
                     teamContact.setOnClickListener(new View.OnClickListener()
                     {
@@ -205,13 +216,18 @@ public class TournamentTeamsAdapter extends RecyclerView.Adapter<TournamentTeams
                     if(teamStateValue.equals("pending") || teamStateValue.equals("blocked"))
                     {
                         stateButton.setText("approve");
-                        teamStateVal="approve";
+                        teamStateVal="approved";
 
+                    }
+                    else if (teamStateValue.equals("approved"))
+                    {
+                        stateButton.setText("block");
+                        teamStateVal="blocked";
                     }
                     stateButton.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v)
                         {
-                        callUpdateStateWebservice(true,teams.get(getAdapterPosition()).getTournamentTeamId(), adapterPosition);
+                        callUpdateStateWebservice(true,teams.get(getAdapterPosition()).getTournamentTeamId(), adapterPosition, teamStateVal);
                         dialog.dismiss();
 
                         }

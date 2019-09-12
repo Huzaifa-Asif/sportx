@@ -160,18 +160,46 @@
 
 
 
+<!--            <Button-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_below="@id/c_winning_prize"-->
+<!--                android:layout_marginTop="@dimen/_20sdp"-->
+<!--                android:layout_marginLeft="@dimen/_10sdp"-->
+<!--                android:layout_marginRight="@dimen/_10sdp"-->
+<!--                android:text="Add Team"-->
+<!--                android:textColor="#fff"-->
+<!--                android:background="@color/colorPrimary"-->
+<!--                android:id="@+id/add_team"-->
+<!--                />-->
+
             <Button
+                android:id="@+id/accept_tournament"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_below="@id/c_winning_prize"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:text="Add Team"
+                android:text="Complete Tournament"
                 android:textColor="#fff"
                 android:background="@color/colorPrimary"
-                android:id="@+id/add_team"
                 />
+
+
+            <Button
+                android:id="@+id/cancel_tournament"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/accept_tournament"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:text="Cancel Tournament"
+                android:textColor="#fff"
+                android:background="@color/red"
+                />
+
 
 
         </RelativeLayout>
@@ -179,33 +207,20 @@
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/colorPrimary"
+                app:srcCompat="@drawable/add"
+                app:fabCustomSize="52dp"
+                app:maxImageSize="52dp"
+                android:elevation="16dp"
 
-    <Button
-        android:id="@+id/accept_tournament"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@id/card_details"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:text="Publish Tournament"
-        android:textColor="#fff"
-        android:background="@color/colorPrimary"
-        />
-
-
-    <Button
-        android:id="@+id/cancel_tournament"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@id/accept_tournament"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:text="Cancel Tournament"
-        android:textColor="#fff"
-        android:background="@color/red"
-        />
+                />
 
     <TextView
         android:id="@+id/tournamentTeams"
@@ -213,7 +228,6 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_30sdp"
         android:text="Tournament Teams"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"

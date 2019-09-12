@@ -1,19 +1,25 @@
 package com.sport.x;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.sport.x.Adapters.TournamentTeamsAdapter;
 
 import com.sport.x.Misc.Misc;
+import com.sport.x.Models.Tournament;
 import com.sport.x.Models.TournamentTeam;
 import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
@@ -29,8 +35,13 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
 
     private TextView _name,_service_provider, _type, _no_of_teams, _entry_fee, _no_of_days,_start_date, _winning_prize, _team_text;
-    private String tournament_id,state, name,service_provider, type, no_of_teams, entry_fee, no_of_days,start_date,start_time, winning_prize;
-    private Button add_team, accept_tournament, cancel_tournament;
+    private String team_state, tournament_id,state, name,service_provider, type, no_of_teams, entry_fee, no_of_days,start_date,start_time, winning_prize;
+    private Button  accept_tournament, cancel_tournament, team_register;
+    FloatingActionButton add_team;
+    private EditText team_name, team_contact;
+    private ArrayList<TournamentTeam> teamsListModel;
+
+    JSONArray players;
 
     SharedPref sharedPref;
     Misc misc;
@@ -38,6 +49,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
     ArrayList<TournamentTeam> teams = new ArrayList<TournamentTeam>();
     private RecyclerView teamRecycler;
     private TournamentTeamsAdapter teamAdapter;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +57,11 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         super.inflateView(R.layout.activity_tournament_detail);
         setTitle("Tournament");
 
+        this.context = context;
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
 
+        teamsListModel  = new ArrayList<>();
 
         _name = findViewById(R.id.c_name);
         _service_provider = findViewById(R.id.c_service_provider);
@@ -61,6 +75,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
         add_team = findViewById(R.id.add_team);
         add_team.setOnClickListener(this);
+
 
         accept_tournament = findViewById(R.id.accept_tournament);
         accept_tournament.setOnClickListener(this);
@@ -99,6 +114,13 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         teamRecycler.setLayoutManager(new LinearLayoutManager(this));
         teamRecycler.setAdapter(teamAdapter);
 
+        if(sharedPref.getUserRole()==1)
+        {
+            team_state="approved";
+        }
+        else{
+            team_state="pending";
+        }
 
         // method call to fetch teams
         callTeamWebservice(true);
@@ -136,6 +158,72 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
     public void addTeam()
     {
 
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.add_team_popup);
+
+        team_name = dialog.findViewById(R.id.team_name);
+        team_contact = dialog.findViewById(R.id.team_contact);
+        team_register = dialog.findViewById(R.id.team_register);
+
+        team_register.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("name", team_name.getText().toString());
+                jsonObject.addProperty("teamContact", team_contact.getText().toString());
+                jsonObject.addProperty("adderEmail", sharedPref.getEmail());
+                jsonObject.addProperty("tournamentId", tournament_id);
+                jsonObject.addProperty("state", team_state);
+
+                addTeamDataToServer(jsonObject);
+                dialog.dismiss();
+
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    public void addTeamDataToServer(JsonObject jsonObject){
+        Ion.with(this)
+                .load(misc.ROOT_PATH+"team/add_team")
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            misc.showToast("Please check your connection");
+                            return;
+                        }
+
+
+                        try{
+                            JSONObject jsonObject1 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject1.getBoolean("status");
+
+
+                            if (!status) {
+                                misc.showToast("Sorry Try Again");
+                                return;
+                            }
+                            else if (status) {
+                                String team_id = jsonObject1.getString("_id");
+                                misc.showToast("Team Registered");
+                                teamsListModel.add(new TournamentTeam(team_state, team_name.getText().toString(), players,team_id,tournament_id,sharedPref.getEmail(),team_contact.getText().toString()));
+                                
+                            }
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
+                });
     }
 
     public void acceptTournament()
@@ -159,7 +247,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         final int teamSize = teams.size();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "tournament/get_team_by_tournament/" + tournament_id)
+                .load("GET", misc.ROOT_PATH + "team/get_team_by_tournament/" + tournament_id)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -191,7 +279,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
                                 String teamContact = jsonObjectTeam.getString("teamContact");
                                 String adderEmail = jsonObjectTeam.getString("adderEmail");
 //                              String players = jsonObjectTeam.getString("name");
-                                JSONArray players = new JSONArray(jsonObjectTeam.getString("players"));
+//                                JSONArray players = new JSONArray(jsonObjectTeam.getString("players"));
 
 //
 
