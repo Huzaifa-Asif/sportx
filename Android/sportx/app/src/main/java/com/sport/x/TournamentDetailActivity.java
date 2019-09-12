@@ -35,8 +35,8 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
 
     private TextView _name,_service_provider, _type, _no_of_teams, _entry_fee, _no_of_days,_start_date, _winning_prize, _team_text;
-    private String team_state, tournament_id,state, name,service_provider, type, no_of_teams, entry_fee, no_of_days,start_date,start_time, winning_prize;
-    private Button  accept_tournament, cancel_tournament, team_register;
+    private String tournament_state, team_state, tournament_id,state, name,service_provider, type, no_of_teams, entry_fee, no_of_days,start_date,start_time, winning_prize;
+    private Button  tournament_state_, cancel_tournament, team_register;
     FloatingActionButton add_team;
     private EditText team_name, team_contact;
 
@@ -77,8 +77,8 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         add_team.setOnClickListener(this);
 
 
-        accept_tournament = findViewById(R.id.accept_tournament);
-        accept_tournament.setOnClickListener(this);
+        tournament_state_ = findViewById(R.id.tournament_state);
+        tournament_state_.setOnClickListener(this);
 
         cancel_tournament = findViewById(R.id.cancel_tournament);
         cancel_tournament.setOnClickListener(this);
@@ -122,6 +122,12 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
             team_state="pending";
         }
 
+        if(state.equals("inactive")){
+            tournament_state_.setText("Publish Tournament");
+        }
+        else if(state.equals("active")){
+            tournament_state_.setText("Complete Tournament");
+        }
         // method call to fetch teams
         callTeamWebservice(true);
 
@@ -147,7 +153,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         if(v.getId() == add_team.getId()) {
             addTeam();
         }
-        if(v.getId() == accept_tournament.getId()){
+        if(v.getId() == tournament_state_.getId()){
             acceptTournament();
         }
         if(v.getId() == cancel_tournament.getId()){

@@ -174,7 +174,7 @@
 <!--                />-->
 
             <Button
-                android:id="@+id/accept_tournament"
+                android:id="@+id/tournament_state"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_below="@id/c_winning_prize"
@@ -191,7 +191,7 @@
                 android:id="@+id/cancel_tournament"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_below="@id/accept_tournament"
+                android:layout_below="@id/tournament_state"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
