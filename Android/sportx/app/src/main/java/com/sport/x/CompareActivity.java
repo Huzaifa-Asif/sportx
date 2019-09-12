@@ -89,8 +89,6 @@ Context context;
                     current_longitude = currentLocation.getLongitude();
                     String email1=sharedPref.getCompareServiceProvider1();
                     String email2=sharedPref.getCompareServiceProvider2();
-                    Log.wtf("sp1",email1);
-                    Log.wtf("sp1",email2);
                     if(email1==null || email2==null)
                     {
                         final Dialog dialog = new Dialog(context);

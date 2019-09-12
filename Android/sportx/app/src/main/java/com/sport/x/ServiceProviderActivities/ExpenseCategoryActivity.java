@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,8 +61,17 @@ public class ExpenseCategoryActivity extends Menu {
                 Button add=dialog.findViewById(R.id.add);
                 add.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        callAddExpenseCategoryWebservice();
-                        dialog.dismiss();
+                        if(newCategory.getText().toString().isEmpty())
+                        {
+                            misc.showToast("Please Enter New Category Name");
+                        }
+                        else
+                        {
+                            callAddExpenseCategoryWebservice();
+                            dialog.dismiss();
+                        }
+
+
 
                     }
                 });
@@ -71,7 +81,7 @@ public class ExpenseCategoryActivity extends Menu {
 
 
 
-        expenseCategoryRecycler =  findViewById(R.id.reyclerview_expense_list);
+        expenseCategoryRecycler =  findViewById(R.id.reyclerview_expense_category_list);
         expenseCategoryRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy){
@@ -140,11 +150,13 @@ public class ExpenseCategoryActivity extends Menu {
                             }
                             else if (status) {
                                 pd.dismiss();
-                                misc.showToast("Expense Added");
-
-
-
+                                misc.showToast("Expense Category Added");
                             }
+                            String id=jsonObject1.getString("_id");
+                            String name=jsonObject1.getString("name");
+                            String serviceProviderEmail=jsonObject1.getString("serviceProviderEmail");
+                            categories.add(new ExpenseCategory(id,name,serviceProviderEmail));
+                            expenseCategoryAdapter.notifyDataSetChanged();
 
                         }
                         catch (JSONException e1) {
@@ -202,6 +214,7 @@ public class ExpenseCategoryActivity extends Menu {
                                 String name = jsonObjectExpenseCategory.getString("name");
                                 String serviceProviderEmail = jsonObjectExpenseCategory.getString("serviceProviderEmail");
                                 categories.add(new ExpenseCategory(expenseCategoryId, name, serviceProviderEmail));
+
 
                             }
 

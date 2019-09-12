@@ -2,24 +2,45 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:paddingRight="16dp"
-    android:paddingLeft="16dp"
-    android:orientation="vertical" >
+    android:layout_height="match_parent"
 
+    android:orientation="vertical"
+    >
 
-    <TextView
-        android:id="@+id/categoryField"
-        android:text="Name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:width="100dp"
-        android:height="@dimen/_30sdp"/>
-
+        android:orientation="horizontal"
+        android:weightSum="2"
+        >
+        <TextView
+            android:id="@+id/categoryField"
+            android:text="Name"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimary"
+            />
+        <TextView
+            android:id="@+id/deleteField"
+            android:text="Delete"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            />
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -27,18 +48,21 @@
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/reyclerview_expense_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/reyclerview_revenue_category_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/add" />
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/add"
+            app:fabCustomSize="52dp"
+            app:maxImageSize="52dp"
+            android:elevation="16dp"/>
 
     </FrameLayout>
 
