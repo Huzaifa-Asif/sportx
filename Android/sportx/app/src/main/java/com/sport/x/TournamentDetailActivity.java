@@ -24,10 +24,13 @@ import com.sport.x.Models.TournamentTeam;
 import com.sport.x.ServiceProviderActivities.Menu;
 import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
+import com.sport.x.TournamentActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.content.Context;
 
 import java.util.ArrayList;
 
@@ -35,11 +38,10 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
 
     private TextView _name,_service_provider, _type, _no_of_teams, _entry_fee, _no_of_days,_start_date, _winning_prize, _team_text;
-    private String tournament_state, team_state, tournament_id,state, name,service_provider, type, no_of_teams, entry_fee, no_of_days,start_date,start_time, winning_prize;
+    private String t_state, tournament_state, team_state, tournament_id,state, name,service_provider, type, no_of_teams, entry_fee, no_of_days,start_date,start_time, winning_prize;
     private Button  tournament_state_, cancel_tournament, team_register;
     FloatingActionButton add_team;
     private EditText team_name, team_contact;
-
 
     JSONArray players;
 
@@ -124,9 +126,11 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
         if(state.equals("inactive")){
             tournament_state_.setText("Publish Tournament");
+            t_state="active";
         }
         else if(state.equals("active")){
             tournament_state_.setText("Complete Tournament");
+            t_state="completed";
         }
         // method call to fetch teams
         callTeamWebservice(true);
@@ -154,7 +158,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
             addTeam();
         }
         if(v.getId() == tournament_state_.getId()){
-            acceptTournament();
+            stateTournament();
         }
         if(v.getId() == cancel_tournament.getId()){
             cancelTournament();
@@ -232,9 +236,55 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
                 });
     }
 
-    public void acceptTournament()
+    public void stateTournament()
     {
 
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("state", t_state);
+        Ion.with(this)
+                .load("PATCH", misc.ROOT_PATH+"tournament/update_tournament/"+tournament_id)
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            misc.showToast("Please check your connection");
+                            return;
+                        }
+
+
+                        try{
+                            JSONObject jsonObject1 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject1.getBoolean("status");
+
+
+                            if (!status) {
+                                misc.showToast("Sorry Try Again");
+                                return;
+                            }
+                            else if (status) {
+
+                                misc.showToast("Tournament State Updated");
+                                Intent intent = new Intent(TournamentDetailActivity.this, TournamentActivity.class);
+                                startActivity(intent);
+                                finish();
+
+
+                            }
+
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
+                });
     }
 
     public void cancelTournament()

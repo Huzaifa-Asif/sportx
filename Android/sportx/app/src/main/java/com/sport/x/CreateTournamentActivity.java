@@ -36,7 +36,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
-public class CreateTournamentActivity extends Menu implements OnItemSelectedListener{
+public class CreateTournamentActivity extends Menu implements OnItemSelectedListener,View.OnClickListener{
 
     private EditText name, no_of_days, entry_fee, winning_prize, txtDate, txtTime;
 
@@ -83,6 +83,15 @@ public class CreateTournamentActivity extends Menu implements OnItemSelectedList
         txtTime=findViewById(R.id.in_time);
 
 
+
+        btnDatePicker = findViewById(R.id.btn_date);
+
+        btnDatePicker.setOnClickListener(this);
+
+        btnTimePicker = findViewById(R.id.btn_time);
+
+        btnTimePicker.setOnClickListener(this);
+
         //Spinner
         tournamentType = findViewById(R.id.tournamentType);
 
@@ -120,49 +129,70 @@ public class CreateTournamentActivity extends Menu implements OnItemSelectedList
     }
 
 
-    protected  void DatePickerClick(View v){
-        // Get Current Date
-        final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+    @Override
+    public void onClick(View v) {
+
+        if(v.getId() == btnDatePicker.getId()) {
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,R.style.DialogTheme,
-                new DatePickerDialog.OnDateSetListener() {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.DialogTheme,
+                    new DatePickerDialog.OnDateSetListener() {
 
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
 
-                        txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            String dayString,monthString,yearString;
+                            if(dayOfMonth<10)
+                            {
+                                dayString="0"+dayOfMonth;
+                            }
+                            else
+                            {
+                                dayString=""+dayOfMonth;
+                            }
+                            if(monthOfYear+1<10)
+                            {
+                                monthString="0"+(monthOfYear+1);
+                            }
+                            else
+                            {
+                                monthString=""+(monthOfYear+1);
+                            }
+                            yearString=""+year;
+                            txtDate.setText(dayString + "-" +monthString + "-" + yearString);
 
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+
+        if(v.getId() == btnTimePicker.getId()) {
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.DialogTheme,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            txtTime.setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
+        }
+
     }
-
-
-    protected void TimePickerClick(View v){
-        // Get Current Time
-        final Calendar c = Calendar.getInstance();
-        mHour = c.get(Calendar.HOUR_OF_DAY);
-        mMinute = c.get(Calendar.MINUTE);
-
-        // Launch Time Picker Dialog
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.DialogTheme,
-                new TimePickerDialog.OnTimeSetListener() {
-
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                          int minute) {
-
-                        txtTime.setText(hourOfDay + ":" + minute);
-                    }
-                }, mHour, mMinute, false);
-        timePickerDialog.show();
-    }
-
 
 
 
@@ -326,7 +356,7 @@ public class CreateTournamentActivity extends Menu implements OnItemSelectedList
                                 pd.dismiss();
 
                                 misc.showToast("Tournament Created Successfully");
-                                Intent intent = new Intent(CreateTournamentActivity.this, ServiceHomeActivity.class);
+                                Intent intent = new Intent(CreateTournamentActivity.this, TournamentActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
