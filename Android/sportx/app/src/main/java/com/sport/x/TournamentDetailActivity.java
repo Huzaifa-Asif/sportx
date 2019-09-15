@@ -138,11 +138,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
             t_state="completed";
         }
 
-        if((sharedPref.getUserRole()==1) && (no_of_teams==teams.size()) )
-        {
-            create_fixtures.setVisibility(View.VISIBLE);
-            misc.showToast("teams full");
-        }
+
 
         // method call to fetch teams
         callTeamWebservice(true);
@@ -414,6 +410,11 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
                             teamAdapter.notifyDataSetChanged();
 
+                            if((sharedPref.getUserRole()==1) && (no_of_teams==teams.size()) )
+                            {
+                                create_fixtures.setVisibility(View.VISIBLE);
+                                misc.showToast("teams full");
+                            }
 
                         } catch (JSONException e1) {
                             e1.printStackTrace();
@@ -432,7 +433,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("tournament", tournament_id);
         Ion.with(this)
-                .load("POST", misc.ROOT_PATH+"tournament/update_tournament/")
+                .load("POST", misc.ROOT_PATH+"fixture/create_fixture")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
