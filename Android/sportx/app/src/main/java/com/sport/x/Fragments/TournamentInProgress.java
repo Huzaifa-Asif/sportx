@@ -98,7 +98,7 @@ public class TournamentInProgress extends Fragment {
                                     String tournament_id = jsonObject.getString("_id");
                                     String state = jsonObject.getString("state");
                                     String tournament_name = jsonObject.getString("name");
-                                    String no_of_teams = jsonObject.getString("teams");
+                                    Integer no_of_teams = jsonObject.getInt("teams");
                                     String winning_prize = jsonObject.getString("winningPrize");
                                     String entry_fee = jsonObject.getString("entryFee");
                                     String tournament_type = jsonObject.getString("tournamentType");

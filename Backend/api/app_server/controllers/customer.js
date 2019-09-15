@@ -95,6 +95,10 @@ module.exports.addCustomer = async (customerform, callback) => {
     {
         record.name="";
     }
+    if(!customerform.token)
+    {
+        record.token="";
+    }
 
     record.save(callback);
 }
@@ -121,10 +125,7 @@ module.exports.updateCustomer = async (email, customerform, options, callback) =
         //urlImage = JSON(imgUrl.url);
         customerform.picture=imgUrl.url;
     }
-    else
-    {
-        customerform.picture="";
-    }
+    
    
     customer.findOneAndUpdate(query, customerform, options, callback);
 }

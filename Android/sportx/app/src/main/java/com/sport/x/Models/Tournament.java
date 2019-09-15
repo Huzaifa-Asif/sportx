@@ -4,7 +4,7 @@ public class Tournament {
     private String tournamentId;
     private String state;
     private String name;
-    private String teams;
+    private Integer teams;
     private String winningPrize;
     private String entryFee;
     private String tournamentType;
@@ -15,7 +15,7 @@ public class Tournament {
     private String startTime;
     private String date;
 
-    public Tournament(String tournamentId, String state, String name, String teams, String winningPrize, String entryFee, String tournamentType, String maxDays, String serviceProviderEmail, String adderEmail, String startDate,String startTime, String date) {
+    public Tournament(String tournamentId, String state, String name, Integer teams, String winningPrize, String entryFee, String tournamentType, String maxDays, String serviceProviderEmail, String adderEmail, String startDate,String startTime, String date) {
         this.tournamentId = tournamentId;
         this.state = state;
         this.name = name;
@@ -43,7 +43,7 @@ public class Tournament {
         return name;
     }
 
-    public String getTournamentTeam() {
+    public Integer getTournamentTeam() {
         return teams;
     }
 

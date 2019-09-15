@@ -38,10 +38,12 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
 
     private TextView _name,_service_provider, _type, _no_of_teams, _entry_fee, _no_of_days,_start_date, _winning_prize, _team_text;
-    private String t_state, tournament_state, team_state, tournament_id,state, name,service_provider, type, no_of_teams, entry_fee, no_of_days,start_date,start_time, winning_prize;
+    private String t_state, tournament_state, team_state, tournament_id,state, name,service_provider, type, entry_fee, no_of_days,start_date,start_time, winning_prize;
     private Button  tournament_state_, cancel_tournament, team_register, create_fixtures;
     FloatingActionButton add_team;
     private EditText team_name, team_contact;
+
+    private Integer no_of_teams;
 
     JSONArray players;
 
@@ -94,7 +96,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         tournament_id=intent.getStringExtra("tournament_id");
         state=intent.getStringExtra("state");
         name=intent.getStringExtra("name");
-        no_of_teams=intent.getStringExtra("teams");
+        no_of_teams=intent.getIntExtra("teams",-1);
         winning_prize=intent.getStringExtra("winningPrize");
         entry_fee = intent.getStringExtra("entryFee");
         type = intent.getStringExtra("tournamentType");
@@ -135,7 +137,12 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
             tournament_state_.setText("Complete Tournament");
             t_state="completed";
         }
-
+        
+        if((sharedPref.getUserRole()==1) && (no_of_teams==teams.size()) )
+        {
+            create_fixtures.setVisibility(View.VISIBLE);
+            misc.showToast("teams full");
+        }
 
         // method call to fetch teams
         callTeamWebservice(true);
@@ -454,7 +461,6 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
                                 Intent intent = new Intent(TournamentDetailActivity.this, TournamentActivity.class);
                                 startActivity(intent);
                                 finish();
-
 
                             }
 

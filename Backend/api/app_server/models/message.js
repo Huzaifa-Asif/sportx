@@ -23,8 +23,11 @@ const messageSchema = new schema({
         type:String
     },
     date:{
-        type:Date
-    }
+        type:String
+    },
+    time:{
+        type:String
+    },
 })
 
 
