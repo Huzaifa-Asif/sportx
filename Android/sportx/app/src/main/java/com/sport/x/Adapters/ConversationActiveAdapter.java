@@ -77,7 +77,7 @@ public class ConversationActiveAdapter extends RecyclerView.Adapter<Conversation
             if((Conversation.getConversationUserRole())==1)
             {
                 comp_name.setText(Conversation.getConversationCustomerName());
-                comp_date.setText(Conversation.getConversationDate());
+                comp_date.setText(Conversation.getConversationDate()+" "+Conversation.getTime());
 
                 if(Conversation.getConversationCustomerPicture()!=null )
                 {

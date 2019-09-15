@@ -10,9 +10,10 @@ public class Conversation {
     private String serviceProviderPicture;
     private String state;
     private String date;
+    private String time;
     private int user_role;
 
-    public Conversation(String conversationId, String customerEmail, String customerName, String customerPicture, String serviceProviderEmail, String serviceProviderName, String serviceProviderPicture, String state, String date, int user_role) {
+    public Conversation(String conversationId, String customerEmail, String customerName, String customerPicture, String serviceProviderEmail, String serviceProviderName, String serviceProviderPicture, String state, String date, String time, int user_role) {
         this.conversationId = conversationId;
         this.customerEmail = customerEmail;
         this.customerName = customerName;
@@ -22,6 +23,7 @@ public class Conversation {
         this.serviceProviderPicture = serviceProviderPicture;
         this.state = state;
         this.date = date;
+        this.time=time;
         this.user_role = user_role;
     }
 
@@ -59,6 +61,10 @@ public class Conversation {
 
     public String getConversationDate() {
         return date;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public int getConversationUserRole() {

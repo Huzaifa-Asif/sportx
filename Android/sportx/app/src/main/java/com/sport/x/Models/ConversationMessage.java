@@ -8,6 +8,7 @@ public class ConversationMessage {
     private String type;
     private String file_path;
     private String date;
+    private String time;
 
 
 
@@ -18,8 +19,8 @@ public class ConversationMessage {
     private String customerEmail;
     private String serviceProviderEmail;
 
-    public ConversationMessage(String conversationMessageId, String conversationId, String senderEmail, String message, String type, String file_path, String date,
-                               String customerName,String serviceProviderName, String customerPicture,String serviceProviderPicture, String customerEmail,String serviceProviderEmail) {
+    public ConversationMessage(String conversationMessageId, String conversationId, String senderEmail, String message, String type, String file_path, String date, String time,
+                               String customerName,String serviceProviderName, String customerPicture,String serviceProviderPicture, String customerEmail,String serviceProviderEmail ) {
         this.conversationMessageId = conversationMessageId;
         this.conversationId = conversationId;
         this.senderEmail = senderEmail;
@@ -27,12 +28,17 @@ public class ConversationMessage {
         this.type = type;
         this.file_path = file_path;
         this.date = date;
+        this.time=time;
         this.customerName=customerName;
         this.serviceProviderName=serviceProviderName;
         this.customerPicture=customerPicture;
         this.serviceProviderPicture=serviceProviderPicture;
         this.customerEmail=customerEmail;
-        this.customerEmail=customerEmail;
+        this.serviceProviderEmail=serviceProviderEmail;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public String getConversationMessageId() {

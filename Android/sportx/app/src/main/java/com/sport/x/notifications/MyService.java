@@ -49,6 +49,7 @@ Misc misc;
 
     @Override
     public void onNewToken(String s) {
+        misc=new Misc(this);
         super.onNewToken(s);
         misc.addToken(s);
 
