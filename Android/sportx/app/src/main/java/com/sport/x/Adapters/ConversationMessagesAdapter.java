@@ -142,7 +142,7 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
         }
 
         void bind(ConversationMessage message) {
-            messageText.setText(message.getConversationMessage());
+            messageText.setText(message.getConversationMessage()+"\n"+message.getTime());
 
             // Format the stored timestamp into a readable String using method.
             //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
@@ -184,7 +184,7 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
             profileImage = itemView.findViewById(R.id.image_message_profile);
         }
         void bind(ConversationMessage message) {
-            messageText.setText(message.getConversationMessage());
+            messageText.setText(message.getConversationMessage()+"\n"+message.getTime());
 
             // Format the stored timestamp into a readable String using method.
             //timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
@@ -192,11 +192,11 @@ public class ConversationMessagesAdapter extends RecyclerView.Adapter {
 
             if(SharedPref.getUserRole()==1)
             {
-                nameText.setText(message.getServiceProviderName());
+                nameText.setText(message.getCustomerName());
             }
             else
             {
-                nameText.setText(message.getCustomerName());
+                nameText.setText(message.getServiceProviderName());
             }
 
             if(SharedPref.getUserRole()==2)

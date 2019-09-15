@@ -64,7 +64,6 @@
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
                 app:cardCornerRadius="@dimen/_20sdp"
                 app:cardElevation="@dimen/_10sdp"
                 android:id="@+id/revenue"
@@ -102,7 +101,6 @@
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
                 app:cardCornerRadius="@dimen/_20sdp"
                 app:cardElevation="@dimen/_10sdp"
                 android:id="@+id/expense_category"
@@ -124,7 +122,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Manage categories of you Expense"
+                        android:text="Manage Categories of your Expense"
                         android:textSize="@dimen/_15sdp"
                         android:textColor="#fff"
                         android:textStyle="bold"
@@ -162,7 +160,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Manage categories of you Expense"
+                        android:text="Manage Categories of your Revenue"
                         android:textSize="@dimen/_15sdp"
                         android:textColor="#fff"
                         android:textStyle="bold"

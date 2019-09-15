@@ -189,13 +189,15 @@ public class MessageActivity extends Menu {
 //                                String file_path = jsonObjectMessage.getString("file_path");
                                 String file_path = "No Value";
                                 String date = jsonObjectMessage.getString("date");
+                                String time = jsonObjectMessage.getString("time");
                                 customerName=jsonObjectMessage.getString("customerName");
                                 serviceProviderName=jsonObjectMessage.getString("serviceProviderName");
                                 customerEmail=jsonObjectMessage.getString("customerEmail");
                                 serviceProviderEmail=jsonObjectMessage.getString("serviceProviderEmail");
                                 customerPicture=jsonObjectMessage.getString("customerPicture");
                                 serviceProviderPicture=jsonObjectMessage.getString("serviceProviderPicture");
-                                messages.add(new ConversationMessage(conversationMessageId, conversationId, senderEmail, message, type, file_path, date,customerName,serviceProviderName,customerPicture,serviceProviderPicture,customerEmail,serviceProviderEmail));
+
+                                messages.add(new ConversationMessage(conversationMessageId, conversationId, senderEmail, message, type, file_path, date,time,customerName,serviceProviderName,customerPicture,serviceProviderPicture,customerEmail,serviceProviderEmail));
 
                             }
 
@@ -207,9 +209,7 @@ public class MessageActivity extends Menu {
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
-//                        if (messages.size() > messagesSize) {
-//                                mMessageAdapter.notifyDataSetChanged();
-//                        }
+//
 
                     }
 
@@ -228,7 +228,8 @@ public class MessageActivity extends Menu {
         jsonObject.addProperty("message", newMessage.getText().toString());
         jsonObject.addProperty("type", "text");
         jsonObject.addProperty("file_path", "");
-        jsonObject.addProperty("date",  new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
+        jsonObject.addProperty("date",  new SimpleDateFormat("E,dd-MM-yyyy", Locale.getDefault()).format(new Date()));
+        jsonObject.addProperty("time",  new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()));
 
 
         Ion.with(this)
@@ -270,8 +271,10 @@ public class MessageActivity extends Menu {
 //                                String file_path = jsonObjectMessage.getString("file_path");
                                 String newfile_path = "No Value";
                                 String newdate = jsonObject1.getString("date");
+                                String newtime = jsonObject1.getString("time");
 
-                                messages.add(new ConversationMessage(newconversationMessageId, conversationId, newsenderEmail, newmessage, newtype, newfile_path, newdate,customerName,serviceProviderName,customerPicture,serviceProviderPicture,customerEmail,serviceProviderEmail));
+
+                                messages.add(new ConversationMessage(newconversationMessageId, conversationId, newsenderEmail, newmessage, newtype, newfile_path, newdate, newtime,customerName,serviceProviderName,customerPicture,serviceProviderPicture,customerEmail,serviceProviderEmail));
                                 newMessage.getText().clear();
                                 mMessageAdapter.notifyDataSetChanged();
                             }

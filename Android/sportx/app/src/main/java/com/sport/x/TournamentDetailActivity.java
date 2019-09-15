@@ -137,7 +137,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
             tournament_state_.setText("Complete Tournament");
             t_state="completed";
         }
-        
+
         if((sharedPref.getUserRole()==1) && (no_of_teams==teams.size()) )
         {
             create_fixtures.setVisibility(View.VISIBLE);

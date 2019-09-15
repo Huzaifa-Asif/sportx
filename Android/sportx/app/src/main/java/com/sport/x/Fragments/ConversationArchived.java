@@ -104,9 +104,10 @@ public class ConversationArchived extends Fragment {
                                     String serviceProviderPicture = jsonObject.getString("serviceProviderPic");
                                     String state = jsonObject.getString("state");
                                     String date = jsonObject.getString("date");
+                                    String time = jsonObject.getString("time");
                                     int user_role = sharedPref.getUserRole();
 
-                                    conversationsListModel.add(new Conversation(conversationId, customerEmail, customerName, customerPicture, serviceProviderEmail, serviceProviderName, serviceProviderPicture, state, date, user_role));
+                                    conversationsListModel.add(new Conversation(conversationId, customerEmail, customerName, customerPicture, serviceProviderEmail, serviceProviderName, serviceProviderPicture, state, date,time, user_role));
                                 }
                                 conversationsAdapter = new ConversationArchivedAdapter(context, conversationsListModel);
                                 view.setAdapter(conversationsAdapter);
