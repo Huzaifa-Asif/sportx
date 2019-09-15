@@ -39,7 +39,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
     private TextView _name,_service_provider, _type, _no_of_teams, _entry_fee, _no_of_days,_start_date, _winning_prize, _team_text;
     private String t_state, tournament_state, team_state, tournament_id,state, name,service_provider, type, no_of_teams, entry_fee, no_of_days,start_date,start_time, winning_prize;
-    private Button  tournament_state_, cancel_tournament, team_register;
+    private Button  tournament_state_, cancel_tournament, team_register, create_fixtures;
     FloatingActionButton add_team;
     private EditText team_name, team_contact;
 
@@ -85,6 +85,9 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         cancel_tournament = findViewById(R.id.cancel_tournament);
         cancel_tournament.setOnClickListener(this);
 
+        create_fixtures = findViewById(R.id.create_fixtures);
+        create_fixtures.setOnClickListener(this);
+
 
         Intent intent = getIntent();
 
@@ -128,10 +131,12 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
             tournament_state_.setText("Publish Tournament");
             t_state="active";
         }
-        else if(state.equals("active")){
+        if(state.equals("active")){
             tournament_state_.setText("Complete Tournament");
             t_state="completed";
         }
+
+
         // method call to fetch teams
         callTeamWebservice(true);
 
@@ -162,6 +167,9 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         }
         if(v.getId() == cancel_tournament.getId()){
             cancelTournament();
+        }
+        if(v.getId() == create_fixtures.getId()){
+            createFixtures();
         }
     }
 
@@ -224,6 +232,11 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
                                 misc.showToast("Team Registered");
                                 teams.add(new TournamentTeam(team_state, team_name.getText().toString(), players,team_id,tournament_id,sharedPref.getEmail(),team_contact.getText().toString()));
                                 teamAdapter.notifyDataSetChanged();
+
+                                if(sharedPref.getUserRole()==1 && no_of_teams.equals(teams.size()))
+                                {
+                                    create_fixtures.setVisibility(View.VISIBLE);
+                                }
                             }
 
                         }
@@ -287,8 +300,55 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
                 });
     }
 
+
     public void cancelTournament()
     {
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("state", "cancelled");
+        Ion.with(this)
+                .load("PATCH", misc.ROOT_PATH+"tournament/update_tournament/"+tournament_id)
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            misc.showToast("Please check your connection");
+                            return;
+                        }
+
+
+                        try{
+                            JSONObject jsonObject1 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject1.getBoolean("status");
+
+
+                            if (!status) {
+                                misc.showToast("Sorry Try Again");
+                                return;
+                            }
+                            else if (status) {
+
+                                misc.showToast("Tournament Cancelled");
+                                Intent intent = new Intent(TournamentDetailActivity.this, TournamentActivity.class);
+                                startActivity(intent);
+                                finish();
+
+
+                            }
+
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
+                });
 
     }
 
@@ -360,16 +420,54 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
 
 
-    private void Book(){
-//        Intent intent = new Intent(this, BookingActivity.class);
-//        intent.putExtra("service_provider_name",service_provider_name);
-//        intent.putExtra("service_name", service_name);
-//        intent.putExtra("service_provider_email", service_provider_email);
-//        intent.putExtra("service_provider_phone_number", service_provider_phone_number);
-//        intent.putExtra("service_provider_address", service_provider_address);
-//        intent.putExtra("service_provider_latitude", service_provider_latitude);
-//        intent.putExtra("service_provider_longitude", service_provider_longitude);
-//        startActivity(intent);
+    public void createFixtures(){
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("tournament", tournament_id);
+        Ion.with(this)
+                .load("POST", misc.ROOT_PATH+"tournament/update_tournament/")
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            misc.showToast("Please check your connection");
+                            return;
+                        }
+
+
+                        try{
+                            JSONObject jsonObject1 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject1.getBoolean("status");
+
+
+                            if (!status) {
+                                misc.showToast("Sorry Try Again");
+                                return;
+                            }
+                            else if (status) {
+
+                                misc.showToast("Tournament Cancelled");
+                                Intent intent = new Intent(TournamentDetailActivity.this, TournamentActivity.class);
+                                startActivity(intent);
+                                finish();
+
+
+                            }
+
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
+                });
+
     }
 
 

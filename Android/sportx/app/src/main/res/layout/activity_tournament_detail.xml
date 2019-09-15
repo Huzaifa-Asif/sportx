@@ -200,6 +200,20 @@
                 android:background="@color/red"
                 />
 
+            <Button
+                android:id="@+id/create_fixtures"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/cancel_tournament"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:text="Create Fixtures"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:background="@color/gradStart"
+                />
+
 
 
         </RelativeLayout>
