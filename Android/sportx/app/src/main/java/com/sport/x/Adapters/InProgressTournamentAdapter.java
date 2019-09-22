@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Tournament;
 import com.sport.x.R;
-import com.sport.x.TournamentDetailActivity;
+import com.sport.x.Activities.SharedActivites.TournamentDetailActivity;
 
 import java.util.ArrayList;
 

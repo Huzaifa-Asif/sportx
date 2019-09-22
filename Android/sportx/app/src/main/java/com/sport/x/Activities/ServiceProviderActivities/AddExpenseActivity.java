@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.sport.x.Activities.Menu.Menu;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
@@ -51,7 +52,7 @@ public class AddExpenseActivity extends Menu implements OnItemSelectedListener,V
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_add_expense);
+        super.inflateView(R.layout.activity_sp_add_expense);
         setTitle("Add Expense");
         context = this;
         SharedPref = new SharedPref(context);
@@ -72,7 +73,7 @@ public class AddExpenseActivity extends Menu implements OnItemSelectedListener,V
         date.setOnClickListener(this);
         newCategory.setVisibility(View.GONE);
         categories.add("Select Category");
-        email=sharedPref.getEmail();
+        email=SharedPref.getEmail();
         callExpenseCategoryWebservice(true);
         spin = findViewById(R.id.spinner);
         final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(

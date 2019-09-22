@@ -12,7 +12,7 @@
     <item
         android:id="@+id/job_history"
         android:title="Booking Management"
-        android:icon="@drawable/job_history"
+        android:icon="@drawable/booking_management"
         app:showAsAction="ifRoom"
         />
     <item

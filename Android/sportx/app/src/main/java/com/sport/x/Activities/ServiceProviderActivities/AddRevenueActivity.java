@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.sport.x.Activities.Menu.Menu;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
@@ -49,12 +50,12 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_add_revenue);
+        super.inflateView(R.layout.activity_sp_add_revenue);
         setTitle("Add revenue");
         context = this;
         SharedPref = new SharedPref(context);
         misc = new Misc(context);
-        email=sharedPref.getEmail();
+        email=SharedPref.getEmail();
         newCategory=findViewById(R.id.newCategory);
         amount=findViewById(R.id.amount);
         txtDate=findViewById(R.id.in_date1);

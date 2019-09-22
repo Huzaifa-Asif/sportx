@@ -12,6 +12,7 @@ import android.view.View;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.sport.x.Activities.Menu.Menu;
 import com.sport.x.Adapters.ExpenseAdapter;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Expense;
@@ -36,7 +37,7 @@ public class ExpenseActivity extends Menu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        super.inflateView(R.layout.activity_expense);
+        super.inflateView(R.layout.activity_sp_expense);
 
         setTitle("Expenses");
         context = this;

@@ -16,6 +16,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.sport.x.Activities.Menu.Menu;
 import com.sport.x.Adapters.RevenueCategoryAdapter;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.RevenueCategory;
@@ -39,7 +40,7 @@ public class RevenueCategoryActivity extends Menu {
     EditText newCategory;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_revenue_category);
+        super.inflateView(R.layout.activity_sp_revenue_category);
         setTitle("Revenue Category");
         context = this;
         SharedPref = new SharedPref(context);

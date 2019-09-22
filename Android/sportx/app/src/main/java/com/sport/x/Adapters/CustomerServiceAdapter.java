@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sport.x.AdminActivities.AllCustomersActivity;
-import com.sport.x.MapsActivity;
+import com.sport.x.Activities.CustomerActivities.MapsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Service;
 import com.sport.x.R;

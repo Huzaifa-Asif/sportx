@@ -1,35 +1,14 @@
 package com.sport.x.notifications;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.ProgressDialog;
-import android.app.Service;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
-import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
-import com.koushikdutta.ion.Response;
-import com.sport.x.AllServiceActivity;
-import com.sport.x.BookingActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
-import com.sport.x.SharedPref.SharedPref;
-
-import android.support.v7.app.AlertDialog;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MyService extends FirebaseMessagingService {
 

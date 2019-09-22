@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
+import com.sport.x.Activities.Menu.Menu;
 import com.sport.x.R;
 
 public class AccountsActivity extends Menu implements View.OnClickListener  {
@@ -12,7 +13,7 @@ public class AccountsActivity extends Menu implements View.OnClickListener  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_accounts);
+        super.inflateView(R.layout.activity_sp_accounts);
         setTitle("Accounts");
 
         expense = findViewById(R.id.expense);
@@ -60,7 +61,7 @@ public class AccountsActivity extends Menu implements View.OnClickListener  {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, ServiceHomeActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

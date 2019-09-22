@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    tools:context=".Activities.CustomerActivities.ServiceProviderDetailsActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_10sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tournament Details"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12sdp"
+                android:id="@+id/contact_details"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contact_details"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Name: "
+                android:layout_alignParentLeft="true"
+                android:id="@+id/c_name"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service Provider: "
+                android:id="@+id/c_service_provider"
+                android:layout_below="@id/c_name"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
+                android:layout_marginRight="@dimen/_35sdp"
+                android:textStyle="bold"
+
+                />
+
+
+        <RelativeLayout
+            android:id="@+id/layout1"
+            android:layout_below="@id/c_service_provider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp">
+
+            <View style="@style/Divider"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type: "
+                android:layout_alignParentLeft="true"
+                android:id="@+id/c_type"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No of Teams: "
+                android:layout_alignParentRight="true"
+                android:id="@+id/c_teams"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Entry Fee: "
+                android:layout_below="@+id/c_type"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/c_entry"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No of Days: "
+                android:layout_below="@+id/c_type"
+                android:layout_alignParentRight="true"
+                android:id="@+id/c_days"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Date: "
+                android:layout_below="@+id/c_entry"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/c_start_date"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Winning Prize: "
+                android:layout_below="@+id/c_days"
+                android:layout_alignParentRight="true"
+                android:id="@+id/c_winning_prize"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                />
+
+
+
+<!--            <Button-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_below="@id/c_winning_prize"-->
+<!--                android:layout_marginTop="@dimen/_20sdp"-->
+<!--                android:layout_marginLeft="@dimen/_10sdp"-->
+<!--                android:layout_marginRight="@dimen/_10sdp"-->
+<!--                android:text="Add Team"-->
+<!--                android:textColor="#fff"-->
+<!--                android:background="@color/colorPrimary"-->
+<!--                android:id="@+id/add_team"-->
+<!--                />-->
+
+            <Button
+                android:id="@+id/tournament_state"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/c_winning_prize"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:text="Complete Tournament"
+                android:textColor="#fff"
+                android:background="@color/colorPrimary"
+                />
+
+
+            <Button
+                android:id="@+id/cancel_tournament"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/tournament_state"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:text="Cancel Tournament"
+                android:textColor="#fff"
+                android:background="@color/red"
+                />
+
+            <Button
+                android:id="@+id/create_fixtures"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/cancel_tournament"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:text="Create Fixtures"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:background="@color/gradStart"
+                />
+
+
+
+        </RelativeLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/add_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/colorPrimary"
+                app:srcCompat="@drawable/add"
+                app:fabCustomSize="52dp"
+                app:maxImageSize="52dp"
+                android:elevation="16dp"
+
+                />
+
+    <TextView
+        android:id="@+id/tournamentTeams"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:text="Tournament Teams"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="@dimen/_12sdp"
+        android:layout_below="@id/cancel_tournament"
+        />
+
+        <!--<FrameLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@id/tournamentTeams"-->
+            <!--android:layout_marginRight="@dimen/_20sdp"-->
+            <!--android:layout_marginLeft="@dimen/_20sdp"-->
+            <!--android:layout_marginTop="@dimen/_10sdp">-->
+            <!---->
+
+        <!--</FrameLayout>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Teams Found for this tournament"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_below="@+id/tournamentTeams"
+        android:id="@+id/no_team_text"
+        android:textStyle="bold"
+        android:visibility="gone"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/tournamentTeams"
+        android:id="@+id/reyclerview_team_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

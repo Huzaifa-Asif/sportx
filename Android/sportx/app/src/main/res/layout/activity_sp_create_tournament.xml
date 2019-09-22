@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="false"
+    android:background="#fff"
+    tools:context=".Activities.ServiceProviderActivities.CreateTournamentActivity">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
+
+
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Tournament Details"
+                android:textColor="@color/grey"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:textStyle="bold"
+                android:textSize="@dimen/_13sdp"
+                android:id="@+id/details"
+                />
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:hint="Tournament Name"
+                android:textColor="@color/grey"
+                android:textColorHint="@color/grey"
+
+                android:id="@+id/tournament_name"
+                android:inputType="text"
+                android:layout_below="@+id/details"
+                android:background="@drawable/edittext"
+                android:textCursorDrawable="@color/grey"
+                />
+
+
+            <Spinner
+                android:background="@drawable/spinner"
+                android:id="@+id/tournamentType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:padding="@dimen/_12sdp"
+                android:entries="@array/tournamentType"
+                android:layout_below="@+id/tournament_name" />
+
+
+            <Spinner
+                android:background="@drawable/spinner"
+                android:id="@+id/no_of_team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:padding="@dimen/_12sdp"
+                android:entries="@array/tournamentTeams"
+                android:layout_below="@+id/tournamentType" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:hint="No of Days"
+                android:textColor="@color/grey"
+                android:textColorHint="@color/grey"
+                android:background="@drawable/edittext"
+                android:id="@+id/tournament_days"
+                android:inputType="number"
+                android:layout_below="@+id/no_of_team"
+                android:textCursorDrawable="@color/grey"
+                />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:hint="Entry Fees"
+                android:textColor="@color/grey"
+                android:textColorHint="@color/grey"
+                android:background="@drawable/edittext"
+                android:id="@+id/tournament_entry_fee"
+                android:inputType="number"
+                android:layout_below="@+id/tournament_days"
+                android:textCursorDrawable="@color/grey"
+
+                />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:hint="Winning Prize"
+                android:textColor="@color/grey"
+                android:textColorHint="@color/grey"
+                android:background="@drawable/edittext"
+                android:id="@+id/tournament_winning_prize"
+                android:inputType="number"
+                android:layout_below="@+id/tournament_entry_fee"
+                android:textCursorDrawable="@color/grey"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Specify Tournament Start Time"
+                android:textColor="@color/grey"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:textStyle="bold"
+                android:textSize="@dimen/_13sdp"
+                android:id="@+id/startTime"
+                android:layout_below="@+id/tournament_winning_prize"
+                />
+
+
+
+            <EditText
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/in_date"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:focusable="false"
+                android:hint="Select Date"
+                android:textColorHint="@color/grey"
+                android:layout_below="@+id/startTime"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="@dimen/_10sdp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SELECT DATE"
+                android:id="@+id/btn_date"
+                android:onClick="DatePickerClick"
+                android:layout_alignBottom="@+id/in_date"
+                android:layout_alignEnd="@+id/in_date"
+                android:background="@color/colorPrimary"
+                android:textColor="#fff"
+                android:paddingLeft="@dimen/_8sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                />
+
+            <EditText
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/in_time"
+                android:layout_marginTop="4dp"
+                android:focusable="false"
+                android:hint="Select Time"
+                android:textColorHint="@color/grey"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:layout_below="@+id/in_date"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="@dimen/_10sdp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SELECT TIME"
+                android:id="@+id/btn_time"
+                android:onClick="TimePickerClick"
+                android:layout_below="@+id/btn_date"
+                android:layout_alignEnd="@+id/btn_date"
+                android:background="@color/colorPrimary"
+                android:textColor="#fff"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                />
+
+        </RelativeLayout>
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit_button"
+            android:layout_marginRight="@dimen/_18sdp"
+            android:layout_marginLeft="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@color/colorPrimary"
+            android:text="Submit"
+            android:textColor="#fff"
+            android:layout_marginBottom="@dimen/_18sdp"
+            />
+    </LinearLayout>
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+    <!--</RelativeLayout>-->
+
+</ScrollView>

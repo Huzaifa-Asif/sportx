@@ -38,7 +38,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
             startActivity(intent);
             finish();
         }
-//        if(v.getId() == job_history.getId()){
+//        if(v.getId() == booking_management.getId()){
 //            Intent intent = new Intent(this, AllJobsActivity.class);
 //            startActivity(intent);
 //            finish();

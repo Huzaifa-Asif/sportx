@@ -10,7 +10,7 @@
             android:title="Home" />
         <item
             android:id="@+id/service_jobs"
-            android:icon="@drawable/job_history"
+            android:icon="@drawable/booking_management"
             android:title="Booking Management" />
         <item
             android:id="@+id/conversation"
@@ -27,7 +27,7 @@
 
         <item
             android:id="@+id/createtournament"
-            android:icon="@drawable/tournament"
+            android:icon="@drawable/create_tournament"
             android:title="Create Tournaments" />
 
         <item
@@ -36,25 +36,16 @@
             android:title="Profile" />
         <item
             android:id="@+id/service_update_password"
-            android:icon="@drawable/update"
+            android:icon="@drawable/update_password"
             android:title="Update Password" />
-        <item
-            android:id="@+id/service_update"
-            android:icon="@drawable/ic_border_color_black_24dp"
-            android:title="Update Services" />
 
-
-        <item
-            android:id="@+id/up_password"
-            android:icon="@drawable/ic_vpn_key_black_24dp"
-            android:title="Update Password" />
         <item
             android:id="@+id/service_help"
-            android:icon="@drawable/ic_help"
+            android:icon="@drawable/help"
             android:title="Help" />
         <item
             android:id="@+id/logout"
-            android:icon="@drawable/ic_logout"
+            android:icon="@drawable/logout"
             android:title="Logout" />
     </group>
 

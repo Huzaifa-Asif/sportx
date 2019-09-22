@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.sport.x.Activities.Menu.Menu;
 import com.sport.x.Adapters.ExpenseReportAdapter;
 import com.sport.x.Adapters.RevenueReportAdapter;
 import com.sport.x.Misc.Misc;
@@ -54,7 +55,7 @@ public class AccountsReportActivity extends Menu implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_accounts_report);
+        super.inflateView(R.layout.activity_sp_accounts_report);
         setTitle("Accounts Report");
         context = this;
         SharedPref = new SharedPref(context);

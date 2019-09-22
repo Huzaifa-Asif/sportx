@@ -16,6 +16,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.sport.x.Activities.Menu.Menu;
 import com.sport.x.Adapters.ExpenseCategoryAdapter;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.ExpenseCategory;
@@ -40,7 +41,7 @@ public class ExpenseCategoryActivity extends Menu {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_expense_category);
+        super.inflateView(R.layout.activity_sp_expense_category);
         setTitle("Expense Category");
         context = this;
         SharedPref = new SharedPref(context);
