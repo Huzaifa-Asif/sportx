@@ -1,4 +1,4 @@
-package com.sport.x.ServiceProviderActivities;
+package com.sport.x.Activities.ServiceProviderActivities;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,9 +16,9 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
-import com.sport.x.Adapters.RevenueCategoryAdapter;
+import com.sport.x.Adapters.ExpenseCategoryAdapter;
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.RevenueCategory;
+import com.sport.x.Models.ExpenseCategory;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 
@@ -29,29 +28,30 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class RevenueCategoryActivity extends Menu {
+public class ExpenseCategoryActivity extends Menu {
     Misc misc;
     SharedPref SharedPref;
     Context context;
-    ArrayList<RevenueCategory> categories = new ArrayList<RevenueCategory>();
-    private RecyclerView revenueCategoryRecycler;
-    private RevenueCategoryAdapter revenueCategoryAdapter;
+    ArrayList<ExpenseCategory> categories = new ArrayList<ExpenseCategory>();
+    private RecyclerView expenseCategoryRecycler;
+    private ExpenseCategoryAdapter expenseCategoryAdapter;
     FloatingActionButton add;
     EditText newCategory;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_revenue_category);
-        setTitle("Revenue Category");
+        super.inflateView(R.layout.activity_expense_category);
+        setTitle("Expense Category");
         context = this;
         SharedPref = new SharedPref(context);
         misc = new Misc(context);
-        callRevenueCategoryWebservice(true);
+        callExpenseCategoryWebservice(true);
         add=findViewById(R.id.fab);
 
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.add_revenue_category);
+                dialog.setContentView(R.layout.add_expense_category);
                 newCategory = dialog.findViewById(R.id.category);
                 Button add=dialog.findViewById(R.id.add);
                 add.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +60,12 @@ public class RevenueCategoryActivity extends Menu {
                         {
                             misc.showToast("Please Enter New Category Name");
                         }
-                        else {
-                            callAddRevenueCategoryWebservice();
+                        else
+                        {
+                            callAddExpenseCategoryWebservice();
                             dialog.dismiss();
                         }
+
 
 
                     }
@@ -73,8 +75,9 @@ public class RevenueCategoryActivity extends Menu {
         });
 
 
-        revenueCategoryRecycler =  findViewById(R.id.reyclerview_revenue_category_list);
-        revenueCategoryRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
+
+        expenseCategoryRecycler =  findViewById(R.id.reyclerview_expense_category_list);
+        expenseCategoryRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy){
                 if (dy<0 && !add.isShown())
@@ -88,9 +91,9 @@ public class RevenueCategoryActivity extends Menu {
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
-        revenueCategoryAdapter = new RevenueCategoryAdapter(this, categories);
-        revenueCategoryRecycler.setLayoutManager(new LinearLayoutManager(this));
-        revenueCategoryRecycler.setAdapter(revenueCategoryAdapter);
+        expenseCategoryAdapter = new ExpenseCategoryAdapter(this, categories);
+        expenseCategoryRecycler.setLayoutManager(new LinearLayoutManager(this));
+        expenseCategoryRecycler.setAdapter(expenseCategoryAdapter);
     }
 
     @Override
@@ -100,10 +103,10 @@ public class RevenueCategoryActivity extends Menu {
         finish();
     }
 
-    private void callAddRevenueCategoryWebservice(){
+    private void callAddExpenseCategoryWebservice(){
 
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Adding revenue Category...");
+        pd.setMessage("Adding Expense Category...");
         pd.setCancelable(false);
         pd.show();
         JsonObject jsonObject = new JsonObject();
@@ -113,7 +116,7 @@ public class RevenueCategoryActivity extends Menu {
 
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"revenuecategory/add_revenueCategory")
+                .load(misc.ROOT_PATH+"expensecategory/add_expenseCategory")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -142,13 +145,14 @@ public class RevenueCategoryActivity extends Menu {
                             }
                             else if (status) {
                                 pd.dismiss();
-                                misc.showToast("Revenue Category Added");
+                                misc.showToast("Expense Category Added");
                             }
                             String id=jsonObject1.getString("_id");
                             String name=jsonObject1.getString("name");
                             String serviceProviderEmail=jsonObject1.getString("serviceProviderEmail");
-                            categories.add(new RevenueCategory(id,name,serviceProviderEmail));
-                            revenueCategoryAdapter.notifyDataSetChanged();
+                            categories.add(new ExpenseCategory(id,name,serviceProviderEmail));
+                            expenseCategoryAdapter.notifyDataSetChanged();
+
                         }
                         catch (JSONException e1) {
                             e1.printStackTrace();
@@ -161,21 +165,20 @@ public class RevenueCategoryActivity extends Menu {
     }
 
 
-
-    public void callRevenueCategoryWebservice(boolean isShowDialog)
+    public void callExpenseCategoryWebservice(boolean isShowDialog)
     {
 
 
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Fetching all revenue categories");
+        pd.setMessage("Fetching all expense categories");
         pd.setCancelable(false);
         if(categories.size()==0) {
             pd.show();
         }
-        final int revenueCategorySize = categories.size();
+        final int expenseCategorySize = categories.size();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "revenuecategory/get_revenueCategory_by_serviceProvider/" + SharedPref.getEmail())
+                .load("GET", misc.ROOT_PATH + "expensecategory/get_expenseCategory_by_serviceProvider/" + SharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -192,7 +195,7 @@ public class RevenueCategoryActivity extends Menu {
 
                             JSONArray jsonArray = new JSONArray(result.getResult());
                             if (jsonArray.length() < 1) {
-                                misc.showToast("No revenue Categories Found");
+                                misc.showToast("No expense Categories Found");
                                 pd.dismiss();
                                 return;
                             }
@@ -200,16 +203,17 @@ public class RevenueCategoryActivity extends Menu {
                             for (int i = 0; i < jsonArray.length(); i++) {
 
 
-                                JSONObject jsonObjectRevenueCategory = (JSONObject) jsonArray.get(i);
+                                JSONObject jsonObjectExpenseCategory = (JSONObject) jsonArray.get(i);
 
-                                String revenueCategoryId = jsonObjectRevenueCategory.getString("_id");
-                                String name = jsonObjectRevenueCategory.getString("name");
-                                String serviceProviderEmail = jsonObjectRevenueCategory.getString("serviceProviderEmail");
-                                categories.add(new RevenueCategory(revenueCategoryId, name, serviceProviderEmail));
+                                String expenseCategoryId = jsonObjectExpenseCategory.getString("_id");
+                                String name = jsonObjectExpenseCategory.getString("name");
+                                String serviceProviderEmail = jsonObjectExpenseCategory.getString("serviceProviderEmail");
+                                categories.add(new ExpenseCategory(expenseCategoryId, name, serviceProviderEmail));
+
 
                             }
 
-                            revenueCategoryAdapter.notifyDataSetChanged();
+                            expenseCategoryAdapter.notifyDataSetChanged();
 
 
                         } catch (JSONException e1) {
@@ -221,8 +225,6 @@ public class RevenueCategoryActivity extends Menu {
 
                 });
     }
-
-
 
 
 }

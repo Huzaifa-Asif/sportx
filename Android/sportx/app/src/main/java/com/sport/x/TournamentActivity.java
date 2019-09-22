@@ -12,8 +12,8 @@ import android.os.Bundle;
 import com.sport.x.Fragments.TournamentCompleted;
 import com.sport.x.Fragments.TournamentInProgress;
 import com.sport.x.Fragments.TournamentInActive;
-import com.sport.x.ServiceProviderActivities.Menu;
-import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
 
 public class TournamentActivity extends Menu {

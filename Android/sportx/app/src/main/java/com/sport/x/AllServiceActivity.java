@@ -18,7 +18,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.sport.x.Adapters.CustomerServiceAdapter;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Service;
-import com.sport.x.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
 import com.sport.x.SharedPref.SharedPref;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;

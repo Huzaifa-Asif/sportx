@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,7 +23,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.sport.x.Misc.Misc;
-import com.sport.x.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
 import com.sport.x.SharedPref.SharedPref;
 
 import org.json.JSONArray;

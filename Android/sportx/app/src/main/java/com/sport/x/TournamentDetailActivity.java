@@ -19,18 +19,14 @@ import com.koushikdutta.ion.Response;
 import com.sport.x.Adapters.TournamentTeamsAdapter;
 
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.Tournament;
 import com.sport.x.Models.TournamentTeam;
-import com.sport.x.ServiceProviderActivities.Menu;
-import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
-import com.sport.x.TournamentActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.content.Context;
 
 import java.util.ArrayList;
 

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
-import com.sport.x.ServiceProviderActivities.RegisterServiceActivity;
+import com.sport.x.Activities.ServiceProviderActivities.RegisterServiceActivity;
 
 public class RegisterAsActivity extends AppCompatActivity implements View.OnClickListener {
 

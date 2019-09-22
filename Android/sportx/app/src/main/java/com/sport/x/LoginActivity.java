@@ -8,7 +8,6 @@ import android.content.pm.Signature;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,7 @@ import android.widget.TextView;
 
 import com.sport.x.AdminActivities.AdminHomeActivity;
 import com.sport.x.Misc.Misc;
-import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.Activities.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;

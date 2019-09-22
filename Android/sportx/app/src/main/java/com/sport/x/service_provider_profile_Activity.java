@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sport.x.Misc.Misc;
-import com.sport.x.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
 import com.sport.x.SharedPref.SharedPref;
 
 public class service_provider_profile_Activity extends Menu implements OnMapReadyCallback, View.OnClickListener {

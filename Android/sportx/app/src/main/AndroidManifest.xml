@@ -29,7 +29,7 @@
             android:required="false" />
 
         <activity
-            android:name=".ServiceProviderActivities.ProviderJobsActivity"
+            android:name=".Activities.ServiceProviderActivities.ProviderJobsActivity"
             android:label="@string/title_activity_provider_jobs"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -53,7 +53,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ServiceProviderActivities.UpdateServicesActivity" />
+        <activity android:name=".Activities.ServiceProviderActivities.UpdateServicesActivity" />
         <activity android:name=".ResetPasswordActivity" />
 
         <activity android:name=".AdminActivities.CustomerDetailsActivity" />
@@ -66,19 +66,19 @@
         <activity android:name=".AdminActivities.AllComplaintsActivity" />
         <activity android:name=".AdminActivities.AdminHomeActivity" />
         <activity android:name=".ComplainActivity" />
-        <activity android:name=".ServiceProviderActivities.AccountsReportActivity" />
+        <activity android:name=".Activities.ServiceProviderActivities.AccountsReportActivity" />
         <activity android:name=".HelpActivity" />
         <activity
             android:name=".AllServiceActivity"
             android:label="@string/title_activity_all_service"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ServiceProviderActivities.SerivceUpdatePasswordActivity" />
-        <activity android:name=".ServiceProviderActivities.ServiceProfileActivity" />
+        <activity android:name=".Activities.ServiceProviderActivities.SerivceUpdatePasswordActivity" />
+        <activity android:name=".Activities.ServiceProviderActivities.ServiceProfileActivity" />
         <activity
-            android:name=".ServiceProviderActivities.ServiceHomeActivity"
+            android:name=".Activities.ServiceProviderActivities.ServiceHomeActivity"
             android:label="@string/title_activity_service_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ServiceProviderActivities.RegisterServiceActivity" />
+        <activity android:name=".Activities.ServiceProviderActivities.RegisterServiceActivity" />
         <activity android:name=".RegisterAsActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".CompletedJobDetailsActivity" />
@@ -127,13 +127,13 @@
 
 
 
-        <activity android:name=".ServiceProviderActivities.ExpenseActivity"></activity>
-        <activity android:name=".ServiceProviderActivities.AccountsActivity"></activity>
-        <activity android:name=".ServiceProviderActivities.AddExpenseActivity"></activity>
-        <activity android:name=".ServiceProviderActivities.AddRevenueActivity"></activity>
-        <activity android:name=".ServiceProviderActivities.RevenueActivity"></activity>
-        <activity android:name=".ServiceProviderActivities.RevenueCategoryActivity"></activity>
-        <activity android:name=".ServiceProviderActivities.ExpenseCategoryActivity"></activity>
+        <activity android:name=".Activities.ServiceProviderActivities.ExpenseActivity"></activity>
+        <activity android:name=".Activities.ServiceProviderActivities.AccountsActivity"></activity>
+        <activity android:name=".Activities.ServiceProviderActivities.AddExpenseActivity"></activity>
+        <activity android:name=".Activities.ServiceProviderActivities.AddRevenueActivity"></activity>
+        <activity android:name=".Activities.ServiceProviderActivities.RevenueActivity"></activity>
+        <activity android:name=".Activities.ServiceProviderActivities.RevenueCategoryActivity"></activity>
+        <activity android:name=".Activities.ServiceProviderActivities.ExpenseCategoryActivity"></activity>
         <activity android:name=".MessageActivity"></activity>
 
         <service android:name=".notifications.MyService">

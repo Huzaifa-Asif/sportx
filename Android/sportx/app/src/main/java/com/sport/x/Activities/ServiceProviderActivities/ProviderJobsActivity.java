@@ -1,9 +1,7 @@
-package com.sport.x.ServiceProviderActivities;
+package com.sport.x.Activities.ServiceProviderActivities;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

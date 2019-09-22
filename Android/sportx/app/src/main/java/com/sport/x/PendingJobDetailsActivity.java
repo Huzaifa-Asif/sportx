@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.sport.x.Misc.Misc;
-import com.sport.x.ServiceProviderActivities.Menu;
-import com.sport.x.ServiceProviderActivities.ProviderJobsActivity;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.ProviderJobsActivity;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.GoogleMap;

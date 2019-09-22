@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sport.x.Misc.Misc;
-import com.sport.x.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;

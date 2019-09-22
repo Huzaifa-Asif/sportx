@@ -17,7 +17,7 @@ import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Service_Provider;
 
 
-import com.sport.x.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;

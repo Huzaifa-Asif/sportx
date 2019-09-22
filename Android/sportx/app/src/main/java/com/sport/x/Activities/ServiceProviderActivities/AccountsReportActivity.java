@@ -1,4 +1,4 @@
-package com.sport.x.ServiceProviderActivities;
+package com.sport.x.Activities.ServiceProviderActivities;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -19,12 +19,9 @@ import android.widget.TextView;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
-import com.sport.x.Adapters.ExpenseAdapter;
-import com.sport.x.Adapters.ExpenseCategoryAdapter;
 import com.sport.x.Adapters.ExpenseReportAdapter;
 import com.sport.x.Adapters.RevenueReportAdapter;
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.Expense;
 import com.sport.x.Models.ExpenseReport;
 import com.sport.x.Models.RevenueReport;
 import com.sport.x.R;

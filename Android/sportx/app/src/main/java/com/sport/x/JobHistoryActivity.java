@@ -12,8 +12,8 @@ import android.os.Bundle;
 import com.sport.x.Fragments.CustomerCompletedJobs;
 import com.sport.x.Fragments.CustomerInProgressJobs;
 import com.sport.x.Fragments.CustomerPendingJobs;
-import com.sport.x.ServiceProviderActivities.Menu;
-import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
 
 public class JobHistoryActivity extends Menu {

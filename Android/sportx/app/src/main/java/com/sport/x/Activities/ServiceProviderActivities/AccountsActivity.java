@@ -1,4 +1,4 @@
-package com.sport.x.ServiceProviderActivities;
+package com.sport.x.Activities.ServiceProviderActivities;
 
 import android.content.Intent;
 import android.os.Bundle;

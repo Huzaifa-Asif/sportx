@@ -1,4 +1,4 @@
-package com.sport.x.ServiceProviderActivities;
+package com.sport.x.Activities.ServiceProviderActivities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,9 +12,9 @@ import android.view.View;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
-import com.sport.x.Adapters.ExpenseAdapter;
+import com.sport.x.Adapters.RevenueAdapter;
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.Expense;
+import com.sport.x.Models.Revenue;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 
@@ -24,39 +24,37 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ExpenseActivity extends Menu {
+public class RevenueActivity extends Menu {
+
 
     Misc misc;
     SharedPref SharedPref;
     Context context;
-    ArrayList<Expense> expenses = new ArrayList<Expense>();
-    private RecyclerView expenseRecycler;
-    private ExpenseAdapter expenseAdapter;
+    ArrayList<Revenue> revenues = new ArrayList<Revenue>();
+    private RecyclerView revenueRecycler;
+    private RevenueAdapter revenueAdapter;
     FloatingActionButton add;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        super.inflateView(R.layout.activity_expense);
-
-        setTitle("Expenses");
+        super.inflateView(R.layout.activity_revenue);
+        setTitle("Revenues");
         context = this;
         SharedPref = new SharedPref(context);
         misc = new Misc(context);
-        callExpenseWebservice(true);
+        callrevenueWebservice(true);
         add=findViewById(R.id.fab);
 
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(ExpenseActivity.this, AddExpenseActivity.class);
+                Intent intent = new Intent(RevenueActivity.this, AddRevenueActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-
-
-        expenseRecycler =  findViewById(R.id.reyclerview_expense_list);
-        expenseRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
+        revenueRecycler =  findViewById(R.id.reyclerview_revenue_list);
+        revenueRecycler.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy){
                 if (dy<0 && !add.isShown())
@@ -70,9 +68,9 @@ public class ExpenseActivity extends Menu {
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
-        expenseAdapter = new ExpenseAdapter(this, expenses);
-        expenseRecycler.setAdapter(expenseAdapter);
-        expenseRecycler.setHasFixedSize(true);
+        revenueAdapter = new RevenueAdapter(this, revenues);
+        revenueRecycler.setAdapter(revenueAdapter);
+        revenueRecycler.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this)
         {
 
@@ -82,31 +80,29 @@ public class ExpenseActivity extends Menu {
             }
         };
 
-        expenseRecycler.setLayoutManager(llm);
-
-
+        revenueRecycler.setLayoutManager(llm);
     }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, AccountsActivity.class);
         startActivity(intent);
         finish();
     }
-
-    public void callExpenseWebservice(boolean isShowDialog)
+    public void callrevenueWebservice(boolean isShowDialog)
     {
 
 
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Fetching all expenses");
+        pd.setMessage("Fetching all revenues");
         pd.setCancelable(false);
-        if(expenses.size()==0) {
+        if(revenues.size()==0) {
             pd.show();
         }
-        final int expenseSize = expenses.size();
+        final int revenueSize = revenues.size();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "expense/get_expense_by_serviceProvider/" + SharedPref.getEmail())
+                .load("GET", misc.ROOT_PATH + "revenue/get_revenue_by_serviceProvider/" + SharedPref.getEmail())
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {
@@ -123,7 +119,7 @@ public class ExpenseActivity extends Menu {
 
                             JSONArray jsonArray = new JSONArray(result.getResult());
                             if (jsonArray.length() < 1) {
-                                misc.showToast("No expenses Found");
+                                misc.showToast("No revenues Found");
                                 pd.dismiss();
                                 return;
                             }
@@ -131,19 +127,19 @@ public class ExpenseActivity extends Menu {
                             for (int i = 0; i < jsonArray.length(); i++) {
 
 
-                                JSONObject jsonObjectExpense = (JSONObject) jsonArray.get(i);
+                                JSONObject jsonObjectrevenue = (JSONObject) jsonArray.get(i);
 
-                                String expenseId = jsonObjectExpense.getString("_id");
-                                String expenseCategory = jsonObjectExpense.getString("expenseCategory");
-                                int amount = jsonObjectExpense.getInt("amount");
-                                String serviceProviderEmail = jsonObjectExpense.getString("serviceProviderEmail");
-                                String date = jsonObjectExpense.getString("date");
-                                String description = jsonObjectExpense.getString("description");
-                                expenses.add(new Expense(expenseId, expenseCategory, amount, serviceProviderEmail, date, description));
+                                String revenueId = jsonObjectrevenue.getString("_id");
+                                String revenueCategory = jsonObjectrevenue.getString("revenueCategory");
+                                int amount = jsonObjectrevenue.getInt("amount");
+                                String serviceProviderEmail = jsonObjectrevenue.getString("serviceProviderEmail");
+                                String date = jsonObjectrevenue.getString("date");
+                                String description = jsonObjectrevenue.getString("description");
+                                revenues.add(new Revenue(revenueId, revenueCategory, amount, serviceProviderEmail, date, description));
 
                             }
 
-                            expenseAdapter.notifyDataSetChanged();
+                            revenueAdapter.notifyDataSetChanged();
 
 
                         } catch (JSONException e1) {

@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.sport.x.ServiceProviderActivities.Menu;
-import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.ServiceHomeActivity;
 
 public class HelpActivity extends Menu {
 

@@ -10,8 +10,8 @@ import android.support.v4.view.ViewPager;
 
 import com.sport.x.Fragments.ConversationActive;
 import com.sport.x.Fragments.ConversationArchived;
-import com.sport.x.ServiceProviderActivities.Menu;
-import com.sport.x.ServiceProviderActivities.ServiceHomeActivity;
+import com.sport.x.Activities.ServiceProviderActivities.Menu;
+import com.sport.x.Activities.ServiceProviderActivities.ServiceHomeActivity;
 import com.sport.x.SharedPref.SharedPref;
 
 public class ConversationActivity extends Menu {

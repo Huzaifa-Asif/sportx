@@ -1,14 +1,11 @@
-package com.sport.x.ServiceProviderActivities;
+package com.sport.x.Activities.ServiceProviderActivities;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,9 +20,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
-import com.sport.x.CreateTournamentActivity;
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.ConversationMessage;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 
@@ -33,14 +28,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.TimePicker;
 
 
 public class AddExpenseActivity extends Menu implements OnItemSelectedListener,View.OnClickListener {
