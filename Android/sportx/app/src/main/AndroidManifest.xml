@@ -55,10 +55,7 @@
         </activity>
         <activity android:name=".ServiceProviderActivities.UpdateServicesActivity" />
         <activity android:name=".ResetPasswordActivity" />
-        <activity
-            android:name=".AdminActivities.AllJobsActivity"
-            android:label="@string/title_activity_all_jobs"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".AdminActivities.CustomerDetailsActivity" />
         <activity android:name=".CompareActivity" />
         <activity android:name=".AdminActivities.AddServiceActivity" />
@@ -69,6 +66,7 @@
         <activity android:name=".AdminActivities.AllComplaintsActivity" />
         <activity android:name=".AdminActivities.AdminHomeActivity" />
         <activity android:name=".ComplainActivity" />
+        <activity android:name=".ServiceProviderActivities.AccountsReportActivity" />
         <activity android:name=".HelpActivity" />
         <activity
             android:name=".AllServiceActivity"

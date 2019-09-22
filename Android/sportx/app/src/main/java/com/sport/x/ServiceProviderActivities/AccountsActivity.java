@@ -2,16 +2,13 @@ package com.sport.x.ServiceProviderActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
-import com.sport.x.LoginActivity;
 import com.sport.x.R;
-import com.sport.x.RegisterActivity;
 
 public class AccountsActivity extends Menu implements View.OnClickListener  {
-    private CardView expense, expenseCategory,revenue,revenueCategory;
+    private CardView expense, expenseCategory,revenue,revenueCategory,report;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,11 +19,13 @@ public class AccountsActivity extends Menu implements View.OnClickListener  {
         revenue = findViewById(R.id.revenue);
         expenseCategory = findViewById(R.id.expense_category);
         revenueCategory = findViewById(R.id.revenue_category);
+        report=findViewById(R.id.report);
 
         expense.setOnClickListener(this);
         revenue.setOnClickListener(this);
         expenseCategory.setOnClickListener(this);
         revenueCategory.setOnClickListener(this);
+        report.setOnClickListener(this);
 
     }
     @Override
@@ -36,18 +35,23 @@ public class AccountsActivity extends Menu implements View.OnClickListener  {
             startActivity(intent);
             finish();
         }
-        if(v.getId() == revenue.getId()){
+        else if(v.getId() == revenue.getId()){
             Intent intent = new Intent(this, RevenueActivity.class);
             startActivity(intent);
             finish();
         }
-        if(v.getId() == expenseCategory.getId()){
+        else if(v.getId() == expenseCategory.getId()){
             Intent intent = new Intent(this, ExpenseCategoryActivity.class);
             startActivity(intent);
             finish();
         }
-        if(v.getId() == revenueCategory.getId()){
+        else if(v.getId() == revenueCategory.getId()){
             Intent intent = new Intent(this, RevenueCategoryActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if(v.getId() == report.getId()){
+            Intent intent = new Intent(this, AccountsReportActivity.class);
             startActivity(intent);
             finish();
         }
