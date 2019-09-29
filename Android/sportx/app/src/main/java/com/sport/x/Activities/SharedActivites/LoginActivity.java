@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         user_email = findViewById(R.id.login_email);
         user_password = findViewById(R.id.login_password);
         forgot = findViewById(R.id.forgot_password);
-        forgot.setVisibility(View.GONE);
+
       //  loginButton = findViewById(R.id.login_fb);
 
         forgot.setOnClickListener(this);
