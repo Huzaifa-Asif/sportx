@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
@@ -63,7 +64,8 @@ public class BookingActivity extends Menu implements OnItemSelectedListener, Vie
 
     // Date and Time
 
-    Button btnDatePicker, btnTimePicker;
+
+    ImageButton btnDatePicker,btnTimePicker;
     EditText txtDate, txtTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
@@ -88,8 +90,8 @@ public class BookingActivity extends Menu implements OnItemSelectedListener, Vie
 
         // Date and Time
 
-        btnDatePicker=(Button)findViewById(R.id.btn_date);
-        btnTimePicker=(Button)findViewById(R.id.btn_time);
+        btnDatePicker=findViewById(R.id.btn_date);
+        btnTimePicker=findViewById(R.id.btn_time);
         txtDate=(EditText)findViewById(R.id.in_date);
         txtTime=(EditText)findViewById(R.id.in_time);
 

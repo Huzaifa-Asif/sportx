@@ -44,10 +44,10 @@
 
     <array name="tournamentTeams">
         <item>No of Teams</item>
-        <item>8</item>
-        <item>16</item>
-        <item>24</item>
-        <item>32</item>
+        <item> 8 Teams </item>
+        <item> 16 Teams </item>
+        <item> 24 Teams </item>
+        <item> 32 Teams </item>
     </array>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -34,15 +34,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:gravity="center"
                     >
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/_90sdp"-->
-                        <!--android:layout_height="@dimen/_90sdp"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:layout_marginTop="@dimen/_15sdp"-->
-                        <!--android:layout_marginBottom="@dimen/_15sdp"-->
-                        <!--android:src="@drawable/jersey"-->
-                        <!--/>-->
+                    <ImageView
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        app:srcCompat="@drawable/expense"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -73,15 +74,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:gravity="center"
                     >
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/_90sdp"-->
-                        <!--android:layout_height="@dimen/_90sdp"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:layout_marginTop="@dimen/_15sdp"-->
-                        <!--android:layout_marginBottom="@dimen/_15sdp"-->
-                        <!--android:src="@drawable/stadium"-->
-                        <!--/>-->
+                    <ImageView
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        app:srcCompat="@drawable/revenue"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -110,15 +112,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:gravity="center"
                     >
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/_90sdp"-->
-                        <!--android:layout_height="@dimen/_90sdp"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:layout_marginTop="@dimen/_15sdp"-->
-                        <!--android:layout_marginBottom="@dimen/_15sdp"-->
-                        <!--android:src="@drawable/stadium"-->
-                        <!--/>-->
+                    <ImageView
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        app:srcCompat="@drawable/expense_category"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -147,15 +150,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:gravity="center"
                     >
-                    <!--<ImageView-->
-                        <!--android:layout_width="@dimen/_90sdp"-->
-                        <!--android:layout_height="@dimen/_90sdp"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--android:layout_marginTop="@dimen/_15sdp"-->
-                        <!--android:layout_marginBottom="@dimen/_15sdp"-->
-                        <!--android:src="@drawable/stadium"-->
-                        <!--/>-->
+                    <ImageView
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        app:srcCompat="@drawable/revenue_category"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -186,15 +190,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:gravity="center"
                     >
-                    <!--<ImageView-->
-                    <!--android:layout_width="@dimen/_90sdp"-->
-                    <!--android:layout_height="@dimen/_90sdp"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_marginTop="@dimen/_15sdp"-->
-                    <!--android:layout_marginBottom="@dimen/_15sdp"-->
-                    <!--android:src="@drawable/stadium"-->
-                    <!--/>-->
+                    <ImageView
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    app:srcCompat="@drawable/report"
+                    />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

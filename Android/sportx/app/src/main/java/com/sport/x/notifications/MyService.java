@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.sport.x.Activities.CustomerActivities.BookingManagement;
+import com.sport.x.Activities.ServiceProviderActivities.BookingManagementActivity;
 import com.sport.x.Activities.SharedActivites.SplashActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
@@ -26,7 +27,13 @@ Misc misc;
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         super.onMessageReceived(remoteMessage);
-        showNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+        try
+        {
+            showNotification(remoteMessage.getData().get("title"),remoteMessage.getData().get("body"));
+        }
+     catch (Exception e) {
+        e.printStackTrace();
+    }
 //        showAlertDialog(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
 
     }
@@ -45,14 +52,21 @@ Misc misc;
         if(title.equalsIgnoreCase("Booking Accepted"))
         {
             intent=new Intent(this, BookingManagement.class);
+            intent.putExtra("position",1);
         }
         else if(title.equalsIgnoreCase("Booking Completed"))
         {
             intent=new Intent(this, BookingManagement.class);
+            intent.putExtra("position",2);
         }
         else if(title.equalsIgnoreCase("Booking Cancelled"))
         {
             intent=new Intent(this, BookingManagement.class);
+        }
+        if(title.equalsIgnoreCase("New Booking Notification"))
+        {
+            intent=new Intent(this, BookingManagementActivity.class);
+            intent.putExtra("position",0);
         }
         // Set the Activity to start in a new, empty task
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK

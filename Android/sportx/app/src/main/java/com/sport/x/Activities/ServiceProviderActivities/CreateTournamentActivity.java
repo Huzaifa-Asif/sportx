@@ -2,10 +2,12 @@ package com.sport.x.Activities.ServiceProviderActivities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.google.gson.JsonObject;
@@ -41,11 +43,11 @@ public class CreateTournamentActivity extends Menu implements OnItemSelectedList
 
     private EditText name, no_of_days, entry_fee, winning_prize, txtDate, txtTime;
 
-    private Button submit,btnDatePicker, btnTimePicker;
+    private Button submit;
+    private ImageButton btnDatePicker, btnTimePicker;
+    Spinner tournamentType;
 
-    Spinner tournamentType = null;
-
-    Spinner teamNo = null;
+    Spinner teamNo ;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
 

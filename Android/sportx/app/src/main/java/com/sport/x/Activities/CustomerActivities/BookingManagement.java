@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.sport.x.Fragments.CustomerCompletedJobs;
 import com.sport.x.Fragments.CustomerInProgressJobs;
@@ -41,6 +42,12 @@ public class BookingManagement extends Menu {
         setTitle("Booking Management");
 
 
+        int position = 0;
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            position = extras.getInt("position");
+        }
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -48,7 +55,8 @@ public class BookingManagement extends Menu {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        mViewPager.setCurrentItem(position);
+        Log.wtf("position",""+position);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         sharedPref = new SharedPref(this);
