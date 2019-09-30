@@ -2,6 +2,7 @@ package com.sport.x.Activities.CustomerActivities;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -23,10 +24,22 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.Response;
+import com.sport.x.Activities.SharedActivites.MessageActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Activities.Menu.Menu;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCallback, View.OnClickListener {
 
@@ -203,11 +216,64 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
     }
 
     private void sendSMS(){
-        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-        sendIntent.putExtra("address", service_provider_phone_number);
-        sendIntent.putExtra("sms_body", "Hi there!");
-        sendIntent.setType("vnd.android-dir/mms-sms");
-        startActivity(sendIntent);
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Opening Chat...");
+        pd.setCancelable(false);
+        pd.show();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("date",  new SimpleDateFormat("E,dd-MM-yyyy", Locale.getDefault()).format(new Date()));
+        jsonObject.addProperty("time",  new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()));
+        jsonObject.addProperty("serviceProviderEmail", service_provider_email);
+        jsonObject.addProperty("customerEmail", sharedPref.getEmail());
+
+
+        Ion.with(this)
+                .load(misc.ROOT_PATH+"conversation/add_conversation")
+                .setJsonObjectBody(jsonObject)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            pd.dismiss();
+                            misc.showToast("Please check your connection");
+                            pd.dismiss();
+                            return;
+                        }
+
+
+                        try{
+                            JSONObject jsonObject1 = new JSONObject(result.getResult());
+
+                            Boolean status = jsonObject1.getBoolean("status");
+                            String id=jsonObject1.getString("_id");
+
+                            if (!status) {
+                                String Message = jsonObject1.getString("Message");
+                                pd.dismiss();
+                                misc.showToast(Message);
+                                return;
+                            }
+                            else if (status) {
+                                pd.dismiss();
+
+                                Intent intent = new Intent(ServiceProviderDetailsActivity.this, MessageActivity.class);
+                                intent.putExtra("conversationId",id);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        }
+                        catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+
+                    }
+                });
     }
 
     private void Book(){
