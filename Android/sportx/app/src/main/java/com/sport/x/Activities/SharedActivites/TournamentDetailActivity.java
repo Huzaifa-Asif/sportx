@@ -40,7 +40,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
     FloatingActionButton add_team;
     private EditText team_name, team_contact;
 
-    private Integer no_of_teams;
+    private String no_of_teams;
 
     JSONArray players;
 
@@ -93,7 +93,7 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
         tournament_id=intent.getStringExtra("tournament_id");
         state=intent.getStringExtra("state");
         name=intent.getStringExtra("name");
-        no_of_teams=intent.getIntExtra("teams",-1);
+        no_of_teams=intent.getStringExtra("teams");
         winning_prize=intent.getStringExtra("winningPrize");
         entry_fee = intent.getStringExtra("entryFee");
         type = intent.getStringExtra("tournamentType");
@@ -233,10 +233,10 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
                                 teams.add(new TournamentTeam(team_state, team_name.getText().toString(), players,team_id,tournament_id,sharedPref.getEmail(),team_contact.getText().toString()));
                                 teamAdapter.notifyDataSetChanged();
 
-                                if(sharedPref.getUserRole()==1 && no_of_teams.equals(teams.size()))
-                                {
-                                    create_fixtures.setVisibility(View.VISIBLE);
-                                }
+//                                if(sharedPref.getUserRole()==1 && no_of_teams.equals(teams.size()))
+//                                {
+//                                    create_fixtures.setVisibility(View.VISIBLE);
+//                                }
                             }
 
                         }
@@ -407,11 +407,11 @@ public class TournamentDetailActivity extends Menu implements View.OnClickListen
 
                             teamAdapter.notifyDataSetChanged();
 
-                            if((sharedPref.getUserRole()==1) && (no_of_teams==teams.size()) )
-                            {
-                                create_fixtures.setVisibility(View.VISIBLE);
-                                misc.showToast("teams full");
-                            }
+//                            if((sharedPref.getUserRole()==1) && (no_of_teams==teams.size()) )
+//                            {
+//                                create_fixtures.setVisibility(View.VISIBLE);
+//                                misc.showToast("teams full");
+//                            }
 
                         } catch (JSONException e1) {
                             e1.printStackTrace();
