@@ -13,9 +13,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,6 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.Toast;
 
-import com.sport.x.Activities.Menu.Menu;
 import com.sport.x.Activities.SharedActivites.LoginActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Service;
@@ -47,7 +47,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SignupActivity extends Menu implements View.OnClickListener {
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button register;
     private EditText name, email, phone, password, re_password, city,country,street_address;
@@ -66,7 +66,7 @@ public class SignupActivity extends Menu implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_sp_signup);
+        setContentView(R.layout.activity_sp_signup);
         setTitle("Register As Service Provider");
 
         misc = new Misc(this);

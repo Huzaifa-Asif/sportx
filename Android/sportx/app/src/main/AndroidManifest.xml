@@ -90,6 +90,8 @@
         <activity android:name=".Activities.SharedActivites.ConversationActivity" />
         <activity android:name=".Activities.SharedActivites.TournamentActivity" />
         <activity android:name=".Activities.ServiceProviderActivities.CreateTournamentActivity" />
+
+        <activity android:name=".Activities.ServiceProviderActivities.AddBookingSettingsActivity" />
         <activity android:name=".Activities.SharedActivites.TournamentDetailActivity"></activity>
 
         <!--

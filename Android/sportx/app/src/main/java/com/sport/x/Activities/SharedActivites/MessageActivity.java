@@ -6,8 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import java.text.SimpleDateFormat;
 
 import android.text.Editable;
@@ -64,7 +64,7 @@ public class MessageActivity extends Menu {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_c_messages);
+        super.inflateView(R.layout.activity_sh_messages);
         setTitle("Messages");
         context=this;
         SharedPref = new SharedPref(context);
@@ -408,7 +408,7 @@ public class MessageActivity extends Menu {
 //
 //
 //    public int myView() {
-//        return R.layout.activity_c_messages;
+//        return R.layout.activity_sh_messages;
 //    }
 //
 //

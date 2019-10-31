@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="false"
+    android:background="#fff"
+    tools:context=".Activities.ServiceProviderActivities.SignupActivity">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/radios"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Booking Settings"
+                    android:textColor="@color/grey"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_13sdp"
+                    />
+                <Spinner
+                    android:backgroundTint="@color/colorPrimary"
+                    android:id="@+id/spinner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginLeft="@dimen/_18sdp"
+                    android:layout_marginRight="@dimen/_18sdp"
+                    android:textColor="@color/grey"
+                    android:textColorHint="@color/grey"
+                    android:entries="@array/duration"
+
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_18sdp"
+                    android:layout_marginRight="@dimen/_18sdp"
+                    android:hint="Booking Price"
+                    android:textColor="@color/grey"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/edittext"
+                    android:id="@+id/amount"
+                    android:inputType="text"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_7sdp"
+
+                    android:layout_marginLeft="@dimen/_18sdp"
+                    android:layout_marginRight="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:hint="Phone"
+                    android:maxLength="11"
+                    android:textColor="@color/grey"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/edittext"
+                    android:id="@+id/provider_phone"
+                    android:inputType="phone"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:weightSum="2"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/time"
+                        android:background="@color/white"
+                        android:id="@+id/btn_start_time"
+                        android:textColor="#fff"
+                        />
+                    <EditText
+                        android:backgroundTint="@color/colorPrimary"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:id="@+id/startTime"
+                        android:focusable="false"
+                        android:gravity="center"
+                        android:hint="Select Opening Time"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:weightSum="2"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/time"
+                        android:background="@color/white"
+                        android:id="@+id/btn_end_time"
+                        android:textColor="#fff"
+                        />
+                    <EditText
+                        android:backgroundTint="@color/colorPrimary"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:id="@+id/endTime"
+                        android:focusable="false"
+                        android:gravity="center"
+                        android:hint="Select Closing Time"
+
+                        />
+                </LinearLayout>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginEnd="@dimen/_18sdp"
+                    android:hint="Total Grounds"
+                    android:textColor="@color/grey"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/edittext"
+                    android:id="@+id/totalGrounds"
+                    android:inputType="number"
+                    />
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_18sdp"
+                    android:layout_marginRight="@dimen/_18sdp"
+                    android:hint="Whole Day Booking"
+                    android:textColor="@color/grey"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/edittext"
+                    android:id="@+id/dayBookingAllowed"
+
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_18sdp"
+                    android:layout_marginRight="@dimen/_18sdp"
+                    android:hint="Whole Day Booking Price"
+                    android:textColor="@color/grey"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/edittext"
+                    android:id="@+id/dayBookingAmount"
+                    android:inputType="number"
+                    />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <!--</RelativeLayout>-->
+
+    </LinearLayout>
+</ScrollView>

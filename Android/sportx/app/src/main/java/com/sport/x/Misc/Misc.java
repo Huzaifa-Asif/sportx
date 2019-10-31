@@ -5,11 +5,10 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.facebook.share.Share;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,8 +34,8 @@ public class Misc {
     SharedPref SharedPref;
     Misc misc;
 
-//    public static final String ROOT_PATH = "https://sport-x.herokuapp.com/";
-    public static final String ROOT_PATH = "http://192.168.100.11:3300/";
+    public static final String ROOT_PATH = "https://sport-x.herokuapp.com/";
+//    public static final String ROOT_PATH = "http://192.168.100.11:3300/";
 
     public Misc(Context context) {
         this.context = context;

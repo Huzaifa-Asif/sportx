@@ -1,16 +1,14 @@
 package com.sport.x.Adapters;
 
-import android.app.Dialog;
-import android.support.v7.widget.RecyclerView;
-import android.app.Activity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -23,7 +21,6 @@ import com.sport.x.Models.ExpenseCategory;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

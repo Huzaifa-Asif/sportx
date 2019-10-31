@@ -97,7 +97,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/_13sdp"
                 />
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/full_name"
                 android:layout_marginRight="@dimen/_18sdp"
                 android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/_13sdp"
                 android:textCursorDrawable="@drawable/cursor_color" />
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_phone"
                 android:layout_marginRight="@dimen/_18sdp"
                 android:layout_width="match_parent"
@@ -137,7 +137,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/_13sdp"
                 />
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/register_email"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_18sdp"
@@ -151,7 +151,7 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/_13sdp"
                 android:textCursorDrawable="@drawable/cursor_color" />
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true"
@@ -163,7 +163,7 @@
                 app:hintEnabled="false"
                 app:hintAnimationEnabled="false"
                 >
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_7sdp"
@@ -176,9 +176,9 @@
                     android:id="@+id/reg_password"
                     android:textCursorDrawable="@drawable/cursor_color"
                     />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true"
@@ -191,7 +191,7 @@
                 app:hintEnabled="false"
 
                 >
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_7sdp"
@@ -204,7 +204,7 @@
                     android:textSize="@dimen/_13sdp"
                     android:textCursorDrawable="@drawable/cursor_color"
                     />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:layout_width="match_parent"

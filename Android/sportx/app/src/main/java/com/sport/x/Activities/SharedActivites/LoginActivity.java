@@ -5,9 +5,10 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -181,10 +182,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     // Service Provider
                                     else if(role == 1 )
                                     {
+                                        boolean completedProfile=jsonObject1.getBoolean("profile_completed");
+                                        Log.wtf("Profile Completed",""+completedProfile);
                                         String picture_profile = jsonObject1.getString("picture_profile");
                                         String address = jsonObject1.getString("address");
                                         sharedPref.createLoginSession(id, email, address, role, name, contact, picture_profile);
                                     pd.dismiss();
+                                    if(!completedProfile)
+                                    {
+                                        Intent intent = new Intent(LoginActivity.this, com.sport.x.Activities.ServiceProviderActivities.AddBookingSettingsActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                     Intent intent = new Intent(LoginActivity.this, com.sport.x.Activities.ServiceProviderActivities.HomeActivity.class);
                                     startActivity(intent);
                                     finish();

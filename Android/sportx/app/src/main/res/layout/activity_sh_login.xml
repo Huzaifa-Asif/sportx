@@ -60,7 +60,7 @@
                 <!--android:textCursorDrawable="@color/grey"-->
                 <!--/>-->
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:passwordToggleEnabled="true"
@@ -75,7 +75,7 @@
         android:id="@+id/log"
         app:hintAnimationEnabled="false"
         >
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -93,7 +93,7 @@
             android:id="@+id/login_password"
             android:textCursorDrawable="@drawable/cursor_color"
             />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 
