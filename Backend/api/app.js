@@ -6,6 +6,7 @@ var logger = require('morgan');
 const cloudinary = require('cloudinary');
 const mongoose = require('mongoose');
 
+
 // routes
 var routeAdmin = require('./app_server/routes/route.admin.js');
 var routeBookingDetails = require('./app_server/routes/route.bookingDetails.js');
@@ -24,6 +25,7 @@ var routeTeam = require('./app_server/routes/route.team.js');
 var routeTournament = require('./app_server/routes/route.tournament.js');
 var routeBookingSetting = require('./app_server/routes/route.bookingSetting.js');
 var routeFixture = require('./app_server/routes/route.fixture.js');
+var routeComplaint = require('./app_server/routes/route.complaint.js');
 
 
 var cors = require('cors')
@@ -57,6 +59,7 @@ app.get('/', (req, res) => {
     message: "Welcome to Sport-X Backend"
 })
 });
+
 app.use('/admin', routeAdmin);
 app.use('/bookingdetails', routeBookingDetails);
 app.use('/conversation', routeConversation);
@@ -74,11 +77,13 @@ app.use('/team', routeTeam);
 app.use('/tournament', routeTournament);
 app.use('/bookingsetting',routeBookingSetting);
 app.use('/fixture',routeFixture);
+app.use('/complaint',routeComplaint);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

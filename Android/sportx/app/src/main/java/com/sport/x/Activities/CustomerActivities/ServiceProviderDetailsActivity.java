@@ -9,7 +9,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
-import androidx.appcompat.widget.TooltipCompat;
+import android.support.v7.widget.TooltipCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;

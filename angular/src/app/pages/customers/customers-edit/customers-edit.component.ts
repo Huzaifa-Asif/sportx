@@ -92,7 +92,7 @@ export class UsersEditComponent implements OnInit {
   _sendUpdateRequest(data, userName, username) {
     console.log("Req",data)
 
-    this.api.patch('update_customer/', data.email, data).then((response: any) => {
+    this.api.patch('customer/update_customer/', data.email, data).then((response: any) => {
 
       this.isRequested = true;
       this.helper.successBigToast('Success', 'Successfully updated: ' + userName + '\'s Account');

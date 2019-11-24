@@ -45,7 +45,7 @@ export class AuthService {
 
   login(userDeatils) {
     return new Promise((resolve, reject) => {
-      this.api.post('loginAdmin', userDeatils).then((data: any) => {
+      this.api.post('admin/loginAdmin', userDeatils).then((data: any) => {
         // console.log('UserData', data);
 
         if (!data.Locked) {

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    >
-    <androidx.cardview.widget.CardView
+    tools:context=".ServiceProviderActivities.AllProvidersActivity">
+    <android.support.v7.widget.CardView
         style="@style/CardView"
         android:layout_margin="@dimen/_5sdp"
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:id="@+id/searc_card"
         app:cardCornerRadius="3dp">
 
-    <androidx.appcompat.widget.SearchView
+    <android.support.v7.widget.SearchView
         android:id="@+id/sv_search"
         android:focusable="false"
         android:layout_width="match_parent"
@@ -26,16 +26,16 @@
         android:background="@color/white"
         app:queryHint="Search">
 
-    </androidx.appcompat.widget.SearchView>
-    </androidx.cardview.widget.CardView>
+    </android.support.v7.widget.SearchView>
+    </android.support.v7.widget.CardView>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <androidx.core.widget.SwipeRefreshLayout
         android:id="@+id/swipe"
         android:layout_below="@+id/searc_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/vendor_services"
@@ -43,9 +43,9 @@
             android:layout_below="@id/searc_card"
             >
 
-        </androidx.recyclerview.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.core.widget.SwipeRefreshLayout>
 
 
 </RelativeLayout>

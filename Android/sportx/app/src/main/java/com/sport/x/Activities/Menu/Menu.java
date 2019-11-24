@@ -2,31 +2,33 @@ package com.sport.x.Activities.Menu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.sport.x.Activities.ServiceProviderActivities.AccountsActivity;
-import com.sport.x.Activities.ServiceProviderActivities.BookingManagementActivity;
-import com.sport.x.Activities.CustomerActivities.HomeActivity;
-import com.sport.x.Activities.CustomerActivities.CompareActivity;
-import com.sport.x.Activities.SharedActivites.ComplainActivity;
-import com.sport.x.Activities.SharedActivites.ConversationActivity;
-import com.sport.x.Activities.ServiceProviderActivities.CreateTournamentActivity;
-import com.sport.x.Activities.SharedActivites.HelpActivity;
+import androidx.core.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+
+
 import com.sport.x.Activities.CustomerActivities.BookingManagement;
-import com.sport.x.Activities.SharedActivites.LoginActivity;
+import com.sport.x.Activities.CustomerActivities.CompareActivity;
+import com.sport.x.Activities.CustomerActivities.HomeActivity;
 import com.sport.x.Activities.CustomerActivities.UpdatePasswordActivity;
 import com.sport.x.Activities.CustomerActivities.UpdateProfileActivity;
+import com.sport.x.Activities.ServiceProviderActivities.AccountsActivity;
+import com.sport.x.Activities.ServiceProviderActivities.BookingManagementActivity;
+import com.sport.x.Activities.ServiceProviderActivities.CreateTournamentActivity;
+import com.sport.x.Activities.SharedActivites.ComplainActivity;
+import com.sport.x.Activities.SharedActivites.ConversationActivity;
+import com.sport.x.Activities.SharedActivites.HelpActivity;
+import com.sport.x.Activities.SharedActivites.LoginActivity;
+import com.sport.x.Activities.SharedActivites.TournamentActivity;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
-import com.sport.x.Activities.SharedActivites.TournamentActivity;
 
 public class Menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,8 +55,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         contentFrameLayout=findViewById(R.id.content_frame);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 

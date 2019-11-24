@@ -1,14 +1,12 @@
 package com.sport.x.Activities.ServiceProviderActivities;
 
 import android.content.Intent;
-import com.google.android.material.tabs.TabLayout;
+import android.support.design.widget.TabLayout;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.core.app.Fragment;
+import androidx.core.app.FragmentManager;
+import androidx.core.app.FragmentPagerAdapter;
+import androidx.core.view.ViewPager;
 import android.os.Bundle;
 
 import com.sport.x.Activities.Menu.Menu;
@@ -20,12 +18,12 @@ import com.sport.x.R;
 public class BookingManagementActivity extends Menu {
 
     /**
-     * The {@link PagerAdapter} that will provide
+     * The {@link androidx.core.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
      * {@link FragmentPagerAdapter} derivative, which will keep every
      * loaded fragment in memory. If this becomes too memory intensive, it
      * may be best to switch to a
-     * {@link FragmentStatePagerAdapter}.
+     * {@link androidx.core.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 

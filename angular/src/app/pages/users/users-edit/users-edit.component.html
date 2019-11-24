@@ -50,7 +50,7 @@
             <div class="col-12 mb-3">
               <label for="contact">Contact Number</label>
               <input type="text" class="form-control input-air-primary" id="contact" formControlName="contact"
-                [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" autocomplete="new-password">
+                [ngClass]="{ 'is-invalid': submitted && f.contact.errors }">
 
               <div *ngIf="submitted && f['contact'].errors" class="text text-danger">
                 <div *ngIf="f['contact'].errors.required">Required</div>

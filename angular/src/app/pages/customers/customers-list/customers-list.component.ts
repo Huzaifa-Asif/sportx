@@ -31,7 +31,7 @@ export class UsersListComponent implements OnInit {
 
 
   getUsers() {
-    this.api.get('get_customer').then((response: any) => {
+    this.api.get('customer/get_customer').then((response: any) => {
       this.users = response;
 
 

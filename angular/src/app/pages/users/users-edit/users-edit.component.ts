@@ -73,7 +73,7 @@ export class UsersEditComponent implements OnInit {
 
   getUsersData() {
 
-    this.api.get('get_serviceCategory').then((data: any) => {
+    this.api.get('servicecategory/get_serviceCategory').then((data: any) => {
       // console.log('Data', data);
       let i=0;
       this.services=data;
@@ -116,7 +116,7 @@ export class UsersEditComponent implements OnInit {
   _sendUpdateRequest(data, userName, username) {
     console.log("Req",data)
 
-    this.api.patch('update_serviceProvider/', data.email, data).then((response: any) => {
+    this.api.patch('serviceProvider/update_serviceProvider/', data.email, data).then((response: any) => {
 
       this.isRequested = true;
       this.helper.successBigToast('Success', 'Successfully updated: ' + userName + '\'s Account');

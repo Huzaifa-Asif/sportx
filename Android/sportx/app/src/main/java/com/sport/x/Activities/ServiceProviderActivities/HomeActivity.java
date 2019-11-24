@@ -7,9 +7,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import android.util.Log;
-import com.google.android.material.navigation.NavigationView;
+import android.support.design.widget.NavigationView;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.core.widget.DrawerLayout;
 import android.widget.TextView;
 
 import com.google.firebase.messaging.FirebaseMessaging;

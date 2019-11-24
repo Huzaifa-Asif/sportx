@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt-nodejs');
 
 // Service Provider Schema
 
+
 const serviceProviderSchema = mongoose.Schema({
 	name:{
 		type: String,
@@ -66,6 +67,10 @@ const serviceProviderSchema = mongoose.Schema({
     {
         type:String
         
+	},
+	profile_completed:{
+		type:Boolean,
+		default:false
 	}
 	
     
@@ -80,3 +85,13 @@ serviceProviderSchema.index( { location : "2dsphere" } );
  
 
 const serviceProvider = module.exports = mongoose.model('ServiceProvider', serviceProviderSchema);
+// serviceProvider.updateMany(
+//     {}, 
+//     {profile_completed : false },
+//     {multi:true}, 
+// 	function(err, numberAffected){
+// 		if(err)
+// 		console.log(err)
+// 		else
+// 		console.log(numberAffected)  
+// 	});
