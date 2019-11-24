@@ -12,7 +12,7 @@ public class SharedPref {
     private static final String IS_LOGIN = "IsLoggedIn";
     private int PRIVATE_MODE = 0;
     private String token,compareServiceProvider1,compareServiceProvider2;
-
+    private boolean profileCompleted;
     public SharedPref(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
@@ -40,6 +40,17 @@ public class SharedPref {
     public String getToken()
     {
         return sharedPreferences.getString("token", null);
+    }
+
+    public void setProfileCompleted(boolean profileCompleted1)
+    {
+        editor.putBoolean("profileCompleted", profileCompleted1);
+        editor.commit();
+
+    }
+    public boolean getProfileCompleted()
+    {
+        return sharedPreferences.getBoolean("profileCompleted", false);
     }
 
     public String getUserId() {

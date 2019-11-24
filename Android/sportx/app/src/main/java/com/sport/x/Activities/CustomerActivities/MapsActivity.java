@@ -221,6 +221,10 @@ public class MapsActivity extends Menu implements
         return true;
     }
 
+    private void fetchServiceProviderSettings()
+    {
+
+    }
     private void fetchService_Provider(){
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Finding " + service_name + " Service Providers");

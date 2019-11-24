@@ -66,26 +66,11 @@
                     android:textColor="@color/grey"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/edittext"
-                    android:id="@+id/amount"
+                    android:id="@+id/price"
                     android:inputType="text"
                     />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_7sdp"
 
-                    android:layout_marginLeft="@dimen/_18sdp"
-                    android:layout_marginRight="@dimen/_18sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:hint="Phone"
-                    android:maxLength="11"
-                    android:textColor="@color/grey"
-                    android:textColorHint="@color/grey"
-                    android:background="@drawable/edittext"
-                    android:id="@+id/provider_phone"
-                    android:inputType="phone"
-                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -166,11 +151,12 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginLeft="@dimen/_18sdp"
                     android:layout_marginRight="@dimen/_18sdp"
-                    android:hint="Whole Day Booking"
+                    android:text="Please Check if You allow Whole Day Booking"
                     android:textColor="@color/grey"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/edittext"
                     android:id="@+id/dayBookingAllowed"
+                    android:buttonTint="@color/grey"
 
                     />
                 <EditText
@@ -187,6 +173,22 @@
                     android:id="@+id/dayBookingAmount"
                     android:inputType="number"
                     />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_18sdp"
+                    android:layout_marginRight="@dimen/_18sdp"
+                    android:text="Submit"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/button"
+                    android:id="@+id/submit"
+                    />
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

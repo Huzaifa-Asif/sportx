@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void checkLogin(){
         String _id = sharedPref.getUserId();
         Integer role = sharedPref.getUserRole();
-
+        boolean profileCompleted=sharedPref.getProfileCompleted();
         if(_id != null && role != null) {
             if(role==2) {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -79,9 +79,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
             }
             if(role==1) {
-                Intent intent = new Intent(LoginActivity.this, com.sport.x.Activities.ServiceProviderActivities.HomeActivity.class);
-                startActivity(intent);
-                finish();
+                if(!profileCompleted)
+                {
+                    Intent intent = new Intent(LoginActivity.this, com.sport.x.Activities.ServiceProviderActivities.AddBookingSettingsActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else
+                {
+                    Intent intent = new Intent(LoginActivity.this, com.sport.x.Activities.ServiceProviderActivities.HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
             if(role==0) {
                 Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
@@ -182,21 +191,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     // Service Provider
                                     else if(role == 1 )
                                     {
-                                        boolean completedProfile=jsonObject1.getBoolean("profile_completed");
-                                        Log.wtf("Profile Completed",""+completedProfile);
+                                        boolean profileCompleted=jsonObject1.getBoolean("profile_completed");
                                         String picture_profile = jsonObject1.getString("picture_profile");
                                         String address = jsonObject1.getString("address");
                                         sharedPref.createLoginSession(id, email, address, role, name, contact, picture_profile);
+                                        sharedPref.setProfileCompleted(profileCompleted);
                                     pd.dismiss();
-                                    if(!completedProfile)
+                                    if(!profileCompleted)
                                     {
                                         Intent intent = new Intent(LoginActivity.this, com.sport.x.Activities.ServiceProviderActivities.AddBookingSettingsActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }
-                                    Intent intent = new Intent(LoginActivity.this, com.sport.x.Activities.ServiceProviderActivities.HomeActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    else
+                                    {
+                                        Intent intent = new Intent(LoginActivity.this, com.sport.x.Activities.ServiceProviderActivities.HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
                                     }
                                     else if(role == 0 )
                                     {
@@ -226,18 +239,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-    private void printKeyHash() {
-        try {
-            String packageName = getApplicationContext().getPackageName();
-            PackageInfo info = getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
-            e("KeyHash:", e.toString());
-        }
-    }
+
 
 }

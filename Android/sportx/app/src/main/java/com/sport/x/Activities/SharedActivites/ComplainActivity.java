@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.sport.x.Activities.CustomerActivities.BookingActivity;
 import com.sport.x.Activities.CustomerActivities.HomeActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Activities.Menu.Menu;
@@ -16,6 +17,9 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ComplainActivity extends Menu {
 
@@ -36,17 +40,12 @@ public class ComplainActivity extends Menu {
         msg = findViewById(R.id.complain_msg);
         submit = findViewById(R.id.submit_complain);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submitComplain();
-            }
-        });
+        submit.setOnClickListener(v -> submitComplain());
     }
 
     private void submitComplain(){
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Submitting Complain...");
+        pd.setMessage("Submitting Complaint...");
         pd.setCancelable(false);
         pd.show();
 
@@ -57,11 +56,11 @@ public class ComplainActivity extends Menu {
         }
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("message", message);
-        jsonObject.addProperty("fk_user_id", sharedPref.getUserId());
+        jsonObject.addProperty("complaint", message);
+        jsonObject.addProperty("complainantEmail", sharedPref.getUserId());
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"submit_complaint")
+                .load(misc.ROOT_PATH+"complaint/add_complaint")
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -74,8 +73,31 @@ public class ComplainActivity extends Menu {
                             return;
                         }
                         else{
-                            misc.showToast(result.getResult());
                             pd.dismiss();
+
+                            try{
+                                JSONObject jsonObject1 = new JSONObject(result.getResult());
+
+                                Boolean status = jsonObject1.getBoolean("status");
+
+
+                                if (!status) {
+                                    String Message = jsonObject1.getString("Message");
+                                    misc.showToast(Message);
+                                    return;
+                                }
+                                else if (status) {
+                                    misc.showToast("Complaint Submitted Successfully");
+                                    Intent intent = new Intent(ComplainActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                            }
+                            catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
+
                             onBackPressed();
                         }
                     }

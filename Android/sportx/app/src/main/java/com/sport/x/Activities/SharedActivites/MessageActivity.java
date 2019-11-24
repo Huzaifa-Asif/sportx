@@ -229,7 +229,7 @@ public class MessageActivity extends Menu {
         jsonObject.addProperty("message", newMessage.getText().toString());
         jsonObject.addProperty("type", "text");
         jsonObject.addProperty("file_path", "");
-        jsonObject.addProperty("date",  new SimpleDateFormat("E,dd-MM-yyyy", Locale.getDefault()).format(new Date()));
+        jsonObject.addProperty("date",  new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
         jsonObject.addProperty("time",  new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()));
 
 
