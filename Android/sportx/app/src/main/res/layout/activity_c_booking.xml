@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:fillViewport="false"
     android:background="#fff"
-    tools:context=".Activities.CustomerActivities.BookingActivity">
+    tools:context=".activities.customerActivities.BookingActivity">
 
 
     <LinearLayout

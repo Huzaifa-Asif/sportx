@@ -6,7 +6,7 @@
     android:background="#fff"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    tools:context=".Activities.CustomerActivities.ServiceProviderDetailsActivity">
+    tools:context=".activities.customerActivities.ServiceProviderDetailsActivity">
 
     <androidx.core.widget.NestedScrollView
         android:orientation="vertical" android:layout_width="match_parent"

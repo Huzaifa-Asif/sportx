@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sport.x.Activities.CustomerActivities.TournamentDetailActivity;
+import com.sport.x.activities.customerActivities.TournamentDetailActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Tournament;
 import com.sport.x.R;

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:fillViewport="false"
     android:background="#fff"
-    tools:context=".Activities.ServiceProviderActivities.CreateTournamentActivity">
+    tools:context=".activities.serviceProviderActivities.CreateTournamentActivity">
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

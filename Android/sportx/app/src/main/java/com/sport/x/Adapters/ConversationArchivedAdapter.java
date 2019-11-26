@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
-import com.sport.x.Activities.SharedActivites.MessageActivity;
+import com.sport.x.activities.sharedActivities.MessageActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Conversation;
 import com.sport.x.R;

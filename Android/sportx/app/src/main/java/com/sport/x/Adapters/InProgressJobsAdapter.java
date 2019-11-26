@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sport.x.Activities.SharedActivites.InProgressBookingDetailsActivity;
+import com.sport.x.activities.sharedActivities.InProgressBookingDetailsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Job;
 import com.sport.x.R;

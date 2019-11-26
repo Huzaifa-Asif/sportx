@@ -9,9 +9,9 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.sport.x.Activities.CustomerActivities.BookingManagement;
-import com.sport.x.Activities.ServiceProviderActivities.BookingManagementActivity;
-import com.sport.x.Activities.SharedActivites.SplashActivity;
+import com.sport.x.activities.customerActivities.BookingManagement;
+import com.sport.x.activities.serviceProviderActivities.BookingManagementActivity;
+import com.sport.x.activities.sharedActivities.SplashActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
 

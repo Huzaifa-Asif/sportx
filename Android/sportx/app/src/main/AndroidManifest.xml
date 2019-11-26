@@ -13,6 +13,18 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <!--some devices need read permission to create folders or files-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <!--needed by background Rtp service to keep service alive-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <!--Optional for play store-->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
 
     <application
         android:allowBackup="true"
@@ -21,80 +33,6 @@
         android:roundIcon="@drawable/applogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-
-        <activity
-            android:name=".Activities.ServiceProviderActivities.BookingManagementActivity"
-            android:label="@string/title_activity_provider_jobs"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
-        <activity
-            android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="@string/fb_login_protocol_scheme" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Activities.SharedActivites.ForgotPasswordActivity" />
-
-        <activity android:name=".AdminActivities.CustomerDetailsActivity" />
-        <activity android:name=".Activities.CustomerActivities.CompareActivity" />
-        <activity android:name=".AdminActivities.AddServiceActivity" />
-        <activity android:name=".AdminActivities.RegisteredServiceProvidersActivity" />
-        <activity android:name=".AdminActivities.ServiceProviderDetailsActivity" />
-        <activity android:name=".AdminActivities.AllServiceProvidersActivity" />
-        <activity android:name=".AdminActivities.AllCustomersActivity" />
-        <activity android:name=".AdminActivities.AllComplaintsActivity" />
-        <activity android:name=".AdminActivities.AdminHomeActivity" />
-        <activity android:name=".Activities.SharedActivites.ComplainActivity" />
-        <activity android:name=".Activities.ServiceProviderActivities.AccountsReportActivity" />
-        <activity android:name=".Activities.SharedActivites.HelpActivity" />
-        <activity
-            android:name=".Activities.CustomerActivities.HomeActivity"
-            android:label="@string/title_activity_all_service"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.ServiceProviderActivities.UpdatePasswordActivity" />
-        <activity android:name=".Activities.ServiceProviderActivities.UpdateProfileActivity" />
-        <activity
-            android:name=".Activities.ServiceProviderActivities.HomeActivity"
-            android:label="@string/title_activity_service_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.ServiceProviderActivities.SignupActivity" />
-        <activity android:name=".Activities.SharedActivites.SignupAsActivity" />
-        <activity android:name=".Activities.CustomerActivities.UpdateProfileActivity" />
-        <activity android:name=".Activities.SharedActivites.CompletedBookingDetailsActivity" />
-        <activity android:name=".Activities.SharedActivites.InProgressBookingDetailsActivity" />
-        <activity android:name=".Activities.SharedActivites.PendingBookingDetailsActivity" />
-        <activity android:name=".Activities.CustomerActivities.BookingActivity" />
-        <activity android:name=".Activities.CustomerActivities.ServiceProviderDetailsActivity" />
-        <activity android:name=".Activities.CustomerActivities.UpdatePasswordActivity" />
-        <activity android:name=".Activities.CustomerActivities.BookingManagement" />
-        <activity android:name=".Activities.CustomerActivities.TournamentActivity" />
-        <activity android:name=".Activities.CustomerActivities.TournamentDetailActivity" />
-        <activity android:name=".Activities.SharedActivites.ConversationActivity" />
-        <activity android:name=".Activities.ServiceProviderActivities.TournamentActivity" />
-        <activity android:name=".Activities.ServiceProviderActivities.CreateTournamentActivity" />
-
-        <activity android:name=".Activities.ServiceProviderActivities.AddBookingSettingsActivity" />
-        <activity android:name=".Activities.ServiceProviderActivities.TournamentDetailActivity"></activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -108,36 +46,91 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+
+
+        <!--        Service Provider Activities-->
+
         <activity
-            android:name=".Activities.CustomerActivities.MapsActivity"
+            android:name=".activities.serviceProviderActivities.BookingManagementActivity"
+            android:label="@string/title_activity_provider_jobs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.serviceProviderActivities.AccountsReportActivity" />
+        <activity android:name=".activities.serviceProviderActivities.UpdatePasswordActivity" />
+        <activity android:name=".activities.serviceProviderActivities.UpdateProfileActivity" />
+        <activity
+            android:name=".activities.serviceProviderActivities.HomeActivity"
+            android:label="@string/title_activity_service_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.serviceProviderActivities.SignupActivity" />
+        <activity android:name=".activities.serviceProviderActivities.TournamentActivity" />
+        <activity android:name=".activities.serviceProviderActivities.CreateTournamentActivity" />
+        <activity android:name=".activities.serviceProviderActivities.AddBookingSettingsActivity" />
+        <activity android:name=".activities.serviceProviderActivities.TournamentDetailActivity"/>
+        <activity android:name=".activities.serviceProviderActivities.StreamActivity"/>
+        <activity android:name=".activities.serviceProviderActivities.ExpenseActivity"/>
+        <activity android:name=".activities.serviceProviderActivities.AccountsActivity"/>
+        <activity android:name=".activities.serviceProviderActivities.AddExpenseActivity"/>
+        <activity android:name=".activities.serviceProviderActivities.AddRevenueActivity"/>
+        <activity android:name=".activities.serviceProviderActivities.RevenueActivity"/>
+        <activity android:name=".activities.serviceProviderActivities.RevenueCategoryActivity"/>
+        <activity android:name=".activities.serviceProviderActivities.ExpenseCategoryActivity"/>
+
+
+
+        <!--        Customer Activities-->
+
+        <activity
+            android:name=".activities.customerActivities.HomeActivity"
+            android:label="@string/title_activity_all_service"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.customerActivities.UpdateProfileActivity" />
+        <activity android:name=".activities.customerActivities.BookingActivity" />
+        <activity android:name=".activities.customerActivities.ServiceProviderDetailsActivity" />
+        <activity android:name=".activities.customerActivities.UpdatePasswordActivity" />
+        <activity android:name=".activities.customerActivities.BookingManagement" />
+        <activity android:name=".activities.customerActivities.TournamentActivity" />
+        <activity android:name=".activities.customerActivities.TournamentDetailActivity" />
+        <activity
+            android:name=".activities.customerActivities.MapsActivity"
             android:label="@string/title_activity_maps"
             />
-        <activity android:name=".Activities.CustomerActivities.SignupActivity"></activity>
+        <activity android:name=".activities.customerActivities.SignupActivity"/>
+        <activity android:name=".activities.customerActivities.CompareActivity"/>
+
+
+
+        <!--        Shared Activities-->
+
+        <activity android:name=".activities.sharedActivities.ForgotPasswordActivity" />
+        <activity android:name=".activities.sharedActivities.ComplainActivity" />
+        <activity android:name=".activities.sharedActivities.HelpActivity" />
+        <activity android:name=".activities.sharedActivities.SignupAsActivity" />
+        <activity android:name=".activities.sharedActivities.CompletedBookingDetailsActivity" />
+        <activity android:name=".activities.sharedActivities.InProgressBookingDetailsActivity" />
+        <activity android:name=".activities.sharedActivities.PendingBookingDetailsActivity" />
+        <activity android:name=".activities.sharedActivities.ConversationActivity" />
         <activity
-            android:name=".Activities.SharedActivites.LoginActivity"
+            android:name=".activities.sharedActivities.LoginActivity"
             android:noHistory="false" />
         <activity
-            android:name=".Activities.SharedActivites.SplashActivity"
+            android:name=".activities.sharedActivities.SplashActivity"
             android:theme="@style/NoAction">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.sharedActivities.MessageActivity"/>
+        <activity android:name=".activities.sharedActivities.ViewStreamActivity" />
 
 
 
-
-
-        <activity android:name=".Activities.ServiceProviderActivities.ExpenseActivity"></activity>
-        <activity android:name=".Activities.ServiceProviderActivities.AccountsActivity"></activity>
-        <activity android:name=".Activities.ServiceProviderActivities.AddExpenseActivity"></activity>
-        <activity android:name=".Activities.ServiceProviderActivities.AddRevenueActivity"></activity>
-        <activity android:name=".Activities.ServiceProviderActivities.RevenueActivity"></activity>
-        <activity android:name=".Activities.ServiceProviderActivities.RevenueCategoryActivity"></activity>
-        <activity android:name=".Activities.ServiceProviderActivities.ExpenseCategoryActivity"></activity>
-        <activity android:name=".Activities.SharedActivites.MessageActivity"></activity>
+        <!-- FireBase Notification Service-->
 
         <service android:name=".notifications.MyService">
             <intent-filter>

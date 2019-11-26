@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".Activities.SharedActivites.HelpActivity">
+    tools:context=".activities.sharedActivities.HelpActivity">
 
     <TextView
         android:layout_width="wrap_content"
