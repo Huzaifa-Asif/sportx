@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/_7sdp">
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_message_gray"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginEnd="@dimen/_45sdp"-->
+        <!--android:background="@drawable/bg_list_item_gray"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:padding="@dimen/_10sdp"-->
+        <!--android:paddingStart="@dimen/_10sdp"-->
+        <!--android:text="Test Paitent"-->
+        <!--android:textAlignment="gravity"-->
+        <!--android:textColor="@color/colorBlack"-->
+        <!--android:textSize="@dimen/_10sdp" />-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/img_gray"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/_150sdp"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginEnd="@dimen/_45sdp"-->
+        <!--android:background="@drawable/bg_list_item_gray"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:textAlignment="gravity"-->
+        <!--android:textColor="@color/colorBlack"-->
+        <!--android:textSize="@dimen/_10sdp" />-->
+    <!--<TextView-->
+        <!--android:id="@+id/tv_message_blue"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginStart="@dimen/_45sdp"-->
+        <!--android:background="@drawable/bg_list_item_blue"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:padding="@dimen/_10sdp"-->
+        <!--android:paddingStart="@dimen/_10sdp"-->
+        <!--android:text=""-->
+        <!--android:textAlignment="gravity"-->
+        <!--android:textColor="@color/colorWhite"-->
+        <!--android:textSize="@dimen/_10sdp" />-->
+    <!--<ImageView-->
+        <!--android:id="@+id/img_blue"-->
+        <!--android:scaleType="centerInside"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/_150sdp"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginStart="@dimen/_45sdp"-->
+        <!--android:background="@drawable/bg_list_item_blue"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:textAlignment="gravity"-->
+        <!--android:textColor="@color/colorBlack"-->
+        <!--android:textSize="@dimen/_10sdp" />-->
+</LinearLayout>

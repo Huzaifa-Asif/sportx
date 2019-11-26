@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+    <androidx.cardview.widget.CardView
+        style="@style/CardView"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searc_card"
+        app:cardCornerRadius="3dp">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/sv_search"
+        android:focusable="false"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        app:iconifiedByDefault="false"
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginRight="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/white"
+        app:queryHint="Search">
+
+    </androidx.appcompat.widget.SearchView>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_below="@+id/searc_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/vendor_services"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@id/searc_card"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</RelativeLayout>
