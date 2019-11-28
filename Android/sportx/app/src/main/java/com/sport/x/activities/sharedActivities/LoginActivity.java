@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sport.x.activities.customerActivities.HomeActivity;
-import com.sport.x.AdminActivities.AdminHomeActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
@@ -83,11 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     finish();
                 }
             }
-            if(role==0) {
-                Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
+
         }
     }
 
@@ -103,23 +98,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
             finish();
         }
-        if(v.getId() == login.getId()){
+        if(v.getId() == login.getId())
+        {
             String email = user_email.getText().toString().trim();
             String password = user_password.getText().toString().trim();
-            if((email.equals("admin@gmail.com")) && (password.equals("123"))) {
-                Intent intent = new Intent(this, AdminHomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-            else{
-                if(misc.isConnectedToInternet()){
-                    if(email.isEmpty() || password.isEmpty()) {
-                        misc.showToast("Email and Password required!");
-                        return;
+
+            if(misc.isConnectedToInternet()){
+                if(email.isEmpty() || password.isEmpty()) {
+                    misc.showToast("Email and Password required!");
+                    return;
                     }
                     loginUser(email, password);
                 }
-            }
+
         }
     }
 
@@ -202,16 +193,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
 
                                     }
-                                    else if(role == 0 )
-                                    {
-                                        String picture = jsonObject1.getString("picture");
-                                        String address="";
-                                    sharedPref.createLoginSession(id, email,address, role, name, contact, picture);
-                                    pd.dismiss();
-                                    Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                    }
+
                                 }
 
                                else if(status==false){

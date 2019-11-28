@@ -25,6 +25,10 @@
             android:id="@+id/tournament"
             android:icon="@drawable/tournament"
             android:title="Tournaments" />
+        <item
+            android:id="@+id/viewstream"
+            android:icon="@drawable/view_stream"
+            android:title="Ongoing Streams" />
 
         <item
             android:id="@+id/customer_profile"

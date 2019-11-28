@@ -16,6 +16,7 @@ import com.sport.x.activities.serviceProviderActivities.AccountsActivity;
 import com.sport.x.activities.serviceProviderActivities.BookingManagementActivity;
 import com.sport.x.activities.customerActivities.HomeActivity;
 import com.sport.x.activities.customerActivities.CompareActivity;
+import com.sport.x.activities.serviceProviderActivities.StreamActivity;
 import com.sport.x.activities.sharedActivities.ComplainActivity;
 import com.sport.x.activities.sharedActivities.ConversationActivity;
 import com.sport.x.activities.sharedActivities.HelpActivity;
@@ -26,6 +27,7 @@ import com.sport.x.activities.customerActivities.UpdateProfileActivity;
 import com.sport.x.activities.customerActivities.TournamentActivity;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
+import com.sport.x.activities.sharedActivities.ViewStreamActivity;
 
 
 public class Menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -98,6 +100,11 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                 startActivity(accounts);
                 finish();
             }
+            else if (id == R.id.livestream) {
+                Intent stream = new Intent(this, StreamActivity.class);
+                startActivity(stream);
+                finish();
+            }
             else if (id == R.id.tournament) {
                 Intent conversation = new Intent(this, com.sport.x.activities.serviceProviderActivities.TournamentActivity.class);
                 startActivity(conversation);
@@ -158,6 +165,11 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             else if (id == R.id.tournament) {
                 Intent tournament = new Intent(this, TournamentActivity.class);
                 startActivity(tournament);
+                finish();
+            }
+            else if (id == R.id.viewstream) {
+                Intent view = new Intent(this, ViewStreamActivity.class);
+                startActivity(view);
                 finish();
             }
             else if (id == R.id.update_password) {

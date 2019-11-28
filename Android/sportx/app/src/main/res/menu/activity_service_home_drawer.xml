@@ -29,6 +29,10 @@
             android:id="@+id/createtournament"
             android:icon="@drawable/create_tournament"
             android:title="Create Tournaments" />
+        <item
+            android:id="@+id/livestream"
+            android:icon="@drawable/live_stream"
+            android:title="Go Live" />
 
         <item
             android:id="@+id/service_profile"

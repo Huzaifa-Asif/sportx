@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sport.x.AdminActivities.AllCustomersActivity;
 import com.sport.x.activities.customerActivities.MapsActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.Service;
@@ -110,21 +109,12 @@ public class CustomerServiceAdapter extends RecyclerView.Adapter<CustomerService
         @Override
         public void onClick(View v) {
 
-            if(sharedPref.getUserId() == null) {
-                Intent intent = new Intent(context, AllCustomersActivity.class);
-                intent.putExtra("vendors", 1);
-                intent.putExtra("service_id", serviceListModel.get(getAdapterPosition()).getServiceId());
-                intent.putExtra("service_name", serviceListModel.get(getAdapterPosition()).getServiceName());
-                context.startActivity(intent);
-                ((Activity) context).finish();
-            }
-            else{
-                Intent intent = new Intent(context, MapsActivity.class);
-                intent.putExtra("service_id", serviceListModel.get(getAdapterPosition()).getServiceId());
-                intent.putExtra("service_name", serviceListModel.get(getAdapterPosition()).getServiceName());
-                context.startActivity(intent);
-                ((Activity) context).finish();
-            }
+            Intent intent = new Intent(context, MapsActivity.class);
+            intent.putExtra("service_id", serviceListModel.get(getAdapterPosition()).getServiceId());
+            intent.putExtra("service_name", serviceListModel.get(getAdapterPosition()).getServiceName());
+            context.startActivity(intent);
+            ((Activity) context).finish();
+
         }
     }
 }

@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.pedro.encoder.input.video.CameraOpenException;
 import com.pedro.rtplibrary.rtmp.RtmpCamera1;
+import com.sport.x.SharedPref.SharedPref;
 import com.sport.x.activities.menu.Menu;
 import com.sport.x.R;
 
@@ -32,7 +33,7 @@ import net.ossrs.rtmp.ConnectCheckerRtmp;
 
 public class StreamActivity extends Menu
         implements ConnectCheckerRtmp, View.OnClickListener, SurfaceHolder.Callback {
-
+    SharedPref sharedPref;
     private RtmpCamera1 rtmpCamera1;
     private Button button;
     private Button bRecord;
@@ -53,6 +54,7 @@ public class StreamActivity extends Menu
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, 1);
         }
+        sharedPref=new SharedPref(this);
         SurfaceView surfaceView = findViewById(R.id.surfaceView);
         button = findViewById(R.id.b_start_stop);
         button.setOnClickListener(this);
@@ -156,7 +158,7 @@ public class StreamActivity extends Menu
                     if (rtmpCamera1.isRecording()
                             || rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo()) {
                         button.setText(R.string.stop_button);
-                        rtmpCamera1.startStream("rtmp://192.168.100.11:1935/live/NKsUXnXx");
+                        rtmpCamera1.startStream("rtmp://192.168.100.7:1935/live/"+sharedPref.getEmail());
                     } else {
                         Toast.makeText(this, "Error preparing stream, This device cant do it",
                                 Toast.LENGTH_SHORT).show();
@@ -212,7 +214,7 @@ public class StreamActivity extends Menu
                         currentDateAndTime = "";
                     }
                 } else {
-                    Toast.makeText(this, "You need min JELLY_BEAN_MR2(API 18) for do it...",
+                    Toast.makeText(this, "You need min JELLY_BEAN_MR2(API 18) for doing it...",
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
