@@ -3,6 +3,7 @@ package com.sport.x.activities.sharedActivities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,14 +36,14 @@ public class OngoingStreams extends Menu {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sh_ongoing_streams);
+        super.inflateView(R.layout.activity_sh_ongoing_streams);
         sharedPref=new SharedPref(this);
         misc=new Misc(this);
         getOngoingStreams();
         streamsRecycler=findViewById(R.id.reyclerview_streams_list);
         streamAdapter=new StreamAdapter(this,streams);
         streamsRecycler.setAdapter(streamAdapter);
-        streamsRecycler.setHasFixedSize(true);
+//        streamsRecycler.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this)
         {
 
@@ -64,7 +65,6 @@ public class OngoingStreams extends Menu {
         if(streams.size()==0) {
             pd.show();
         }
-        final int streamSize = streams.size();
 
         Ion.with(this)
                 .load("GET", misc.ROOT_PATH + "livestream/ongoingstreams")
@@ -89,8 +89,7 @@ public class OngoingStreams extends Menu {
                                 return;
                             }
                             pd.dismiss();
-                            for (int i = streamSize; i < jsonArray.length(); i++) {
-
+                            for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject jsonObjectStream = (JSONObject) jsonArray.get(i);
 

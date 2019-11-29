@@ -3,6 +3,7 @@ package com.sport.x.Adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.StreamView
         this.context = context;
         this.streams = streams;
         misc = new Misc(context);
+
 
     }
     @NonNull
