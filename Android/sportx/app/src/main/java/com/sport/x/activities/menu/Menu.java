@@ -27,6 +27,7 @@ import com.sport.x.activities.customerActivities.UpdateProfileActivity;
 import com.sport.x.activities.customerActivities.TournamentActivity;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
+import com.sport.x.activities.sharedActivities.OngoingStreams;
 import com.sport.x.activities.sharedActivities.ViewStreamActivity;
 
 
@@ -168,7 +169,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                 finish();
             }
             else if (id == R.id.viewstream) {
-                Intent view = new Intent(this, ViewStreamActivity.class);
+                Intent view = new Intent(this, OngoingStreams.class);
                 startActivity(view);
                 finish();
             }

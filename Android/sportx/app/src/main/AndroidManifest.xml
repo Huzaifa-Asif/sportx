@@ -105,6 +105,7 @@
 
         <!--        Shared Activities-->
 
+        <activity android:name=".activities.sharedActivities.OngoingStreams"/>
         <activity android:name=".activities.sharedActivities.ForgotPasswordActivity" />
         <activity android:name=".activities.sharedActivities.ComplainActivity" />
         <activity android:name=".activities.sharedActivities.HelpActivity" />

@@ -1,5 +1,6 @@
 package com.sport.x.activities.sharedActivities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -24,7 +25,9 @@ public class ViewStreamActivity extends Menu {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sh_view_stream);
+        super.inflateView(R.layout.activity_sh_view_stream);
+        Intent i=getIntent();
+        String email=i.getStringExtra("email");
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
         TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
         TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
@@ -37,7 +40,7 @@ public class ViewStreamActivity extends Menu {
         RtmpDataSourceFactory rtmpDataSourceFactory = new RtmpDataSourceFactory();
         // This is the MediaSource representing the media to be played.
         MediaSource videoSource = new ExtractorMediaSource.Factory(rtmpDataSourceFactory)
-                .createMediaSource(Uri.parse("rtmp://192.168.100.7/live/khuz@gmail.com"));
+                .createMediaSource(Uri.parse("rtmp://192.168.100.7/live/"+email));
 
         // Prepare the player with the source.
         player.prepare(videoSource);

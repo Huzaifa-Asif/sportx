@@ -34,8 +34,8 @@ public class Misc {
     SharedPref SharedPref;
     Misc misc;
 
-    public static final String ROOT_PATH = "https://sport-x.herokuapp.com/";
-//    public static final String ROOT_PATH = "http://192.168.100.11:3300/";
+//    public static final String ROOT_PATH = "https://sport-x.herokuapp.com/";
+    public static final String ROOT_PATH = "http://192.168.100.7:3300/";
 
     public Misc(Context context) {
         this.context = context;
