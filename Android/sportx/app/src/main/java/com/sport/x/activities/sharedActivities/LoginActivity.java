@@ -196,9 +196,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                 }
 
-                               else if(status==false){
+                               else if(!status){
                                    pd.dismiss();
-                                   misc.showToast("Invalid Email or Password!");
+                                   String message = jsonObject1.getString("Message");
+                                   misc.showToast(message);
                                    return;
                                }
 

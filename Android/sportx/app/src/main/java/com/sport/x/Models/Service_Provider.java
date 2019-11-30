@@ -12,6 +12,9 @@ public class Service_Provider {
     private Double userLat;
     private Double userLon;
 
+
+
+
     public Service_Provider( String name, String email, String address,String picture_profile, String contact,  String password,  String category, Double userLat, Double userLon) {
 
         this.name = name;

@@ -202,6 +202,14 @@ public class MapsActivity extends Menu implements
                     intent.putExtra("service_provider_latitude", vendorList.get(index).getUserLat());
                     intent.putExtra("service_provider_longitude", vendorList.get(index).getUserLon());
 
+//                    intent.putExtra("booking_setting_openingTime", vendorList.get(index).getBookingSettings().getOpeningTime());
+//                    intent.putExtra("booking_setting_closingTime", vendorList.get(index).getBookingSettings().getClosingTime());
+//                    intent.putExtra("booking_setting_amount", vendorList.get(index).getBookingSettings().getAmount());
+//                    intent.putExtra("booking_setting_duration", vendorList.get(index).getBookingSettings().getDuration());
+//                    intent.putExtra("booking_setting_wholeDayBookingAllowed", vendorList.get(index).getBookingSettings().isWholeDayBookingAllowed());
+//                    intent.putExtra("booking_setting_wholeDayBookingPrice", vendorList.get(index).getBookingSettings().getWholeDayBookingPrice());
+
+
 
                     startActivity(intent);
                    // postJob();
@@ -221,10 +229,6 @@ public class MapsActivity extends Menu implements
         return true;
     }
 
-    private void fetchServiceProviderSettings()
-    {
-
-    }
     private void fetchService_Provider(){
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Finding " + service_name + " Service Providers");
@@ -254,9 +258,9 @@ public class MapsActivity extends Menu implements
                                     return;
                                 }
                                 vendorList.clear();
-                                for(i = 1; i < jsonArray.length(); i++){
+                                for(i = 0; i < jsonArray.length(); i++){
 
-//                                    misc.showToast("For Loop"+result.getResult());
+
 
                                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
@@ -273,6 +277,24 @@ public class MapsActivity extends Menu implements
                                     password = jsonObject.getString("password");
                                     category = jsonObject.getString("category");
 
+//                                    JSONObject bookingSetting  = jsonObject.getJSONObject("bookingSetting");
+//                                    String bookingSettingId=bookingSetting.getString("_id");
+//                                    int amount=bookingSetting.getInt("amount");
+//                                    String openingTime=bookingSetting.getString("openingTime");
+//                                    String closingTime=bookingSetting.getString("closingTime");
+//                                    int duration=bookingSetting.getInt("duration");
+//                                    int totalGrounds=bookingSetting.getInt("totalGrounds");
+//                                    String spEmail=bookingSetting.getString("serviceProviderEmail");
+//                                    boolean wholeDayBookingAllowed=bookingSetting.getBoolean("wholeDayBookingAllowed");
+//                                    int wholeDayBookingPrice=0;
+//                                    if(wholeDayBookingAllowed)
+//                                    {
+//                                        wholeDayBookingPrice=bookingSetting.getInt("wholeDayBookingPrice");
+//                                    }
+//
+//                                    BookingSettings bookingSettings=new BookingSettings(bookingSettingId,amount,openingTime,closingTime,duration,totalGrounds,spEmail,wholeDayBookingAllowed,wholeDayBookingPrice);
+
+
 //
                                     //vendorList.add(new Service_Provider(service_provider_name, email, address, picture, contact, password, category, latitude1, longitude1));
 
@@ -280,6 +302,7 @@ public class MapsActivity extends Menu implements
                                         vendorList.add(new Service_Provider(service_provider_name, email, address, picture_profile, contact, password, category, latitude1, longitude1));
                                     }
                                 }
+
                                 if(vendorList.isEmpty()){
                                     misc.showToast("No Nearby " + service_name + " Found. Please visit again");
                                     pd.dismiss();

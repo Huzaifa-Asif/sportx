@@ -22,41 +22,6 @@
             android:paddingBottom="@dimen/activity_vertical_margin">
 
 
-
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Enter Booking Details"
-                android:textColor="@color/grey"
-                android:layout_marginLeft="@dimen/_18sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:textStyle="bold"
-                android:textSize="@dimen/_13sdp"
-                android:id="@+id/details"
-                />
-
-
-
-            <Spinner
-                android:backgroundTint="@color/colorPrimary"
-                android:id="@+id/spinner1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginLeft="@dimen/_18sdp"
-                android:layout_marginRight="@dimen/_8sdp"
-                android:paddingStart="@dimen/_1sdp"
-                android:paddingVertical="@dimen/_8sdp"
-                android:entries="@array/bookingType"
-                android:layout_below="@+id/details"
-
-                android:paddingLeft="50dp"
-                android:paddingRight="180dp" />
-
             <EditText
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_width="match_parent"
@@ -89,52 +54,30 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                  />
 
-            <EditText
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/in_time"
-                android:layout_marginTop="4dp"
-                android:focusable="false"
-                android:hint="Select Time"
-                android:textColorHint="@color/grey"
-                android:layout_marginLeft="@dimen/_18sdp"
-                android:layout_marginRight="@dimen/_8sdp"
-                android:layout_below="@+id/in_date"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="@dimen/_10sdp"/>
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/time"
-                android:id="@+id/btn_time"
-                android:layout_below="@+id/btn_date"
-                android:layout_alignEnd="@+id/btn_date"
-                android:background="@color/white"
-                android:textColor="#fff"
-                android:paddingLeft="@dimen/_10sdp"
-                android:paddingRight="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                 />
 
         </RelativeLayout>
 
 
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/register_button"
-                android:layout_marginRight="@dimen/_18sdp"
-                android:layout_marginLeft="@dimen/_18sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@color/colorPrimary"
-                android:text="Submit"
-                android:textColor="#fff"
-                android:layout_marginBottom="@dimen/_18sdp"
-                />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_booking_slots"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_button"
+            android:layout_marginRight="@dimen/_18sdp"
+            android:layout_marginLeft="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@color/colorPrimary"
+            android:text="Confirm Booking"
+            android:textColor="#fff"
+            android:layout_marginBottom="@dimen/_18sdp"
+            />
         </LinearLayout>
 
         <!--</android.support.v4.widget.NestedScrollView>-->

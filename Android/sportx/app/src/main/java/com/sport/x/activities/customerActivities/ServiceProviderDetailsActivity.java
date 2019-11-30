@@ -28,12 +28,15 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.sport.x.Models.BookingSettings;
+import com.sport.x.Models.Expense;
 import com.sport.x.activities.sharedActivities.MessageActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.activities.menu.Menu;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,10 +48,13 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
 
     private GoogleMap mMap;
     private Marker myMarker;
-    private TextView name,email, service, phone, address;
+    private TextView name,email, service, phone, address,amount,opening,closing,duration,wholeDayAllowed,wholeDayPrice;
     private Location currentLocation;
     private double service_provider_longitude, service_provider_latitude;
     private String phoneNumber, service_name, service_provider_email,service_provider_name, service_provider_address, service_provider_phone_number;
+    private int booking_setting_amount,booking_setting_duration,booking_setting_wholeDayBookingPrice;
+    private String booking_setting_openingTime,booking_setting_closingTime;
+    private boolean booking_setting_wholeDayBookingAllowed;
     private Button book, msg, call;
     private ImageButton compare;
     private EditText meesage;
@@ -75,6 +81,16 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
         address= findViewById(R.id.c_address);
         call = findViewById(R.id.make_call);
         msg = findViewById(R.id.message);
+        amount=findViewById(R.id.amount);
+        opening=findViewById(R.id.opening_time);
+        closing=findViewById(R.id.closing_time);
+        duration=findViewById(R.id.duration);
+        wholeDayAllowed=findViewById(R.id.whole_day_booking_allowed);
+        wholeDayPrice=findViewById(R.id.whole_day_booking_price);
+
+
+
+
         msg.setOnClickListener(this);
 
         book = findViewById(R.id.book);
@@ -94,12 +110,20 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
         service_provider_phone_number = intent.getStringExtra("service_provider_phone_number");
         service_provider_latitude=intent.getDoubleExtra("service_provider_latitude",33);
         service_provider_longitude=intent.getDoubleExtra("service_provider_longitude",73);
+        callBookingSettingWebService();
+//        booking_setting_amount=intent.getIntExtra("booking_setting_amount",500);
+//        booking_setting_openingTime=intent.getStringExtra("booking_setting_openingTime");
+//        booking_setting_closingTime=intent.getStringExtra("booking_setting_closingTime");
+//        booking_setting_duration=intent.getIntExtra("booking_setting_duration",60);
+//        booking_setting_wholeDayBookingAllowed=intent.getBooleanExtra("booking_setting_wholeDayBookingAllowed",false);
+//        booking_setting_wholeDayBookingPrice=intent.getIntExtra("booking_setting_wholeDayBookingPrice",0);
 
         name.setText("Name: " + service_provider_name);
         email.setText("Email: " + service_provider_email);
         service.setText("Service: " + service_name);
         phone.setText("Phone: " + service_provider_phone_number);
         address.setText("Address: " + service_provider_address);
+
 
 
 
@@ -285,7 +309,85 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
         intent.putExtra("service_provider_address", service_provider_address);
         intent.putExtra("service_provider_latitude", service_provider_latitude);
         intent.putExtra("service_provider_longitude", service_provider_longitude);
+
+        intent.putExtra("booking_setting_openingTime", booking_setting_openingTime);
+        intent.putExtra("booking_setting_closingTime", booking_setting_closingTime);
+        intent.putExtra("booking_setting_amount", booking_setting_amount);
+        intent.putExtra("booking_setting_duration", booking_setting_duration);
+        intent.putExtra("booking_setting_wholeDayBookingAllowed", booking_setting_wholeDayBookingAllowed);
+        intent.putExtra("booking_setting_wholeDayBookingPrice", booking_setting_wholeDayBookingPrice);
+
         startActivity(intent);
+    }
+    public void callBookingSettingWebService()
+    {
+
+
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Fetching Service provider Details");
+        pd.setCancelable(false);
+        pd.show();
+
+        Ion.with(this)
+                .load("GET", misc.ROOT_PATH + "bookingSetting/get_bookingSetting_by_serviceProvider/" + service_provider_email)
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            pd.dismiss();
+                            misc.showToast("Please check your connection");
+                            pd.dismiss();
+                            return;
+                        }
+
+                        try {
+
+
+                            JSONObject bookingSetting  = new JSONObject(result.getResult());
+                            String bookingSettingId=bookingSetting.getString("_id");
+                            booking_setting_amount=bookingSetting.getInt("amount");
+                            booking_setting_openingTime=bookingSetting.getString("openingTime");
+                            booking_setting_closingTime=bookingSetting.getString("closingTime");
+                            booking_setting_duration=bookingSetting.getInt("duration");
+                            int totalGrounds=bookingSetting.getInt("totalGrounds");
+                            String spEmail=bookingSetting.getString("serviceProviderEmail");
+                            booking_setting_wholeDayBookingAllowed=bookingSetting.getBoolean("wholeDayBookingAllowed");
+                            booking_setting_wholeDayBookingPrice=0;
+                            if(booking_setting_wholeDayBookingAllowed)
+                            {
+                                booking_setting_wholeDayBookingPrice=bookingSetting.getInt("wholeDayBookingPrice");
+                            }
+
+//                           BookingSettings bookingSettings=new BookingSettings(bookingSettingId,amount,openingTime,closingTime,duration,totalGrounds,spEmail,wholeDayBookingAllowed,wholeDayBookingPrice);
+
+
+                            opening.setText("Opening Time: "+booking_setting_openingTime);
+                            closing.setText("Closing Time: "+booking_setting_closingTime);
+                            duration.setText("Booking Duration: "+booking_setting_duration+" minutes");
+                            amount.setText("Booking Price: "+booking_setting_amount);
+                            if(booking_setting_wholeDayBookingAllowed)
+                            {
+                                wholeDayAllowed.setText("Whole Day Booking Allowed: Yes");
+                                wholeDayPrice.setText("Whole Day Booking Price: "+ booking_setting_wholeDayBookingPrice);
+                            }
+                            else
+                            {
+                                wholeDayAllowed.setText("Whole Day Booking Allowed: No");
+                                wholeDayPrice.setVisibility(View.GONE);
+                            }
+
+
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
+
+                });
+        pd.dismiss();
     }
 
 

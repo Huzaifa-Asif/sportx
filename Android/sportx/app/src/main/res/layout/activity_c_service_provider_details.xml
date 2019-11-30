@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
     android:layout_width="match_parent"
     android:background="#fff"
     android:layout_height="match_parent"
@@ -112,11 +121,72 @@
                 android:text="Email: "
                 android:textSize="@dimen/_11sdp"
                 android:textStyle="bold" />
+            <TextView
+                android:id="@+id/opening_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/c_email"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_35sdp"
+                android:text="Opening Time: "
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/closing_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/opening_time"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_35sdp"
+                android:text="Closing Time: "
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/closing_time"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_35sdp"
+                android:text="Booking Duration: "
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/duration"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_35sdp"
+                android:text="Booking Duration: "
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/whole_day_booking_allowed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/amount"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_35sdp"
+                android:text="Whole Day Booking"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/whole_day_booking_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/whole_day_booking_allowed"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_35sdp"
+                android:text="Whole Day Booking Price: "
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_below="@id/c_email"
+                android:layout_below="@id/whole_day_booking_price"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
@@ -184,18 +254,6 @@
     </androidx.cardview.widget.CardView>
 
 
-
-
-    <!--<Button-->
-        <!--android:id="@+id/cancel_job"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:layout_below="@id/complete_job"-->
-        <!--android:layout_marginTop="@dimen/_10sdp"-->
-        <!--android:layout_marginLeft="@dimen/_10sdp"-->
-        <!--android:layout_marginRight="@dimen/_10sdp"-->
-        <!--android:text="Cancel Job"-->
-        <!--android:textColor="#fff"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--/>-->
 </RelativeLayout>
+</ScrollView>
+</LinearLayout>
