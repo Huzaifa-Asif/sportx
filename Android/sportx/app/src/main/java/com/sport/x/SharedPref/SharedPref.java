@@ -11,7 +11,14 @@ public class SharedPref {
     private static final String PREF_NAME = "SportxLog";
     private static final String IS_LOGIN = "IsLoggedIn";
     private int PRIVATE_MODE = 0;
-    private String token,compareServiceProvider1,compareServiceProvider2;
+    private String token;
+    private String compareServiceProvider1;
+    private String compareServiceProvider2;
+
+
+
+    private String compareServiceProvider3;
+    private String compareServiceProvider4;
     private boolean profileCompleted;
     public SharedPref(Context context) {
         this.context = context;
@@ -96,11 +103,25 @@ public class SharedPref {
         editor.remove("number");
         editor.remove("email");
         editor.remove("picture");
+        editor.remove("serviceProvider1");
+        editor.remove("serviceProvider2");
+        editor.remove("serviceProvider3");
+        editor.remove("serviceProvider4");
         editor.putBoolean("login", false);
+        editor.remove("spState");
         editor.clear();
         editor.commit();
     }
 
+    public boolean getSpState()
+    {
+        return sharedPreferences.getBoolean("spState",false);
+    }
+    public void setSpState(boolean spState)
+    {
+        editor.putBoolean("spState",spState);
+        editor.commit();
+    }
     public String getCompareServiceProvider2() {
         return sharedPreferences.getString("compareServiceProvider2", null);
     }
@@ -119,7 +140,23 @@ public class SharedPref {
         editor.commit();
     }
 
+    public String getCompareServiceProvider4() {
+        return sharedPreferences.getString("compareServiceProvider4", null);
+    }
 
+    public void setCompareServiceProvider4(String compareServiceProvider4) {
+        editor.putString("compareServiceProvider4", compareServiceProvider4);
+        editor.commit();
+    }
+
+    public String getCompareServiceProvider3() {
+        return sharedPreferences.getString("compareServiceProvider3", null);
+    }
+
+    public void setCompareServiceProvider3(String compareServiceProvider3) {
+        editor.putString("compareServiceProvider3", compareServiceProvider3);
+        editor.commit();
+    }
 
 
 }

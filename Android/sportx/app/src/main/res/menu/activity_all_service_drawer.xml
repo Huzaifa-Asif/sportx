@@ -13,6 +13,10 @@
             android:icon="@drawable/booking_management"
             android:title="Booking Management" />
         <item
+            android:id="@+id/search_by_name"
+            android:icon="@drawable/search"
+            android:title="Service provider Search" />
+        <item
             android:id="@+id/compare"
             android:icon="@drawable/compare"
             android:title="Compare" />
@@ -30,18 +34,19 @@
             android:icon="@drawable/view_stream"
             android:title="Ongoing Streams" />
 
-        <item
-            android:id="@+id/customer_profile"
-            android:icon="@drawable/profile"
-            android:title="Profile" />
-        <item
-            android:id="@+id/update_password"
-            android:icon="@drawable/update"
-            android:title="Update Password" />
+
     </group>
 
-    <item android:title="Help">
+    <item android:title="Settings &amp; Help">
         <menu>
+            <item
+                android:id="@+id/customer_profile"
+                android:icon="@drawable/profile"
+                android:title="Profile" />
+            <item
+                android:id="@+id/update_password"
+                android:icon="@drawable/update"
+                android:title="Update Password" />
             <item
                 android:id="@+id/customer_help"
                 android:icon="@drawable/help"

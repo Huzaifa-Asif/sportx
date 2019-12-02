@@ -59,7 +59,7 @@ public class MessageActivity extends Menu {
     private EditText newMessage;
     private Button send;
     private String customerName,serviceProviderName,customerPicture,serviceProviderPicture,customerEmail,serviceProviderEmail;
-
+    private boolean first=true;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,8 +149,9 @@ public class MessageActivity extends Menu {
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Fetching all messages");
         pd.setCancelable(false);
-        if(messages.size()==0) {
+        if(messages.size()==0&&first) {
             pd.show();
+            first=false;
         }
         final int messagesSize = messages.size();
 

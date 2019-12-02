@@ -122,6 +122,7 @@ public class BookingActivity extends Menu implements  View.OnClickListener {
 
 
         register = findViewById(R.id.register_button);
+        register.setVisibility(View.GONE);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -261,9 +262,10 @@ public class BookingActivity extends Menu implements  View.OnClickListener {
                                 monthString=""+(monthOfYear+1);
                             }
                             yearString=""+year;
-                            txtDate.setText(dayString + "-" +monthString + "-" + yearString);
+                            txtDate.setText(yearString + "-" +monthString + "-" + dayString);
                             mModelList.clear();
                             bookingsModel.clear();
+                            register.setVisibility(View.VISIBLE);
                             callBookingDetailsWebService(txtDate.getText().toString());
 
                         }
@@ -363,6 +365,7 @@ public class BookingActivity extends Menu implements  View.OnClickListener {
 
                     }
                 });
+        pd.dismiss();
     }
 
 
@@ -377,7 +380,7 @@ public class BookingActivity extends Menu implements  View.OnClickListener {
         intent.putExtra("service_provider_address", service_provider_address);
         intent.putExtra("service_provider_latitude", service_provider_latitude);
         intent.putExtra("service_provider_longitude", service_provider_longitude);
-
+        intent.putExtra("calling","maps");
         startActivity(intent);
 
     }
@@ -408,7 +411,7 @@ public class BookingActivity extends Menu implements  View.OnClickListener {
         pd.show();
 
         Ion.with(this)
-                .load("GET", misc.ROOT_PATH + "bookingdetails/get_bookingdetails_by_date/" + selectedDate)
+                .load("GET", misc.ROOT_PATH + "bookingdetails/get_bookingdetails_by_date?date="+selectedDate+"&email="+service_provider_email)
                 .asString()
                 .withResponse()
                 .setCallback(new FutureCallback<Response<String>>() {

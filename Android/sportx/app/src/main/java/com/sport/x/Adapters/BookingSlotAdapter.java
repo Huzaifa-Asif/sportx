@@ -37,7 +37,7 @@ public class BookingSlotAdapter extends RecyclerView.Adapter<BookingSlotAdapter.
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final BookingSlot model = mModelList.get(position);
-        holder.textView.setText(model.getStart()+" to "+model.getEnd());
+        holder.textView.setText(model.getStart()+"\n to \n"+model.getEnd());
         if(model.isAvailable())
         {
             holder.availability.setText("Available");
@@ -46,7 +46,15 @@ public class BookingSlotAdapter extends RecyclerView.Adapter<BookingSlotAdapter.
         {
             holder.availability.setText("Booked");
         }
-        holder.view.setBackgroundColor(model.isSelected() ? Color.CYAN : Color.WHITE);
+
+        //Check Selected
+        holder.cardSlot.setBackgroundColor(model.isSelected() ? context.getResources().getColor(R.color.colorPrimary) : Color.WHITE);
+        holder.textView.setTextColor(model.isSelected() ?  Color.WHITE : context.getResources().getColor(R.color.colorPrimary));
+        holder.availability.setTextColor(model.isSelected() ? Color.WHITE : context.getResources().getColor(R.color.colorPrimary));
+
+        //Check Availability
+        holder.cardSlot.setBackgroundColor(model.isAvailable() ? Color.WHITE : Color.parseColor("#D5D5D5") );
+        holder.cardSlot.setRadius(20);
         holder.cardSlot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +65,11 @@ public class BookingSlotAdapter extends RecyclerView.Adapter<BookingSlotAdapter.
                 }
 
                 model.setSelected(!model.isSelected());
-                holder.view.setBackgroundColor(model.isSelected() ? Color.GREEN : Color.WHITE);
+                //Check Selected
+                holder.cardSlot.setBackgroundColor(model.isSelected() ? context.getResources().getColor(R.color.colorPrimary) : Color.WHITE);
+                holder.textView.setTextColor(model.isSelected() ?  Color.WHITE : context.getResources().getColor(R.color.colorPrimary));
+                holder.availability.setTextColor(model.isSelected() ? Color.WHITE : context.getResources().getColor(R.color.colorPrimary));
+
             }
         });
     }

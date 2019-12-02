@@ -58,6 +58,9 @@ public class HomeActivity extends Menu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.inflateView(R.layout.activity_c_home);
+        if(!hasPermissions(this, PERMISSIONS)){
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
         setTitle("Book Services");
         context = this;
 
@@ -95,9 +98,7 @@ public class HomeActivity extends Menu
         else{
             misc.showToast("No Internet Connection");
         }
-        if(!hasPermissions(this, PERMISSIONS)){
-            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
-        }
+
 
     }
 

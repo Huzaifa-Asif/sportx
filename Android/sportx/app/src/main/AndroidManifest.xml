@@ -78,7 +78,7 @@
         <activity android:name=".activities.serviceProviderActivities.RevenueActivity"/>
         <activity android:name=".activities.serviceProviderActivities.RevenueCategoryActivity"/>
         <activity android:name=".activities.serviceProviderActivities.ExpenseCategoryActivity"/>
-
+        <activity android:name=".activities.serviceProviderActivities.EditBookingSettingActivity" />
 
 
         <!--        Customer Activities-->
@@ -91,7 +91,7 @@
         <activity android:name=".activities.customerActivities.BookingActivity" />
         <activity android:name=".activities.customerActivities.ServiceProviderDetailsActivity" />
         <activity android:name=".activities.customerActivities.UpdatePasswordActivity" />
-        <activity android:name=".activities.customerActivities.BookingManagement" />
+        <activity android:name=".activities.customerActivities.BookingManagementActivity" />
         <activity android:name=".activities.customerActivities.TournamentActivity" />
         <activity android:name=".activities.customerActivities.TournamentDetailActivity" />
         <activity
@@ -100,12 +100,13 @@
             />
         <activity android:name=".activities.customerActivities.SignupActivity"/>
         <activity android:name=".activities.customerActivities.CompareActivity"/>
-
+        <activity android:name=".activities.customerActivities.SearchByNameActivity" />
+        <activity android:name=".activities.customerActivities.PaymentOptionActivity"/>
 
 
         <!--        Shared Activities-->
 
-        <activity android:name=".activities.sharedActivities.OngoingStreams"/>
+        <activity android:name=".activities.sharedActivities.OngoingStreamsActivity"/>
         <activity android:name=".activities.sharedActivities.ForgotPasswordActivity" />
         <activity android:name=".activities.sharedActivities.ComplainActivity" />
         <activity android:name=".activities.sharedActivities.HelpActivity" />

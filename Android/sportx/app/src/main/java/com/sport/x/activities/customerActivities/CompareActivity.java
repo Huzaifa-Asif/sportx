@@ -32,29 +32,58 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CompareActivity extends Menu {
-TextView name1,name2,bookings1,bookings2,ratings1,ratings2,avg1,avg2,distance1,distance2;
+TextView name1,name2,name3,name4,bookings1,bookings2,bookings3,bookings4,ratings1,ratings2,ratings3,ratings4,avg1,avg2,avg3,avg4,distance1,distance2,distance3,distance4;
 Misc misc;
 SharedPref sharedPref;
 private Location currentLocation;
 private FusedLocationProviderClient fusedLocationProviderClient;
 private double current_latitude, current_longitude;
 private static final int LOCATION_REQUEST_CODE = 101;
+    TextView names[] = new TextView[4];
+    TextView bookings[] = new TextView[4];
+    TextView ratings[] = new TextView[4];
+    TextView avgs[] = new TextView[4];
+    TextView distances[] = new TextView[4];
 Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.inflateView(R.layout.activity_c_compare);
         setTitle("Compare Service providers");
-        name1 = findViewById(R.id.name1);
-        name2 = findViewById(R.id.name2);
-        bookings1 = findViewById(R.id.bookings1);
-        bookings2 = findViewById(R.id.bookings2);
-        ratings1 = findViewById(R.id.ratings1);
-        ratings2 = findViewById(R.id.ratings2);
-        avg1 = findViewById(R.id.avg1);
-        avg2 = findViewById(R.id.avg2);
-        distance1 = findViewById(R.id.distance1);
-        distance2 = findViewById(R.id.distance2);
+        names[0] = findViewById(R.id.name1);
+        names[1] = findViewById(R.id.name2);
+        names[2] = findViewById(R.id.name3);
+        names[3] = findViewById(R.id.name4);
+
+        bookings[0] = findViewById(R.id.bookings1);
+        bookings[1] = findViewById(R.id.bookings2);
+        bookings[2] = findViewById(R.id.bookings3);
+        bookings[3] = findViewById(R.id.bookings4);
+
+        ratings[0] = findViewById(R.id.ratings1);
+        ratings[1] = findViewById(R.id.ratings2);
+        ratings[2] = findViewById(R.id.ratings3);
+        ratings[3] = findViewById(R.id.ratings4);
+
+        avgs[0] = findViewById(R.id.avg1);
+        avgs[1] = findViewById(R.id.avg2);
+        avgs[2] = findViewById(R.id.avg3);
+        avgs[3] = findViewById(R.id.avg4);
+
+        distances[0] = findViewById(R.id.distance1);
+        distances[1] = findViewById(R.id.distance2);
+        distances[2] = findViewById(R.id.distance3);
+        distances[3] = findViewById(R.id.distance4);
+
+
+        for(int i=0;i<names.length;i++)
+        {
+            names[i].setText("-");
+            bookings[i].setText("-");
+            ratings[i].setText("-");
+            avgs[i].setText("-");
+            distances[i].setText("-");
+        }
         misc=new Misc(this);
         sharedPref=new SharedPref(this);
         context=this;
@@ -89,47 +118,10 @@ Context context;
                     current_longitude = currentLocation.getLongitude();
                     String email1=sharedPref.getCompareServiceProvider1();
                     String email2=sharedPref.getCompareServiceProvider2();
-                    if(email1==null || email2==null)
-                    {
-                        final Dialog dialog = new Dialog(context);
-                        dialog.setContentView(R.layout.compare_dialog_service_provider_short);
-                        TextView serviceProvider1=dialog.findViewById(R.id.serviceProvider1);
-                        TextView serviceProvider2=dialog.findViewById(R.id.serviceProvider2);
-                        if(email1==null)
-                        {
-                            serviceProvider1.setText("NULL");
-                        }
-                        else
-                        {
-                            serviceProvider1.setText(email1);
-                        }
-                        if(email2==null)
-                        {
-                            serviceProvider2.setText("NULL");
-                        }
-                        else
-                        {
-                            serviceProvider2.setText(email2);
-                        }
+                    String email3=sharedPref.getCompareServiceProvider3();
+                    String email4=sharedPref.getCompareServiceProvider4();
 
-                        Button accept=dialog.findViewById(R.id.accept);
-                        accept.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                                Intent intent = new Intent(context, HomeActivity.class);
-                                startActivity(intent);
-                                finish();
-
-                            }
-                        });
-                        dialog.show();
-                    }
-                    else
-                    {
-                        compare(email1,email2);
-                    }
-
-                    //Toast.makeText(MapsActivity.this,currentLocation.getLatitude()+" "+currentLocation.getLongitude(),Toast.LENGTH_SHORT).show();
+                    compare(email1,email2,email3,email4);
 
                 }else{
                     Toast.makeText(CompareActivity.this,"No Location recorded",Toast.LENGTH_SHORT).show();
@@ -139,7 +131,7 @@ Context context;
     }
 
 
-    private void compare(String email1,String email2){
+    private void compare(String email1,String email2,String email3,String email4){
 
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Comparison in Progress...");
@@ -152,6 +144,8 @@ Context context;
         jsonObject1.addProperty("long",current_longitude);
         jsonObject.addProperty("email1", email1);
         jsonObject.addProperty("email2", email2);
+        jsonObject.addProperty("email3", email3);
+        jsonObject.addProperty("email4", email4);
         jsonObject.add("location",jsonObject1);
 
 
@@ -175,18 +169,25 @@ Context context;
                         try{
                             pd.dismiss();
                             JSONArray jsonArray = new JSONArray(result.getResult());
-                            JSONObject jsonObject1 = (JSONObject) jsonArray.get(0);
-                            JSONObject jsonObject2 = (JSONObject) jsonArray.get(1);
-                            name1.setText(jsonObject1.getString("name"));
-                            name2.setText(jsonObject2.getString("name"));
-                            bookings1.setText(jsonObject1.getString("totalBookings"));
-                            bookings2.setText(jsonObject2.getString("totalBookings"));
-                            ratings1.setText(jsonObject1.getString("totalRatings"));
-                            ratings2.setText(jsonObject2.getString("totalRatings"));
-                            avg1.setText(jsonObject1.getString("avgRating"));
-                            avg2.setText(jsonObject2.getString("avgRating"));
-                            distance1.setText(jsonObject1.getString("distance"));
-                            distance2.setText(jsonObject2.getString("distance"));
+                            for(int i=0;i<jsonArray.length();i++)
+                            {
+                                JSONObject jsonObject1=(JSONObject) jsonArray.get(i);
+                                names[i].setText(jsonObject1.getString("name"));
+                                bookings[i].setText(jsonObject1.getString("totalBookings"));
+                                if(jsonObject1.getString("avgRating").equals("NaN"))
+                                {
+                                    avgs[i].setText("-");
+                                }
+                                else
+                                {
+                                    avgs[i].setText(jsonObject1.getString("avgRating"));
+
+                                }
+                                ratings[i].setText(jsonObject1.getString("totalRatings"));
+                                distances[i].setText(jsonObject1.getString("distance"));
+
+                            }
+
 
 
 

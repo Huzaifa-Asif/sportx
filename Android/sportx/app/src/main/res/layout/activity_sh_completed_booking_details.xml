@@ -74,6 +74,7 @@
                 android:textColorHint="@color/colorPrimary"
                 android:shadowColor="@color/colorPrimary"
                 android:backgroundTint="@color/colorPrimary"
+                android:textCursorDrawable="@drawable/cursor_color"
                 android:paddingLeft="@dimen/_5sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_10sdp"

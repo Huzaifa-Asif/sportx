@@ -40,7 +40,7 @@ public class ViewStreamActivity extends Menu {
         RtmpDataSourceFactory rtmpDataSourceFactory = new RtmpDataSourceFactory();
         // This is the MediaSource representing the media to be played.
         MediaSource videoSource = new ExtractorMediaSource.Factory(rtmpDataSourceFactory)
-                .createMediaSource(Uri.parse("rtmp://192.168.100.7/live/"+email));
+                .createMediaSource(Uri.parse("rtmp://192.64.114.135/live/"+email));
 
         // Prepare the player with the source.
         player.prepare(videoSource);

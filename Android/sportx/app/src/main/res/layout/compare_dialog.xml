@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
     android:paddingRight="16dp"
@@ -12,10 +12,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
+        android:padding="16dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -23,10 +20,12 @@
             android:text="Which Service Provider Do You Wish to Replace?"
             android:gravity="center"
             android:textStyle="bold"
+            android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:width="0dp"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:height="@dimen/_30sdp"/>
     </LinearLayout>
@@ -42,7 +41,11 @@
         <Button
             android:id="@+id/serviceProvider1"
             android:text="Amount"
+            android:maxLines="1"
+            android:background="@drawable/button"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:layout_width="0dp"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textSize="12sp"
@@ -50,13 +53,48 @@
         <Button
             android:id="@+id/serviceProvider2"
             android:text="John Doe"
+            android:maxLines="1"
+            android:background="@drawable/button"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:layout_width="0dp"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textSize="12sp"/>
+
     </LinearLayout>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:orientation="horizontal" >
 
-
+    <Button
+        android:id="@+id/serviceProvider3"
+        android:text="Amount"
+        android:maxLines="1"
+        android:layout_width="0dp"
+        android:textColor="@color/white"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:background="@drawable/button"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        />
+    <Button
+        android:id="@+id/serviceProvider4"
+        android:text="This is the Longest email"
+        android:maxLines="1"
+        android:layout_width="0dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"/>
+    </LinearLayout>
 
 </LinearLayout>

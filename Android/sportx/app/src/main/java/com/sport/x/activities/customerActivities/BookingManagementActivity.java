@@ -19,7 +19,7 @@ import com.sport.x.activities.menu.Menu;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 
-public class BookingManagement extends Menu {
+public class BookingManagementActivity extends Menu {
 
     /**
      * The {@link PagerAdapter} that will provide

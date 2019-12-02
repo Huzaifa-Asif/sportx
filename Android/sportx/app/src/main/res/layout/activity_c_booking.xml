@@ -65,15 +65,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
+
             />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_button"
+
             android:layout_marginRight="@dimen/_18sdp"
             android:layout_marginLeft="@dimen/_18sdp"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button"
             android:text="Confirm Booking"
             android:textColor="#fff"
             android:layout_marginBottom="@dimen/_18sdp"

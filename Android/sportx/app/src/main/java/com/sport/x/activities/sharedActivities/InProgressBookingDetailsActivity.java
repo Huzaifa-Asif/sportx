@@ -1,6 +1,7 @@
 package com.sport.x.activities.sharedActivities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
@@ -11,10 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
-import com.sport.x.activities.customerActivities.BookingManagement;
+import com.sport.x.activities.customerActivities.BookingManagementActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.activities.menu.Menu;
-import com.sport.x.activities.serviceProviderActivities.BookingManagementActivity;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -39,6 +39,7 @@ public class InProgressBookingDetailsActivity extends Menu implements View.OnCli
     private String phoneNumber, jobId;
     private Button cancel,complete, msg, call;
     private EditText meesage;
+    Context context;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int LOCATION_REQUEST_CODE = 101;
     SharedPref sharedPref;
@@ -51,7 +52,7 @@ public class InProgressBookingDetailsActivity extends Menu implements View.OnCli
         super.onCreate(savedInstanceState);
         super.inflateView(R.layout.activity_sh_in_progress_booking_details);
         setTitle("Job Request");
-
+        context=this;
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
 
@@ -120,12 +121,12 @@ public class InProgressBookingDetailsActivity extends Menu implements View.OnCli
     public void onBackPressed() {
 
         if(sharedPref.getUserRole() == 1) {
-            Intent intent = new Intent(this, BookingManagementActivity.class);
+            Intent intent = new Intent(this, com.sport.x.activities.serviceProviderActivities.BookingManagementActivity.class);
             startActivity(intent);
             finish();
         }
         else{
-            Intent intent = new Intent(this, BookingManagement.class);
+            Intent intent = new Intent(this, BookingManagementActivity.class);
             startActivity(intent);
             finish();
         }
@@ -190,8 +191,11 @@ public class InProgressBookingDetailsActivity extends Menu implements View.OnCli
                                 JSONObject jsonObject = new JSONObject(result.getResult());
                                 String status = jsonObject.getString("status");
                                 String message = jsonObject.getString("message");
-                                onBackPressed();
-                                misc.showToast("Booking Request Canceled");
+                                Intent intent=new Intent(context,com.sport.x.activities.serviceProviderActivities.BookingManagementActivity.class);
+                                intent.putExtra("position",1);
+                                startActivity(intent);
+                                finish();
+                                misc.showToast("Booking Request Cancelled");
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }
@@ -231,7 +235,10 @@ public class InProgressBookingDetailsActivity extends Menu implements View.OnCli
                                 JSONObject jsonObject = new JSONObject(result.getResult());
                                 String status = jsonObject.getString("status");
                                 String message = jsonObject.getString("message");
-                                onBackPressed();
+                                Intent intent=new Intent(context,com.sport.x.activities.serviceProviderActivities.BookingManagementActivity.class);
+                                intent.putExtra("position",2);
+                                startActivity(intent);
+                                finish();
                                 misc.showToast("Booking Request Completed");
                             } catch (JSONException e1) {
                                 e1.printStackTrace();

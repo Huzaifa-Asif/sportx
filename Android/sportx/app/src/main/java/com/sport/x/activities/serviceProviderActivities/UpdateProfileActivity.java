@@ -331,7 +331,7 @@ public class UpdateProfileActivity extends Menu {
 
 
         Ion.with(this)
-                .load("PATCH", misc.ROOT_PATH+"update_serviceProvider/"+sharedPref.getEmail())
+                .load("PATCH", misc.ROOT_PATH+"serviceprovider/update_serviceProvider/"+sharedPref.getEmail())
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()

@@ -9,10 +9,9 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.sport.x.activities.customerActivities.BookingManagement;
+import com.sport.x.activities.customerActivities.BookingManagementActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.activities.menu.Menu;
-import com.sport.x.activities.serviceProviderActivities.BookingManagementActivity;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.gson.JsonObject;
@@ -232,12 +231,12 @@ public class CompletedBookingDetailsActivity extends Menu {
     public void onBackPressed() {
 
         if(sharedPref.getUserRole() == 1) {
-            Intent intent = new Intent(this, BookingManagementActivity.class);
+            Intent intent = new Intent(this, com.sport.x.activities.serviceProviderActivities.BookingManagementActivity.class);
             startActivity(intent);
             finish();
         }
         else{
-            Intent intent = new Intent(this, BookingManagement.class);
+            Intent intent = new Intent(this, BookingManagementActivity.class);
             startActivity(intent);
             finish();
         }

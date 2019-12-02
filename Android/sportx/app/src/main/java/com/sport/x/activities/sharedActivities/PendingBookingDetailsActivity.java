@@ -1,6 +1,7 @@
 package com.sport.x.activities.sharedActivities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
@@ -11,10 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
-import com.sport.x.activities.customerActivities.BookingManagement;
+import com.sport.x.activities.customerActivities.BookingManagementActivity;
 import com.sport.x.Misc.Misc;
+import com.sport.x.activities.customerActivities.PaymentOptionActivity;
 import com.sport.x.activities.menu.Menu;
-import com.sport.x.activities.serviceProviderActivities.BookingManagementActivity;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,12 +37,13 @@ public class PendingBookingDetailsActivity extends Menu implements View.OnClickL
     private TextView name, booking_type, phone, state, date, time;
     private Location currentLocation;
     private String phoneNumber, jobId;
-    private Button accept, cancel, msg, call;
+    private Button accept, cancel, msg, call,pay;
     private EditText meesage;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int LOCATION_REQUEST_CODE = 101;
     SharedPref sharedPref;
     Misc misc;
+    Context context;
     private boolean show = false;
     private String jobStatus;
 
@@ -53,17 +55,17 @@ public class PendingBookingDetailsActivity extends Menu implements View.OnClickL
 
         misc = new Misc(this);
         sharedPref = new SharedPref(this);
-
+        context=this;
         name = findViewById(R.id.c_name);
         booking_type = findViewById(R.id.c_booking_type);
         phone = findViewById(R.id.c_phone);
         state = findViewById(R.id.c_state);
         date = findViewById(R.id.c_date);
         time = findViewById(R.id.c_time);
-
+        pay=findViewById(R.id.pay_now);
         call = findViewById(R.id.make_call);
         call.setOnClickListener(this);
-
+        pay.setOnClickListener(this);
         msg = findViewById(R.id.message);
         msg.setOnClickListener(this);
 
@@ -84,7 +86,7 @@ public class PendingBookingDetailsActivity extends Menu implements View.OnClickL
         int userRole = sharedPref.getUserRole();
         if(userRole == 1) {
             phoneNumber = intent.getStringExtra("customerNumber");
-
+            pay.setVisibility(GONE);
             name.setText("Name: " + intent.getStringExtra("customerName"));
             booking_type.setText("Booking Type: " + intent.getStringExtra("bookingType"));
             phone.setText("Phone: " + intent.getStringExtra("customerNumber"));
@@ -118,12 +120,12 @@ public class PendingBookingDetailsActivity extends Menu implements View.OnClickL
     public void onBackPressed() {
 
         if(sharedPref.getUserRole() == 1) {
-            Intent intent = new Intent(this, BookingManagementActivity.class);
+            Intent intent = new Intent(this, com.sport.x.activities.serviceProviderActivities.BookingManagementActivity.class);
             startActivity(intent);
             finish();
         }
         else{
-            Intent intent = new Intent(this, BookingManagement.class);
+            Intent intent = new Intent(this, BookingManagementActivity.class);
             startActivity(intent);
             finish();
         }
@@ -134,14 +136,20 @@ public class PendingBookingDetailsActivity extends Menu implements View.OnClickL
         if(v.getId() == accept.getId()) {
             acceptJob("accepted");
         }
-        if(v.getId() == cancel.getId()) {
+        else if(v.getId() == cancel.getId()) {
             cancelJob("canceled");
         }
-        if(v.getId() == call.getId()){
+        else if(v.getId() == call.getId()){
             makeCall();
         }
-        if(v.getId() == msg.getId()){
+        else if(v.getId() == msg.getId()){
             sendSMS();
+        }
+        else if(v.getId() == pay.getId()){
+            Intent intent=new Intent(this, PaymentOptionActivity.class);
+            intent.putExtra("id",jobId);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -188,7 +196,10 @@ public class PendingBookingDetailsActivity extends Menu implements View.OnClickL
                                 JSONObject jsonObject = new JSONObject(result.getResult());
                                 String status = jsonObject.getString("status");
                                 String message = jsonObject.getString("message");
-                                onBackPressed();
+                                Intent intent=new Intent(context,com.sport.x.activities.serviceProviderActivities.BookingManagementActivity.class);
+                                intent.putExtra("position",1);
+                                startActivity(intent);
+                                finish();
                                 misc.showToast("Booking Request Accepted");
                             } catch (JSONException e1) {
                                 e1.printStackTrace();

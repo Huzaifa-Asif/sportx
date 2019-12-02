@@ -63,7 +63,6 @@
                     android:layout_marginLeft="@dimen/_18sdp"
                     android:layout_marginRight="@dimen/_18sdp"
                     android:hint="Booking Price"
-
                     android:textColor="@color/grey"
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:textColorHint="@color/grey"
@@ -124,7 +123,6 @@
                     <EditText
                         android:backgroundTint="@color/colorPrimary"
                         android:layout_width="0dp"
-
                         android:textCursorDrawable="@drawable/cursor_color"
                         android:layout_weight="1"
                         android:layout_height="match_parent"

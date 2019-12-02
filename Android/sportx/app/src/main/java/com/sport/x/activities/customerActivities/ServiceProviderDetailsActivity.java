@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.widget.TooltipCompat;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,13 +58,14 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
     private String booking_setting_openingTime,booking_setting_closingTime;
     private boolean booking_setting_wholeDayBookingAllowed;
     private Button book, msg, call;
-    private ImageButton compare;
+    private ImageButton compare,directions;
     private EditText meesage;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int LOCATION_REQUEST_CODE = 101;
     SharedPref sharedPref;
     Misc misc;
     private boolean show = false;
+    private String calling;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +90,10 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
         duration=findViewById(R.id.duration);
         wholeDayAllowed=findViewById(R.id.whole_day_booking_allowed);
         wholeDayPrice=findViewById(R.id.whole_day_booking_price);
-
-
-
+        wholeDayAllowed.setVisibility(View.GONE);
+        wholeDayPrice.setVisibility(View.GONE);
+        directions=findViewById(R.id.directions);
+        directions.setOnClickListener(this);
 
         msg.setOnClickListener(this);
 
@@ -110,6 +114,7 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
         service_provider_phone_number = intent.getStringExtra("service_provider_phone_number");
         service_provider_latitude=intent.getDoubleExtra("service_provider_latitude",33);
         service_provider_longitude=intent.getDoubleExtra("service_provider_longitude",73);
+        calling=intent.getStringExtra("calling");
         callBookingSettingWebService();
 //        booking_setting_amount=intent.getIntExtra("booking_setting_amount",500);
 //        booking_setting_openingTime=intent.getStringExtra("booking_setting_openingTime");
@@ -163,10 +168,21 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
     @Override
     public void onBackPressed() {
 
-            Intent intent = new Intent(this, MapsActivity.class);
-            intent.putExtra("service_name",service_name);
-            startActivity(intent);
-            finish();
+            if(calling.equals("maps"))
+            {
+                Intent intent = new Intent(this, MapsActivity.class);
+                intent.putExtra("service_name",service_name);
+                startActivity(intent);
+                finish();
+            }
+            else if (calling.equals("searchByName"))
+            {
+                Intent intent = new Intent(this, SearchByNameActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+
 
     }
 
@@ -185,13 +201,17 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
 
             slecetForComparison();
         }
+        else if(v.getId() == directions.getId()){
+
+            getDirections(service_provider_latitude,service_provider_longitude);
+        }
     }
 
 
     private void slecetForComparison()
     {
         String serviceProvider1=sharedPref.getCompareServiceProvider1(),serviceProvider2=sharedPref.getCompareServiceProvider2();
-
+        String serviceProvider3=sharedPref.getCompareServiceProvider3(),serviceProvider4=sharedPref.getCompareServiceProvider4();
         if(serviceProvider1==null)
         {
 
@@ -204,14 +224,31 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
             sharedPref.setCompareServiceProvider2(service_provider_email);
             misc.showToast("Service Provider "+service_provider_name+" added for comparison");
         }
+        else if(serviceProvider3==null)
+        {
+
+            sharedPref.setCompareServiceProvider3(service_provider_email);
+            misc.showToast("Service Provider "+service_provider_name+" added for comparison");
+        }
+        else if(serviceProvider4==null)
+        {
+
+            sharedPref.setCompareServiceProvider4(service_provider_email);
+            misc.showToast("Service Provider "+service_provider_name+" added for comparison");
+        }
         else
         {
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.compare_dialog);
             Button btnServiceProvider1=dialog.findViewById(R.id.serviceProvider1);
             Button btnServiceProvider2=dialog.findViewById(R.id.serviceProvider2);
+            Button btnServiceProvider3=dialog.findViewById(R.id.serviceProvider3);
+            Button btnServiceProvider4=dialog.findViewById(R.id.serviceProvider4);
             btnServiceProvider1.setText(serviceProvider1);
             btnServiceProvider2.setText(serviceProvider2);
+            btnServiceProvider3.setText(serviceProvider3);
+            btnServiceProvider4.setText(serviceProvider4);
+
             btnServiceProvider1.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     sharedPref.setCompareServiceProvider1(service_provider_email);
@@ -223,6 +260,22 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
             btnServiceProvider2.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     sharedPref.setCompareServiceProvider2(service_provider_email);
+                    misc.showToast("Service Provider "+service_provider_name+" added for comparison");
+                    dialog.dismiss();
+
+                }
+            });
+            btnServiceProvider3.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    sharedPref.setCompareServiceProvider3(service_provider_email);
+                    misc.showToast("Service Provider "+service_provider_name+" added for comparison");
+                    dialog.dismiss();
+
+                }
+            });
+            btnServiceProvider4.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    sharedPref.setCompareServiceProvider4(service_provider_email);
                     misc.showToast("Service Provider "+service_provider_name+" added for comparison");
                     dialog.dismiss();
 
@@ -390,6 +443,13 @@ public class ServiceProviderDetailsActivity extends Menu implements OnMapReadyCa
         pd.dismiss();
     }
 
+    private void getDirections(Double deslatitude,Double deslongitude){
+        Double srclatitude=33.6207751;
+        Double srclongitude=73.1011514;
+        String geoUri = "http://maps.google.com/maps?saddr" + srclatitude + "," + srclongitude + "&daddr="+ deslatitude + "," + deslongitude;
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
+        startActivity(intent);
 
+    }
 
 }

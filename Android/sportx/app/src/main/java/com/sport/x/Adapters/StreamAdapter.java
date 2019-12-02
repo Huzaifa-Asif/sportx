@@ -1,5 +1,6 @@
 package com.sport.x.Adapters;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -97,6 +98,7 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.StreamView
                     Intent i=new Intent(context, ViewStreamActivity.class);
                     i.putExtra("email",liveStream.getServiceProviderEmail());
                     context.startActivity(i);
+                    ((Activity) context).finish();
                 }
             });
 
