@@ -35,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.sport.x.activities.sharedActivities.SignupAsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -258,7 +259,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         address=street_address.getText().toString()+", "+city.getText().toString()+", "+country.getText().toString();
         latlng = misc.getCoordinates(address);
 
-
+        String passwordPattern= "^[a-zA-Z0-9]*$";
         String regex = "[A-Za-z A-Za-z]+";
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
@@ -270,6 +271,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if(!user_email.matches(emailPattern) && user_email.isEmpty()) {
             misc.showToast("Invalid Email");
             email.setError("Invalid Email");
+            return false;
+        }
+        if(!user_password.matches(passwordPattern))
+        {
+            misc.showToast("Password should only contain Alphabets and Numbers");
+            password.setError("Password should only contain Alphabets and Numbers");
             return false;
         }
         if(user_phone.length() < 11) {
@@ -445,7 +452,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, SignupAsActivity.class);
         startActivity(intent);
         finish();
     }

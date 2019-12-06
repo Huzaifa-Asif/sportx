@@ -33,6 +33,7 @@
                 android:paddingLeft="@dimen/_8sdp"
                 android:drawablePadding="@dimen/_8sdp"
                 android:drawableLeft="@drawable/ic_email_black_24dp"
+
                 android:paddingRight="@dimen/_8sdp"
                 android:inputType="textEmailAddress"
                 android:layout_below="@+id/logo_img"

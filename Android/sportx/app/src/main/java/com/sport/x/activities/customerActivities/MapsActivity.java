@@ -201,7 +201,7 @@ public class MapsActivity extends Menu implements
                     intent.putExtra("service_provider_address", vendorList.get(index).getServiceProviderAddress());
                     intent.putExtra("service_provider_latitude", vendorList.get(index).getUserLat());
                     intent.putExtra("service_provider_longitude", vendorList.get(index).getUserLon());
-
+                    intent.putExtra("calling","maps");
 //                    intent.putExtra("booking_setting_openingTime", vendorList.get(index).getBookingSettings().getOpeningTime());
 //                    intent.putExtra("booking_setting_closingTime", vendorList.get(index).getBookingSettings().getClosingTime());
 //                    intent.putExtra("booking_setting_amount", vendorList.get(index).getBookingSettings().getAmount());
@@ -212,6 +212,7 @@ public class MapsActivity extends Menu implements
 
 
                     startActivity(intent);
+                    finish();
                    // postJob();
                 }
             });

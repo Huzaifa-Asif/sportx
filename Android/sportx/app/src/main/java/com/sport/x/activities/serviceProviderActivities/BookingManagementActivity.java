@@ -39,7 +39,11 @@ public class BookingManagementActivity extends Menu {
         super.onCreate(savedInstanceState);
         super.inflateView(R.layout.activity_sp_booking_management);
         setTitle("Booking Management Service Provider");
-
+        int position = 0;
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            position = extras.getInt("position");
+        }
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -47,7 +51,7 @@ public class BookingManagementActivity extends Menu {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        mViewPager.setCurrentItem(position);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

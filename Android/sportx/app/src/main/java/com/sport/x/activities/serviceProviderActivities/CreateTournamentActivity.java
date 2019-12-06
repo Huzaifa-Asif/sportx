@@ -167,7 +167,7 @@ public class CreateTournamentActivity extends Menu implements OnItemSelectedList
                                 monthString=""+(monthOfYear+1);
                             }
                             yearString=""+year;
-                            txtDate.setText(dayString + "-" +monthString + "-" + yearString);
+                            txtDate.setText(yearString + "-" +monthString + "-" + dayString);
 
                         }
                     }, mYear, mMonth, mDay);
@@ -186,8 +186,24 @@ public class CreateTournamentActivity extends Menu implements OnItemSelectedList
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay,
                                               int minute) {
-
-                            txtTime.setText(hourOfDay + ":" + minute);
+                            String hour,minutes;
+                            if(hourOfDay<10)
+                            {
+                                hour="0"+hourOfDay;
+                            }
+                            else
+                            {
+                                hour=""+hourOfDay;
+                            }
+                            if(minute<10)
+                            {
+                                minutes="0"+minute;
+                            }
+                            else
+                            {
+                                minutes=""+minute;
+                            }
+                            txtTime.setText(hour+ ":" + minutes);
                         }
                     }, mHour, mMinute, false);
             timePickerDialog.show();

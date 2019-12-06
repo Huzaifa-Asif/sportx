@@ -9,8 +9,9 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.sport.x.activities.customerActivities.BookingManagement;
-import com.sport.x.activities.serviceProviderActivities.BookingManagementActivity;
+import com.sport.x.activities.customerActivities.BookingManagementActivity;
+import com.sport.x.activities.customerActivities.TournamentActivity;
+import com.sport.x.activities.sharedActivities.OngoingStreamsActivity;
 import com.sport.x.activities.sharedActivities.SplashActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
@@ -18,7 +19,7 @@ import com.sport.x.R;
 public class MyService extends FirebaseMessagingService {
 
 Misc misc;
-
+int x=0;
     public MyService() {
 
     }
@@ -51,22 +52,32 @@ Misc misc;
         Intent intent=new Intent(this, SplashActivity.class);
         if(title.equalsIgnoreCase("Booking Accepted"))
         {
-            intent=new Intent(this, BookingManagement.class);
+            intent=new Intent(this, BookingManagementActivity.class);
             intent.putExtra("position",1);
         }
         else if(title.equalsIgnoreCase("Booking Completed"))
         {
-            intent=new Intent(this, BookingManagement.class);
+            intent=new Intent(this, BookingManagementActivity.class);
             intent.putExtra("position",2);
         }
         else if(title.equalsIgnoreCase("Booking Cancelled"))
         {
-            intent=new Intent(this, BookingManagement.class);
-        }
-        if(title.equalsIgnoreCase("New Booking Notification"))
-        {
             intent=new Intent(this, BookingManagementActivity.class);
+        }
+        else if(title.equalsIgnoreCase("New Booking Notification"))
+        {
+            intent=new Intent(this, com.sport.x.activities.serviceProviderActivities.BookingManagementActivity.class);
             intent.putExtra("position",0);
+        }
+        else if(title.equalsIgnoreCase("New Live Stream Notification"))
+        {
+            intent=new Intent(this, OngoingStreamsActivity.class);
+
+        }
+        else if(title.equalsIgnoreCase("New Tournament Started"))
+        {
+            intent=new Intent(this, TournamentActivity.class);
+
         }
         // Set the Activity to start in a new, empty task
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
@@ -86,7 +97,8 @@ Misc misc;
             NotificationChannel channel = new NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT);
             manager.createNotificationChannel(channel);
         }
-        manager.notify(0, builder.build());
+        manager.notify(x, builder.build());
+        x++;
     }
 //    private void showAlertDialog(String title,String message){
 //        AlertDialog.Builder builder = new AlertDialog.Builder(this);

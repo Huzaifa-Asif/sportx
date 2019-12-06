@@ -178,6 +178,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         String address = jsonObject1.getString("address");
                                         sharedPref.createLoginSession(id, email, address, role, name, contact, picture_profile);
                                         sharedPref.setProfileCompleted(profileCompleted);
+                                        String state=jsonObject1.getString("state");
+                                        if(state.equals("away"))
+                                        {
+                                            sharedPref.setSpState(true);
+                                        }
                                     pd.dismiss();
                                     if(!profileCompleted)
                                     {

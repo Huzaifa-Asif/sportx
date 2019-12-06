@@ -145,7 +145,7 @@ public class AddRevenueActivity extends Menu implements OnItemSelectedListener,V
                             monthString=""+(monthOfYear+1);
                         }
                         yearString=""+year;
-                        txtDate.setText(dayString + "-" +monthString + "-" + yearString);
+                        txtDate.setText(yearString + "-" +monthString + "-" + dayString);
 
                     }
                 }, mYear, mMonth, mDay);

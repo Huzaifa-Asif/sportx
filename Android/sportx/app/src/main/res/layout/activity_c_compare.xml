@@ -8,10 +8,10 @@
     android:layout_marginRight="16dp"
     android:background="@drawable/rounded_corner"
     android:orientation="vertical">
+
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:divider="@color/grey"
     android:showDividers="middle"
     >
@@ -25,7 +25,7 @@
         android:layout_weight="1"
         android:collapseColumns="0"
 
-        android:weightSum="3"
+        android:weightSum="5"
         android:divider="@color/grey"
         android:showDividers="middle">
 
@@ -60,6 +60,24 @@
             android:gravity="center"
             android:layout_height="match_parent">
         </TextView>
+        <TextView
+            android:id="@+id/name3"
+            android:text="Name 3"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/name4"
+            android:text="Name 4"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
         <!-- Add elements/columns in the first row-->
 
     </TableRow>
@@ -68,8 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-
-
+        android:weightSum="5"
         android:divider="@color/grey"
         android:showDividers="middle">
 
@@ -101,6 +118,23 @@
             android:gravity="center"
             android:layout_height="match_parent">
         </TextView>
+        <TextView
+            android:id="@+id/bookings3"
+            android:text="Bookings 3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/bookings4"
+            android:text="Bookings 4"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
 
     </TableRow>
     <TableRow
@@ -108,6 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:weightSum="5"
         android:divider="@color/grey"
         android:showDividers="middle">
 
@@ -139,6 +174,22 @@
             android:gravity="center"
             android:layout_height="match_parent">
         </TextView>
+        <TextView
+            android:id="@+id/ratings3"
+            android:text="Ratings 3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/ratings4"
+            android:text="Ratings 4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
 
     </TableRow>
     <TableRow
@@ -146,7 +197,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-
+        android:weightSum="5"
         android:divider="@color/grey"
         android:showDividers="middle">
 
@@ -178,6 +229,23 @@
             android:gravity="center"
             android:layout_height="match_parent">
         </TextView>
+        <TextView
+            android:id="@+id/avg3"
+            android:text="Avg. 3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:id="@+id/avg4"
+            android:text="Avg. 4"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
 
     </TableRow>
     <TableRow
@@ -185,7 +253,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-
+        android:weightSum="5"
         android:divider="@color/grey"
         android:showDividers="middle">
 
@@ -217,7 +285,23 @@
             android:layout_height="match_parent"
             android:gravity="center">
         </TextView>
+        <TextView
+            android:id="@+id/distance3"
+            android:text="Distance 3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center">
+        </TextView>
+        <TextView
+            android:id="@+id/distance4"
+            android:text="Distance 4"
 
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center">
+        </TextView>
     </TableRow>
 
 </TableLayout>

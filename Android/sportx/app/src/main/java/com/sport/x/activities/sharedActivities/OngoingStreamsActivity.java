@@ -27,7 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class OngoingStreams extends Menu {
+public class OngoingStreamsActivity extends Menu {
     SharedPref sharedPref;
     Misc misc;
     ArrayList<LiveStream> streams = new ArrayList<LiveStream>();

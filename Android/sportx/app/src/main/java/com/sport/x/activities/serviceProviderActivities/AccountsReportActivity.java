@@ -272,7 +272,7 @@ private void setTextViews()
                                 monthString=""+(monthOfYear+1);
                             }
                             yearString=""+year;
-                            startDate.setText(dayString + "-" +monthString + "-" + yearString);
+                            startDate.setText(yearString + "-" +monthString + "-" + dayString);
 
                         }
                     }, mYear, mMonth, mDay);
@@ -310,7 +310,7 @@ private void setTextViews()
                                 monthString=""+(monthOfYear+1);
                             }
                             yearString=""+year;
-                            endDate.setText(dayString + "-" +monthString + "-" + yearString);
+                            endDate.setText(yearString + "-" +monthString + "-" + dayString);
 
                         }
                     }, mYear, mMonth, mDay);

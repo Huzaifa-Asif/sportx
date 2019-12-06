@@ -4,9 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginStart="@dimen/_20sdp"
-    android:layout_marginEnd="@dimen/_10sdp"
-    android:layout_marginTop="@dimen/_30sdp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
     app:cardCornerRadius="@dimen/_20sdp"
     app:cardElevation="@dimen/_10sdp"
     android:id="@+id/card_slot"
@@ -17,20 +16,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
         android:gravity="center"
+        android:background="@android:color/transparent"
         >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:id="@+id/slot"
-            android:text="Slot"
-            android:textSize="@dimen/_15sdp"
+            android:text="00:00\n to\n 23:59"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:padding="@dimen/_10sdp"
+            android:background="@android:color/transparent"
             android:textAlignment="center"
             />
         <TextView
@@ -38,11 +36,11 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:id="@+id/status"
-            android:text="Booked"
-            android:textSize="@dimen/_15sdp"
+            android:text="Available"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:padding="@dimen/_10sdp"
+            android:background="@android:color/transparent"
             android:textAlignment="center"
             />
 

@@ -74,7 +74,13 @@ public class UpdatePasswordActivity extends Menu {
 
         String user_password = password.getText().toString();
         String user_re_password = confirm.getText().toString();
-
+        String passwordPattern= "^[a-zA-Z0-9]*$";
+        if(!user_password.matches(passwordPattern))
+        {
+            misc.showToast("Password should Only contain Alphabets and Numbers");
+            password.setError("Password should Only contain Alphabets and Numbers");
+            return false;
+        }
 
         if(user_password.length() < 6 ) {
             misc.showToast("Password should be min 6 characters");

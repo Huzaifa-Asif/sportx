@@ -17,18 +17,20 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
-import com.sport.x.activities.menu.Menu;
-import com.sport.x.activities.sharedActivities.SplashActivity;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
+import com.sport.x.activities.customerActivities.ServiceProviderDetailsActivity;
+import com.sport.x.activities.menu.Menu;
+import com.sport.x.activities.sharedActivities.SplashActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
 
-public class AddBookingSettingsActivity extends Menu implements  View.OnClickListener{
+public class EditBookingSettingActivity extends Menu implements View.OnClickListener {
+
 
     private Button submit;
     private ImageButton btnStartTime,btnEndTime;
@@ -42,8 +44,8 @@ public class AddBookingSettingsActivity extends Menu implements  View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.inflateView(R.layout.activity_sp_add_booking_settings);
-        setTitle("Service Provider Booking");
+        super.inflateView(R.layout.activity_sp_edit_booking_setting);
+        setTitle("Edit Booking Setting");
         misc=new Misc(this);
         sharedPref=new SharedPref(this);
         submit=findViewById(R.id.submit);
@@ -108,6 +110,7 @@ public class AddBookingSettingsActivity extends Menu implements  View.OnClickLis
             }
 
         });
+        callBookingSettingWebService();
     }
 
 
@@ -116,48 +119,50 @@ public class AddBookingSettingsActivity extends Menu implements  View.OnClickLis
     @Override
     public void onClick(View v) {
 
-            // Get Current Time
-            final Calendar c = Calendar.getInstance();
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
+        // Get Current Time
+        final Calendar c = Calendar.getInstance();
+        mHour = c.get(Calendar.HOUR_OF_DAY);
+        mMinute = c.get(Calendar.MINUTE);
 
-            // Launch Time Picker Dialog
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.DialogTheme,
-                    new TimePickerDialog.OnTimeSetListener() {
+        // Launch Time Picker Dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.DialogTheme,
+                new TimePickerDialog.OnTimeSetListener() {
 
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay,
-                                              int minute) {
-                            String hour,minutes;
-                            if(hourOfDay<10)
-                            {
-                                hour="0"+hourOfDay;
-                            }
-                            else
-                            {
-                                hour=""+hourOfDay;
-                            }
-                            if(minute<10)
-                            {
-                                minutes="0"+minute;
-                            }
-                            else
-                            {
-                                minutes=""+minute;
-                            }
-                            if(v == btnStartTime)
-                            {
-                                startTime.setText(hour + ":" + minutes);
-                            }
-                            else if(v == btnEndTime)
-                            {
-                                endTime.setText(hour + ":" + minutes);
-                            }
-
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                          int minute) {
+                        String hour,minutes;
+                        if(hourOfDay<10)
+                        {
+                            hour="0"+hourOfDay;
                         }
-                    }, mHour, mMinute, false);
-            timePickerDialog.show();
-        }
+                        else
+                        {
+                            hour=""+hourOfDay;
+                        }
+                        if(minute<10)
+                        {
+                            minutes="0"+minute;
+                        }
+                        else
+                        {
+                            minutes=""+minute;
+                        }
+
+                        if(v == btnStartTime)
+                        {
+
+                            startTime.setText(hour + ":" + minutes);
+                        }
+                        else if(v == btnEndTime)
+                        {
+                            endTime.setText(hour + ":" + minutes);
+                        }
+
+                    }
+                }, mHour, mMinute, false);
+        timePickerDialog.show();
+    }
 
 
 
@@ -170,11 +175,75 @@ public class AddBookingSettingsActivity extends Menu implements  View.OnClickLis
         return true;
     }
 
+    public void callBookingSettingWebService()
+    {
+
+
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Fetching Service provider Details");
+        pd.setCancelable(false);
+        pd.show();
+
+        Ion.with(this)
+                .load("GET", misc.ROOT_PATH + "bookingSetting/get_bookingSetting_by_serviceProvider/" + sharedPref.getEmail())
+                .asString()
+                .withResponse()
+                .setCallback(new FutureCallback<Response<String>>() {
+                    @Override
+                    public void onCompleted(Exception e, Response<String> result) {
+                        if (e != null) {
+                            pd.dismiss();
+                            misc.showToast("Please check your connection");
+                            pd.dismiss();
+                            return;
+                        }
+
+                        try {
+
+
+                            JSONObject bookingSetting  = new JSONObject(result.getResult());
+                            String bookingSettingId=bookingSetting.getString("_id");
+                            price.setText(""+bookingSetting.getInt("amount"));
+                           startTime.setText(bookingSetting.getString("openingTime"));
+                            endTime.setText(bookingSetting.getString("closingTime"));
+                            int duration1=bookingSetting.getInt("duration");
+                            if(duration1==60)
+                            {
+                                spinner.setSelection(1);
+                            }
+                            else if(duration1==120)
+                            {
+                                spinner.setSelection(2);
+                            }
+                            else if(duration1==180)
+                            {
+                                spinner.setSelection(3);
+                            }
+                            else if(duration1==240)
+                            {
+                                spinner.setSelection(4);
+                            }
+//                           BookingSettings bookingSettings=new BookingSettings(bookingSettingId,amount,openingTime,closingTime,duration,totalGrounds,spEmail,wholeDayBookingAllowed,wholeDayBookingPrice);
+
+
+
+
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+
+
+                    }
+
+                });
+        pd.dismiss();
+    }
+
 
     private void callAddBookingSettingsWebService(){
 
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Adding Booking Settings...");
+        pd.setMessage("Updating Booking Settings...");
         pd.setCancelable(false);
         pd.show();
         JsonObject jsonObject = new JsonObject();
@@ -192,7 +261,7 @@ public class AddBookingSettingsActivity extends Menu implements  View.OnClickLis
 //        }
 
         Ion.with(this)
-                .load(misc.ROOT_PATH+"bookingsetting/add_bookingSetting")
+                .load("PATCH",misc.ROOT_PATH+"bookingsetting/update_bookingSetting/"+sharedPref.getEmail())
                 .setJsonObjectBody(jsonObject)
                 .asString()
                 .withResponse()
@@ -221,9 +290,9 @@ public class AddBookingSettingsActivity extends Menu implements  View.OnClickLis
                             }
                             else if (status) {
                                 pd.dismiss();
-                                misc.showToast("Booking Settings Added");
+                                misc.showToast("Booking Settings Edited");
                                 sharedPref.setProfileCompleted(true);
-                                Intent intent = new Intent(AddBookingSettingsActivity.this, SplashActivity.class);
+                                Intent intent = new Intent(EditBookingSettingActivity.this, EditBookingSettingActivity.class);
                                 startActivity(intent);
                                 finish();
 
@@ -241,5 +310,11 @@ public class AddBookingSettingsActivity extends Menu implements  View.OnClickLis
                 });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+
+    }
 
 }

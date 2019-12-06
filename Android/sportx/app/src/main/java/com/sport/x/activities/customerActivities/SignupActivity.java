@@ -96,7 +96,7 @@ public class SignupActivity extends AppCompatActivity {
         String user_phone = phone.getText().toString().trim();
         String user_password = password.getText().toString();
         String user_re_password = re_password.getText().toString();
-
+        String passwordPattern= "^[a-zA-Z0-9]*$";
         String regex = "[A-Za-z A-Za-z]+";
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
@@ -113,6 +113,12 @@ public class SignupActivity extends AppCompatActivity {
         if(user_phone.length() < 11) {
             misc.showToast("Invalid Phone Number");
             phone.setError("Invalid Phone Number");
+            return false;
+        }
+        if(!user_password.matches(passwordPattern))
+        {
+            misc.showToast("Password should only contain Alphabets and Numbers");
+            password.setError("Password should only contain Alphabets and Numbers");
             return false;
         }
         if(user_password.length() < 6 ) {
