@@ -176,7 +176,7 @@ public class StreamActivity extends Menu
                     if (rtmpCamera1.isRecording()
                             || rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo()) {
                         button.setImageResource(R.drawable.stop_stream_btn);
-                        rtmpCamera1.startStream("rtmp://192.168.100.7:1935/live/"+sharedPref.getEmail());
+                        rtmpCamera1.startStream("rtmp://192.64.114.135:1935/live/"+sharedPref.getEmail());
                     } else {
                         Toast.makeText(this, "Error preparing stream, This device cant do it",
                                 Toast.LENGTH_SHORT).show();
