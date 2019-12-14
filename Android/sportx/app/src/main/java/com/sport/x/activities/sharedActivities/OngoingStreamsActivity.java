@@ -3,7 +3,6 @@ package com.sport.x.activities.sharedActivities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,13 +12,11 @@ import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.sport.x.Adapters.StreamAdapter;
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.ConversationMessage;
 import com.sport.x.Models.LiveStream;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 import com.sport.x.activities.customerActivities.HomeActivity;
 import com.sport.x.activities.menu.Menu;
-import com.sport.x.activities.serviceProviderActivities.AccountsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.view.View;
 
 import androidx.appcompat.widget.SearchView;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -16,9 +15,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.sport.x.Adapters.AllVendorsAdapter;
-import com.sport.x.Adapters.CustomerServiceAdapter;
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.Service;
 import com.sport.x.Models.Service_Provider;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;

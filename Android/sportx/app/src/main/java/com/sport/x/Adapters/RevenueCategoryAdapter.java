@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Response;
-import com.sport.x.Models.Revenue;
 import com.koushikdutta.ion.Ion;
 import com.sport.x.Misc.Misc;
 import com.sport.x.Models.RevenueCategory;

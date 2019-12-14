@@ -18,7 +18,6 @@ import com.sport.x.Adapters.ConversationActiveAdapter;
 import com.sport.x.Misc.Misc;
 //import com.sport.x.Models.Job;
 import com.sport.x.Models.Conversation;
-import com.sport.x.Models.Customer;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 

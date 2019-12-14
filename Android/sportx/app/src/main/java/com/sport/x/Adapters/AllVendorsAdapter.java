@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 
-import com.sport.x.Models.Customer;
-import com.sport.x.Models.Service;
 import com.sport.x.Models.Service_Provider;
 import com.sport.x.R;
 import com.sport.x.activities.customerActivities.ServiceProviderDetailsActivity;

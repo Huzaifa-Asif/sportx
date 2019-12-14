@@ -20,9 +20,7 @@ import com.koushikdutta.ion.Response;
 import com.sport.x.Misc.Misc;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
-import com.sport.x.activities.customerActivities.ServiceProviderDetailsActivity;
 import com.sport.x.activities.menu.Menu;
-import com.sport.x.activities.sharedActivities.SplashActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

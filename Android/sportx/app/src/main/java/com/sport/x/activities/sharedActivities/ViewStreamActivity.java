@@ -48,4 +48,10 @@ public class ViewStreamActivity extends Menu {
         player.setPlayWhenReady(true);
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, OngoingStreamsActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

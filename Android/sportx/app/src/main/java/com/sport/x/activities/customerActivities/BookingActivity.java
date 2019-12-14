@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.Spinner;
 
 import com.sport.x.Adapters.BookingSlotAdapter;
-import com.sport.x.Adapters.PendingJobsAdapter;
 import com.sport.x.Misc.Misc;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -28,27 +24,17 @@ import com.sport.x.SharedPref.SharedPref;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-
 import org.json.JSONException;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 // Date and Time
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.StringTokenizer;
 
-import android.widget.AdapterView.OnItemSelectedListener;
-
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
