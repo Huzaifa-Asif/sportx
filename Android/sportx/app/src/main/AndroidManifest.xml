@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sport.x">
+    package="com.sportx.pk">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -55,71 +55,71 @@
         <!--        Service Provider Activities-->
 
         <activity
-            android:name="com.sport.x.activities.serviceProviderActivities.BookingManagementActivity"
+            android:name="com.sportx.pk.activities.serviceProviderActivities.BookingManagementActivity"
             android:label="@string/title_activity_provider_jobs"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.AccountsReportActivity" />
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.UpdatePasswordActivity" />
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.UpdateProfileActivity" />
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.AccountsReportActivity" />
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.UpdatePasswordActivity" />
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.UpdateProfileActivity" />
         <activity
-            android:name="com.sport.x.activities.serviceProviderActivities.HomeActivity"
+            android:name="com.sportx.pk.activities.serviceProviderActivities.HomeActivity"
             android:label="@string/title_activity_service_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.SignupActivity" />
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.TournamentActivity" />
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.CreateTournamentActivity" />
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.AddBookingSettingsActivity" />
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.TournamentDetailActivity"/>
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.StreamActivity"/>
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.ExpenseActivity"/>
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.AccountsActivity"/>
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.AddExpenseActivity"/>
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.AddRevenueActivity"/>
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.RevenueActivity"/>
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.RevenueCategoryActivity"/>
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.ExpenseCategoryActivity"/>
-        <activity android:name="com.sport.x.activities.serviceProviderActivities.EditBookingSettingActivity" />
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.SignupActivity" />
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.TournamentActivity" />
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.CreateTournamentActivity" />
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.AddBookingSettingsActivity" />
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.TournamentDetailActivity"/>
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.StreamActivity"/>
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.ExpenseActivity"/>
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.AccountsActivity"/>
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.AddExpenseActivity"/>
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.AddRevenueActivity"/>
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.RevenueActivity"/>
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.RevenueCategoryActivity"/>
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.ExpenseCategoryActivity"/>
+        <activity android:name="com.sportx.pk.activities.serviceProviderActivities.EditBookingSettingActivity" />
 
 
         <!--        Customer Activities-->
 
         <activity
-            android:name="com.sport.x.activities.customerActivities.HomeActivity"
+            android:name="com.sportx.pk.activities.customerActivities.HomeActivity"
             android:label="@string/title_activity_all_service"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.sport.x.activities.customerActivities.UpdateProfileActivity" />
-        <activity android:name="com.sport.x.activities.customerActivities.BookingActivity" />
-        <activity android:name="com.sport.x.activities.customerActivities.ServiceProviderDetailsActivity" />
-        <activity android:name="com.sport.x.activities.customerActivities.UpdatePasswordActivity" />
-        <activity android:name="com.sport.x.activities.customerActivities.BookingManagementActivity" />
-        <activity android:name="com.sport.x.activities.customerActivities.TournamentActivity" />
-        <activity android:name="com.sport.x.activities.customerActivities.TournamentDetailActivity" />
+        <activity android:name="com.sportx.pk.activities.customerActivities.UpdateProfileActivity" />
+        <activity android:name="com.sportx.pk.activities.customerActivities.BookingActivity" />
+        <activity android:name="com.sportx.pk.activities.customerActivities.ServiceProviderDetailsActivity" />
+        <activity android:name="com.sportx.pk.activities.customerActivities.UpdatePasswordActivity" />
+        <activity android:name="com.sportx.pk.activities.customerActivities.BookingManagementActivity" />
+        <activity android:name="com.sportx.pk.activities.customerActivities.TournamentActivity" />
+        <activity android:name="com.sportx.pk.activities.customerActivities.TournamentDetailActivity" />
         <activity
-            android:name="com.sport.x.activities.customerActivities.MapsActivity"
+            android:name="com.sportx.pk.activities.customerActivities.MapsActivity"
             android:label="@string/title_activity_maps"
             />
-        <activity android:name="com.sport.x.activities.customerActivities.SignupActivity"/>
-        <activity android:name="com.sport.x.activities.customerActivities.CompareActivity"/>
-        <activity android:name="com.sport.x.activities.customerActivities.SearchByNameActivity" />
-        <activity android:name="com.sport.x.activities.customerActivities.PaymentOptionActivity"/>
+        <activity android:name="com.sportx.pk.activities.customerActivities.SignupActivity"/>
+        <activity android:name="com.sportx.pk.activities.customerActivities.CompareActivity"/>
+        <activity android:name="com.sportx.pk.activities.customerActivities.SearchByNameActivity" />
+        <activity android:name="com.sportx.pk.activities.customerActivities.PaymentOptionActivity"/>
 
 
         <!--        Shared Activities-->
 
-        <activity android:name="com.sport.x.activities.sharedActivities.OngoingStreamsActivity"/>
-        <activity android:name="com.sport.x.activities.sharedActivities.ForgotPasswordActivity" />
-        <activity android:name="com.sport.x.activities.sharedActivities.ComplainActivity" />
-        <activity android:name="com.sport.x.activities.sharedActivities.HelpActivity" />
-        <activity android:name="com.sport.x.activities.sharedActivities.SignupAsActivity" />
-        <activity android:name="com.sport.x.activities.sharedActivities.CompletedBookingDetailsActivity" />
-        <activity android:name="com.sport.x.activities.sharedActivities.InProgressBookingDetailsActivity" />
-        <activity android:name="com.sport.x.activities.sharedActivities.PendingBookingDetailsActivity" />
-        <activity android:name="com.sport.x.activities.sharedActivities.ConversationActivity" />
+        <activity android:name="com.sportx.pk.activities.sharedActivities.OngoingStreamsActivity"/>
+        <activity android:name="com.sportx.pk.activities.sharedActivities.ForgotPasswordActivity" />
+        <activity android:name="com.sportx.pk.activities.sharedActivities.ComplainActivity" />
+        <activity android:name="com.sportx.pk.activities.sharedActivities.HelpActivity" />
+        <activity android:name="com.sportx.pk.activities.sharedActivities.SignupAsActivity" />
+        <activity android:name="com.sportx.pk.activities.sharedActivities.CompletedBookingDetailsActivity" />
+        <activity android:name="com.sportx.pk.activities.sharedActivities.InProgressBookingDetailsActivity" />
+        <activity android:name="com.sportx.pk.activities.sharedActivities.PendingBookingDetailsActivity" />
+        <activity android:name="com.sportx.pk.activities.sharedActivities.ConversationActivity" />
         <activity
-            android:name="com.sport.x.activities.sharedActivities.LoginActivity"
+            android:name="com.sportx.pk.activities.sharedActivities.LoginActivity"
             android:noHistory="false" />
         <activity
-            android:name="com.sport.x.activities.sharedActivities.SplashActivity"
+            android:name="com.sportx.pk.activities.sharedActivities.SplashActivity"
             android:theme="@style/NoAction">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -127,14 +127,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sport.x.activities.sharedActivities.MessageActivity"/>
-        <activity android:name="com.sport.x.activities.sharedActivities.ViewStreamActivity" />
+        <activity android:name="com.sportx.pk.activities.sharedActivities.MessageActivity"/>
+        <activity android:name="com.sportx.pk.activities.sharedActivities.ViewStreamActivity" />
 
 
 
         <!-- FireBase Notification Service-->
 
-        <service android:name="com.sport.x.notifications.MyService">
+        <service android:name="com.sportx.pk.notifications.MyService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

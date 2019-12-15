@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "807086748777",
-    "firebase_url": "https://sport-x-a7672.firebaseio.com",
-    "project_id": "sport-x-a7672",
-    "storage_bucket": "sport-x-a7672.appspot.com"
+    "project_number": "834436870780",
+    "firebase_url": "https://sportx-472ae.firebaseio.com",
+    "project_id": "sportx-472ae",
+    "storage_bucket": "sportx-472ae.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:807086748777:android:206389ada7f95f05",
+        "mobilesdk_app_id": "1:834436870780:android:200acb11b2474f4b978ff9",
         "android_client_info": {
-          "package_name": "com.sport.x"
+          "package_name": "com.sportx.pk"
         }
       },
       "oauth_client": [
         {
-          "client_id": "807086748777-262hfp6hm7q0u19a81cq9g4fmjj0m93m.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sport.x",
-            "certificate_hash": "5b51d6abc67b9caf9a870018260b1f2697c6d1a4"
-          }
-        },
-        {
-          "client_id": "807086748777-39rhup5m27na9fflce9un5e5qm527qlo.apps.googleusercontent.com",
+          "client_id": "834436870780-f6lcbsp0g3kbjpt8ge6h836uocpevj7l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDVVK1wgidoFgpnyWeIigDpLRYfRJkfVHA"
+          "current_key": "AIzaSyCt-Uif1Lu7XgKJQZ__KbFOeRHpw3JZgQE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "807086748777-39rhup5m27na9fflce9un5e5qm527qlo.apps.googleusercontent.com",
+              "client_id": "834436870780-f6lcbsp0g3kbjpt8ge6h836uocpevj7l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
