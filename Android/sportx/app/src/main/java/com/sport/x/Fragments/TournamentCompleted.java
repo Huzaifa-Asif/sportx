@@ -16,7 +16,6 @@ import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
 import com.sport.x.Adapters.CompletedTournamentAdapter;
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.Job;
 import com.sport.x.Models.Tournament;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;

@@ -1,14 +1,11 @@
 package com.sport.x.Adapters;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,18 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-import com.koushikdutta.ion.Response;
 import com.sport.x.Misc.Misc;
-import com.sport.x.Models.Expense;
 import com.sport.x.Models.LiveStream;
 import com.sport.x.R;
 import com.sport.x.SharedPref.SharedPref;
 import com.sport.x.activities.sharedActivities.ViewStreamActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
